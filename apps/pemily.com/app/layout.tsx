@@ -56,10 +56,10 @@ export const metadata = {
 		maximumScale: 1,
 	},
 	generator: 'Next.js',
-	applicationName: 'Portfolio Vinod',
+	applicationName: 'Pemilyy',
 	referrer: 'origin-when-cross-origin',
-	keywords: ['vinod', 'vinod kumar', 'vakadu', 'vakadu vinod', 'vinod vakadu', 'portfolio', 'javascript', 'react', 'nextjs'],
-	authors: [{ name: 'Vinod Kumar', url: 'https://vakaduvinod.in' }],
+	keywords: ['pemilyy', 'pemily', 'pemil', 'pets', 'cats', 'dogs', 'animals', 'animal', 'pet family', 'family'],
+	authors: [{ name: 'Vinod Kumar', url: 'https://vakaduvinod.in' }, { name: 'Avishek Singh' }],
 	colorScheme: 'light',
 	creator: 'Vinod Kumar',
 	publisher: 'Vinod Kumar',
@@ -69,10 +69,10 @@ export const metadata = {
 		telephone: false,
 	},
 	openGraph: {
-		title: 'Vinod Kumar | Vakadu',
-		description: 'Vinod Kumar',
-		url: 'https://vakaduvinod.in',
-		siteName: 'Vinod Kumar',
+		title: 'Pemilyy',
+		description: 'Pemilyy',
+		url: 'https://pemilyy.com',
+		siteName: 'Pemilyy',
 		images: [
 			{
 				url: '/favicons/android-chrome-512x512.png',
