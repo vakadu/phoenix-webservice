@@ -1,61 +1,62 @@
 {
-  "name": "pemily.com",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/pemily.com",
-  "projectType": "application",
-  "targets": {
-    "build": {
-      "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
-      "options": {
-        "outputPath": "dist/apps/pemily.com"
+    "name": "pemily.com",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "apps/pemily.com",
+    "projectType": "application",
+    "targets": {
+      "build": {
+			"executor": "@nx/next:build",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "production",
+			"options": {
+				"outputPath": "dist/apps/pemily.com"
+			},
+			"configurations": {
+			"development": {
+				"outputPath": "apps/pemily.com"
+			},
+			"production": {}
+			}
       },
-      "configurations": {
-        "development": {
-          "outputPath": "apps/pemily.com"
-        },
-        "production": {}
-      }
-    },
-    "serve": {
-      "executor": "@nx/next:server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "pemily.com:build",
-        "dev": true
+      "serve": {
+			"executor": "@nx/next:server",
+			"defaultConfiguration": "development",
+			"options": {
+				"buildTarget": "pemily.com:build",
+				"dev": true,
+				"port": 1001
+			},
+			"configurations": {
+				"development": {
+					"buildTarget": "pemily.com:build:development",
+					"dev": true
+				},
+				"production": {
+					"buildTarget": "pemily.com:build:production",
+					"dev": false
+				}
+			}
       },
-      "configurations": {
-        "development": {
-          "buildTarget": "pemily.com:build:development",
-          "dev": true
-        },
-        "production": {
-          "buildTarget": "pemily.com:build:production",
-          "dev": false
-        }
+      "export": {
+			"executor": "@nx/next:export",
+			"options": {
+				"buildTarget": "pemily.com:build:production"
+			}
+      },
+      "test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "apps/pemily.com/jest.config.ts"
+			}
+      },
+      "lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"],
+			"options": {
+				"lintFilePatterns": ["apps/pemily.com/**/*.{ts,tsx,js,jsx}"]
+			}
       }
     },
-    "export": {
-      "executor": "@nx/next:export",
-      "options": {
-        "buildTarget": "pemily.com:build:production"
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/pemily.com/jest.config.ts"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/pemily.com/**/*.{ts,tsx,js,jsx}"]
-      }
-    }
-  },
-  "tags": []
+    "tags": []
 }

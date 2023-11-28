@@ -1,0 +1,17 @@
+node:internal/process/promises:289
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+Error: connect EHOSTUNREACH 0.0.16.105:4200 - Local (192.168.1.7:62546)
+[90m    at internalConnect (node:net:1090:16)[39m
+[90m    at defaultTriggerAsyncIdScope (node:internal/async_hooks:464:18)[39m
+[90m    at GetAddrInfoReqWrap.emitLookup [as callback] (node:net:1481:9)[39m
+[90m    at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:130:8)[39m {
+  errno: [33m-65[39m,
+  code: [32m'EHOSTUNREACH'[39m,
+  syscall: [32m'connect'[39m,
+  address: [32m'0.0.16.105'[39m,
+  port: [33m4200[39m
+}
+
+Node.js v20.5.1

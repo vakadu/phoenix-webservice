@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+      	--color-brand: 17 122 101;
+    }
+
+	html,
+    body {
+        @apply font-normal text-secondary;
+    }
+}
+
+body{
+    -webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	@apply bg-beige;
+}
+
+body.no-scroll {
+    @apply overflow-hidden;
+}
+
+.sticky-header{
+	@apply sticky top-0 transform translate-y-0 bg-white shadow-2;
+}
+
+.sticky-header.header-in{
+	@apply animate-headerAnimation;
+}
+
+.cursor{
+    transition: width 0.3s cubic-bezier(0.3, 0, 0.3, 1), height 0.3s cubic-bezier(0.3, 0, 0.3, 1), background 0.3s cubic-bezier(0.3, 0, 0.3, 1), margin 0.3s cubic-bezier(0.3, 0, 0.3, 1), opacity 0.7s cubic-bezier(0.3, 0, 0.3, 1);
+}
