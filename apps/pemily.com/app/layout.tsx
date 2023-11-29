@@ -37,7 +37,7 @@ const sathoshi = localFont({
 })
 
 export const metadata = {
-	title: 'Vinod Kumar | vakadu',
+	title: 'Pemily',
 	description: 'Vinod Kumar',
 	icons: {
 		icon: [
