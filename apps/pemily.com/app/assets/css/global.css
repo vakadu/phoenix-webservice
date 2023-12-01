@@ -46,6 +46,6 @@ body.no-scroll {
     @apply text-16 font-medium my-8 uppercase;
 }
 
-.para {
+.para{
     @apply text-16 my-6;
 }
