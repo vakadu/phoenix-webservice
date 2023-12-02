@@ -50,6 +50,10 @@ body.no-scroll {
     @apply text-16 my-6;
 }
 
-.mail{
+.para h6{
+    @apply font-medium inline-block;
+}
+
+.link{
     @apply text-brand border-b border-brand;
 }

@@ -31,7 +31,7 @@ const Privacy = () => {
         please refrain from using the Site. For queries, contact our Customer
         Support Desk at{' '}
         <a
-          className="mail"
+          className="link"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
@@ -45,10 +45,10 @@ const Privacy = () => {
         experience. Information may include:
       </p>
       <p className="para">
-        1. **Personal Data:** Name, Phone Number, Email ID, Address, City.
+        <h6>1. Personal Data:</h6> Name, Phone Number, Email ID, Address, City.
       </p>
       <p className="para">
-        2. **Tracking Information:** IP address, Device ID when connected to the
+      <h6>2. Tracking Information:</h6> IP address, Device ID when connected to the
         Internet.
       </p>
       <p className="para">
@@ -76,17 +76,17 @@ const Privacy = () => {
       <h2 className="h2-header pt-24">COOKIES</h2>
       <p className="para">We use cookies for various functionalities:</p>
       <p className="para">
-        1. **Strictly Necessary Cookies:** Required for Application operation.
+      <h6>1. Strictly Necessary Cookies:</h6> Required for Application operation.
       </p>
       <p className="para">
-        2. **Analytical/Performance Cookies:** Count visitors and improve
+      <h6>2. Analytical/Performance Cookies:</h6> Count visitors and improve
         Application functionality.
       </p>
       <p className="para">
-        3. **Functionality Cookies:** Recognize users and personalize content.
+      <h6>3. Functionality Cookies:</h6> Recognize users and personalize content.
       </p>
       <p className="para">
-        4. **Targeting Cookies:** Customize advertising based on user interests.
+      <h6>4. Targeting Cookies:</h6> Customize advertising based on user interests.
       </p>
       <p className="para">
         Third-party cookies may be used. Users can adjust browser settings, but
@@ -174,7 +174,7 @@ const Privacy = () => {
       <p className="para">
         To withdraw consent or request data download/removal, email{' '}
         <a
-          className="mail"
+          className="link"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
@@ -186,7 +186,7 @@ const Privacy = () => {
       <p className="para">
         For questions, contact us at{' '}
         <a
-          className="mail"
+          className="link"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
