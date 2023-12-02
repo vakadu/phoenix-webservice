@@ -5,7 +5,7 @@ const Refund = () => {
 
       <h2 className="h2-header pt-24">1. GENERAL</h2>
       <p className="para">
-        a. Welcome to www.pemilyy.com ("Website/Site"), operated by Veena
+        a. Welcome to <a className="link" href="https://www.pemilyy.com/">pemilyy.com</a> ("Website/Site"), operated by Veena
         Tech("We/Our/Us").
       </p>
       <p className="para">
@@ -45,7 +45,7 @@ const Refund = () => {
         <h6>c. Date of Transaction:</h6> The service invoice date, including renewal
         processed as per applicable service agreement terms.
       </p>
-      <p className="para"> <h6>d. Website:</h6> www.pemilyy.com.</p>
+      <p className="para"> <h6>d. Website:</h6> <a className="link" href="https://www.pemilyy.com/">pemilyy.com</a>.</p>
 
       <h2 className="h2-header pt-24">3. REFUND RULES</h2>
       <p className="para">

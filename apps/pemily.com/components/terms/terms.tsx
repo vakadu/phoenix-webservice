@@ -6,29 +6,33 @@ const Terms = () => {
         This Website is owned and operated by Veena Tech, its registered address
         is BTM 2nd Stage, near Silk Board, Bengaluru, Karnataka 560076, India,
         operating under the brand name "Pemilyy" ("Brand Name"). By using this
-        Website ("www.pemilyy.com"), you agree to comply with the terms outlined
-        below.
+        Website (
+        <a className="link" href="https://www.pemilyy.com/">
+          pemilyy.com
+        </a>
+        ), you agree to comply with the terms outlined below.
       </p>
 
       <h2 className="h2-header pt-24">GENERAL TERMS</h2>
       <p className="para">
-        1. *Headings for Organization:* Section headings are for organizing
-        provisions, interpreting them accordingly. They hold legal or
+        <h6>1. Headings for Organization:</h6> Section headings are for
+        organizing provisions, interpreting them accordingly. They hold legal or
         contractual value on your usage of the Website.
       </p>
       <p className="para">
-        2. *Binding Agreement:* Your use of the Website is governed by these
-        Terms of Use, the Privacy Policy, and any amendments at our discretion.
-        Continuing to use the Website implies your agreement to these terms.
+        <h6>2. Binding Agreement:</h6> Your use of the Website is governed by
+        these Terms of Use, the Privacy Policy, and any amendments at our
+        discretion. Continuing to use the Website implies your agreement to
+        these terms.
       </p>
       <p className="para">
-        3. *Co-Terminus Agreement:* These Terms of Use and the Privacy Policy
-        are co-terminus. The expiration or termination of one results in the
-        termination of the other.
+        <h6>3. Co-Terminus Agreement:</h6> These Terms of Use and the Privacy
+        Policy are co-terminus. The expiration or termination of one results in
+        the termination of the other.
       </p>
       <p className="para">
-        4. *Amendments:* We reserve the right to modify these Terms of Use
-        without prior notice. Your continued use after changes indicates
+        <h6>4. Amendments:</h6> We reserve the right to modify these Terms of
+        Use without prior notice. Your continued use after changes indicates
         acceptance. Failure to adhere requires discontinuation of Website use.
       </p>
 
@@ -88,10 +92,7 @@ const Terms = () => {
       <p className="para">
         Users agree to receive communications (SMS, Whatsapp, Phone call, Email)
         related to services. Discrepancies can be reported to
-        <a
-          className="link"
-          href="mailto:care.pemilyy@gmail.com"
-        >
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>
       </p>
@@ -134,23 +135,21 @@ const Terms = () => {
 
       <h2 className="h2-header pt-24">MISCELLANEOUS PROVISIONS</h2>
       <p className="para">
-        1. *Entire Agreement:* These Terms, along with the Privacy Policy,
-        constitute the entire agreement superseding all prior communications.
+        <h6>1. Entire Agreement:</h6> These Terms, along with the Privacy
+        Policy, constitute the entire agreement superseding all prior
+        communications.
       </p>
       <p className="para">
-        2. *Waiver:* Failure to enforce any provision doesn't waive our right to
-        enforce it later.
+        <h6>2. Waiver:</h6> Failure to enforce any provision doesn't waive our
+        right to enforce it later.
       </p>
       <p className="para">
-        3. *Severability:* If any provision is deemed invalid, the remaining
-        provisions remain valid.
+        <h6>3. Severability:</h6> If any provision is deemed invalid, the
+        remaining provisions remain valid.
       </p>
       <p className="para">
-        4. *Contact Us:* Questions can be directed to{' '}
-        <a
-          className="link"
-          href="mailto:care.pemilyy@gmail.com"
-        >
+        <h6>4. Contact Us:</h6> Questions can be directed to{' '}
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>{' '}
         or to Veena Tech at the provided address.
