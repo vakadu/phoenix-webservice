@@ -89,7 +89,7 @@ const Terms = () => {
         Users agree to receive communications (SMS, Whatsapp, Phone call, Email)
         related to services. Discrepancies can be reported to
         <a
-          className="text-brand border-b border-brand"
+          className="mail"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
@@ -148,7 +148,7 @@ const Terms = () => {
       <p className="para">
         4. *Contact Us:* Questions can be directed to{' '}
         <a
-          className="text-brand border-b border-brand"
+          className="mail"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com

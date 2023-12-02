@@ -31,7 +31,7 @@ const Privacy = () => {
         please refrain from using the Site. For queries, contact our Customer
         Support Desk at{' '}
         <a
-          className="text-brand border-b border-brand"
+          className="mail"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
@@ -174,7 +174,7 @@ const Privacy = () => {
       <p className="para">
         To withdraw consent or request data download/removal, email{' '}
         <a
-          className="text-brand border-b border-brand"
+          className="mail"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
@@ -186,7 +186,7 @@ const Privacy = () => {
       <p className="para">
         For questions, contact us at{' '}
         <a
-          className="text-brand border-b border-brand"
+          className="mail"
           href="mailto:care.pemilyy@gmail.com"
         >
           care.pemilyy@gmail.com
