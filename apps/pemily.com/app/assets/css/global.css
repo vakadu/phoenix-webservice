@@ -39,13 +39,17 @@ body.no-scroll {
 }
 
 .h1-header{
-    @apply text-24 font-semibold mb-12;
+    @apply text-24 font-bold mb-12;
 }
 
 .h2-header{
-    @apply text-16 font-medium my-8 uppercase;
+    @apply text-16 font-semibold my-8 uppercase;
 }
 
 .para{
     @apply text-16 my-6;
+}
+
+.mail{
+    @apply text-brand border-b border-brand;
 }
