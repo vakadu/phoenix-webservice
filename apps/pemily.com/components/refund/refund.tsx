@@ -32,20 +32,20 @@ const Refund = () => {
       <h2 className="h2-header pt-24">2. DEFINITIONS</h2>
       <p className="para">
         {' '}
-        a. **Business Days:** Non-Saturday, Sunday, public holiday, or bank
+        <h6>a. Business Days:</h6> Non-Saturday, Sunday, public holiday, or bank
         holiday in India or the state where our office is located.
       </p>
       <p className="para">
         {' '}
-        b. **Customer:** A person availing services for personal use, excluding
+        <h6>b. Customer:</h6> A person availing services for personal use, excluding
         commercial purchases.
       </p>
       <p className="para">
         {' '}
-        c. **Date of Transaction:** The service invoice date, including renewal
+        <h6>c. Date of Transaction:</h6> The service invoice date, including renewal
         processed as per applicable service agreement terms.
       </p>
-      <p className="para"> d. **Website:** www.pemilyy.com.</p>
+      <p className="para"> <h6>d. Website:</h6> www.pemilyy.com.</p>
 
       <h2 className="h2-header pt-24">3. REFUND RULES</h2>
       <p className="para">
@@ -70,7 +70,7 @@ const Refund = () => {
       </p>
       <p className="para">
         f. Refund requests can be made by reaching out to Pemilyy via email -
-        <a className="mail" href="mailto:care.pemilyy@gmail.com">
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>
       </p>
@@ -89,7 +89,7 @@ const Refund = () => {
       <p className="para">
         b. If unresolved after 7 (seven) Business Days, contact Our customer
         care at{' '}
-        <a className="mail" href="mailto:care.pemilyy@gmail.com">
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>
         .
@@ -129,7 +129,7 @@ const Refund = () => {
       <p className="para">
         Requests for return or refund can be canceled by contacting customer
         care at{' '}
-        <a className="mail" href="mailto:care.pemilyy@gmail.com">
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>
         .
@@ -163,7 +163,7 @@ const Refund = () => {
       <p className="para">For feedback or queries, contact us at:</p>
       <p className="para">
         Customer Care:{' '}
-        <a className="mail" href="mailto:care.pemilyy@gmail.com">
+        <a className="link" href="mailto:care.pemilyy@gmail.com">
           care.pemilyy@gmail.com
         </a>
       </p>
