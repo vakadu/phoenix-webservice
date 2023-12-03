@@ -1,0 +1,45 @@
+/*
+ * Replace this with your own classes
+ *
+ * e.g.
+ * .container {
+ * }
+*/
+
+.input{
+    position: relative;
+    cursor: pointer;
+    display: block;
+}
+
+.label{
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 3px 4px;
+    white-space: nowrap;
+    transform: translate(10px, 14px);
+    transform-origin: 0 0;
+    transition: transform 120ms ease-in;
+}
+
+.field{
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    background: transparent;
+    outline: none;
+    height: 54px;
+}
+
+.field:not(:-moz-placeholder-shown) + .label {
+    transform: translate(0.25rem, -36%) scale(0.8);
+}
+
+.field:not(:-ms-input-placeholder) + .label {
+    transform: translate(12px, -36%) scale(0.8);
+}
+.field:focus + .label, .field:not(:placeholder-shown) + .label {
+    transform: translate(12px, -36%) scale(0.8);
+}

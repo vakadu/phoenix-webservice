@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import './assets/css/global.css';
 import './assets/css/vendors/swiper.css';
+import Providers from './providers';
 
 const sathoshi = localFont({
 	src: [
@@ -99,7 +100,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" className={`${sathoshi.variable} ${jost.variable} font-sathoshi`}>
 			<body>
-				{children}
+				<Providers>{children}</Providers>
 				{/* <Analytics /> */}
 			</body>
 		</html>

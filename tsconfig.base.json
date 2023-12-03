@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@webservices/helpers": ["libs/helpers/src/index.ts"],
+      "@webservices/hooks": ["libs/hooks/src/index.ts"],
+      "@webservices/icons": ["libs/icons/src/index.ts"],
+      "@webservices/icons/server": ["libs/icons/src/server.ts"],
+      "@webservices/primitives": ["libs/primitives/src/index.ts"],
+      "@webservices/slices": ["libs/slices/src/index.ts"],
       "@webservices/ui": ["libs/ui/src/index.ts"],
       "@webservices/ui/server": ["libs/ui/src/server.ts"]
     }
