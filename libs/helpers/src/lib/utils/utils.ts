@@ -11,3 +11,17 @@ export const toBase64 = (str: string) =>
 export const formatPrice = (num: number) => {
 	return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 21 }).format(num);
 };
+
+export const stickyNav = () => {
+	const offset = window.scrollY;
+	const sticky = document.querySelectorAll(".header");
+	sticky.forEach((stick) => {
+		if (stick) {
+			if (offset > 100) {
+				stick.classList.add("header-in", "sticky-header");
+			} else {
+				stick.classList.remove("header-in", "sticky-header");
+			}
+		  }
+	})
+};
