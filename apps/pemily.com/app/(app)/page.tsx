@@ -1,7 +1,7 @@
 export default function Home() {
     return (
         <section>
-            Pemilyyy
+            Pemilyy
         </section>
     )
 }
