@@ -39,16 +39,16 @@ const sathoshi = localFont({
 
 export const metadata = {
 	title: 'Pemily',
-	description: 'Vinod Kumar',
+	description: 'pemily',
 	icons: {
 		icon: [
-			{ url: '/favicons/favicon.ico' },
-			{ url: '/favicons/favicon-16x16.png' },
-			{ url: '/favicons/favicon-32x32.png' },
+			{ url: '/favicon/favicon.ico' },
+			{ url: '/favicon/favicon-16x16.png' },
+			{ url: '/favicon/favicon-32x32.png' },
 		],
-		shortcut: ['/favicons/favicon-16x16.png'],
+		shortcut: ['/favicon/favicon-16x16.png'],
 		apple: [
-			{ url: '/favicons/apple-touch-icon.png' },
+			{ url: '/favicon/apple-touch-icon.png' },
 		]
 	},
 	viewport: {
@@ -62,8 +62,8 @@ export const metadata = {
 	keywords: ['pemilyy', 'pemily', 'pemil', 'pets', 'cats', 'dogs', 'animals', 'animal', 'pet family', 'family'],
 	authors: [{ name: 'Vinod Kumar', url: 'https://vakaduvinod.in' }, { name: 'Avishek Singh' }],
 	colorScheme: 'light',
-	creator: 'Vinod Kumar',
-	publisher: 'Vinod Kumar',
+	creator: 'Pemilyy',
+	publisher: 'Pemilyy',
 	formatDetection: {
 		email: false,
 		address: false,
@@ -76,7 +76,7 @@ export const metadata = {
 		siteName: 'Pemilyy',
 		images: [
 			{
-				url: '/favicons/android-chrome-512x512.png',
+				url: '/favicon/android-chrome-512x512.png',
 				width: 512,
 				height: 512,
 			}
