@@ -12,10 +12,10 @@
 				"outputPath": "dist/apps/pemily.com"
 			},
 			"configurations": {
-			"development": {
-				"outputPath": "apps/pemily.com"
-			},
-			"production": {}
+				"development": {
+					"outputPath": "apps/pemily.com"
+				},
+				"production": {}
 			}
       },
       "serve": {
