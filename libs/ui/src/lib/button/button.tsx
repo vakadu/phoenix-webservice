@@ -28,7 +28,8 @@ type ColorNames =
   | 'info'
   | 'warning'
   | 'danger'
-  | 'black';
+  | 'black'
+  | 'blackWhite';
 type SizeNames = 'large' | 'medium' | 'small';
 
 const shapes: Record<ShapeNames, string[]> = {
@@ -52,6 +53,7 @@ const colors: Record<ColorNames, string[]> = {
 	warning: ['text-yellow-500', 'bg-yellow-500', 'border-yellow-500'],
 	danger: ['text-red-500', 'bg-red-500', 'border-red-500'],
 	black: ['text-white', 'bg-black', 'border-black dark:border-grey-dark-shade'],
+	blackWhite: ['text-black', 'bg-black', 'border-black'],
 };
 
 const sizes: Record<SizeNames, string[]> = {

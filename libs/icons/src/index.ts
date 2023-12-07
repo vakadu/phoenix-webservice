@@ -41,4 +41,6 @@ export * from './lib/moon/moon';
 export * from './lib/sun/sun';
 export * from './lib/close-icon/close-icon';
 export * from './lib/options-icon/options-icon';
+export * from './lib/play-store-icon/play-store-icon';
+export * from './lib/app-store-icon/app-store-icon';
 export * from './lib/icons';
