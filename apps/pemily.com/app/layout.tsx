@@ -1,6 +1,7 @@
 import { Jost } from 'next/font/google';
 import localFont from 'next/font/local';
-// import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import './assets/css/global.css';
 import './assets/css/vendors/swiper.css';
@@ -101,7 +102,8 @@ export default function RootLayout({
 		<html lang="en" className={`${sathoshi.variable} ${jost.variable} font-sathoshi`}>
 			<body>
 				<Providers>{children}</Providers>
-				{/* <Analytics /> */}
+				<Analytics />
+				<SpeedInsights />
 			</body>
 		</html>
 	);
