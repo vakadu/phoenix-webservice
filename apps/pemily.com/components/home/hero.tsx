@@ -8,8 +8,8 @@ const Hero = () => {
                 <section className="relative pt-[20px] w-full">
                     <section className="text-center md:text-left">
                         <section className="max-w-[740px] mb-[420px] lg:mb-0">
-                            <h1 className="text-[42px] font-bold">Welcome to </h1>
-                            <h1 className="text-[42px] font-bold text-brand">Pemilyy</h1>
+                            <h1 className="text-[80px] font-bold">Welcome to </h1>
+                            <h1 className="text-[80px] font-bold text-brand">Pemilyy</h1>
                             <p className="mt-24 lg:max-w-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores eum inventore labore repellat reprehenderit corrupti voluptatem vero quidem maxime et nihil similique, enim eaque, laborum, natus at aperiam optio architecto?</p>
                             <section className="mt-24">
                                 <Button className="bg-brand flex px-12 mr-12">

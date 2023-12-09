@@ -32,7 +32,7 @@ export const InputNormal = React.forwardRef<HTMLInputElement, InputNormalProps>(
 
 		return(
 			<section className={`relative ${containerClasses}`}>
-				<label className={`text-14 leading-[32px] font-semibold ${labelClass}`}>
+				<label className={`text-14 md:text-16 leading-[32px] font-semibold ${labelClass}`}>
 					{ label }
 				</label>
 				<section className='relative'>
@@ -43,7 +43,7 @@ export const InputNormal = React.forwardRef<HTMLInputElement, InputNormalProps>(
 						inputMode={inputMode}
 						placeholder={placeholder}
 						disabled={disabled}
-						className={`h-[52px] border-2 focus:border-none border-grey-border focus:ring-2 focus:shadow-sm outline-none w-full block transition-all duration-0.6 ease-smooth rounded-4 px-12 text-14 ${parentClass}`} 
+						className={`h-[52px] border-2 focus:border-none border-grey-border focus:ring-2 focus:shadow-sm outline-none w-full block transition-all duration-0.6 ease-smooth rounded-4 px-12 text-14 md:text-16 ${parentClass}`} 
 					/>	
 				</section>
 				{
