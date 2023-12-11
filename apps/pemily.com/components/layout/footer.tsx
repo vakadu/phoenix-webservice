@@ -25,8 +25,10 @@ const Footer = () => {
                         <a className="link" href="mailto:care.pemilyy@gmail.com">care.pemilyy@gmail.com</a>
                     </li>
                     <li className="text-14 px-12">
-                        <span>Regirterd Office: </span>
-                        <a>KOKARYA, Business Synergy Center, No.51, OLD SITE No.1, FIFTH FLOOR, 5th Main, 5th BLOCK, JAYANAGAR, BENGALURU-560011</a>
+                        <span>Registered Office: </span>
+                        <a>KOKARYA, Business Synergy Center, No.51, OLD SITE No.1, FIFTH FLOOR,
+                            5th Main, 5th BLOCK, JAYANAGAR, BENGALURU-560011
+                        </a>
                     </li>
                 </ul>
             </section>

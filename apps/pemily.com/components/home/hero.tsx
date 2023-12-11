@@ -10,14 +10,19 @@ const Hero = () => {
                         <section className="max-w-[740px] mb-[420px] lg:mb-0">
                             <h1 className="text-[42px] lg:text-[80px] font-bold">Welcome to </h1>
                             <h1 className="text-[42px] lg:text-[80px] font-bold text-brand">Pemilyy</h1>
-                            <p className="mt-24 lg:max-w-lg text-14 md:text-16 text-center md:text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores eum inventore labore repellat reprehenderit corrupti voluptatem vero quidem maxime et nihil similique, enim eaque, laborum, natus at aperiam optio architecto?</p>
+                            <p className="mt-24 lg:max-w-lg text-14 md:text-16 text-center md:text-left">
+                                Where we proudly declare,{' '}
+                                <span className="font-medium">
+                                    "WE ARE AN EXTENDED FAMILY OF YOUR PETS!!!"
+                                </span>{' '}
+                                Download the Pemilly app by clicking below</p>
                             <section className="mt-24 grid md:grid-cols-2 max-w-md gap-24">
                                 <Button className="bg-brand flex px-12 col-span-1">
-                                    <PlayStoreIcon className="w-[24px] h-[24px]"/>
+                                    <PlayStoreIcon className="w-[24px] h-[24px]" />
                                     <span className="text-14 ml-12">Play Store</span>
                                 </Button>
                                 <Button variant="ghost" color="blackWhite" className="flex col-span-1 px-12">
-                                    <AppStoreIcon className="w-[24px] h-[24px]"/>
+                                    <AppStoreIcon className="w-[24px] h-[24px]" />
                                     <span className="text-14 ml-12">App Store</span>
                                 </Button>
                             </section>
