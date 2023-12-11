@@ -30,7 +30,7 @@ const Header = () => {
                         />
                     </figure>
                 </Link>
-                <section className="flex-1 flex flex-col md:flex-row justify-end items-end md:items-center">
+                <section className="flex-1 flex flex-col justify-end items-end">
                     <Link className='text-14 font-semibold' href='/about'>
                         About Us
                     </Link>
