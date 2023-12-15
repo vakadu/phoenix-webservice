@@ -13,7 +13,7 @@ const Hero = () => {
                             <p className="mt-24 lg:max-w-lg text-14 md:text-16 text-center md:text-left">
                                 Where we proudly declare,{' '}
                                 <span className="font-medium">
-                                    "WE ARE AN EXTENDED FAMILY OF YOUR PETS!!!"
+                                    "WE ARE AN EXTENDED FAMILY OF YOUR PETS"
                                 </span>{' '}
                                 Download the Pemilly app by clicking below</p>
                             <section className="mt-24 grid md:grid-cols-2 max-w-md gap-24">
