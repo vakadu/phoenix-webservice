@@ -1,3 +1,7 @@
+"use client"
+
+import Link from 'next/link';
+
 import { AppStoreIcon, PlayStoreIcon } from "@webservices/icons";
 import { Button } from "@webservices/ui";
 
@@ -17,14 +21,18 @@ const Hero = () => {
                                 </span>{' '}
                                 Download the Pemilly app by clicking below</p>
                             <section className="mt-24 grid md:grid-cols-2 max-w-md gap-24">
-                                <Button className="bg-brand flex px-12 col-span-1">
-                                    <PlayStoreIcon className="w-[24px] h-[24px]" />
-                                    <span className="text-14 ml-12">Play Store</span>
-                                </Button>
-                                <Button variant="ghost" color="blackWhite" className="flex col-span-1 px-12">
-                                    <AppStoreIcon className="w-[24px] h-[24px]" />
-                                    <span className="text-14 ml-12">App Store</span>
-                                </Button>
+                                <Link className='col-span-1' target='_blank' href='https://play.google.com/store/apps/details?id=com.pemilyy.android'>
+                                    <Button className="bg-brand flex px-12 w-full">
+                                        <PlayStoreIcon className="w-[24px] h-[24px]" />
+                                        <span className="text-14 ml-12">Play Store</span>
+                                    </Button>
+                                </Link>
+                                <Link className='col-span-1' target='_blank' href='https://apps.apple.com/us/app/pemilyy/id6474898482'>
+                                    <Button variant="ghost" color="blackWhite" className="flex px-12 w-full">
+                                        <AppStoreIcon className="w-[24px] h-[24px]" />
+                                        <span className="text-14 ml-12">App Store</span>
+                                    </Button>
+                                </Link>
                             </section>
                         </section>
                     </section>
