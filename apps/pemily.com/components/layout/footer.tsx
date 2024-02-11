@@ -21,8 +21,8 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li className="text-14 px-12">
-                        <span>Mail us at </span>
-                        <a className="link" href="mailto:care.pemilyy@gmail.com">care.pemilyy@gmail.com</a>
+                        <span>Contact us via: </span>
+                        <a>Mail - care.pemilyy@gmail.com , Phone - 8789263285</a>
                     </li>
                     <li className="text-14 px-12">
                         <span>Registered Office: </span>
