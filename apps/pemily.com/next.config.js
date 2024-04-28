@@ -12,6 +12,9 @@ const nextConfig = {
 		// See: https://github.com/gregberge/svgr
 		svgr: false,
 	},
+	images: {
+		domains: ['pemilyy-assets.s3.ap-south-1.amazonaws.com'],
+	},
 };
 
 const plugins = [

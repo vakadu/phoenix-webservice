@@ -203,7 +203,8 @@ module.exports = {
                 '2': '2px'
             },
             borderRadius: {
-                4: '4px'
+                4: '4px',
+                6: '6px'
             },
             boxShadow: {
                 1: '5px 5px rgba(0, 0, 0, 0.2)',

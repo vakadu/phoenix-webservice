@@ -4,7 +4,7 @@
 
 @layer base {
     :root {
-      	--color-brand: 17 122 101;
+      	--color-brand: 0 122 101;
     }
 
 	html,
@@ -19,7 +19,7 @@ body{
 }
 
 body {
-	@apply bg-beige;
+	@apply bg-white;
 }
 
 body.no-scroll {
@@ -56,4 +56,16 @@ body.no-scroll {
 
 .link{
     @apply text-brand border-b border-brand;
+}
+
+.btn{
+    @apply h-40 text-14 font-medium flex justify-center items-center;
+}
+
+.btn-primary {
+    @apply bg-brand text-white;
+}
+
+.btn-medium {
+    @apply px-24 rounded-6;
 }

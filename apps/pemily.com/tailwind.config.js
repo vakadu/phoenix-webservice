@@ -23,7 +23,10 @@ module.exports = {
 				secondary: '#040F0F',
 				teritary: '#2D3A3A',
 				beige: 'rgb(245, 239, 231)',
-				tomato: '#F06543'
+				tomato: '#F06543',
+				black: {
+					bg: '#1C2428',
+				},
 			},
 			keyframes: {
 				spinnerline: {
