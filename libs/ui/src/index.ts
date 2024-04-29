@@ -1,3 +1,4 @@
+export * from './lib/modal-view/modal-view';
 export * from './lib/select-box/select-box';
 export * from './lib/radio/radio';
 export * from './lib/quantity-update/quantity-update';

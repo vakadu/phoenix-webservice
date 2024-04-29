@@ -7,9 +7,8 @@ const RootLayout = ({ children }: PropsWithChildren) => {
     return(
         <main className="max-w-[1400px] mx-auto">
             <Header/>
-            {/* <section className="relative min-h-[100vh]">
-                { children }
-            </section>*/}
+            <section className="relative min-h-[100vh]">
+            </section>
             <Footer/> 
         </main>
     )

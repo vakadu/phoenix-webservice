@@ -6,6 +6,7 @@ import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 
 import modalReducer from '../modal-slice/modal-slice';
 import snackbarReducer from '../snackbar/snackbar-slice';
+import layoutReducer from '../layout/layout-slice';
 
 // const persistConfig = {
 //     key: "auth",
@@ -16,6 +17,7 @@ import snackbarReducer from '../snackbar/snackbar-slice';
 const rootReducer = combineReducers({
     modal: modalReducer,
     snackbar: snackbarReducer,
+    layout: layoutReducer,
 });
 
 export const pemilyStore = configureStore({

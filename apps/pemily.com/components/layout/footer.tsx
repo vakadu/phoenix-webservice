@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 const Footer = () => {
     return (
-        <footer className="bg-black-bg py-[64px] px-[165px]">
-            <section className="grid grid-cols-3">
+        <footer className="bg-black-bg px-16 py-24 lg:py-[64px] lg:px-[165px]">
+            <section className="grid lg:grid-cols-3">
                 <section className="col-span-1">
                     <Link href='/'>
                         <figure className='w-[93px] h-[38px] relative'>
@@ -18,31 +18,43 @@ const Footer = () => {
                             />
                         </figure>
                     </Link>
-                    <p className="py-24 text-14 leading-20 text-white">Copyright © {new Date().getFullYear()} Veena Tech.</p>
+                    <p className="pt-16 pb-32 lg:pt-12 lg:pb-24 text-14 leading-20 text-white">Copyright © {new Date().getFullYear()} Veena Tech.</p>
                 </section>
-                <section className="col-span-2 grid grid-cols-3 gap-24 text-white">
+                <section className="col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-24 text-white">
                     <section className="col-span-1">
-                        <p className="text-20 font-semibold leading-28 mb-24">Company</p>
+                        <p className="text-20 font-semibold leading-28 mb-10 lg:mb-28">Company</p>
                         <ul>
-                            <li>
-                                <Link className='text-16 leading-24' href='/about'>
+                            <li className="py-8">
+                                <Link className='text-14 leading-20 lg:text-16 lg:leading-24' href='/about'>
                                     About Us
                                 </Link>
                             </li>
-                            <li>
-                                <Link className='text-16 leading-24' href='/about'>
+                            <li className="py-8">
+                                <Link className='text-14 leading-20 lg:text-16 lg:leading-24' href='/about'>
                                     Services
                                 </Link>
                             </li>
-                            <li>
-                                <Link className='text-16 leading-24' href='/about'>
+                            <li className="py-8">
+                                <Link className='text-14 leading-20 lg:text-16 lg:leading-24' href='/about'>
                                     Why Pemily
                                 </Link>
                             </li>
                         </ul>
                     </section>
                     <section className="col-span-1">
-                        <p className="text-20 font-semibold leading-28">Support</p>
+                        <p className="text-20 font-semibold leading-28 mb-10 lg:mb-28">Support</p>
+                        <ul>
+                            <li className="py-8">
+                                <Link className='text-14 leading-20 lg:text-16 lg:leading-24' href='/about'>
+                                    Help center
+                                </Link>
+                            </li>
+                            <li className="py-8">
+                                <Link className='text-14 leading-20 lg:text-16 lg:leading-24' href='/about'>
+                                    Terms of service
+                                </Link>
+                            </li>
+                        </ul>
                     </section>
                     <section className="col-span-1">
                         <p className="text-20 font-semibold leading-28">Stay up to date</p>

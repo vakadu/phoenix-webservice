@@ -59,7 +59,7 @@ body.no-scroll {
 }
 
 .btn{
-    @apply h-40 text-14 font-medium flex justify-center items-center;
+    @apply h-40 leading-[40px] text-14 font-medium block;
 }
 
 .btn-primary {

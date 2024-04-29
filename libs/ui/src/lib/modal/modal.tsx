@@ -1,48 +1,31 @@
 "use client"
 
-import { Fragment, useEffect, useCallback } from 'react';
-import dynamic from 'next/dynamic';
+import { Fragment, useEffect, ReactNode } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { useSelector } from 'react-redux';
 
-import { ModalTypes } from '@webservices/primitives';
-import { PemilyRootState, closeModal, usePemilyAppDispatch, MODAL_VIEW } from '@webservices/slices';
 import { useRouterQuery } from '@webservices/hooks';
 
-const ConfirmationModal = dynamic(() => import('./confirmation-modal/confirmation'));
-
 /* eslint-disable-next-line */
-export interface ModalViewsProps {
-	bottomSheet?: boolean;
+export interface ModalProps {
+	isOpen: boolean;
+	children: ReactNode;
+	handleClose: () => void;
+	isCenter?: boolean;
 };
 
-function renderModalContent(view: MODAL_VIEW | string) {
-	switch (view) {
-		case ModalTypes.CONFIRMATION_MODAL:
-			return <ConfirmationModal/>;
-		default:
-			return null;
-	}
-}
-
-export function Modal(props: ModalViewsProps) {
+export function Modal(props: ModalProps) {
+	const { isOpen, children, handleClose, isCenter = true } = props;
 	const { pathname, params } = useRouterQuery();
-	const dispatch = usePemilyAppDispatch();
-	const modalData = useSelector((state: PemilyRootState) => state.modal);	
-
-	const handleClose = useCallback(() => {
-		dispatch(closeModal())
-	}, []);
 
 	useEffect(() => {		
 		handleClose();
-	  }, [pathname, params, handleClose])
+	}, [pathname, params])
 
 	return (
-		<Transition appear show={modalData.isOpen} as={Fragment}>
+		<Transition appear show={isOpen} as={Fragment}>
 			<Dialog
 				as="section"
-				className="fixed inset-0 z-50 h-full w-full overflow-y-auto overflow-x-hidden text-center"
+				className="fixed inset-0 z-50 h-full w-full overflow-y-auto overflow-x-hidden"
 				onClose={handleClose}
 			>
 				<Transition.Child
@@ -58,9 +41,12 @@ export function Modal(props: ModalViewsProps) {
 				</Transition.Child>
 
 				{/* FOR CENTERING MODAL */}
-				<span className="inline-block h-full align-middle" aria-hidden="true">
-					&#8203;
-				</span>
+				{
+					isCenter &&
+						<span className="inline-block h-full align-middle" aria-hidden="true">
+							&#8203;
+						</span>
+				}
 
 				<Transition.Child
 					as={Fragment}
@@ -71,9 +57,9 @@ export function Modal(props: ModalViewsProps) {
 					leaveFrom="opacity-100 scale-100"
 					leaveTo="opacity-0 scale-105"
 				>
-					<section className={`relative z-50 text-left align-middle ${modalData.bottomSheet ? '!absolute bottom-0 w-full' : 'inline-block w-full'}`}>
-						{modalData.view && renderModalContent(modalData.view)}
-					</section>
+					{/* <section className="relative z-50 text-left align-middle inline-block w-full"> */}
+						{children}
+					{/* </section> */}
 				</Transition.Child>
 			</Dialog>
 		</Transition>

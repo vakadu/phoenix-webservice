@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 
 import { pemilyStore } from '@webservices/slices';
-import { Modal, Snackbar } from '@webservices/ui';
+import { ModalView, Snackbar } from '@webservices/ui';
 
 persistStore(pemilyStore);
 
@@ -18,7 +18,7 @@ export default function Providers({ children }: any) {
         <Provider store={pemilyStore}>
             <QueryClientProvider client={queryClient}>
                 {children}
-                <Modal/>
+                <ModalView/>
                 <Snackbar/>
             </QueryClientProvider>
         </Provider>
