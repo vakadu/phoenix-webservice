@@ -67,26 +67,26 @@ const Terms = () => {
 
         <h2 className="h2-header pt-24">CONTENT</h2>
         <p className="para">
-          1. *Intellectual Property:* All content, including text, graphics, and
+          <h6>1. Intellectual Property:</h6> All content, including text, graphics, and
           trademarks, is subject to copyright. Reuse requires written consent.
         </p>
         <p className="para">
-          2. *Indemnity:* Users agree to indemnify and hold us harmless from
+          <h6>2. Indemnity:</h6> Users agree to indemnify and hold us harmless from
           losses, claims, and damages arising from breaches of these Terms.
         </p>
         <p className="para">
-          3. *Limitation of Liability:* We disclaim liability for
+          <h6>3. Limitation of Liability:</h6> We disclaim liability for
           unavailability, errors, or user actions. Users must comply with laws
           and policies.
         </p>
 
         <h2 className="h2-header pt-24">TERM</h2>
         <p className="para">
-          1. *Continuity:* These Terms of Use remain valid until you cease
+          <h6>1.Continuity:</h6> These Terms of Use remain valid until you cease
           Website access. Termination rights are reserved by us.
         </p>
         <p className="para">
-          2. *Termination:* We reserve the right to terminate your access or
+          <h6>2. Termination:</h6> We reserve the right to terminate your access or
           account for any reason without notice.
         </p>
 
