@@ -26,6 +26,7 @@ module.exports = {
 				tomato: '#F06543',
 				black: {
 					bg: '#1C2428',
+					bg2: '#1C1B1E',
 				},
 			},
 			keyframes: {
@@ -57,7 +58,10 @@ module.exports = {
 			},
 			backgroundImage: {
 				ass: 'linear-gradient(0deg, #FFFFFF 0%, #F0EBE3 100%);'
-			}
+			},
+			dropShadow: {
+				text1: '0px 4px 30px 0px #00000070',
+			},
 		},
 	},
   	plugins: [],

@@ -1,32 +1,72 @@
-import { AppStoreIcon, PlayStoreIcon } from "@webservices/icons";
-import { Button } from "@webservices/ui";
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Hero = () => {
-    return (
-        <section className="pb-[80px] bg-transparent bg-[linear-gradient(0deg,_#FFFFFF_0%,_#F0EBE3_100%)] dark:bg-[linear-gradient(0deg,_#31363c_0%,_#222831_100%)]">
-            <section className="min-h-screen flex items-center max-w-[1300px] mx-auto px-16 md:px-24">
-                <section className="relative pt-[20px] w-full">
-                    <section className="text-center md:text-left">
-                        <section className="max-w-[740px] mb-[420px] lg:mb-0">
-                            <h1 className="text-[42px] font-bold">Welcome to </h1>
-                            <h1 className="text-[42px] font-bold text-brand">Pemilyy</h1>
-                            <p className="mt-24 lg:max-w-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores eum inventore labore repellat reprehenderit corrupti voluptatem vero quidem maxime et nihil similique, enim eaque, laborum, natus at aperiam optio architecto?</p>
-                            <section className="mt-24">
-                                <Button className="bg-brand flex px-12 mr-12">
-                                    <PlayStoreIcon className="w-[24px] h-[24px]"/>
-                                    <span className="text-14 ml-12">Play Store</span>
-                                </Button>
-                                <Button variant="ghost" color="blackWhite" className="flex px-12 ml-12">
-                                    <AppStoreIcon className="w-[24px] h-[24px]"/>
-                                    <span className="text-14 ml-12">App Store</span>
-                                </Button>
-                            </section>
-                        </section>
-                    </section>
-                </section>
-            </section>
-        </section>
-    )
+	return (
+		<section className="relative">
+			<figure className="relative h-[calc(100vh-120px)]">
+				<Image
+					alt="Mountains"
+					src="/images/hero.jpeg"
+					quality={100}
+					sizes="100vw"
+					fill
+					className="object-cover"
+				/>
+			</figure>
+
+			<section className="flex flex-col justify-center absolute top-1/2 -translate-y-1/2 px-16 lg:px-[144px]">
+				<h1 className="text-[64px] leading-[76px] text-center lg:text-left text-white drop-shadow-text1 font-bold max-w-[650px]">
+					Tender care for your beloved furry family.
+				</h1>
+				<p className="text-16 leading-24 text-white py-24 text-center lg:text-left">
+					Professional pet care at your door step
+				</p>
+				<section className="flex gap-12 lg:gap-30">
+					<Link
+						href="https://play.google.com/store/apps/details?id=com.pemilyy.android"
+						className="grid grid-cols-3 justify-items-center content-center max-w[220px] w-full lg:w-[220px] bg-black-bg2 h-[65px] lg:h-[78px] px-20 py-12 border border-white rounded-[12px]"
+						target="_blank"
+					>
+						<figure className="relative h-[24px] w-[24px] lg:h-[32px] lg:w-[32px] col-span-1">
+							<Image
+								alt="play-store"
+								src="/icons/play-store.svg"
+								quality={100}
+								sizes="100vw"
+								fill
+								className="object-contain"
+							/>
+						</figure>
+						<p className="col-span-2 text-white">
+							<span className="block text-12 leading-15">Get it on</span>
+							<span className="text-16 lg:text-20 lg:leading-25">Google Play</span>
+						</p>
+					</Link>
+					<Link
+						href="https://apps.apple.com/us/app/pemilyy/id6474898482"
+						className="grid grid-cols-3 max-w[220px] justify-items-center content-center w-full lg:w-[220px] bg-black-bg2 h-[65px] lg:h-[78px] px-20 py-12 border border-white rounded-[12px]"
+						target="_blank"
+					>
+						<figure className="relative h-[32px] w-[32px] col-span-1">
+							<Image
+								alt="app-store"
+								src="/icons/app-store.svg"
+								quality={100}
+								sizes="100vw"
+								fill
+								className="object-contain"
+							/>
+						</figure>
+						<p className="col-span-2 text-white">
+							<span className="block text-12 leading-15">Download on the</span>
+							<span className="text-16 lg:text-20 lg:leading-25">App Store</span>
+						</p>
+					</Link>
+				</section>
+			</section>
+		</section>
+	);
 };
 
 export default Hero;
