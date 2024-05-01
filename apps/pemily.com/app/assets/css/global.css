@@ -10,6 +10,7 @@
 	html,
     body {
         @apply font-normal text-secondary;
+        scroll-behavior: smooth !important;
     }
 
     input[type="number"]::-webkit-inner-spin-button,
@@ -65,7 +66,7 @@ body.no-scroll {
 }
 
 .btn{
-    @apply h-40 leading-[40px] text-14 font-medium block;
+    @apply h-40 leading-[40px] text-14 font-medium;
 }
 
 .btn-primary {

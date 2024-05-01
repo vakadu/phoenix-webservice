@@ -2,7 +2,12 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { useScrollTop } from '@webservices/hooks';
+import { Button } from '@webservices/ui';
+
 const Menu = () => {
+	const { scrollToBottom } = useScrollTop();
+
 	return (
 		<section className="px-16 lg:px-0 flex flex-col lg:flex-row h-full">
 			<section className="flex-1 gap-24 lg:gap-[60px] items-start flex flex-col lg:flex-row lg:items-center lg:justify-center">
@@ -26,7 +31,8 @@ const Menu = () => {
 				</Link>
 				<Link
 					className="text-18 hover:text-brand lg:text-16 lg:leading-24 lg:inline-block lg:w-auto block w-full"
-					href="/"
+					href="#services"
+					scroll={false}
 				>
 					Services
 				</Link>
@@ -43,9 +49,9 @@ const Menu = () => {
 					Contact Us
 				</Link>
 			</section>
-			<Link className="btn btn-primary btn-medium hidden lg:block" href="/">
+			<Button onClick={scrollToBottom} size="medium" className="hidden lg:block">
 				Contact Us
-			</Link>
+			</Button>
 		</section>
 	);
 };

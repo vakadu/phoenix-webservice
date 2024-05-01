@@ -35,8 +35,8 @@ const sathoshi = localFont({
 			style: 'normal',
 		},
 	],
-	variable: '--font-sathoshi'
-})
+	variable: '--font-sathoshi',
+});
 
 export const metadata = {
 	title: 'Pemily',
@@ -48,9 +48,7 @@ export const metadata = {
 			{ url: '/favicon/favicon-32x32.png' },
 		],
 		shortcut: ['/favicon/favicon-16x16.png'],
-		apple: [
-			{ url: '/favicon/apple-touch-icon.png' },
-		]
+		apple: [{ url: '/favicon/apple-touch-icon.png' }],
 	},
 	viewport: {
 		width: 'device-width',
@@ -60,7 +58,18 @@ export const metadata = {
 	generator: 'Next.js',
 	applicationName: 'Pemilyy',
 	referrer: 'origin-when-cross-origin',
-	keywords: ['pemilyy', 'pemily', 'pemil', 'pets', 'cats', 'dogs', 'animals', 'animal', 'pet family', 'family'],
+	keywords: [
+		'pemilyy',
+		'pemily',
+		'pemil',
+		'pets',
+		'cats',
+		'dogs',
+		'animals',
+		'animal',
+		'pet family',
+		'family',
+	],
 	authors: [{ name: 'Vinod Kumar', url: 'https://vakaduvinod.in' }, { name: 'Avishek Singh' }],
 	colorScheme: 'light',
 	creator: 'Pemilyy',
@@ -80,7 +89,7 @@ export const metadata = {
 				url: '/favicon/android-chrome-512x512.png',
 				width: 512,
 				height: 512,
-			}
+			},
 		],
 		locale: 'en_US',
 		type: 'website',
@@ -93,13 +102,12 @@ const jost = Jost({
 	variable: '--font-jost',
 });
 
-export default function RootLayout({
-  	children,
-}: {
-  	children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" className={`${sathoshi.variable} ${jost.variable} font-sathoshi`}>
+		<html
+			lang="en"
+			className={`${sathoshi.variable} ${jost.variable} font-sathoshi scroll-smooth`}
+		>
 			<body>
 				<Providers>{children}</Providers>
 				<Analytics />

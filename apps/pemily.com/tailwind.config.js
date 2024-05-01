@@ -18,6 +18,9 @@ module.exports = {
 			  	jost: ['var(--font-jost)'],
 				sathoshi: ['var(--font-sathoshi)']
 			},
+			screens: {
+				
+			},
 			colors: {
 				brand: 'rgb(var(--color-brand) / <alpha-value>)',
 				secondary: '#040F0F',
@@ -61,6 +64,9 @@ module.exports = {
 			},
 			dropShadow: {
 				text1: '0px 4px 30px 0px #00000070',
+			},
+			boxShadow: {
+				1: '0px 8px 16px 0px #ABBED166'
 			},
 		},
 	},
