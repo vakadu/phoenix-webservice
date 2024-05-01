@@ -25,7 +25,7 @@ const Menu = () => {
 				</Link>
 				<Link
 					className="text-18 hover:text-brand lg:text-16 lg:leading-24 block lg:inline-block lg:w-auto w-full"
-					href="/"
+					href="/about"
 				>
 					About Us
 				</Link>
