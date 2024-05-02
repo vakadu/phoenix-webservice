@@ -1,7 +1,7 @@
 const About = () => {
 	return (
 		<section className="bg-white">
-			<section className="max-w-[1300px] mx-auto px-16 py-24 pt-[120px]">
+			<section className="px-16 py-24">
 				<h1 className="font-bold text-32 text-center mb-24 text-brand">About Us</h1>
 				<p className="text-16">
 					Welcome to{' '}

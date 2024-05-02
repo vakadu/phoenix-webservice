@@ -31,6 +31,9 @@ module.exports = {
 					bg: '#1C2428',
 					bg2: '#1C1B1E',
 				},
+				grey: {
+					bg: '#F5F7FA',
+				},
 			},
 			keyframes: {
 				spinnerline: {
