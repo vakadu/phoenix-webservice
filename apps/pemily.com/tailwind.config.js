@@ -69,7 +69,8 @@ module.exports = {
 				text1: '0px 4px 30px 0px #00000070',
 			},
 			boxShadow: {
-				1: '0px 8px 16px 0px #ABBED166'
+				1: '0px 8px 16px 0px #ABBED166',
+				bg1: '0px 2px 4px 0px #ABBED133',
 			},
 		},
 	},

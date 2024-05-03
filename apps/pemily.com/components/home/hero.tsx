@@ -17,10 +17,10 @@ const Hero = () => {
 
 			<section className="flex flex-col justify-center absolute top-1/2 -translate-y-1/2 px-16 lg:px-[144px]">
 				<h1 className="text-[64px] leading-[76px] text-center lg:text-left text-white drop-shadow-text1 font-bold max-w-[650px]">
-					Tender care for your beloved furry family.
+					Your Digital Pet Clinic Companion.
 				</h1>
 				<p className="text-16 leading-24 text-white py-24 text-center lg:text-left">
-					Professional pet care at your door step
+					Transitioning Your Pet Clinic into the Digital Age with Our Advanced Platform
 				</p>
 				<section className="flex gap-12 lg:gap-30">
 					<Link

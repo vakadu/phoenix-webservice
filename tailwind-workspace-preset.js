@@ -204,7 +204,12 @@ module.exports = {
             },
             borderRadius: {
                 4: '4px',
-                6: '6px'
+                6: '6px',
+                '7': '7px',
+                '8': '8px',
+                '9': '9px',
+                '10': '10px',
+				'12': '12px',
             },
             boxShadow: {
                 1: '5px 5px rgba(0, 0, 0, 0.2)',

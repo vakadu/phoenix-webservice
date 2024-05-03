@@ -28,7 +28,7 @@ const Services = () => {
 	return (
 		<section id="services" className="py-[68px] px-16 lg:px-80">
 			<h2 className="text-[36px] leading-[44px] font-medium text-center mb-24">
-				Our Services
+				How We Support You
 			</h2>
 			<section className="grid lg:grid-cols-3 gap-32 lg:gap-16">
 				{data?.map((service) => {
