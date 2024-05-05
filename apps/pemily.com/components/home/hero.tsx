@@ -1,25 +1,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { ImagePlaceholder } from '@webservices/ui';
+
 const Hero = () => {
 	return (
 		<section className="relative">
-			<figure className="relative h-[calc(100vh-120px)]">
-				<Image
-					alt="Pemilyy"
-					src="/images/hero-1.jpeg"
-					quality={100}
-					sizes="100vw"
-					fill
-					className="object-cover"
-				/>
-			</figure>
-
-			<section className="flex flex-col justify-center absolute top-1/2 -translate-y-1/2 px-16 lg:px-[144px]">
-				<h1 className="text-[64px] leading-[76px] text-center lg:text-left text-white drop-shadow-text1 font-bold max-w-[650px]">
+			<ImagePlaceholder
+				containerClasses="h-[calc(100vh-120px)] hidden lg:block"
+				alt="Pemilyy"
+				src="/images/hero-1.jpeg"
+				imageClasses="object-cover"
+			/>
+			<ImagePlaceholder
+				containerClasses="h-[calc(100vh-420px)] lg:hidden"
+				alt="Pemilyy"
+				src="/images/hero-mobile.jpg"
+				imageClasses="object-cover"
+			/>
+			<section className="flex flex-col justify-center lg:absolute pt-32 lg:pt-0 lg:top-1/2 lg:-translate-y-1/2 px-16 lg:px-[144px]">
+				<h1 className="text-[64px] leading-[76px] text-center lg:text-left lg:text-white drop-shadow-text1 font-bold max-w-[650px]">
 					Your Digital Pet Clinic Companion.
 				</h1>
-				<p className="text-16 leading-24 text-white py-24 text-center lg:text-left">
+				<p className="text-16 leading-24 lg:text-white py-24 text-center lg:text-left">
 					Transitioning Your Pet Clinic into the Digital Age with Our Advanced Platform
 				</p>
 				<section className="flex gap-12 lg:gap-30">

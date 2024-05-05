@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { shimmer, toBase64 } from "@webservices/helpers";
+import { shimmer, toBase64 } from '@webservices/helpers';
 
 /* eslint-disable-next-line */
-export interface ImagePlaceholderProps extends React.HTMLAttributes<HTMLElement>  {
+export interface ImagePlaceholderProps extends React.HTMLAttributes<HTMLElement> {
 	alt?: string;
 	src: string;
 	containerClasses?: string;
@@ -12,13 +12,18 @@ export interface ImagePlaceholderProps extends React.HTMLAttributes<HTMLElement>
 }
 
 export function ImagePlaceholder(props: ImagePlaceholderProps) {
-	const { alt = "arzooo", src, containerClasses, imageClasses, sizes = "100vw", ...rest } = props;
+	const {
+		alt = 'pemilyy',
+		src,
+		containerClasses,
+		imageClasses,
+		sizes = '100vw',
+		...rest
+	} = props;
+	console.log(src);
 
 	return (
-		<figure 
-			className={`relative ${containerClasses}`}
-			{ ...rest }
-		>
+		<figure className={`relative ${containerClasses}`} {...rest}>
 			<Image
 				src={src}
 				alt={alt}

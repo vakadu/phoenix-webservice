@@ -80,8 +80,9 @@ export const metadata = {
 		telephone: false,
 	},
 	openGraph: {
-		title: 'Pemilyy',
-		description: 'Pemilyy',
+		title: 'Pemilyy - Your Digital Pet Clinic Companion',
+		description:
+			'Transitioning Your Pet Clinic into the Digital Age with Our Advanced Platform',
 		url: 'https://pemilyy.com',
 		siteName: 'Pemilyy',
 		images: [
