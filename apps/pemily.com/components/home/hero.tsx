@@ -6,8 +6,8 @@ const Hero = () => {
 		<section className="relative">
 			<figure className="relative h-[calc(100vh-120px)]">
 				<Image
-					alt="Mountains"
-					src="/images/hero.jpeg"
+					alt="Pemilyy"
+					src="/images/hero-1.jpeg"
 					quality={100}
 					sizes="100vw"
 					fill

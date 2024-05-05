@@ -3,24 +3,23 @@ import Image from 'next/image';
 const data = [
 	{
 		id: 1,
-		img: '/images/clinic-appointment.png',
-		heading: 'Clinic Appointment',
+		img: '/images/personalize.jpeg',
+		heading: 'Personalized Setup',
 		descriptoin:
-			'Through partnerships with accredited pet clinics, we offer a spectrum of services from routine check-ups to specialized treatments',
+			'When you add your clients, your clinic automatically becomes the default setting.',
 	},
 	{
 		id: 2,
-		img: '/images/video-appointment.png',
-		heading: 'Video Appointment',
+		img: '/images/organized.jpeg',
+		heading: 'Organized Clinic',
 		descriptoin:
-			'Our user-friendly platform empowers you to effortlessly discover and connect with the finest pet clinics in your vicinity',
+			'Easily manage all aspects of your clinic like appointments, medical records, vaccination history, doctors and more.',
 	},
 	{
 		id: 3,
-		img: '/images/grooming.png',
-		heading: 'Grooming',
-		descriptoin:
-			'Behind Pemilyy is a team of devoted individuals who comprehend the unique bond between pets and their parents',
+		img: '/images/app.jpeg',
+		heading: 'All-in-One App',
+		descriptoin: 'Enjoy the convenience of having everything you need in a single app.',
 	},
 ];
 
@@ -34,7 +33,7 @@ const Services = () => {
 				{data?.map((service) => {
 					return (
 						<section
-							className="col-span-1 transition-all flex flex-col items-center justify-center relative hover:shadow-1 hover:cursor-pointer"
+							className="col-span-1 transition-all flex flex-col items-center justify-center relative"
 							key={service.id}
 						>
 							<figure className="relative w-full h-[286px]">
@@ -45,10 +44,13 @@ const Services = () => {
 									className="object-cover rounded-tl-[12px] rounded-tr-[12px]"
 								/>
 							</figure>
-							<section className="bg-white shadow-1 w-full py-20 rounded-bl-[12px] rounded-br-[12px]">
-								<h4 className="text-brand text-20 leading-28 font-medium text-center">
+							<section className="bg-white flex-1 shadow-1 w-full px-16 py-20 rounded-bl-[12px] rounded-br-[12px]">
+								<h4 className="text-brand text-20 leading-28 font-medium text-center pb-12">
 									{service.heading}
 								</h4>
+								<p className="text-16 font-medium leading-21 text-center">
+									{service.descriptoin}
+								</p>
 							</section>
 						</section>
 					);

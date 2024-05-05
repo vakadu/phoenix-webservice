@@ -81,9 +81,9 @@ const Footer = () => {
 							</li>
 						</ul>
 					</section>
-					<section className="col-span-1">
+					{/* <section className="col-span-1">
 						<p className="text-20 font-semibold leading-28">Stay up to date</p>
-					</section>
+					</section> */}
 				</section>
 			</section>
 		</footer>
