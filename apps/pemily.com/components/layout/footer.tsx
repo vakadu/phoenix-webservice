@@ -18,9 +18,13 @@ const Footer = () => {
 							/>
 						</figure>
 					</Link>
-					<p className="pt-16 pb-32 lg:pt-12 lg:pb-24 text-14 leading-20 text-white">
+					<p className="py-16  lg:py-12  text-14 leading-20 text-white">
 						Copyright © {new Date().getFullYear()} Veena Tech.
 					</p>
+					<address className="text-white text-12 pb-32 lg:pb-24">
+						Address: FIFTH FLOOR,NO 51, OLD SITE NO 1,KOKARYA, BUSINESS SYNERGY CENTER,
+						5TH MAIN , 5TH BLOCK, JAYANAGAR, Bengaluru,Karnataka - 560011
+					</address>
 				</section>
 				<section className="col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-24 text-white">
 					<section className="col-span-1">

@@ -20,7 +20,7 @@ const Hero = () => {
 			/>
 			<section className="flex flex-col justify-center lg:absolute pt-32 lg:pt-0 lg:top-1/2 lg:-translate-y-1/2 px-16 lg:px-[144px]">
 				<h1 className="text-[64px] leading-[76px] text-center lg:text-left lg:text-white drop-shadow-text1 font-bold max-w-[650px]">
-					Your Digital Pet Clinic Companion.
+					Your Digital Pet Clinic Companion
 				</h1>
 				<p className="text-16 leading-24 lg:text-white py-24 text-center lg:text-left">
 					Transitioning Your Pet Clinic into the Digital Age with Our Advanced Platform
@@ -62,7 +62,7 @@ const Hero = () => {
 							/>
 						</figure>
 						<p className="col-span-2 text-white">
-							<span className="block text-12 leading-15">Download on the</span>
+							<span className="block text-12 leading-15">Get it on</span>
 							<span className="text-16 lg:text-20 lg:leading-25">App Store</span>
 						</p>
 					</Link>

@@ -76,3 +76,28 @@ body.no-scroll {
 .btn-medium {
     @apply px-24 rounded-6;
 }
+
+/* swiper */
+.features .swiper-button-prev, .features .swiper-button-next {
+    @apply !text-brand !z-50 !hidden lg:!block;
+}
+
+.features .swiper-button-prev {
+    @apply !top-[92%] !left-[40%];
+}
+
+.features .swiper-button-next {
+    @apply !top-[92%] !right-[38%];
+}
+
+.features .swiper-button-prev:after, .features .swiper-button-next:after{
+    @apply !text-24;
+}
+
+.features .swiper-pagination-bullet-active{
+    @apply !bg-brand;
+}
+
+.features .swiper-pagination{
+    @apply bottom-[18px] lg:bottom-[40px];
+}

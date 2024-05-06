@@ -1,7 +1,8 @@
-import { Jost } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 import './assets/css/global.css';
 import './assets/css/vendors/swiper.css';
@@ -39,8 +40,8 @@ const sathoshi = localFont({
 });
 
 export const metadata = {
-	title: 'Pemily',
-	description: 'pemily',
+	title: 'Pemilyy - Your Digital Pet Clinic Companion',
+	description: 'Transitioning Your Pet Clinic into the Digital Age with Our Advanced Platform',
 	icons: {
 		icon: [
 			{ url: '/favicon/favicon.ico' },
@@ -97,18 +98,9 @@ export const metadata = {
 	},
 };
 
-const jost = Jost({
-	subsets: ['latin'],
-	display: 'swap',
-	variable: '--font-jost',
-});
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html
-			lang="en"
-			className={`${sathoshi.variable} ${jost.variable} font-sathoshi scroll-smooth`}
-		>
+		<html lang="en" className={`${sathoshi.variable} font-sathoshi scroll-smooth`}>
 			<body>
 				<Providers>{children}</Providers>
 				<Analytics />
