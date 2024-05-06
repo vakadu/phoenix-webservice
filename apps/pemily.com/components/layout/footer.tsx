@@ -51,7 +51,7 @@ const Footer = () => {
 									className="text-14 leading-20 lg:text-16 lg:leading-24"
 									href="/"
 								>
-									Why Pemily
+									Why Pemilyy
 								</Link>
 							</li>
 						</ul>
