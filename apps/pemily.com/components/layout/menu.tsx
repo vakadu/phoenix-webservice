@@ -40,7 +40,7 @@ const Menu = () => {
 					className="text-18 hover:text-brand lg:text-16 lg:leading-24 lg:inline-block lg:w-auto block w-full"
 					href="#why"
 				>
-					Why Pemily
+					Why Pemilyy
 				</Link>
 				<Link
 					className="text-18 hover:text-brand lg:text-16 lg:leading-24 lg:w-auto block w-full lg:hidden"

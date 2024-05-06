@@ -21,7 +21,19 @@ const Footer = () => {
 					<p className="py-16  lg:py-12  text-14 leading-20 text-white">
 						Copyright © {new Date().getFullYear()} Veena Tech.
 					</p>
-					<address className="text-white text-12 pb-32 lg:pb-24">
+					<p className="text-14 leading-20 text-white">
+						Email:{' '}
+						<a className="font-medium" href="mailto: care@pemilyy.com">
+							care@pemilyy.com
+						</a>
+					</p>
+					<p className="text-14 leading-20 text-white pt-10">
+						Mobile Number:{' '}
+						<a className="font-medium" href="tel:7047037587">
+							+91 70470 37587
+						</a>
+					</p>
+					<address className="text-white text-12 py-32 lg:py-24">
 						Address: FIFTH FLOOR,NO 51, OLD SITE NO 1,KOKARYA, BUSINESS SYNERGY CENTER,
 						5TH MAIN , 5TH BLOCK, JAYANAGAR, Bengaluru,Karnataka - 560011
 					</address>
