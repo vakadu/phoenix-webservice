@@ -77,8 +77,8 @@ const Refund = () => {
 				</p>
 				<p className="para">
 					f. Refund requests can be made by reaching out to Pemilyy via email -
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 				</p>
 				<p className="para">
@@ -92,8 +92,8 @@ const Refund = () => {
 				</p>
 				<p className="para">
 					b. If unresolved after 7 (seven) Business Days, contact Our customer care at{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 					.
 				</p>
@@ -125,8 +125,8 @@ const Refund = () => {
 				<h2 className="h2-header pt-24">8. CANCELLATION OF RETURN REQUEST</h2>
 				<p className="para">
 					Requests for return or refund can be canceled by contacting customer care at{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 					.
 				</p>
@@ -156,8 +156,8 @@ const Refund = () => {
 				<p className="para">For feedback or queries, contact us at:</p>
 				<p className="para">
 					Customer Care:{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 				</p>
 			</section>

@@ -89,8 +89,8 @@ const Terms = () => {
 				<p className="para">
 					Users agree to receive communications (SMS, Whatsapp, Phone call, Email) related
 					to services. Discrepancies can be reported to
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 				</p>
 
@@ -140,8 +140,8 @@ const Terms = () => {
 				</p>
 				<p className="para">
 					<h6>4. Contact Us:</h6> Questions can be directed to{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>{' '}
 					or to Veena Tech at the provided address.
 				</p>

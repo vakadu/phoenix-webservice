@@ -29,8 +29,8 @@ const Privacy = () => {
 					This Privacy Policy aligns with the General Data Protection Regulation (GDPR)
 					effective from May 25, 2018. If you disagree with the terms, please refrain from
 					using the Site. For queries, contact our Customer Support Desk at{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 					.
 				</p>
@@ -161,8 +161,8 @@ const Privacy = () => {
 				<h2 className="h2-header pt-24">WITHDRAWAL, DATA DOWNLOAD & REMOVAL REQUESTS</h2>
 				<p className="para">
 					To withdraw consent or request data download/removal, email{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 					.
 				</p>
@@ -170,8 +170,8 @@ const Privacy = () => {
 				<h2 className="h2-header pt-24">CONTACT US</h2>
 				<p className="para">
 					For questions, contact us at{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 					.
 				</p>

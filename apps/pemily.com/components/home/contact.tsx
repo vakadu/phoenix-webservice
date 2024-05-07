@@ -40,9 +40,16 @@ const Contact = () => {
 		const data = {
 			name: values.name,
 			mobile: Number(values.mobileNumber),
-			query: values?.message,
 			type: 'Vet Clinic Appointment',
+		} as {
+			name: string;
+			mobile: number;
+			type: 'Vet Clinic Appointment';
+			query?: string;
 		};
+		if (values.message) {
+			data.query = values.message;
+		}
 		const response = await axios.post(url, data);
 		try {
 			if (response?.data?.status === 'SUCCESS') {
@@ -83,6 +90,7 @@ const Contact = () => {
 						inputMode="text"
 						{...register('name')}
 						errorMessage={errors?.name?.message as string}
+						containerClasses="lg:mb-0 mb-24"
 					/>
 					<InputNormal
 						label="Mobile Number"

@@ -63,8 +63,8 @@ const About = () => {
 				<p className="mt-8 text-16">
 					<span className="font-semibold">3.Contact Us:</span> Have questions? Reach out
 					to us at{' '}
-					<a className="link" href="mailto:care.pemilyy@gmail.com">
-						care.pemilyy@gmail.com
+					<a className="link" href="mailto:care@pemilyy.com">
+						care@pemilyy.com
 					</a>
 				</p>
 

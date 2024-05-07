@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { ImagePlaceholder } from '@webservices/ui';
 
 const Footer = () => {
 	return (
@@ -18,12 +19,34 @@ const Footer = () => {
 							/>
 						</figure>
 					</Link>
-					<p className="py-16  lg:py-12  text-14 leading-20 text-white">
+					<p className="py-16  lg:py-24  text-14 leading-20 text-white">
 						Copyright © {new Date().getFullYear()} Veena Tech.
 					</p>
+					<section className="flex pb-16 lg:pb-24">
+						<Link
+							className="pr-12"
+							target="_blank"
+							href="https://www.instagram.com/_pemilyy"
+						>
+							<ImagePlaceholder
+								containerClasses="w-32 h-32"
+								src="/icons/instagram.svg"
+							/>
+						</Link>
+						<Link
+							className="pr-12"
+							target="_blank"
+							href="https://www.youtube.com/@_pemilyy"
+						>
+							<ImagePlaceholder
+								containerClasses="w-32 h-32"
+								src="/icons/youtube.svg"
+							/>
+						</Link>
+					</section>
 					<p className="text-14 leading-20 text-white">
 						Email:{' '}
-						<a className="font-medium" href="mailto: care@pemilyy.com">
+						<a className="font-medium" href="mailto:care@pemilyy.com">
 							care@pemilyy.com
 						</a>
 					</p>
@@ -33,7 +56,7 @@ const Footer = () => {
 							+91 70470 37587
 						</a>
 					</p>
-					<address className="text-white text-12 py-32 lg:py-24">
+					<address className="text-white text-12 py-24">
 						Address: FIFTH FLOOR,NO 51, OLD SITE NO 1,KOKARYA, BUSINESS SYNERGY CENTER,
 						5TH MAIN , 5TH BLOCK, JAYANAGAR, Bengaluru,Karnataka - 560011
 					</address>
