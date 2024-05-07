@@ -44,22 +44,6 @@ const Footer = () => {
 							/>
 						</Link>
 					</section>
-					<p className="text-14 leading-20 text-white">
-						Email:{' '}
-						<a className="font-medium" href="mailto:care@pemilyy.com">
-							care@pemilyy.com
-						</a>
-					</p>
-					<p className="text-14 leading-20 text-white pt-10">
-						Mobile Number:{' '}
-						<a className="font-medium" href="tel:7047037587">
-							+91 70470 37587
-						</a>
-					</p>
-					<address className="text-white text-12 py-24">
-						Address: FIFTH FLOOR,NO 51, OLD SITE NO 1,KOKARYA, BUSINESS SYNERGY CENTER,
-						5TH MAIN , 5TH BLOCK, JAYANAGAR, Bengaluru,Karnataka - 560011
-					</address>
 				</section>
 				<section className="col-span-2 grid grid-cols-2 lg:grid-cols-3 gap-24 text-white">
 					<section className="col-span-1">
@@ -123,6 +107,34 @@ const Footer = () => {
 					{/* <section className="col-span-1">
 						<p className="text-20 font-semibold leading-28">Stay up to date</p>
 					</section> */}
+					<section className="col-span-1">
+						<p className="text-20 font-semibold leading-28 mb-10 lg:mb-28">Contact</p>
+						<ul>
+							<li className="py-8">
+								<p className="text-14 leading-20 text-white">
+									Email:{' '}
+									<a className="font-medium" href="mailto:care@pemilyy.com">
+										care@pemilyy.com
+									</a>
+								</p>
+							</li>
+							<li className="py-8">
+								<p className="text-14 leading-20 text-white">
+									Mobile Number:{' '}
+									<a className="font-medium" href="tel:7047037587">
+										+91 70470 37587
+									</a>
+								</p>
+							</li>
+							<li className="py-8">
+								<address className="text-white text-12">
+									Address: FIFTH FLOOR,NO 51, OLD SITE NO 1,KOKARYA, BUSINESS
+									SYNERGY CENTER, 5TH MAIN , 5TH BLOCK, JAYANAGAR,
+									Bengaluru,Karnataka - 560011
+								</address>
+							</li>
+						</ul>
+					</section>
 				</section>
 			</section>
 		</footer>
