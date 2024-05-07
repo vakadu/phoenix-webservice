@@ -20,7 +20,6 @@ export function ImagePlaceholder(props: ImagePlaceholderProps) {
 		sizes = '100vw',
 		...rest
 	} = props;
-	console.log(src);
 
 	return (
 		<figure className={`relative ${containerClasses}`} {...rest}>

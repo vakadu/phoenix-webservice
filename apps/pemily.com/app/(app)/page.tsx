@@ -4,6 +4,7 @@ import Hero from '../../components/home/hero';
 import Booking from '../../components/home/booking';
 import Why from '../../components/home/why';
 import Features from '../../components/home/features';
+import Contact from '../../components/home/contact';
 
 export default function Home() {
 	return (
@@ -14,6 +15,7 @@ export default function Home() {
 			<Features />
 			{/* <PetOwners /> */}
 			<Booking />
+			<Contact />
 		</>
 	);
 }

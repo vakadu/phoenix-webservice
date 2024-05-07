@@ -5,7 +5,7 @@ export interface InputNormalProps {
 	containerClasses?: string;
 	inputClasses?: string;
 	type: string;
-	inputMode: "numeric" | "email" | "search" | "text" | "tel" | "url" | "none" | "decimal";
+	inputMode: 'numeric' | 'email' | 'search' | 'text' | 'tel' | 'url' | 'none' | 'decimal';
 	label: string;
 	labelClasses?: string;
 	errorMessage: string;
@@ -16,13 +16,27 @@ export interface InputNormalProps {
 export const InputNormal = React.forwardRef<HTMLInputElement, InputNormalProps>(
 	(
 		{
-			containerClasses, inputClasses, type, inputMode, label, labelClasses, errorMessage, placeholder, disabled = false,
+			containerClasses,
+			inputClasses,
+			type,
+			inputMode,
+			label,
+			labelClasses,
+			errorMessage,
+			placeholder,
+			disabled = false,
 			...rest
 		},
-		ref,
-	) => {		
-		const parentClass = `${errorMessage ? 'border-red-dark focus:ring-red-dark text-red-dark placeholder-red-dark' : 'focus:ring-brand'} ${inputClasses}`;
-		const labelClass = `${errorMessage ? 'text-red-dark' : 'text-grey-textDark dark:text-white'} ${labelClasses}`;
+		ref
+	) => {
+		const parentClass = `${
+			errorMessage
+				? 'border-red-dark focus:ring-red-dark text-red-dark placeholder-red-dark'
+				: 'focus:ring-brand'
+		} ${inputClasses}`;
+		const labelClass = `${
+			errorMessage ? 'text-red-dark' : 'text-grey-textDark dark:text-white'
+		} ${labelClasses}`;
 
 		if (inputMode === 'numeric' && type !== 'number') {
 			type = 'number';
@@ -30,30 +44,27 @@ export const InputNormal = React.forwardRef<HTMLInputElement, InputNormalProps>(
 			type = 'email';
 		}
 
-		return(
+		return (
 			<section className={`relative ${containerClasses}`}>
-				<label className={`text-14 md:text-16 leading-[32px] font-semibold ${labelClass}`}>
-					{ label }
+				<label className={`text-14 md:text-16 leading-[32px] font-medium ${labelClass}`}>
+					{label}
 				</label>
-				<section className='relative'>
-					<input 
-						{ ...rest }
+				<section className="relative">
+					<input
+						{...rest}
 						ref={ref}
 						type={type}
 						inputMode={inputMode}
 						placeholder={placeholder}
 						disabled={disabled}
-						className={`h-[52px] border-2 focus:border-none border-grey-border focus:ring-2 focus:shadow-sm outline-none w-full block transition-all duration-0.6 ease-smooth rounded-4 px-12 text-14 md:text-16 ${parentClass}`} 
-					/>	
+						className={`h-[52px] border-2 focus:border-none border-grey-border focus:ring-2 focus:shadow-sm outline-none w-full block transition-all duration-0.6 ease-smooth rounded-4 px-12 text-14 md:text-16 ${parentClass}`}
+					/>
 				</section>
-				{
-					errorMessage && errorMessage !== '' &&
-						<p className='text-12 text-red-dark mt-4'>
-							{ errorMessage }
-						</p>
-				}
+				{errorMessage && errorMessage !== '' && (
+					<p className="text-12 text-red-dark mt-4">{errorMessage}</p>
+				)}
 			</section>
-		)
+		);
 	}
 );
 

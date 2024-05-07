@@ -15,7 +15,7 @@ const data = [
 			'Users can create profiles for their pets, including basic details like name, breed, age, and photos.',
 	},
 	{
-		id: 0,
+		id: 1,
 		img: '/images/feature-2.png',
 		heading: 'Pet Profile Creation',
 		subHeading:
