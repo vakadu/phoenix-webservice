@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 
-import { Button, InputNormal } from '@webservices/ui';
+import { Button, ImagePlaceholder, InputNormal } from '@webservices/ui';
 import { setOpen } from '@webservices/slices';
 import { useDispatch } from 'react-redux';
 
@@ -77,47 +77,56 @@ const Contact = () => {
 	};
 
 	return (
-		<section id="features" className="px-16 lg:px-[244px] relative py-[64px]">
-			<h2 className="text-[36px] leading-[44px] font-medium text-center my-24">
+		<section id="contact" className="px-16 lg:px-[94px] relative py-[64px]">
+			<h2 className="text-[24px] leading-[34px] font-medium text-left my-24">
 				What can we help with?
 			</h2>
-			<form onSubmit={handleSubmit(submit)}>
-				<section className="grid md:grid-cols-2 lg:gap-42 mb-24">
+			<section className="lg:grid lg:grid-cols-3 lg:gap-42">
+				<form className="col-span-2" onSubmit={handleSubmit(submit)}>
+					<section className="grid md:grid-cols-2 lg:gap-42 mb-24">
+						<InputNormal
+							label="Name"
+							placeholder=""
+							type="text"
+							inputMode="text"
+							{...register('name')}
+							errorMessage={errors?.name?.message as string}
+							containerClasses="lg:mb-0 mb-24"
+						/>
+						<InputNormal
+							label="Mobile Number"
+							placeholder=""
+							type="text"
+							inputMode="numeric"
+							{...register('mobileNumber')}
+							errorMessage={errors?.mobileNumber?.message as string}
+						/>
+					</section>
 					<InputNormal
-						label="Name"
+						label="Tell us whats on your mind (Optional)"
 						placeholder=""
 						type="text"
 						inputMode="text"
-						{...register('name')}
-						errorMessage={errors?.name?.message as string}
-						containerClasses="lg:mb-0 mb-24"
+						{...register('message')}
+						errorMessage={errors?.message?.message as string}
 					/>
-					<InputNormal
-						label="Mobile Number"
-						placeholder=""
-						type="text"
-						inputMode="numeric"
-						{...register('mobileNumber')}
-						errorMessage={errors?.mobileNumber?.message as string}
+					<Button
+						disabled={loading}
+						isLoading={loading}
+						loadingText="Submitting"
+						className="mt-24 min-w-[220px] w-full lg:w-auto"
+					>
+						Submit
+					</Button>
+				</form>
+				<section className="col-span-1 flex justify-center items-center mt-24 lg:mt-0">
+					<ImagePlaceholder
+						src="/images/dog.png"
+						containerClasses="h-[256px] w-[253px]"
+						imageClasses="object-cover"
 					/>
 				</section>
-				<InputNormal
-					label="Tell us whats on your mind (Optional)"
-					placeholder=""
-					type="text"
-					inputMode="text"
-					{...register('message')}
-					errorMessage={errors?.message?.message as string}
-				/>
-				<Button
-					disabled={loading}
-					isLoading={loading}
-					loadingText="Submitting"
-					className="mt-24 min-w-[220px] w-full lg:w-auto"
-				>
-					Submit
-				</Button>
-			</form>
+			</section>
 		</section>
 	);
 };

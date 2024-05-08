@@ -60,7 +60,7 @@ const Footer = () => {
 							<li className="py-8">
 								<Link
 									className="text-14 leading-20 lg:text-16 lg:leading-24"
-									href="/"
+									href="#services"
 								>
 									Services
 								</Link>
@@ -68,9 +68,17 @@ const Footer = () => {
 							<li className="py-8">
 								<Link
 									className="text-14 leading-20 lg:text-16 lg:leading-24"
-									href="/"
+									href="#why"
 								>
 									Why Pemilyy
+								</Link>
+							</li>
+							<li className="py-8">
+								<Link
+									className="text-14 leading-20 lg:text-16 lg:leading-24"
+									href="#features"
+								>
+									Features
 								</Link>
 							</li>
 						</ul>
