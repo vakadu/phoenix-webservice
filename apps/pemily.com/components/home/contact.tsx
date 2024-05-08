@@ -121,7 +121,7 @@ const Contact = () => {
 				</form>
 				<section className="col-span-1 flex justify-center items-center mt-24 lg:mt-0">
 					<ImagePlaceholder
-						src="/images/dog.png"
+						src="/images/Dog.png"
 						containerClasses="h-[256px] w-[253px]"
 						imageClasses="object-cover"
 					/>
