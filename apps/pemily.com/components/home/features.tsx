@@ -3,6 +3,8 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
+import Link from 'next/link';
+import Image from 'next/image';
 
 import { ImagePlaceholder } from '@webservices/ui';
 
@@ -10,16 +12,14 @@ const data = [
 	{
 		id: 0,
 		img: '/images/feature-1.png',
-		heading: 'Pet Profile Creation',
-		subHeading:
-			'Users can create profiles for their pets, including basic details like name, breed, age, and photos.',
+		heading: 'Upcoming Vaccinations',
+		subHeading: "Safeguarding every Pet's Well-being with Timely Vaccinations",
 	},
 	{
 		id: 1,
 		img: '/images/feature-2.png',
-		heading: 'Pet Profile Creation',
-		subHeading:
-			'Users can create profiles for their pets, including basic details like name, breed, age, and photos.',
+		heading: 'Upcoming Appointments',
+		subHeading: 'Seamlessly Organizing Your Schedule for Hassle-free Clinic Visits.',
 	},
 ];
 
@@ -51,6 +51,56 @@ const Features = () => {
 									<p className="text-16 leading-20 mt-12 text-center lg:text-left">
 										{feature.subHeading}
 									</p>
+									<section className="flex gap-12 lg:gap-30 mt-24">
+										<Link
+											href="https://play.google.com/store/apps/details?id=com.pemilyy.android"
+											className="grid grid-cols-3 justify-items-center items-center max-w-[220px] w-full lg:w-[220px] bg-black-bg2 h-[65px] lg:h-[78px] px-20 py-12 border border-white rounded-[12px]"
+											target="_blank"
+										>
+											<figure className="relative h-[24px] w-[24px] lg:h-[32px] lg:w-[32px] col-span-1">
+												<Image
+													alt="play-store"
+													src="/icons/play-store.svg"
+													quality={100}
+													sizes="100vw"
+													fill
+													className="object-contain"
+												/>
+											</figure>
+											<p className="col-span-2 text-white">
+												<span className="block text-12 leading-15">
+													Get it on
+												</span>
+												<span className="text-16 lg:text-20 lg:leading-25">
+													Google Play
+												</span>
+											</p>
+										</Link>
+										<Link
+											href="https://apps.apple.com/us/app/pemilyy/id6474898482"
+											className="grid grid-cols-3 max-w-[220px] justify-items-center items-center w-full lg:w-[220px] bg-black-bg2 h-[65px] lg:h-[78px] px-20 py-12 border border-white rounded-[12px]"
+											target="_blank"
+										>
+											<figure className="relative h-[32px] w-[32px] col-span-1">
+												<Image
+													alt="app-store"
+													src="/icons/app-store.svg"
+													quality={100}
+													sizes="100vw"
+													fill
+													className="object-contain"
+												/>
+											</figure>
+											<p className="col-span-2 text-white">
+												<span className="block text-12 leading-15">
+													Get it on
+												</span>
+												<span className="text-16 lg:text-20 lg:leading-25">
+													App Store
+												</span>
+											</p>
+										</Link>
+									</section>
 								</section>
 							</section>
 						</SwiperSlide>
