@@ -1,4 +1,5 @@
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+'use client';
+
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -6,7 +7,7 @@ import { ParsedUrlQuery } from 'querystring';
 export interface UseRouterQuery {
 	query: ParsedUrlQuery;
 	back: () => void;
-	router: AppRouterInstance;
+	router: any;
 	pathname: string;
 }
 
