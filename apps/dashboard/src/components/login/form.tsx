@@ -3,8 +3,10 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+
 import { phoneValidator } from '@webservices/helpers';
 import { Button, TextInput } from '@webservices/ui';
+import { useGetOtp } from '@webservices/api';
 
 const schema = yup.object().shape({
 	mobileNumber: yup
@@ -22,8 +24,11 @@ const LoginForm = () => {
 		resolver: yupResolver(schema),
 		mode: 'all',
 	});
+	const { mutate: sendOtp } = useGetOtp();
 
-	const onSubmit = (values) => {};
+	const onSubmit = (values: { mobileNumber: string }) => {
+		sendOtp({ mobile: values.mobileNumber });
+	};
 
 	return (
 		<form className="space-y-24" onSubmit={handleSubmit(onSubmit)}>

@@ -12,7 +12,7 @@ import { ModalView, Snackbar } from '@webservices/ui';
 persistStore(pemilyStore);
 
 export default function Providers({ children }: any) {
-    const [queryClient] = React.useState(() => new QueryClient())
+    const [queryClient] = React.useState(() => new QueryClient());
 
     return (
         <Provider store={pemilyStore}>

@@ -5,4 +5,4 @@ export const enum ModalTypes {
 
 export enum PaymentScripts {
 	Razorpay = 'https://checkout.razorpay.com/v1/razorpay.js',
-};
+}
