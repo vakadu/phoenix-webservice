@@ -131,7 +131,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 				onClick={clickHandler}
 				disabled={disabled}
 				className={cn(
-					'relative inline-flex shadow-3 shrink-0 items-center justify-center overflow-hidden text-center outline-none transition-all',
+					'relative inline-flex shadow-3 shrink-0 items-center justify-center overflow-hidden text-center outline-none transition-all hover:shadow-base2',
 					className,
 					!disabled ? buttonColorClassNames : 'cursor-not-allowed bg-grey-light',
 					sizeClassNames,
