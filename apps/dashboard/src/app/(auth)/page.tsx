@@ -20,7 +20,7 @@ const Login = () => {
 					</figure>
 				</section>
 				<section className="flex-1 bg-white flex items-center justify-center">
-					<section className="max-w-[524px] mx-auto px-[44px] py-[42px]">
+					<section className="min-w-[524px] mx-auto px-[44px] py-[42px]">
 						<h1 className="text-[32px] leading-[48px] font-medium text-center">
 							Sign In
 						</h1>

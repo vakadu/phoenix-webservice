@@ -13,6 +13,8 @@ interface TextInputProps {
 	error?: FieldError;
 	readonly?: boolean;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	maxLength?: number;
+	minLength?: number;
 	rest?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
@@ -27,6 +29,8 @@ export function TextInput({
 	register,
 	readonly = false,
 	onChange,
+	maxLength,
+	minLength,
 	...rest
 }: TextInputProps) {
 	const hasErrorInput = error
@@ -51,6 +55,8 @@ export function TextInput({
 					disabled={disabled}
 					readOnly={readonly}
 					onChange={onChange}
+					{...(maxLength ? { maxLength } : {})}
+					{...(minLength ? { minLength } : {})}
 				/>
 			</section>
 			{error && <p className={`text-12 ${hasErrorLabel}`}>{error.message}</p>}

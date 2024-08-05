@@ -10,7 +10,7 @@ import layoutReducer from '../layout/layout.slice';
 import authReducer from '../pemilyy-auth/pemilyy-auth.slice';
 
 const persistConfig = {
-	key: 'rrot',
+	key: 'root',
 	storage: storage,
 	whitelist: ['auth'],
 };

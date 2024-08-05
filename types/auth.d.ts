@@ -3,21 +3,11 @@ declare namespace IAuthTypes {
 		isUser: boolean;
 	}
 	interface ILoginOtpApiResponse {
-		status: 'SUCCESS' | 'ERROR';
-		msg: string;
-		data: {
-			type: string;
-		};
-		statusCode: number;
+		type: string;
 	}
 	interface ILoginInterface {
-		status: 'SUCCESS' | 'ERROR';
-		msg: string;
-		data: {
-			accessToken: string;
-			refreshToken: string;
-		};
-		statusCode: number;
+		accessToken: string;
+		refreshToken: string;
 	}
 	interface ISignupFormData {
 		mobile: number;

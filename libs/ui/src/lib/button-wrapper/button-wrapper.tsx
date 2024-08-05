@@ -5,19 +5,14 @@ import cn from 'classnames';
 
 import ButtonDrip from './button-drip';
 
-
 export interface ButtonViewProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
+}
 
-export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>((
-	{
-		children,
-		className,
-		onClick,
-		...buttonProps
-	},
-	ref: React.Ref<HTMLButtonElement | null>
+export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>(
+	(
+		{ children, className, onClick, ...buttonProps },
+		ref: React.Ref<HTMLButtonElement | null>
 	) => {
 		const [dripShow, setDripShow] = useState<boolean>(false);
 		const [dripX, setDripX] = useState<number>(0);
@@ -29,7 +24,7 @@ export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>((
 			setDripShow(false);
 			setDripX(0);
 			setDripY(0);
-		};
+		}
 
 		const clickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
 			if (buttonRef.current) {
@@ -41,27 +36,24 @@ export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>((
 			onClick && onClick(event);
 		};
 
-		return(
+		return (
 			<button
 				ref={buttonRef}
 				onClick={clickHandler}
-				className={cn(
-					'relative outline-none transition-all overflow-hidden',
-					className
-				)}
-				{ ...buttonProps }
+				className={cn('relative outline-none transition-all overflow-hidden', className)}
+				{...buttonProps}
 			>
 				{dripShow && (
 					<ButtonDrip
 						x={dripX}
 						y={dripY}
-						color='rgba(0, 0, 0, 0.1)'
+						color="rgba(0, 0, 0, 0.1)"
 						onCompleted={dripCompletedHandle}
 					/>
 				)}
 				{children}
 			</button>
-		)
+		);
 	}
 );
 
