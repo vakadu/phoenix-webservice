@@ -6,7 +6,7 @@ import * as yup from 'yup';
 
 import { phoneValidator } from '@webservices/helpers';
 import { Button, TextInput } from '@webservices/ui';
-import { useGetOtp } from '@webservices/api';
+import { useCheckUser, useGetOtp } from '@webservices/api';
 
 const schema = yup.object().shape({
 	mobileNumber: yup
@@ -20,14 +20,16 @@ const LoginForm = () => {
 		register,
 		formState: { errors },
 		handleSubmit,
+		watch,
 	} = useForm({
 		resolver: yupResolver(schema),
 		mode: 'all',
 	});
-	const { mutate: sendOtp } = useGetOtp();
+	const watchMobileNumber = watch('mobileNumber');
+	const { mutate: checkUser } = useCheckUser(watchMobileNumber);
 
 	const onSubmit = (values: { mobileNumber: string }) => {
-		sendOtp({ mobile: values.mobileNumber });
+		checkUser({ mobileNumber: values.mobileNumber });
 	};
 
 	return (

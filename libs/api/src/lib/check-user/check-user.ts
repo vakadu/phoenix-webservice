@@ -15,17 +15,15 @@ const checkUser = async (payload: { mobileNumber: string }) => {
 			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.IsUserRegistered}/${payload.mobileNumber}`
 		);
 		return data;
-	} catch (error: any) {
-		console.error('Error sending OTP:', error);
-		throw error;
+	} catch (err) {
+		throw new Error('Error sending OTP');
 	}
 };
 
 export function useCheckUser(options?: UseMutationOptions<any, Error, OtpPayload>) {
 	return useMutation({
 		mutationFn: checkUser,
-		onSuccess: (data) => {},
-		onError: (error) => {},
+		onSuccess: () => {},
 	});
 }
 
