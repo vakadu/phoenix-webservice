@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 
 import { Button, ImagePlaceholder, InputNormal } from '@webservices/ui';
-import { setOpen } from '@webservices/slices';
+import { showSnackbar } from '@webservices/slices';
 import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
@@ -56,21 +56,21 @@ const Contact = () => {
 				reset();
 				setLoading(false);
 				dispatch(
-					setOpen({
+					showSnackbar({
 						message: 'Data submitted successfully',
 					})
 				);
 			} else {
 				setLoading(false);
 				dispatch(
-					setOpen({
+					showSnackbar({
 						message: 'Unable to submit data. Please try again',
 					})
 				);
 			}
 		} catch (err) {
 			setLoading(false);
-			setOpen({
+			showSnackbar({
 				message: 'Unable to submit data. Please try again',
 			});
 		}

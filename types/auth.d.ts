@@ -1,11 +1,6 @@
 declare namespace IAuthTypes {
 	interface IsUserRegisteredInterface {
-		status: 'SUCCESS' | 'ERROR';
-		msg: string;
-		data: {
-			isUser: boolean;
-		};
-		statusCode: number;
+		isUser: boolean;
 	}
 	interface ILoginOtpApiResponse {
 		status: 'SUCCESS' | 'ERROR';

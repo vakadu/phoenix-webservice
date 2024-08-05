@@ -6,7 +6,9 @@ import * as yup from 'yup';
 
 import { phoneValidator } from '@webservices/helpers';
 import { Button, TextInput } from '@webservices/ui';
-import { useCheckUser, useGetOtp } from '@webservices/api';
+import { useCheckUser } from '@webservices/api';
+import { useSelector } from 'react-redux';
+import { PemilyRootState } from '@webservices/slices';
 
 const schema = yup.object().shape({
 	mobileNumber: yup
@@ -26,7 +28,9 @@ const LoginForm = () => {
 		mode: 'all',
 	});
 	const watchMobileNumber = watch('mobileNumber');
-	const { mutate: checkUser } = useCheckUser(watchMobileNumber);
+	const { mutate: checkUser, isPending } = useCheckUser({ mobileNumber: watchMobileNumber });
+	const layoutState = useSelector((state: PemilyRootState) => state.layout);
+	console.log(layoutState);
 
 	const onSubmit = (values: { mobileNumber: string }) => {
 		checkUser({ mobileNumber: values.mobileNumber });
@@ -42,7 +46,7 @@ const LoginForm = () => {
 				error={errors?.mobileNumber}
 				register={register}
 			/>
-			<Button className="w-full">
+			<Button isLoading={isPending} disabled={isPending} className="w-full">
 				<span className="text-16 font-black">GET OTP</span>
 			</Button>
 		</form>

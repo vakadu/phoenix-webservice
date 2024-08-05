@@ -1,27 +1,47 @@
 'use client';
 
-import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 import { ApiEndpoints } from '@webservices/primitives';
+import { setOtp, showSnackbar } from '@webservices/slices';
 
 type OtpPayload = {
 	mobile: string;
 };
 
 const sendOtp = async (payload: OtpPayload) => {
-	const { data } = await axios.post(
-		`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.Otp}`,
-		payload
-	);
-	return data;
+	try {
+		const { data } = await axios.post(
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.Otp}`,
+			payload
+		);
+		return data;
+	} catch (err) {
+		throw new Error('Network Error');
+	}
 };
 
-export function useGetOtp(options?: UseMutationOptions<any, Error, OtpPayload>) {
+export function useGetOtp() {
+	const dispatch = useDispatch();
 	return useMutation({
 		mutationFn: sendOtp,
-		onSuccess: (data) => {},
-		onError: (error) => {},
+		onSuccess: (data) => {
+			dispatch(setOtp({ showOtp: true }));
+			dispatch(
+				showSnackbar({
+					message: 'OTP sent successfully!',
+				})
+			);
+		},
+		onError: (error) => {
+			dispatch(
+				showSnackbar({
+					message: error.message,
+				})
+			);
+		},
 	});
 }
 

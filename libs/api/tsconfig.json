@@ -5,15 +5,9 @@
 		"esModuleInterop": false,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
-		"types": [
-			"jest",
-			"node",
-			"@types"
-		]
+		"types": ["jest", "node", "@types"]
 	},
-	"files": [
-		"../../types/auth.d.ts"
-	],
+	"files": ["../../types/auth.d.ts", "../../types/common.d.ts"],
 	"references": [
 		{
 			"path": "./tsconfig.lib.json"

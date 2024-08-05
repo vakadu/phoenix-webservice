@@ -1,31 +1,38 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-// import { persistReducer } from "redux-persist";
-import logger from "redux-logger";
-import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
-// import storage from 'redux-persist/lib/storage';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import logger from 'redux-logger';
+import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
+import storage from 'redux-persist/lib/storage';
 
-import modalReducer from '../modal-slice/modal-slice';
-import snackbarReducer from '../snackbar/snackbar-slice';
-import layoutReducer from '../layout/layout-slice';
+import modalReducer from '../modal/modal.slice';
+import snackbarReducer from '../snackbar/snackbar.slice';
+import layoutReducer from '../layout/layout.slice';
+import authReducer from '../pemilyy-auth/pemilyy-auth.slice';
 
-// const persistConfig = {
-//     key: "auth",
-//     storage: storage,
-//     whitelist: [""],
-// };
+const persistConfig = {
+	key: 'rrot',
+	storage: storage,
+	whitelist: ['auth'],
+};
 
 const rootReducer = combineReducers({
-    modal: modalReducer,
-    snackbar: snackbarReducer,
-    layout: layoutReducer,
+	modal: modalReducer,
+	snackbar: snackbarReducer,
+	layout: layoutReducer,
+	auth: authReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const pemilyStore = configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => process.env.NODE_ENV === "development" ?
-        getDefaultMiddleware({ serializableCheck: false }).concat(logger) :
-        getDefaultMiddleware({ serializableCheck: false })
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) =>
+		process.env.NODE_ENV === 'development'
+			? getDefaultMiddleware({ serializableCheck: false }).concat(logger)
+			: getDefaultMiddleware({ serializableCheck: false }),
 });
+
+export const pemilyPersistor = persistStore(pemilyStore);
 
 export type PemilyRootState = ReturnType<typeof pemilyStore.getState>;
 export type PemilyAppDispatch = typeof pemilyStore.dispatch;

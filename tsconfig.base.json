@@ -10,58 +10,25 @@
 		"importHelpers": true,
 		"target": "es2015",
 		"module": "esnext",
-		"lib": [
-			"es2020",
-			"dom"
-		],
+		"lib": ["es2020", "dom"],
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@webservices/api": [
-				"libs/api/src/index.ts"
-			],
-			"@webservices/api/server": [
-				"libs/api/src/server.ts"
-			],
-			"@webservices/constants": [
-				"libs/constants/src/index.ts"
-			],
-			"@webservices/constants/server": [
-				"libs/constants/src/server.ts"
-			],
-			"@webservices/helpers": [
-				"libs/helpers/src/index.ts"
-			],
-			"@webservices/hooks": [
-				"libs/hooks/src/index.ts"
-			],
-			"@webservices/icons": [
-				"libs/icons/src/index.ts"
-			],
-			"@webservices/icons/server": [
-				"libs/icons/src/server.ts"
-			],
-			"@webservices/primitives": [
-				"libs/primitives/src/index.ts"
-			],
-			"@webservices/slices": [
-				"libs/slices/src/index.ts"
-			],
-			"@webservices/ui": [
-				"libs/ui/src/index.ts"
-			],
-			"@webservices/ui/server": [
-				"libs/ui/src/server.ts"
-			]
+			"@webservices/api": ["libs/api/src/index.ts"],
+			"@webservices/api/server": ["libs/api/src/server.ts"],
+			"@webservices/constants": ["libs/constants/src/index.ts"],
+			"@webservices/constants/server": ["libs/constants/src/server.ts"],
+			"@webservices/helpers": ["libs/helpers/src/index.ts"],
+			"@webservices/hooks": ["libs/hooks/src/index.ts"],
+			"@webservices/icons": ["libs/icons/src/index.ts"],
+			"@webservices/icons/server": ["libs/icons/src/server.ts"],
+			"@webservices/primitives": ["libs/primitives/src/index.ts"],
+			"@webservices/slices": ["libs/slices/src/index.ts"],
+			"@webservices/ui": ["libs/ui/src/index.ts"],
+			"@webservices/ui/server": ["libs/ui/src/server.ts"]
 		}
 	},
-	"exclude": [
-		"node_modules",
-		"tmp"
-	],
-	"typeRoots": [
-		"types",
-		"node_modules/@types"
-	],
+	"exclude": ["node_modules", "tmp"],
+	"typeRoots": ["types", "node_modules/@types"]
 }
