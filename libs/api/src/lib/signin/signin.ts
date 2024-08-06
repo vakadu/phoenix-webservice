@@ -3,7 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 
 import { ApiEndpoints } from '@webservices/primitives';
-import { showSnackbar } from '@webservices/slices';
+import { authenticateUser, showSnackbar } from '@webservices/slices';
+import { useRouterQuery } from '@webservices/hooks';
 
 const signin = async (payload: IAuthTypes.ISigninFormData) => {
 	try {
@@ -19,9 +20,18 @@ const signin = async (payload: IAuthTypes.ISigninFormData) => {
 
 export const useSignin = () => {
 	const dispatch = useDispatch();
+	const { router } = useRouterQuery();
+
 	return useMutation({
 		mutationFn: signin,
 		onSuccess: (data) => {
+			dispatch(
+				authenticateUser({
+					token: data?.data?.accessToken,
+					refreshToken: data?.data?.refreshToken,
+					navigateFunction: () => router.push('/dashboard'),
+				})
+			);
 			dispatch(
 				showSnackbar({
 					message: 'Logged in!',

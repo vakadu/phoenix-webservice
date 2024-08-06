@@ -34,7 +34,7 @@ export const pemilyStore = configureStore({
 
 export const pemilyPersistor = persistStore(pemilyStore);
 
-export type PemilyRootState = ReturnType<typeof pemilyStore.getState>;
+export type PemilyRootState = ReturnType<typeof rootReducer>;
 export type PemilyAppDispatch = typeof pemilyStore.dispatch;
 
 export const usePemilyAppDispatch = () => useDispatch<PemilyAppDispatch>();
