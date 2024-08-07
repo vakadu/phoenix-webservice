@@ -1,16 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { PemilyRootState } from '@webservices/slices';
-import { useRouterQuery } from '@webservices/hooks';
+import { useRouterQuery, useSidebar } from '@webservices/hooks';
 import Header from '../../components/home-layout/header';
 import Sidebar from '../../components/home-layout/sidebar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { router } = useRouterQuery();
+	const { collapsed } = useSidebar();
 
 	useEffect(() => {
 		if (!authState.loggedIn) {
@@ -18,11 +19,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 		}
 	}, [authState.loggedIn, router]);
 
+	const sidebarClasses = useMemo(() => {
+		return collapsed
+			? 'ml-[72px] transition-all duration-150'
+			: 'ml-[248px] transition-all duration-150';
+	}, [collapsed]);
+
 	return (
 		<section className="max-w-screen-2xl">
-			<Header />
+			<Header sidebarClasses={sidebarClasses} />
 			<Sidebar />
-			{children}
+			<section className={`${sidebarClasses}`}>{children}</section>
 		</section>
 	);
 };

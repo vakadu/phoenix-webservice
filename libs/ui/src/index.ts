@@ -1,3 +1,4 @@
+export * from './lib/dropdown/dropdown';
 export * from './lib/text-input/text-input';
 export * from './lib/modal-view/modal-view';
 export * from './lib/select-box/select-box';
