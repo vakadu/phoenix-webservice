@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { themeConfig } from '@webservices/primitives';
+
 const initialState = {
 	mobileMenu: false,
 	showOtp: false,
 	isNewUser: false,
+	isCollapsed: themeConfig.dashboardLayout.menu.isCollapsed,
 };
 
 export const layoutSlice = createSlice({
@@ -12,6 +15,12 @@ export const layoutSlice = createSlice({
 	reducers: {
 		handleMobileMenu: (state, action) => {
 			state.mobileMenu = action.payload;
+		},
+		handleSidebarCollapsed: (state, action) => {
+			state.isCollapsed = action.payload;
+			if (typeof window !== 'undefined') {
+				window?.localStorage.setItem('sidebarCollapsed', action.payload);
+			}
 		},
 		setOtp: (state, action: PayloadAction<{ showOtp: boolean }>) => {
 			state.showOtp = action.payload.showOtp;
@@ -22,6 +31,7 @@ export const layoutSlice = createSlice({
 	},
 });
 
-export const { handleMobileMenu, setOtp, setIsNewUser } = layoutSlice.actions;
+export const { handleMobileMenu, setOtp, setIsNewUser, handleSidebarCollapsed } =
+	layoutSlice.actions;
 
 export default layoutSlice.reducer;

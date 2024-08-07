@@ -8,7 +8,7 @@ const Header = () => {
 
 	return (
 		<header className="sticky top-0">
-			<section className="py-24 px-16 bg-white shadow-2 flex">
+			<section className="py-24 px-16 bg-white shadow-base flex">
 				<section className="flex-1"></section>
 				<section className="flex-1 flex justify-end">
 					<span>{authState.mobile}</span>

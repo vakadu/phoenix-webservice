@@ -1,11 +1,11 @@
 import { act, renderHook } from '@testing-library/react';
 import * as React from 'react';
 
-import useConstants from './constants';
+import useSidebar from './sidebar';
 
-describe('useConstants', () => {
+describe('useSidebar', () => {
 	it('should render successfully', () => {
-		const { result } = renderHook(() => useConstants());
+		const { result } = renderHook(() => useSidebar());
 
 		expect(result.current.count).toBe(0);
 

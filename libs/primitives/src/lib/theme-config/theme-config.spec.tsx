@@ -1,11 +1,11 @@
 import { act, renderHook } from '@testing-library/react';
 import * as React from 'react';
 
-import useConstants from './constants';
+import useThemeConfig from './theme-config';
 
-describe('useConstants', () => {
+describe('useThemeConfig', () => {
 	it('should render successfully', () => {
-		const { result } = renderHook(() => useConstants());
+		const { result } = renderHook(() => useThemeConfig());
 
 		expect(result.current.count).toBe(0);
 

@@ -58,7 +58,15 @@ module.exports = {
 					dropdown: '0px 4px 8px rgba(0, 0, 0, 0.08)',
 					testi: '0px 4px 24px rgba(0, 0, 0, 0.06)',
 				},
+				transitionTimingFunction: {
+					ease1: 'cubic-bezier(0.39, 0.575, 0.565, 1)',
+				},
 			},
+		},
+	},
+	variants: {
+		extend: {
+			transitionProperty: ['width'],
 		},
 	},
 	plugins: [],
