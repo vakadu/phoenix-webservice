@@ -24,6 +24,8 @@
 			"@webservices/icons": ["libs/icons/src/index.ts"],
 			"@webservices/icons/server": ["libs/icons/src/server.ts"],
 			"@webservices/primitives": ["libs/primitives/src/index.ts"],
+			"@webservices/services": ["libs/services/src/index.ts"],
+			"@webservices/services/server": ["libs/services/src/server.ts"],
 			"@webservices/slices": ["libs/slices/src/index.ts"],
 			"@webservices/ui": ["libs/ui/src/index.ts"],
 			"@webservices/ui/server": ["libs/ui/src/server.ts"]

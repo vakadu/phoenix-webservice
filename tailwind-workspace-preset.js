@@ -219,6 +219,7 @@ module.exports = {
 			boxShadow: {
 				1: '5px 5px rgba(0, 0, 0, 0.2)',
 				2: '6px 14px 16px -12px rgba(0, 0, 0, 0.1)',
+				dropdown: '0px 4px 8px rgba(0, 0, 0, 0.08)',
 				base: '0px 0px 1px rgba(40, 41, 61, 0.08), 0px 0.5px 2px rgba(96, 97, 112, 0.16)',
 				base2: '0px 2px 4px rgba(40, 41, 61, 0.04), 0px 8px 16px rgba(96, 97, 112, 0.16)',
 				base3: '16px 10px 40px rgba(15, 23, 42, 0.22)',
