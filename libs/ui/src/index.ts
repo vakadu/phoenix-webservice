@@ -1,3 +1,4 @@
+export * from './lib/confirmation-modal/confirmation-modal';
 export * from './lib/dropdown/dropdown';
 export * from './lib/text-input/text-input';
 export * from './lib/modal-view/modal-view';

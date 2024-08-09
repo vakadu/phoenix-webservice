@@ -8,6 +8,9 @@ export type MODAL_VIEW = ModalTypes.CONFIRMATION_MODAL | ModalTypes.SIDEBAR_MENU
 type ModalState = {
 	isOpen: boolean;
 	view: MODAL_VIEW;
+	onHandleConfirm?: () => void;
+	confirmationTitle?: string;
+	confirmationHeading?: string;
 };
 
 const initialState: ModalState = {
@@ -25,6 +28,12 @@ const modalSlice = createSlice({
 		},
 		closeModal: (state) => {
 			state.isOpen = false;
+		},
+		confimationModal: (state, action: PayloadAction<Partial<ModalState>>) => {
+			state.confirmationTitle = action.payload.confirmationTitle;
+			state.onHandleConfirm = action.payload.onHandleConfirm;
+			state.confirmationHeading = action.payload.confirmationHeading;
+			Object.assign(state, action.payload);
 		},
 	},
 });

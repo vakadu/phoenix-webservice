@@ -1,11 +1,13 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
-
-import { PemilyRootState } from '@webservices/slices';
-import { Dropdown, ImagePlaceholder } from '@webservices/ui';
 import { MenuItem } from '@headlessui/react';
+
+import { openModal, PemilyRootState } from '@webservices/slices';
+import { Dropdown, ImagePlaceholder } from '@webservices/ui';
 import { useGetUser, useGetUserProfileUrl } from '@webservices/api';
 import { DownIcon } from '@webservices/icons';
+import { ModalTypes } from '@webservices/primitives';
+import { logout } from '../../helpers';
 
 const ProfileLabel = (name: string, id: string) => {
 	const { data: profileData } = useGetUserProfileUrl(id as string);
@@ -26,6 +28,7 @@ const ProfileLabel = (name: string, id: string) => {
 const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
+	const dispatch = useDispatch();
 
 	const menu = useMemo(() => {
 		return [
@@ -39,9 +42,17 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 			{
 				label: 'Logout',
 				icon: 'heroicons-outline:login',
-				//   action: () => {
-				//     dispatch(handleLogout(false));
-				//   },
+				action: () => {
+					dispatch(
+						openModal({
+							isOpen: true,
+							view: ModalTypes.CONFIRMATION_MODAL,
+							confirmationTitle: 'Logout',
+							confirmationHeading: 'Are you sure you want to logout?',
+							onHandleConfirm: () => logout(),
+						})
+					);
+				},
 			},
 		];
 	}, []);
@@ -65,6 +76,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 										className={`py-8 px-12 cursor-pointer hover:bg-primary-4 ${
 											!isLast && 'border-b border-grey-divider'
 										}`}
+										onClick={m.action}
 									>
 										<span className="text-14">{m.label}</span>
 									</section>

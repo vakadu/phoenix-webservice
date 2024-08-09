@@ -1,3 +1,5 @@
+export * from './lib/show-sidebar/show-sidebar';
+export * from './lib/hide-sidebar/hide-sidebar';
 export * from './lib/up-down-icon/up-down-icon';
 export * from './lib/bank-offers-icon/bank-offers-icon';
 export * from './lib/search-history-icon/search-history-icon';
