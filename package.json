@@ -45,6 +45,7 @@
 		"@nx/react": "19.5.4",
 		"@nx/workspace": "19.5.4",
 		"@playwright/test": "^1.36.0",
+		"@svgr/webpack": "^8.1.0",
 		"@swc-node/register": "1.9.2",
 		"@swc/cli": "0.3.14",
 		"@swc/core": "1.5.7",

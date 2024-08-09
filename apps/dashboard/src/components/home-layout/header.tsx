@@ -5,20 +5,26 @@ import { MenuItem } from '@headlessui/react';
 import { openModal, PemilyRootState } from '@webservices/slices';
 import { Dropdown, ImagePlaceholder } from '@webservices/ui';
 import { useGetUser, useGetUserProfileUrl } from '@webservices/api';
-import { DownIcon } from '@webservices/icons';
+import { DownIcon, LogoutIcon, UserIcon } from '@webservices/icons';
 import { ModalTypes } from '@webservices/primitives';
 import { logout } from '../../helpers';
+import { useRouterQuery } from '@webservices/hooks';
 
 const ProfileLabel = (name: string, id: string) => {
 	const { data: profileData } = useGetUserProfileUrl(id as string);
 
 	return (
 		<section className="flex items-center gap-12">
-			<ImagePlaceholder
-				containerClasses="w-32 h-32"
-				imageClasses="rounded-full shadow-base2"
-				src={profileData?.data?.profileUrl as string}
-			/>
+			{profileData?.data?.profileUrl && profileData?.data?.profileUrl !== '' ? (
+				<ImagePlaceholder
+					containerClasses="w-32 h-32"
+					imageClasses="rounded-full shadow-base2"
+					src={profileData?.data?.profileUrl as string}
+				/>
+			) : (
+				<UserIcon width={32} height={32} />
+			)}
+
 			<span className="text-14">{name}</span>
 			<DownIcon />
 		</section>
@@ -29,19 +35,20 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
 	const dispatch = useDispatch();
+	const { router } = useRouterQuery();
 
 	const menu = useMemo(() => {
 		return [
 			{
 				label: 'Profile',
-				icon: 'heroicons-outline:user',
-				//   action: () => {
-				//     router.push("/chat");
-				//   },
+				icon: <UserIcon width={16} height={16} />,
+				action: () => {
+					router.push('/user-profile');
+				},
 			},
 			{
 				label: 'Logout',
-				icon: 'heroicons-outline:login',
+				icon: <LogoutIcon width={16} height={16} />,
 				action: () => {
 					dispatch(
 						openModal({
@@ -73,11 +80,12 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 							return (
 								<MenuItem key={m.label}>
 									<section
-										className={`py-8 px-12 cursor-pointer hover:bg-primary-4 ${
+										className={`py-12 px-12 cursor-pointer hover:bg-grey-2 flex gap-12 items-center ${
 											!isLast && 'border-b border-grey-divider'
 										}`}
 										onClick={m.action}
 									>
+										{m.icon}
 										<span className="text-14">{m.label}</span>
 									</section>
 								</MenuItem>
