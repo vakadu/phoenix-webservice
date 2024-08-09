@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 import { PemilyRootState } from '@webservices/slices';
 import { useRouterQuery, useSidebar } from '@webservices/hooks';
-import Header from '../../components/home-layout/header';
-import Sidebar from '../../components/home-layout/sidebar';
+import Header from '../../components/layout/header';
+import Sidebar from '../../components/layout/sidebar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
