@@ -29,7 +29,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 		<section className="max-w-screen-2xl">
 			<Header sidebarClasses={sidebarClasses} />
 			<Sidebar />
-			<section className={`${sidebarClasses}`}>{children}</section>
+			<section className={`${sidebarClasses} bg-white min-h-[calc(100vh-72px)]`}>
+				{children}
+			</section>
 		</section>
 	);
 };

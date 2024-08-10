@@ -1,3 +1,6 @@
+export * from './lib/mail-icon/mail-icon';
+export * from './lib/phone-icon/phone-icon';
+export * from './lib/web-icon/web-icon';
 export * from './lib/calender-icon/calender-icon';
 export * from './lib/hide-sidebar/hide-sidebar';
 export * from './lib/show-sidebar/show-sidebar';
