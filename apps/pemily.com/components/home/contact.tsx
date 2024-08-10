@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 import { Button, ImagePlaceholder, InputNormal } from '@webservices/ui';
-import { showSnackbar } from '@webservices/slices';
 import { useDispatch } from 'react-redux';
 
 const schema = yup.object().shape({
@@ -55,24 +55,14 @@ const Contact = () => {
 			if (response?.data?.status === 'SUCCESS') {
 				reset();
 				setLoading(false);
-				dispatch(
-					showSnackbar({
-						message: 'Data submitted successfully',
-					})
-				);
+				toast.success('Data submitted successfully');
 			} else {
 				setLoading(false);
-				dispatch(
-					showSnackbar({
-						message: 'Unable to submit data. Please try again',
-					})
-				);
+				toast.error('Unable to submit data. Please try again');
 			}
 		} catch (err) {
 			setLoading(false);
-			showSnackbar({
-				message: 'Unable to submit data. Please try again',
-			});
+			toast.error('Unable to submit data. Please try again');
 		}
 	};
 

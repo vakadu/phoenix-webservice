@@ -3,9 +3,10 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
-import { setOtp, showSnackbar } from '@webservices/slices';
+import { setOtp } from '@webservices/slices';
 
 type OtpPayload = {
 	mobile: string;
@@ -29,18 +30,10 @@ export function useGetOtp() {
 		mutationFn: sendOtp,
 		onSuccess: (data) => {
 			dispatch(setOtp({ showOtp: true }));
-			dispatch(
-				showSnackbar({
-					message: 'OTP sent successfully!',
-				})
-			);
+			toast.success('OTP sent successfully!');
 		},
 		onError: (error) => {
-			dispatch(
-				showSnackbar({
-					message: error.message,
-				})
-			);
+			toast.error(error.message);
 		},
 	});
 }

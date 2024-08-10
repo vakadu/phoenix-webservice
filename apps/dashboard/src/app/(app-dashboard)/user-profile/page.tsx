@@ -4,7 +4,7 @@ import UserProfileTabs from '../../../components/user-profile/tabs';
 
 const UserProfile = () => {
 	return (
-		<section>
+		<section className="bg-white min-h-screen">
 			<UserProfileTabs />
 		</section>
 	);

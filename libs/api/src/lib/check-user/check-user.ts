@@ -3,10 +3,11 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import useGetOtp from '../get-otp/get-otp';
-import { setIsNewUser, showSnackbar } from '@webservices/slices';
+import { setIsNewUser } from '@webservices/slices';
 
 const checkUser = async (payload: { mobileNumber: string }) => {
 	try {
@@ -34,19 +35,11 @@ export function useCheckUser({ mobileNumber }: { mobileNumber: string }) {
 					dispatch(setIsNewUser({ isNewUser: true }));
 				}
 			} else {
-				dispatch(
-					showSnackbar({
-						message: 'Please try again.',
-					})
-				);
+				toast.error('Please try again');
 			}
 		},
 		onError: (err) => {
-			dispatch(
-				showSnackbar({
-					message: err.message,
-				})
-			);
+			toast.error(err.message);
 		},
 	});
 }

@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
-import { authenticateUser, showSnackbar } from '@webservices/slices';
+import { authenticateUser } from '@webservices/slices';
 import { useRouterQuery } from '@webservices/hooks';
 
 const signin = async (payload: IAuthTypes.ISigninFormData) => {
@@ -32,18 +33,10 @@ export const useSignin = () => {
 					navigateFunction: () => router.push('/dashboard'),
 				})
 			);
-			dispatch(
-				showSnackbar({
-					message: 'Logged in!',
-				})
-			);
+			toast.success('Logged in!');
 		},
 		onError: (error) => {
-			dispatch(
-				showSnackbar({
-					message: error.message,
-				})
-			);
+			toast.error(error.message);
 		},
 	});
 };

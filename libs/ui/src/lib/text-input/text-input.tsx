@@ -48,7 +48,7 @@ export function TextInput({
 					{...rest}
 					{...(register ? register(name) : {})}
 					name={name}
-					className={`bg-white text-16 leading-16 py-12 px-12 transition duration-300 ease-in-out border focus:ring-1  focus:shadow-sm outline-none focus:border-none
+					className={`bg-white text-16 leading-16 h-[52px] px-12 transition duration-300 ease-in-out border focus:ring-1  focus:shadow-sm outline-none focus:border-none
    focus:outline-none focus:ring-opacity-90 rounded-8 w-full ${hasErrorInput} ${inputClasses}`}
 					type={type}
 					placeholder={placeholder}

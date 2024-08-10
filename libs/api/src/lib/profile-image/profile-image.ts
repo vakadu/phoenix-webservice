@@ -1,6 +1,6 @@
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
-import { ApiEndpoints } from '@webservices/primitives';
 
+import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
 
 const getUserProfileUrl = async ({ queryKey }: QueryFunctionContext<[string, string]>) => {

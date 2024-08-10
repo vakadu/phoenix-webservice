@@ -1,3 +1,4 @@
+export * from './lib/update-user-details/update-user-details';
 export * from './lib/profile-image/profile-image';
 export * from './lib/user-details/user-details';
 export * from './lib/check-user/check-user';

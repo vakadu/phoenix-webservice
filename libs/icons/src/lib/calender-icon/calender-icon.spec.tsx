@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import Radio from './radio';
+import CalenderIcon from './calender-icon';
 
-describe('Radio', () => {
+describe('CalenderIcon', () => {
 	it('should render successfully', () => {
-		const { baseElement } = render(<Radio />);
+		const { baseElement } = render(<CalenderIcon />);
 		expect(baseElement).toBeTruthy();
 	});
 });

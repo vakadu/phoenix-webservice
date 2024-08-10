@@ -1,3 +1,4 @@
+export * from './lib/calender-icon/calender-icon';
 export * from './lib/hide-sidebar/hide-sidebar';
 export * from './lib/show-sidebar/show-sidebar';
 export * from './lib/up-down-icon/up-down-icon';

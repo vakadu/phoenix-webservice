@@ -1,46 +1,55 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
-/* eslint-disable-next-line */
-export interface RadioProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface RadioProps {
 	label: string;
+	name: string;
+	value: string;
 	checked: boolean;
-	container?: string;
-	labelClasses?: string;
+	onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+	disabled?: boolean;
 	radioClasses?: string;
+	activeClasses?: string;
+	labelClasses?: string;
 }
 
-export const Radio = React.forwardRef<HTMLInputElement, RadioProps>((
-	{
-		label, checked, container, radioClasses, labelClasses, ...rest
-	},
-	ref,
-) => {
+export function Radio({
+	label,
+	name,
+	value,
+	checked,
+	onChange,
+	disabled = false,
+	radioClasses = 'w-[18px] h-[18px]',
+	activeClasses = 'ring-brand border-brand',
+	labelClasses = '',
+}: RadioProps) {
 	return (
-		<section className={`cursor-pointer ${container}`}>
-			<section className="w-full">
-				<label className='relative cursor-pointer w-full flex items-center'>
-					<input
-						{ ...rest }
-						ref={ref}
-						type='radio'
-						className='absolute top-0 left-0 invisible peer'
-						checked={checked}
-					/>
-					<span className={`relative w-18 h-18 inline-block border-2 
-						border-grey-text rounded-full peer-checked:border-brand 
-						dark:peer-checked:border-white before:content-[""] 
-						before:absolute before:left-1/2 before:top-1/2 
-						before:-translate-x-1/2 before:-translate-y-1/2 before:w-8 before:h-8
-						 before:bg-brand before:dark:bg-white before:rounded-full 
-						 before:hidden before:peer-checked:block ${radioClasses}`}
-					/>
-					<p className={`text-14 pl-12 ${labelClasses}`}>
-						{ label }
-					</p>
-				</label>
-			</section>
+		<section>
+			<label
+				className={`flex gap-8 items-center ${
+					disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+				}`}
+			>
+				<input
+					type="radio"
+					className="hidden"
+					name={name}
+					value={value}
+					checked={checked}
+					onChange={onChange}
+					disabled={disabled}
+				/>
+				<span
+					className={`flex-none rounded-full border-[1.5px] relative transition-all duration-150 ${
+						checked
+							? activeClasses + ' ring-[6px]  ring-inset ring-offset-2'
+							: 'border-grey-3'
+					} ${radioClasses}`}
+				></span>
+				<span className={labelClasses}>{label}</span>
+			</label>
 		</section>
 	);
-})
+}
 
 export default Radio;
