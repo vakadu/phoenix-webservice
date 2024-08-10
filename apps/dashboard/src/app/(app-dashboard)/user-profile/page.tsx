@@ -1,13 +1,13 @@
 'use client';
 
-import UserProfileTabs from '../../../components/organisms/user-profile';
+import UserProfile from '../../../components/organisms/user-profile';
 
-const UserProfile = () => {
+const UserProfilePage = () => {
 	return (
 		<section>
-			<UserProfileTabs />
+			<UserProfile />
 		</section>
 	);
 };
 
-export default UserProfile;
+export default UserProfilePage;

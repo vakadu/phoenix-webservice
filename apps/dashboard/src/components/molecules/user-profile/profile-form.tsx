@@ -60,7 +60,7 @@ const ProfileForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="max-w-screen-lg mx-auto pb-[42px] space-y-24"
+			className="max-w-screen-lg pb-[42px] space-y-24 mt-[54px]"
 		>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
@@ -123,7 +123,7 @@ const ProfileForm = () => {
 					</section>
 				</section>
 			</section>
-			<section className="flex justify-end mt-[32px]">
+			<section className="!mt-[62px]">
 				<Button className="min-w-[250px]" isLoading={isPending} disabled={isPending}>
 					<span>SUBMIT</span>
 				</Button>

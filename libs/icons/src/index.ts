@@ -1,3 +1,4 @@
+export * from './lib/camera-icon/camera-icon';
 export * from './lib/mail-icon/mail-icon';
 export * from './lib/phone-icon/phone-icon';
 export * from './lib/web-icon/web-icon';
