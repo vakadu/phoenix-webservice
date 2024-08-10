@@ -11,7 +11,7 @@ const Logo = ({ menuHover }: { menuHover: boolean }) => {
 			<ImagePlaceholder
 				src={
 					collapsed && !menuHover
-						? '/images/logo-1.jpg'
+						? '/images/logo.jpg'
 						: 'https://pemilyy-assets.s3.ap-south-1.amazonaws.com/logos-new/logo-primary.png'
 				}
 				containerClasses="h-[48px] flex-1"

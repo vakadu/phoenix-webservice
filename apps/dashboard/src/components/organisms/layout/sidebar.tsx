@@ -3,7 +3,7 @@
 import { useSidebar } from '@webservices/hooks';
 import { useState } from 'react';
 
-import Logo from './logo';
+import Logo from '../../molecules/layout/logo';
 import { ButtonWrapper } from '@webservices/ui';
 import { HideSidebarIcon, ShowSidebarIcon } from '@webservices/icons';
 
@@ -16,7 +16,7 @@ const Sidebar = () => {
 			onMouseLeave={() => setMenuHover(false)}
 			className={`${
 				collapsed ? 'w-[72px]' : 'w-[248px]'
-			} fixed h-screen top-0 z-[9] bg-white shadow-base transition-width duration-200 ease-ease1 ${
+			} fixed h-screen top-0 z-[11] bg-white shadow-base transition-width duration-200 ease-ease1 ${
 				menuHover ? '!w-[248px]' : ''
 			}`}
 		>

@@ -1,6 +1,7 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
-import ProfileForm from './profile-form';
+import ProfileForm from '../../molecules/user-profile/profile-form';
+import Contact from '../../molecules/user-profile/contact';
 
 const UserProfileTabs = () => {
 	return (
@@ -25,6 +26,9 @@ const UserProfileTabs = () => {
 				</TabPanel>
 				<TabPanel>Content 2</TabPanel>
 				<TabPanel>Content 3</TabPanel>
+				<TabPanel>
+					<Contact />
+				</TabPanel>
 			</TabPanels>
 		</TabGroup>
 	);

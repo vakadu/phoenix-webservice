@@ -1,6 +1,6 @@
 'use client';
 
-import UserProfileTabs from '../../../components/user-profile/tabs';
+import UserProfileTabs from '../../../components/organisms/user-profile';
 
 const UserProfile = () => {
 	return (

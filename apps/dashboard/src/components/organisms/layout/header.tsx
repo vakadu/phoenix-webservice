@@ -7,8 +7,8 @@ import { Dropdown, ImagePlaceholder } from '@webservices/ui';
 import { useGetUser, useGetUserProfileUrl } from '@webservices/api';
 import { DownIcon, LogoutIcon, UserIcon } from '@webservices/icons';
 import { ModalTypes } from '@webservices/primitives';
-import { logout } from '../../helpers';
 import { useRouterQuery } from '@webservices/hooks';
+import { logout } from '../../../helpers';
 
 const ProfileLabel = (name: string, id: string) => {
 	const { data: profileData } = useGetUserProfileUrl(id as string);
