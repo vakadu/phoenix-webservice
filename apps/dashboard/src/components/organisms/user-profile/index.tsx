@@ -5,10 +5,11 @@ import ProfileImage from '../../molecules/user-profile/profile-image';
 import { PrescriptionIcon } from '@webservices/icons';
 import PersonalDetailsForm from '../../molecules/user-profile/personal-details';
 import AddressForm from '../../molecules/user-profile/address';
+import BusinessForm from '../../molecules/user-profile/business-details';
 
 const UserProfile = () => {
 	const tabClass =
-		'rounded-full data-[selected]:font-semibold py-16 px-24 focus:outline-none data-[selected]:bg-purple data-[selected]:text-white min-w-[160px] cursor-pointer text-center border border-purple flex gap-12 items-center justify-center';
+		'rounded-full bg-white data-[selected]:font-semibold py-16 px-24 focus:outline-none data-[selected]:bg-purple data-[selected]:text-white min-w-[160px] cursor-pointer text-center border border-purple flex gap-12 items-center justify-center';
 
 	return (
 		<section className="">
@@ -49,7 +50,7 @@ const UserProfile = () => {
 							<AddressForm />
 						</TabPanel>
 						<TabPanel as="section">
-							<PersonalDetailsForm />
+							<BusinessForm />
 						</TabPanel>
 						<TabPanel as="section">Content 2</TabPanel>
 						<TabPanel as="section">Content 3</TabPanel>

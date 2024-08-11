@@ -93,7 +93,7 @@ const PersonalDetailsForm = () => {
 				<section className="flex flex-col">
 					<label className="text-14">Date of Birth</label>
 					<DatePicker
-						className="mt-[4px]"
+						className="mt-[4px] bg-white"
 						onChange={setDob}
 						value={dob}
 						calendarIcon={<CalenderIcon width={18} height={18} />}
@@ -105,7 +105,7 @@ const PersonalDetailsForm = () => {
 			<section className="grid grid-cols-2 gap-[42px]">
 				<section>
 					<label className="text-14 leading-14 block mb-10">Choose Gender</label>
-					<section className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px]">
+					<section className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px] bg-white">
 						<Radio
 							label="Male"
 							value="M"

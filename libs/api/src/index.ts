@@ -9,4 +9,5 @@ export * from './lib/signin/signin';
 export * from './lib/use-pincode/pincode';
 export * from './lib/use-create-address/create-address';
 export * from './lib/use-update-address/update-address';
+export * from './lib/use-update-business/update-business';
 export * from './lib/api';

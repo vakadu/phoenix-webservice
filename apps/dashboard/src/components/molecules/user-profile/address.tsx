@@ -143,7 +143,7 @@ const AddressForm = () => {
 				/>
 				<section>
 					<label className="text-14 leading-14 block mb-10">Choose Gender</label>
-					<section className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px]">
+					<section className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px] bg-white">
 						<Radio
 							label="Home"
 							value="HOME"

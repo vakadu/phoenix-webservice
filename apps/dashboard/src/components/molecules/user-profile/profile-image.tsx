@@ -20,7 +20,7 @@ const ProfileImage = () => {
 	};
 
 	return (
-		<section className="flex flex-col items-center bg-grey-2 h-[154px] relative">
+		<section className="flex flex-col items-center bg-white h-[154px] relative">
 			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center absolute top-[100%] left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
 				{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 					<ImagePlaceholder
