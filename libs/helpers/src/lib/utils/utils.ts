@@ -1,3 +1,5 @@
+import { pemilyStore, resetUser } from '@webservices/slices';
+
 export const shimmer = () => `
 <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
   <rect width="100" height="100" style="fill:rgb(211,211,211);" />
@@ -27,3 +29,60 @@ export const stickyNav = () => {
 export const phoneValidator = /^[6-9]\d{9}$/;
 
 export const otpValidator = /^[0-9]{1,6}$/;
+
+export const pemilyyLogout = () => {
+	localStorage.removeItem('persist:root');
+	pemilyStore.dispatch(resetUser());
+};
+
+export const createFormDataForImage = (
+	photo: File,
+	keyName: string,
+	body?: Record<string, any>
+) => {
+	const data = new FormData();
+	data.append(keyName, photo);
+
+	if (body) {
+		for (const key in body) {
+			if (Object.prototype.hasOwnProperty.call(body, key)) {
+				const value = body[key];
+				// Append only non-null, non-undefined, non-empty values
+				if (value !== null && value !== undefined && value !== '') {
+					data.append(key, value);
+				}
+			}
+		}
+	}
+
+	return data;
+};
+
+// export const createFormDataForDocument = (
+// 	document?: DocumentPickerResponse | null,
+// 	keyName?: string | null,
+// 	body?: Record<string, any>
+// ) => {
+// 	const data = new FormData();
+// 	if (keyName && document) {
+// 		data.append(keyName, {
+// 			name: document.name,
+// 			type: document.type,
+// 			uri: document.uri,
+// 		});
+// 	}
+
+// 	if (body) {
+// 		for (const key in body) {
+// 			if (Object.prototype.hasOwnProperty.call(body, key)) {
+// 				const value = body[key];
+// 				// Check if the value is not null, undefined, or an empty string
+// 				if (value !== null && value !== undefined && value !== '') {
+// 					data.append(key, value);
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	return data;
+// };

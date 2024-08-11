@@ -6,12 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DatePicker from 'react-date-picker';
 import { useSelector } from 'react-redux';
+import { format } from 'date-fns';
 
 import { Button, Radio, TextInput } from '@webservices/ui';
 import { useGetUser, useUpdateUserDetails } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
 import { CalenderIcon } from '@webservices/icons';
-import { format } from 'date-fns';
 
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),
@@ -19,7 +19,7 @@ const validationSchema = yup.object().shape({
 	email: yup.string().email('Invalid email'),
 });
 
-const ProfileForm = () => {
+const PersonalDetailsForm = () => {
 	const {
 		register,
 		formState: { errors },
@@ -104,8 +104,8 @@ const ProfileForm = () => {
 			</section>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<section>
-					<label className="text-14">Choose Gender</label>
-					<section className="flex gap-24 mt-8">
+					<label className="text-14 leading-14 block mb-10">Choose Gender</label>
+					<section className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px]">
 						<Radio
 							label="Male"
 							value="M"
@@ -123,13 +123,13 @@ const ProfileForm = () => {
 					</section>
 				</section>
 			</section>
-			<section className="!mt-[62px]">
+			<section className="!mt-[42px]">
 				<Button className="min-w-[250px]" isLoading={isPending} disabled={isPending}>
-					<span>SUBMIT</span>
+					<span className="font-bold">Save Profile</span>
 				</Button>
 			</section>
 		</form>
 	);
 };
 
-export default ProfileForm;
+export default PersonalDetailsForm;

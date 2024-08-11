@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { ApiEndpoints } from '@webservices/primitives';
 import { pemilyStore, updateUser } from '@webservices/slices';
 import { HttpService } from './http-service';
+import { pemilyyLogout } from '@webservices/helpers';
 
 let isAlreadyFetchingAccessToken = false;
 type AccessTokenSubscriber = (accessToken: string) => void;
@@ -36,10 +37,10 @@ async function ResetTokenAndReattemptRequest(error: any): Promise<AxiosResponse>
 				);
 				onAccessTokenFetched(resp?.data?.data?.accessToken);
 			} else {
-				// logout();
+				pemilyyLogout();
 			}
 		} catch (err) {
-			// logout();
+			pemilyyLogout();
 			// Handle errors
 		} finally {
 			isAlreadyFetchingAccessToken = false;

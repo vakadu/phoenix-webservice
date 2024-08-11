@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Logo from '../../molecules/layout/logo';
 import { ButtonWrapper } from '@webservices/ui';
 import { HideSidebarIcon, ShowSidebarIcon } from '@webservices/icons';
+import SidebarMenu from '../../molecules/layout/sidebar-menu';
 
 const Sidebar = () => {
 	const [menuHover, setMenuHover] = useState(false);
@@ -23,6 +24,7 @@ const Sidebar = () => {
 			<section className="relative h-full flex flex-col py-24">
 				<section className="flex-1">
 					<Logo menuHover={menuHover} />
+					<SidebarMenu menuHover={menuHover} />
 				</section>
 				<section
 					className={`flex px-16 ${

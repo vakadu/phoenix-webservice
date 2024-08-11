@@ -3,7 +3,7 @@ import { ImagePlaceholder } from '@webservices/ui';
 
 const Contact = () => {
 	return (
-		<section className="grid grid-cols-3 gap-32 mt-[104px]">
+		<section className="grid grid-cols-3 gap-32 mt-[140px] max-w-screen-lg">
 			<section className="col-span-1 flex gap-24 items-center bg-[#E4FFF0] px-24 py-[32px] relative rounded-8">
 				<PhoneIcon />
 				<a target="_blank" className="font-bold text-18" href="tel:7047037587">

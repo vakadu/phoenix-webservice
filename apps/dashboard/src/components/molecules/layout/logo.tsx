@@ -5,12 +5,13 @@ import { useSidebar } from '@webservices/hooks';
 
 const Logo = ({ menuHover }: { menuHover: boolean }) => {
 	const { collapsed } = useSidebar();
+	const isCollapsed = collapsed && !menuHover;
 
 	return (
-		<Link className="px-12 flex gap-12 items-end" href="/dashboard">
+		<Link className={`px-12 flex gap-12`} href="/dashboard">
 			<ImagePlaceholder
 				src={
-					collapsed && !menuHover
+					isCollapsed
 						? '/images/logo.jpg'
 						: 'https://pemilyy-assets.s3.ap-south-1.amazonaws.com/logos-new/logo-primary.png'
 				}

@@ -15,4 +15,6 @@ export * from './lib/down-icon/down-icon';
 export * from './lib/close-icon/close-icon';
 export * from './lib/logout-icon/logout-icon';
 export * from './lib/user-icon/user-icon';
+export * from './lib/prescription-icon/prescription-icon';
+export * from './lib/prescription2-icon/prescription2-icon';
 export * from './lib/icons';

@@ -1,37 +1,41 @@
 import { useSelector } from 'react-redux';
 
-import { useGetUserProfileUrl } from '@webservices/api';
+import { useGetUserProfileUrl, useUploadUserProfile } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
-import { Button, ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
+import { ImagePlaceholder } from '@webservices/ui';
 import { CameraIcon, UserIcon } from '@webservices/icons';
+import { createFormDataForImage } from '@webservices/helpers';
 
 const ProfileImage = () => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUserProfileUrl(authState.userId as string);
+	const { mutate: uploadUserProfile } = useUploadUserProfile();
+
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (file) {
+			const formData = createFormDataForImage(file, 'file');
+			uploadUserProfile(formData);
+		}
+	};
 
 	return (
-		<section className="flex flex-col items-center">
-			<section className="border-[2px] border-primary-1 rounded-full p-4 relative w-[215px] h-[215px] flex justify-center items-center">
+		<section className="flex flex-col items-center bg-grey-2 h-[154px] relative">
+			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center absolute top-[100%] left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
 				{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 					<ImagePlaceholder
 						src={data?.data?.profileUrl as string}
-						containerClasses="w-[208px] h-[208px] "
+						containerClasses="w-[160px] h-[160px] "
 						imageClasses="rounded-full"
 					/>
 				) : (
-					<UserIcon width={208} height={208} />
+					<UserIcon width={160} height={160} />
 				)}
-			</section>
-			<section className="mt-32">
-				<Button className="flex gap-12">
+				<label className="cursor-pointer w-[42px] h-[42px] z-10 rounded-full absolute bg-primary-1 flex items-center justify-center shadow-base right-0 top-[106px]">
+					<input type="file" onChange={onChange} className="w-full hidden" />
 					<CameraIcon className="text-white" width={24} height={24} />
-					<span>Upload Photo</span>
-				</Button>
+				</label>
 			</section>
-
-			{/* <ButtonWrapper className="!absolute bottom-32 right-0 bg-white w-42 h-42 rounded-full flex justify-center items-center shadow-base">
-				<CameraIcon className="text-primary-1" width={32} height={32} />
-			</ButtonWrapper> */}
 		</section>
 	);
 };
