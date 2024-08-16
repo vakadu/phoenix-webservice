@@ -26,5 +26,5 @@ export * from './lib/button/button';
 export * from './lib/button-loader/button-loader';
 export * from './lib/input/input';
 export * from './lib/input-normal/input-normal';
-
+export * from './lib/box-loader/box-loader';
 export * from './lib/ui';

@@ -7,7 +7,12 @@
 		"strict": true,
 		"types": ["jest", "node", "@types"]
 	},
-	"files": ["../../types/auth.d.ts", "../../types/common.d.ts", "../../types/user.d.ts"],
+	"files": [
+		"../../types/auth.d.ts",
+		"../../types/common.d.ts",
+		"../../types/user.d.ts",
+		"../../types/clinic.d.ts"
+	],
 	"references": [
 		{
 			"path": "./tsconfig.lib.json"

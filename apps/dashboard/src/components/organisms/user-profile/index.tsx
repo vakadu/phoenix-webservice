@@ -6,6 +6,7 @@ import { PrescriptionIcon } from '@webservices/icons';
 import PersonalDetailsForm from '../../molecules/user-profile/personal-details';
 import AddressForm from '../../molecules/user-profile/address';
 import BusinessForm from '../../molecules/user-profile/business-details';
+import DoctorsList from '../../molecules/user-profile/doctors-list';
 
 const UserProfile = () => {
 	const tabClass =
@@ -15,7 +16,7 @@ const UserProfile = () => {
 		<section className="">
 			<ProfileImage />
 			<section className="flex px-24 py-16 gap-32 mt-[124px]">
-				<TabGroup as="section" className="flex-1">
+				<TabGroup as="section" className="flex-1 overflow-hidden">
 					<TabList as="section" className="flex gap-24">
 						<Tab as="section" className={tabClass}>
 							<PrescriptionIcon width={18} height={18} />
@@ -52,7 +53,9 @@ const UserProfile = () => {
 						<TabPanel as="section">
 							<BusinessForm />
 						</TabPanel>
-						<TabPanel as="section">Content 2</TabPanel>
+						<TabPanel as="section">
+							<DoctorsList />
+						</TabPanel>
 						<TabPanel as="section">Content 3</TabPanel>
 						<TabPanel as="section">
 							<Contact />

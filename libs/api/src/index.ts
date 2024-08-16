@@ -10,4 +10,6 @@ export * from './lib/use-pincode/pincode';
 export * from './lib/use-create-address/create-address';
 export * from './lib/use-update-address/update-address';
 export * from './lib/use-update-business/update-business';
+export * from './lib/use-get-doctors/get-doctors';
+export * from './lib/use-get-doctor-by-id/get-doctor-by-id';
 export * from './lib/api';

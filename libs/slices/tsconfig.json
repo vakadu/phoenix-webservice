@@ -6,7 +6,12 @@
 		"allowSyntheticDefaultImports": true,
 		"strict": true
 	},
-	"files": ["../../types/auth.d.ts", "../../types/common.d.ts", "../../types/user.d.ts"],
+	"files": [
+		"../../types/auth.d.ts",
+		"../../types/common.d.ts",
+		"../../types/user.d.ts",
+		"../../types/clinic.d.ts"
+	],
 	"include": [],
 	"references": [
 		{
