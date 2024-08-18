@@ -1,37 +1,88 @@
+'use client';
+
+import { useState } from 'react';
+
 import { useGetDoctors } from '@webservices/api';
 import UserProfileImage from '../../atoms/user-profile';
-import { PlusIcon } from '@webservices/icons';
-import { BoxLoader } from '@webservices/ui';
+import { EditIcon, PlusIcon } from '@webservices/icons';
+import { BoxLoader, ButtonWrapper } from '@webservices/ui';
+import AddEditDoctor from './add-edit-doctor';
 
 const DoctorsList = () => {
 	const { data, isPending } = useGetDoctors();
+	const [open, setOpen] = useState(false);
+	const [doctorId, setDoctorId] = useState<string | null>(null);
+	const [modalType, setModalType] = useState<'add' | 'edit' | null>(null);
+
+	const handleMouseEnter = (id: string | null) => {
+		setDoctorId(id);
+	};
+
+	const handleEdit = (id: string) => {
+		setOpen(!open);
+		setModalType('edit');
+		setDoctorId(id);
+	};
+
+	const handleAdd = () => {
+		setOpen(!open);
+		setModalType('add');
+		setDoctorId(null);
+	};
 
 	if (isPending) {
-		return <BoxLoader rows={1} columns={4} coverHeight={144} />;
+		return <BoxLoader rows={2} columns={7} coverHeight={144} />;
 	}
 
 	return (
-		<section className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-24 ">
-			{data?.data?.doctors?.map((doctor) => {
-				return (
-					<section className="cursor-pointer" key={doctor._id}>
-						<UserProfileImage
-							id={doctor?.doctor?.doctorId}
-							containerClasses="!w-[154px] !h-[154px]"
-							imageClasses="!rounded-8"
-							iconHeight={154}
-							iconWidth={154}
-						/>
-						<span className="pt-8 block">{doctor?.doctor?.name}</span>
+		<>
+			<AddEditDoctor
+				doctorId={doctorId}
+				modalType={modalType}
+				open={open}
+				handleClose={() => setOpen(false)}
+			/>
+			<section className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-24 ">
+				{data?.data?.doctors?.map((doctor) => {
+					const isActive = doctorId === doctor?.doctor?.doctorId;
+					return (
+						<section data-id={doctor?.doctor?.doctorId} key={doctor?.doctor?.doctorId}>
+							<section
+								className={`cursor-pointer w-full relative ${
+									isActive ? 'opacity-50' : ''
+								}`}
+								onMouseEnter={() => handleMouseEnter(doctor?.doctor?.doctorId)}
+								onMouseLeave={() => handleMouseEnter(null)}
+							>
+								<UserProfileImage
+									id={doctor?.doctor?.doctorId}
+									containerClasses="!w-full !h-[154px]"
+									imageClasses="!rounded-8"
+									iconHeight={154}
+									iconWidth="100%"
+								/>
+							</section>
+							<section className="flex justify-between items-center px-6 py-6 w-full gap-6">
+								<span className="font-medium flex-1 text-left">
+									{doctor?.doctor?.name}
+								</span>
+								<ButtonWrapper onClick={() => handleEdit(doctor?.doctor?.doctorId)}>
+									<EditIcon width={16} height={16} />
+								</ButtonWrapper>
+							</section>
+						</section>
+					);
+				})}
+				<ButtonWrapper
+					onClick={handleAdd}
+					className="w-[154px] h-[154px] border-[2px] border-dashed border-primary-1 rounded-8 flex items-center justify-center cursor-pointer"
+				>
+					<section className="w-[58px] h-[58px] bg-primary-1 flex items-center justify-center rounded-full">
+						<PlusIcon className="text-white" />
 					</section>
-				);
-			})}
-			<section className="w-[154px] h-[154px] border border-dashed border-primary-1 rounded-8 flex items-center justify-center cursor-pointer">
-				<section className="w-[58px] h-[58px] bg-primary-1 flex items-center justify-center rounded-full">
-					<PlusIcon className="text-white" />
-				</section>
+				</ButtonWrapper>
 			</section>
-		</section>
+		</>
 	);
 };
 

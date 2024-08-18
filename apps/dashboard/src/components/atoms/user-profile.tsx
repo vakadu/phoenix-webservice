@@ -12,8 +12,8 @@ const UserProfileImage = ({
 	id: string;
 	containerClasses?: string;
 	imageClasses?: string;
-	iconWidth?: number;
-	iconHeight?: number;
+	iconWidth?: number | string;
+	iconHeight?: number | string;
 }) => {
 	const { data } = useGetUserProfileUrl(id as string);
 

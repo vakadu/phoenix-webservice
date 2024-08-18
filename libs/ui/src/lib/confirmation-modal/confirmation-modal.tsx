@@ -21,7 +21,7 @@ export function ConfirmationModal() {
 	};
 
 	return (
-		<section className="bg-white rounded-8">
+		<section className="bg-white rounded-8 max-w-md mx-auto">
 			<header className="py-18 px-16 flex justify-between border-b border-grey-divider">
 				<h2 className="text-18 font-semibold">{modalState.confirmationTitle}</h2>
 				<ButtonWrapper onClick={handleClose}>

@@ -37,7 +37,7 @@ export function ModalView(props: ModalViewsProps) {
 	return (
 		<Dialog
 			as="section"
-			className="relative z-10 focus:outline-none"
+			className="relative z-[12] focus:outline-none"
 			onClose={handleClose}
 			open={modalData.isOpen}
 		>
@@ -50,7 +50,7 @@ export function ModalView(props: ModalViewsProps) {
 					<DialogPanel
 						as="section"
 						transition
-						className="w-full max-w-md rounded-8 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+						className="w-full max-w-2xl rounded-8 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
 					>
 						<section className="relative z-50 text-left align-middle inline-block w-full">
 							{modalData.view && renderModalContent(modalData.view)}
