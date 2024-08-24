@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
 import Contact from '../../molecules/user-profile/contact';
@@ -8,10 +9,14 @@ import AddressForm from '../../molecules/user-profile/address';
 import BusinessForm from '../../molecules/user-profile/business-details';
 import DoctorsList from '../../molecules/user-profile/doctors-list';
 import StaffList from '../../molecules/user-profile/staff-list';
+import { PemilyRootState } from '@webservices/slices';
+import { Roles } from '@webservices/primitives';
 
 const UserProfile = () => {
 	const tabClass =
 		'rounded-full bg-white data-[selected]:font-semibold py-16 px-24 focus:outline-none data-[selected]:bg-purple data-[selected]:text-white min-w-[160px] cursor-pointer text-center border border-purple flex gap-12 items-center justify-center';
+
+	const authState = useSelector((state: PemilyRootState) => state.auth);
 
 	return (
 		<section className="">
@@ -54,15 +59,19 @@ const UserProfile = () => {
 						<TabPanel as="section">
 							<BusinessForm />
 						</TabPanel>
-						<TabPanel as="section">
-							<DoctorsList />
-						</TabPanel>
-						<TabPanel as="section">
-							<StaffList />
-						</TabPanel>
-						<TabPanel as="section">
-							<Contact />
-						</TabPanel>
+						{authState.role === Roles.Clinic && (
+							<>
+								<TabPanel as="section">
+									<DoctorsList />
+								</TabPanel>
+								<TabPanel as="section">
+									<StaffList />
+								</TabPanel>
+								<TabPanel as="section">
+									<Contact />
+								</TabPanel>
+							</>
+						)}
 					</TabPanels>
 				</TabGroup>
 			</section>
