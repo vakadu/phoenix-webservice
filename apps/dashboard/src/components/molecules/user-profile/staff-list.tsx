@@ -2,31 +2,31 @@
 
 import { useState } from 'react';
 
-import { useGetDoctors, useUpdateClinicMemberProfile } from '@webservices/api';
+import { useGetStaff, useUpdateClinicMemberProfile } from '@webservices/api';
 import UserProfileImage from '../../atoms/user-profile';
 import { EditIcon, PlusIcon, UploadIcon } from '@webservices/icons';
 import { BoxLoader, ButtonWrapper } from '@webservices/ui';
-import AddEditDoctor from './add-edit-doctor';
 import { createFormDataForImage } from '@webservices/helpers';
+import AddEditStaff from './add-edit-staff';
 
-const DoctorsList = () => {
-	const { data, isPending } = useGetDoctors();
+const StaffList = () => {
+	const { data, isPending } = useGetStaff();
 	const [open, setOpen] = useState(false);
-	const [doctorId, setDoctorId] = useState<string | null>(null);
+	const [staffId, setStaffId] = useState<string | null>(null);
 	const [modalType, setModalType] = useState<'add' | 'edit' | null>(null);
-	const { mutate: uploadClinicMemberProfile } = useUpdateClinicMemberProfile(doctorId as string);
+	const { mutate: uploadClinicMemberProfile } = useUpdateClinicMemberProfile(staffId as string);
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 		const buttonElement = (event.target as HTMLElement).closest('button');
 		const id = buttonElement?.getAttribute('data-id') as string;
-		setDoctorId(id);
+		setStaffId(id);
 		setOpen(!open);
 		setModalType('edit');
 	};
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>, id: string) => {
-		setDoctorId(id);
+		setStaffId(id);
 		const file = event.target.files?.[0];
 		if (file) {
 			const formData = createFormDataForImage(file, 'file');
@@ -37,7 +37,7 @@ const DoctorsList = () => {
 	const handleAdd = () => {
 		setOpen(!open);
 		setModalType('add');
-		setDoctorId(null);
+		setStaffId(null);
 	};
 
 	if (isPending) {
@@ -46,8 +46,8 @@ const DoctorsList = () => {
 
 	return (
 		<>
-			<AddEditDoctor
-				doctorId={doctorId}
+			<AddEditStaff
+				staffId={staffId}
 				modalType={modalType}
 				open={open}
 				handleClose={() => setOpen(false)}
@@ -56,12 +56,12 @@ const DoctorsList = () => {
 				onClick={handleClick}
 				className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-24 "
 			>
-				{data?.data?.doctors?.map((doctor) => {
+				{data?.data?.staffs?.map((staff) => {
 					return (
-						<section key={doctor?.doctor?.doctorId}>
+						<section key={staff?.staff?.staffId}>
 							<section className="cursor-pointer w-full relative">
 								<UserProfileImage
-									id={doctor?.doctor?.doctorId}
+									id={staff?.staff?.staffId}
 									containerClasses="!w-full !h-[154px]"
 									imageClasses="!rounded-8"
 									iconHeight={154}
@@ -70,21 +70,19 @@ const DoctorsList = () => {
 							</section>
 							<section className="flex justify-between items-center py-6 w-full gap-6">
 								<span className="font-medium flex-1 text-left">
-									{doctor?.doctor?.name}
+									{staff?.staff?.name}
 								</span>
 								<section className="flex gap-8">
 									<label className="cursor-pointer w-24 h-24 flex items-center justify-center">
 										<input
 											type="file"
-											onChange={(e) =>
-												handleChange(e, doctor?.doctor?.doctorId)
-											}
+											onChange={(e) => handleChange(e, staff?.staff?.staffId)}
 											className="w-full hidden"
 										/>
 										<UploadIcon className="w-22 h-22" />
 									</label>
 									<ButtonWrapper
-										data-id={doctor?.doctor?.doctorId}
+										data-id={staff?.staff?.staffId}
 										className="w-24 h-24 flex items-center justify-center"
 									>
 										<EditIcon className="w-16 h-16" />
@@ -107,4 +105,4 @@ const DoctorsList = () => {
 	);
 };
 
-export default DoctorsList;
+export default StaffList;

@@ -7,6 +7,7 @@ import PersonalDetailsForm from '../../molecules/user-profile/personal-details';
 import AddressForm from '../../molecules/user-profile/address';
 import BusinessForm from '../../molecules/user-profile/business-details';
 import DoctorsList from '../../molecules/user-profile/doctors-list';
+import StaffList from '../../molecules/user-profile/staff-list';
 
 const UserProfile = () => {
 	const tabClass =
@@ -56,7 +57,9 @@ const UserProfile = () => {
 						<TabPanel as="section">
 							<DoctorsList />
 						</TabPanel>
-						<TabPanel as="section">Content 3</TabPanel>
+						<TabPanel as="section">
+							<StaffList />
+						</TabPanel>
 						<TabPanel as="section">
 							<Contact />
 						</TabPanel>
