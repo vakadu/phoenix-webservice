@@ -30,7 +30,7 @@ export const useSignin = () => {
 				authenticateUser({
 					token: data?.data?.accessToken,
 					refreshToken: data?.data?.refreshToken,
-					navigateFunction: () => router.push('/dashboard'),
+					navigateFunction: () => router.push('/medical-records'),
 				})
 			);
 			toast.success('Logged in!');

@@ -8,7 +8,7 @@ const Logo = ({ menuHover }: { menuHover: boolean }) => {
 	const isCollapsed = collapsed && !menuHover;
 
 	return (
-		<Link className={`px-12 flex gap-12`} href="/dashboard">
+		<Link className={`px-12 flex gap-12`} href="/medical-records">
 			<ImagePlaceholder
 				src={
 					isCollapsed
