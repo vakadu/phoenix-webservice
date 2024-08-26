@@ -1,5 +1,7 @@
-const MedicalRecords = () => {
-	return <section></section>;
+import MedicalRecords from '../../../components/organisms/medical-records';
+
+const Page = () => {
+	return <MedicalRecords />;
 };
 
-export default MedicalRecords;
+export default Page;

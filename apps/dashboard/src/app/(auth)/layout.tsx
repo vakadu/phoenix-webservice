@@ -12,7 +12,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		if (authState.loggedIn) {
-			router.push('/dashboard');
+			router.push('/medical-records');
 		}
 	}, [authState.loggedIn, router]);
 

@@ -53,3 +53,7 @@ body {
 .react-date-picker__calendar .react-calendar {
 	@apply border-grey-divider rounded-8;
 }
+
+.react-calendar {
+	@apply border-grey-2 rounded-8 shadow-base;
+}

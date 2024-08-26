@@ -20,4 +20,5 @@ export * from './lib/input/input';
 export * from './lib/input-normal/input-normal';
 export * from './lib/box-loader/box-loader';
 export * from './lib/switch/switch';
+export * from './lib/days/days';
 export * from './lib/ui';

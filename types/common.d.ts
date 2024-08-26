@@ -190,4 +190,8 @@ declare namespace ICommonTypes {
 		type: string;
 		weeklyClosed: string[];
 	}
+	interface IDayItem {
+		displayDate: string;
+		fullDate: string;
+	}
 }
