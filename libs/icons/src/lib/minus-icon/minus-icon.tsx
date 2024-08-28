@@ -9,18 +9,18 @@ export function MinusIcon(props: React.SVGAttributes<{}>) {
 			xmlns="http://www.w3.org/2000/svg"
 			{...props}
 		>
-			<title/>
+			<title />
 			<g id="Complete">
 				<g id="minus">
-					<line 
-						fill="none" 
-						stroke="currentCOlor" 
-						strokeLinecap="round" 
-						strokeLinejoin="round" 
-						strokeWidth="2" 
-						x1="4" 
-						x2="20" 
-						y1="12" 
+					<line
+						fill="none"
+						stroke="currentColor"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth="2"
+						x1="4"
+						x2="20"
+						y1="12"
 						y2="12"
 					/>
 				</g>

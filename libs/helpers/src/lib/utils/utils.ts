@@ -86,3 +86,14 @@ export const createFormDataForImage = (
 
 // 	return data;
 // };
+
+export const firstCharCapital = (str: string) => {
+	if (str && str !== '') {
+		const first = str.slice(0, 1).toUpperCase();
+		const remaining = str.slice(1).toLowerCase();
+
+		return first + remaining;
+	}
+
+	return '';
+};

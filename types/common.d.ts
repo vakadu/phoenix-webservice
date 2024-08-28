@@ -194,4 +194,8 @@ declare namespace ICommonTypes {
 		displayDate: string;
 		fullDate: string;
 	}
+	interface IFilterContextType {
+		activeRecord: string;
+		handleRecord: (id: string) => void;
+	}
 }

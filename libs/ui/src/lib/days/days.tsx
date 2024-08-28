@@ -63,8 +63,6 @@ export function Days({
 				{daysHeader.map((day, i) => {
 					const split = day.displayDate.split(' ');
 					const active = selectedDate === day.fullDate;
-					console.log(selectedDate, day);
-
 					return (
 						<ButtonWrapper
 							className={`shadow-base rounded-8 py-12 w-[140px] ${

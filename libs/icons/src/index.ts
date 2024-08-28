@@ -20,4 +20,6 @@ export * from './lib/prescription2-icon/prescription2-icon';
 export * from './lib/edit-icon/edit-icon';
 export * from './lib/menu-vertical-icon/menu-vertical';
 export * from './lib/upload-icon/upload-icon';
+export * from './lib/diet-icon/diet-icon';
+export * from './lib/others-icon/others-icon';
 export * from './lib/icons';
