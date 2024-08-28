@@ -194,8 +194,12 @@ declare namespace ICommonTypes {
 		displayDate: string;
 		fullDate: string;
 	}
-	interface IFilterContextType {
+	interface IRecordFilterContextType {
 		activeRecord: string;
 		handleRecord: (id: string) => void;
+	}
+	interface IRecordDateContextType {
+		recordSelectedDate: string;
+		handleRecordSelectedDate: (id: string) => void;
 	}
 }
