@@ -97,3 +97,13 @@ export const firstCharCapital = (str: string) => {
 
 	return '';
 };
+
+export const debounce = <T extends (...args: any[]) => void>(func: T, delay: number) => {
+	let timer: NodeJS.Timeout | undefined;
+	return (...args: Parameters<T>) => {
+		if (timer) clearTimeout(timer);
+		timer = setTimeout(() => {
+			func(...args);
+		}, delay);
+	};
+};

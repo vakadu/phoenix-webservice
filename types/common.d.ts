@@ -202,4 +202,10 @@ declare namespace ICommonTypes {
 		recordSelectedDate: string;
 		handleRecordSelectedDate: (id: string) => void;
 	}
+	interface IRecordSidebarContextType {
+		showSidebar: boolean;
+		handleSidebar: (s: boolean) => void;
+		activeType: string;
+		handleActiveType: (s: string) => void;
+	}
 }

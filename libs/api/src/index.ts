@@ -19,4 +19,5 @@ export * from './lib/use-get-staff/get-staff';
 export * from './lib/use-get-staff-by-id/get-staff-by-id';
 export * from './lib/use-create-staff/create-staff';
 export * from './lib/use-update-staff/update-staff';
+export * from './lib/use-pet-parents/pet-parents';
 export * from './lib/api';

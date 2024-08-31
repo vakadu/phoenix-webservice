@@ -7,10 +7,12 @@ import FilterItem, { FilterIcon, FilterLabel } from '../../atoms/filter-item';
 import { useRecordFilter } from '../../../context/record-filter-context';
 import { medicalRecordsFilters } from '@webservices/constants';
 import { useRecordDate } from '../../../context/record-date-context';
+import { useRecordSidebar } from '../../../context/record-sidebar-context';
 
 const Header = () => {
 	const filterRecords = useRecordFilter();
 	const filterDate = useRecordDate();
+	const sidebar = useRecordSidebar();
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
@@ -19,6 +21,11 @@ const Header = () => {
 		if (id) {
 			filterRecords?.handleRecord(id);
 		}
+	};
+
+	const handleSidebar = () => {
+		sidebar?.handleSidebar(!sidebar.showSidebar);
+		sidebar?.handleActiveType('pet-parents');
 	};
 
 	return (
@@ -45,7 +52,7 @@ const Header = () => {
 							);
 						})}
 					</section>
-					<Button variant="ghost" className="min-w-[230px]">
+					<Button onClick={handleSidebar} variant="ghost" className="min-w-[230px]">
 						<UploadIcon height={28} />
 						<span className="font-semibold">
 							Upload {firstCharCapital(filterRecords?.activeRecord as string)}
