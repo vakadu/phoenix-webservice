@@ -207,5 +207,57 @@ declare namespace ICommonTypes {
 		handleSidebar: (s: boolean) => void;
 		activeType: string;
 		handleActiveType: (s: string) => void;
+		activeParentId: string;
+		handleActiveParent: (p: string) => void;
+		resetSidebar: () => void;
+		activePetId: string;
+		handleActivePet: (p: string) => void;
+	}
+	interface IPetItem {
+		petId: string;
+		name: string;
+		ageYear: number;
+		ageMonth: number;
+		active: boolean;
+		gender: string;
+		type: string;
+		parentId: string;
+		breed: string;
+		updatedBy?: string;
+		createdAt: string;
+		updatedAt: string;
+		dob: string;
+		profileUrl: string;
+	}
+	interface IGetPetsResponse {
+		pets: IPetItem[];
+	}
+	interface IGetPetByIdResponse {
+		pet: IPetItem;
+	}
+	interface IPrescriptionRecord {
+		_id: string;
+		parentId: string;
+		petId: string;
+		type: string;
+		url: string | null;
+		comment: string;
+		active: boolean;
+		createdAtIST: string;
+		updatedAtIST: string;
+		recordId: string;
+		createdAtUTC: string;
+		updatedAtUTC: string;
+		vaccineName: string;
+		vaccinationDate: string;
+		nextVaccinationDate: string;
+		pet: IPetMedicalRecord;
+	}
+	interface IPetMedicalRecord {
+		petId: string;
+		name: string;
+	}
+	interface IPrescriptionResponse {
+		medicalRecords: IPrescriptionRecord[];
 	}
 }

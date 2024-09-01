@@ -1,13 +1,20 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import Search from '../../atoms/search';
 import { debounce } from '@webservices/helpers';
 import { useGetPetParentsMutation } from '@webservices/api';
 import PetParent from '../../atoms/pet-parent';
+import { useRecordSidebar } from '../../../context/record-sidebar-context';
+import { CategoryLoader } from '@webservices/ui';
 
 const SearchBar = () => {
 	const [value, setValue] = useState('');
 	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
+	const { handleActiveParent, activeParentId, handleActiveType } = useRecordSidebar();
+
+	useEffect(() => {
+		getPetParents('');
+	}, []);
 
 	const debouncedFilter = useCallback(
 		debounce((input: string) => {
@@ -15,7 +22,6 @@ const SearchBar = () => {
 		}, 300),
 		[]
 	);
-	console.log(data);
 
 	const onChange = useCallback(
 		(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,14 +36,31 @@ const SearchBar = () => {
 		setValue('');
 	}, []);
 
+	const handlePetParent = useCallback((parent: IClinicTypes.IPetParent) => {
+		handleActiveParent(parent?.parent?.parentId);
+		handleActiveType('pets');
+	}, []);
+
 	return (
-		<section className="py-24 px-16">
-			<Search value={value} handleChange={onChange} handleClear={handleClear} />
+		<section className="">
+			<Search
+				placeholder="Search by name, pet name etc..."
+				value={value}
+				handleChange={onChange}
+				handleClear={handleClear}
+			/>
 			{isPending ? (
-				<p className="text-14 mt-24">Fetching parents...</p>
+				<CategoryLoader rows={3} columns={1} />
 			) : (
 				data?.data?.parents?.map((parent) => {
-					return <PetParent key={parent?._id} parent={parent} />;
+					return (
+						<PetParent
+							handlePetParent={handlePetParent}
+							key={parent?._id}
+							parent={parent}
+							active={parent?.parent?.parentId === activeParentId}
+						/>
+					);
 				})
 			)}
 		</section>

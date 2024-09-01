@@ -12,7 +12,7 @@ import { useRecordSidebar } from '../../../context/record-sidebar-context';
 const Header = () => {
 	const filterRecords = useRecordFilter();
 	const filterDate = useRecordDate();
-	const sidebar = useRecordSidebar();
+	const { showSidebar, handleActiveType, handleSidebar } = useRecordSidebar();
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
@@ -23,9 +23,9 @@ const Header = () => {
 		}
 	};
 
-	const handleSidebar = () => {
-		sidebar?.handleSidebar(!sidebar.showSidebar);
-		sidebar?.handleActiveType('pet-parents');
+	const onSidebarChange = () => {
+		handleSidebar(!showSidebar);
+		handleActiveType('pet-parents');
 	};
 
 	return (
@@ -52,9 +52,13 @@ const Header = () => {
 							);
 						})}
 					</section>
-					<Button onClick={handleSidebar} variant="ghost" className="min-w-[230px]">
-						<UploadIcon height={28} />
-						<span className="font-semibold">
+					<Button
+						onClick={onSidebarChange}
+						variant="ghost"
+						className="min-w-[230px] rounded-10 gap-16"
+					>
+						<UploadIcon height={32} width={24} />
+						<span className="font-black tracking-[-0.41px]">
 							Upload {firstCharCapital(filterRecords?.activeRecord as string)}
 						</span>
 					</Button>

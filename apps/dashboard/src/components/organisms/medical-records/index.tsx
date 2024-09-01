@@ -2,19 +2,21 @@
 
 import { useState } from 'react';
 import { format } from 'date-fns';
+import dynamic from 'next/dynamic';
 
 import { RecordFilterContext } from '../../../context/record-filter-context';
 import Header from '../../molecules/medical-records/header';
 import { medicalRecordsFilters } from '@webservices/constants';
 import { RecordDateContext } from '../../../context/record-date-context';
-import { RecordSidebarContext } from '../../../context/record-sidebar-context';
-import RecordsSidebar from '../../molecules/medical-records/sidebar';
+import { RecordSidebarProvider } from '../../../context/record-sidebar-context';
+
+const RecordsSidebar = dynamic(() => import('../../molecules/medical-records/sidebar'), {
+	loading: () => <p>Loading...</p>,
+});
 
 const MedicalRecords = () => {
 	const [activeRecord, handleRecord] = useState(medicalRecordsFilters[0].value);
 	const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
-	const [showSidebar, setSidebar] = useState(false);
-	const [activeType, setActiveType] = useState<string | null>(null);
 
 	const handleFilter = (id: string) => {
 		handleRecord(id);
@@ -22,14 +24,6 @@ const MedicalRecords = () => {
 
 	const handleDate = (id: string) => {
 		setSelectedDate(id);
-	};
-
-	const handleSidebar = (side: boolean) => {
-		setSidebar(side);
-	};
-
-	const handleActiveType = (type: string) => {
-		setActiveType(type);
 	};
 
 	const recordValue = {
@@ -42,15 +36,8 @@ const MedicalRecords = () => {
 		handleRecordSelectedDate: handleDate,
 	} as ICommonTypes.IRecordDateContextType;
 
-	const sidebarValue = {
-		showSidebar,
-		handleSidebar,
-		activeType,
-		handleActiveType,
-	} as ICommonTypes.IRecordSidebarContextType;
-
 	return (
-		<RecordSidebarContext.Provider value={sidebarValue}>
+		<RecordSidebarProvider>
 			<RecordDateContext.Provider value={dateValue}>
 				<RecordFilterContext.Provider value={recordValue}>
 					<section>
@@ -59,7 +46,7 @@ const MedicalRecords = () => {
 					</section>
 				</RecordFilterContext.Provider>
 			</RecordDateContext.Provider>
-		</RecordSidebarContext.Provider>
+		</RecordSidebarProvider>
 	);
 };
 

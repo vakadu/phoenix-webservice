@@ -5,7 +5,10 @@ const PAGE_LIMIT = 1000;
 const PAGE = 0;
 
 const petParents = async (value: string) => {
-	const url = `${process.env.NEXT_PUBLIC_BASE_PATH}/clinic/parents?page=${PAGE}&limit=${PAGE_LIMIT}&searchTerm=${value}`;
+	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/clinic/parents?page=${PAGE}&limit=${PAGE_LIMIT}`;
+	if (value.length > 0) {
+		url += `&searchTerm=${value}`;
+	}
 	try {
 		const { data } = await HttpService.get<
 			ICommonTypes.IApiResponse<IClinicTypes.IPetParentsApiResponse>

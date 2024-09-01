@@ -20,4 +20,6 @@ export * from './lib/use-get-staff-by-id/get-staff-by-id';
 export * from './lib/use-create-staff/create-staff';
 export * from './lib/use-update-staff/update-staff';
 export * from './lib/use-pet-parents/pet-parents';
+export * from './lib/use-get-pets/get-pets';
+export * from './lib/use-get-pet-profile-image/get-pet-profile-image';
 export * from './lib/api';

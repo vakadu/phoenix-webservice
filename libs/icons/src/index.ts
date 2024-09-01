@@ -22,4 +22,5 @@ export * from './lib/menu-vertical-icon/menu-vertical';
 export * from './lib/upload-icon/upload-icon';
 export * from './lib/diet-icon/diet-icon';
 export * from './lib/others-icon/others-icon';
+export * from './lib/back-icon/back-icon';
 export * from './lib/icons';

@@ -8,15 +8,16 @@ const UserProfileImage = ({
 	imageClasses = '',
 	iconWidth = 160,
 	iconHeight = 160,
+	iconColor = '#D9D9D9',
 }: {
 	id: string;
 	containerClasses?: string;
 	imageClasses?: string;
 	iconWidth?: number | string;
 	iconHeight?: number | string;
+	iconColor?: string;
 }) => {
 	const { data } = useGetUserProfileUrl(id as string);
-
 	return (
 		<>
 			{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
@@ -26,7 +27,7 @@ const UserProfileImage = ({
 					imageClasses={`rounded-full ${imageClasses}`}
 				/>
 			) : (
-				<UserIcon color="#D9D9D9" width={iconWidth} height={iconHeight} />
+				<UserIcon color={iconColor} width={iconWidth} height={iconHeight} />
 			)}
 		</>
 	);

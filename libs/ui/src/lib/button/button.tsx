@@ -57,7 +57,7 @@ const colors: Record<ColorNames, string[]> = {
 };
 
 const sizes: Record<SizeNames, string[]> = {
-	large: ['px-34 h-54 text-16 font-medium tracking-0.05'],
+	large: ['px-34 h-56 text-16 font-medium tracking-0.05'],
 	medium: ['px-24 h-42 text-14'],
 	small: ['px-16 h-32 text-12'],
 };
