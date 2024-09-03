@@ -6,15 +6,13 @@ import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const Upload = ({
-	parentId,
-	petId,
 	btnTxt,
+	handleClick,
 }: {
-	parentId: string;
-	petId: string;
 	btnTxt: string;
+	handleClick: (file: ICommonTypes.IUploadType) => void;
 }) => {
-	const [files, setFiles] = useState<Array<{ file: File; preview: string; index: string }>>([]);
+	const [files, setFiles] = useState<ICommonTypes.IUploadType[]>([]);
 	const { getRootProps, getInputProps } = useDropzone({
 		accept: {
 			'image/*': [],
@@ -22,8 +20,6 @@ const Upload = ({
 		},
 		onDrop: (acceptedFiles) => {
 			const mappedFiles = acceptedFiles.map((acceptedFile, index) => {
-				console.log(acceptedFile);
-
 				return {
 					file: acceptedFile,
 					preview:
@@ -95,7 +91,11 @@ const Upload = ({
 			</section>
 
 			<section className="p-16 shadow-deep">
-				<Button className="px-16 w-full font-bold tracking-[-0.41px]">
+				<Button
+					disabled={files.length === 0}
+					className="px-16 w-full font-bold tracking-[-0.41px]"
+					onClick={() => handleClick(files[0])}
+				>
 					<span className="font-black tracking-[-0.41px]">{btnTxt}</span>
 				</Button>
 			</section>

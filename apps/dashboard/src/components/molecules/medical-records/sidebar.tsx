@@ -5,10 +5,10 @@ import { useCallback, useMemo } from 'react';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { BackIcon } from '@webservices/icons';
 import { ButtonWrapper } from '@webservices/ui';
-import { useRecordFilter } from '../../../context/record-filter-context';
 import { firstCharCapital } from '@webservices/helpers';
+import { useRecordHeader } from '../../../context/record-header-context';
 
-const Upload = dynamic(() => import('../../atoms/upload'), {
+const UploadRecord = dynamic(() => import('./upload-record'), {
 	loading: () => <p>Loading...</p>,
 });
 
@@ -26,28 +26,49 @@ const ActiveContent = ({
 	activeType,
 	parentId,
 	petId,
+	activeClinicId,
+	handleSidebar,
 }: {
 	activeType: string | null;
 	parentId: string | null;
 	petId: string | null;
+	activeClinicId: string | null;
+	handleSidebar: (s: boolean) => void;
 }) => {
-	const filterRecords = useRecordFilter();
-	const btnTxt = `Upload ${firstCharCapital(filterRecords?.activeRecord as string)}`;
+	const { activeRecord } = useRecordHeader();
+	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
 	switch (activeType) {
 		case 'pet-parents':
 			return <SearchBar />;
 		case 'pets':
 			return <PetsList parentId={parentId as string} />;
 		case 'upload':
-			return <Upload btnTxt={btnTxt} parentId={parentId as string} petId={petId as string} />;
+			return (
+				<UploadRecord
+					btnTxt={btnTxt}
+					parentId={parentId as string}
+					petId={petId as string}
+					activeClinicId={activeClinicId as string}
+					activeRecord={activeRecord as string}
+					handleSidebar={handleSidebar}
+				/>
+			);
 		default:
 			return <SearchBar />;
 	}
 };
 
 const RecordsSidebar = () => {
-	const { showSidebar, resetSidebar, activeType, handleActiveType, activeParentId, activePetId } =
-		useRecordSidebar();
+	const {
+		showSidebar,
+		resetSidebar,
+		activeType,
+		handleActiveType,
+		activeParentId,
+		activePetId,
+		activeClinicId,
+		handleSidebar,
+	} = useRecordSidebar();
 
 	const renderTitle = useMemo(() => {
 		switch (activeType) {
@@ -102,6 +123,8 @@ const RecordsSidebar = () => {
 							activeType={activeType}
 							parentId={activeParentId}
 							petId={activePetId}
+							activeClinicId={activeClinicId}
+							handleSidebar={handleSidebar}
 						/>
 					</DialogPanel>
 				</section>

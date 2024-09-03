@@ -10,7 +10,8 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 	const [showSidebar, setSidebar] = useState(false);
 	const [activeType, setActiveType] = useState<IActiveType>('pet-parents');
 	const [activeParentId, setActiveParentId] = useState<string | null>(null);
-	const [activePetId, setActivePeId] = useState<string | null>(null);
+	const [activePetId, setActivePetId] = useState<string | null>(null);
+	const [activeClinicId, setActiveClinicId] = useState<string | null>(null);
 
 	const handleSidebar = (side: boolean) => {
 		setSidebar(side);
@@ -25,7 +26,11 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 	};
 
 	const handleActivePet = (petId: string) => {
-		setActivePeId(petId);
+		setActivePetId(petId);
+	};
+
+	const handleActiveClinicId = (clinicId: string) => {
+		setActiveClinicId(clinicId);
 	};
 
 	const resetSidebar = () => {
@@ -44,6 +49,8 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 		handleActiveParent,
 		resetSidebar,
 		handleActivePet,
+		activeClinicId,
+		handleActiveClinicId,
 	} as ICommonTypes.IRecordSidebarContextType;
 
 	return (

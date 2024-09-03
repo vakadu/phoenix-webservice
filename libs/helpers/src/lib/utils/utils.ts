@@ -58,34 +58,30 @@ export const createFormDataForImage = (
 	return data;
 };
 
-// export const createFormDataForDocument = (
-// 	document?: DocumentPickerResponse | null,
-// 	keyName?: string | null,
-// 	body?: Record<string, any>
-// ) => {
-// 	const data = new FormData();
-// 	if (keyName && document) {
-// 		data.append(keyName, {
-// 			name: document.name,
-// 			type: document.type,
-// 			uri: document.uri,
-// 		});
-// 	}
+export const createFormDataForDocument = (
+	document?: File,
+	keyName?: string | null,
+	body?: Record<string, any>
+) => {
+	const data = new FormData();
+	if (keyName && document) {
+		data.append(keyName, document);
+	}
 
-// 	if (body) {
-// 		for (const key in body) {
-// 			if (Object.prototype.hasOwnProperty.call(body, key)) {
-// 				const value = body[key];
-// 				// Check if the value is not null, undefined, or an empty string
-// 				if (value !== null && value !== undefined && value !== '') {
-// 					data.append(key, value);
-// 				}
-// 			}
-// 		}
-// 	}
+	if (body) {
+		for (const key in body) {
+			if (Object.prototype.hasOwnProperty.call(body, key)) {
+				const value = body[key];
+				// Check if the value is not null, undefined, or an empty string
+				if (value !== null && value !== undefined && value !== '') {
+					data.append(key, value);
+				}
+			}
+		}
+	}
 
-// 	return data;
-// };
+	return data;
+};
 
 export const firstCharCapital = (str: string) => {
 	if (str && str !== '') {

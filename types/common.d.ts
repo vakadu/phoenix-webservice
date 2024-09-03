@@ -212,6 +212,8 @@ declare namespace ICommonTypes {
 		resetSidebar: () => void;
 		activePetId: string;
 		handleActivePet: (p: string) => void;
+		activeClinicId: string;
+		handleActiveClinicId: (c: string) => void;
 	}
 	interface IPetItem {
 		petId: string;
@@ -259,5 +261,10 @@ declare namespace ICommonTypes {
 	}
 	interface IPrescriptionResponse {
 		medicalRecords: IPrescriptionRecord[];
+	}
+	interface IUploadType {
+		file: File;
+		preview: string;
+		index: string;
 	}
 }

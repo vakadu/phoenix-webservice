@@ -10,7 +10,8 @@ import { CategoryLoader } from '@webservices/ui';
 const SearchBar = () => {
 	const [value, setValue] = useState('');
 	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
-	const { handleActiveParent, activeParentId, handleActiveType } = useRecordSidebar();
+	const { handleActiveParent, activeParentId, handleActiveType, handleActiveClinicId } =
+		useRecordSidebar();
 
 	useEffect(() => {
 		getPetParents('');
@@ -38,6 +39,7 @@ const SearchBar = () => {
 
 	const handlePetParent = useCallback((parent: IClinicTypes.IPetParent) => {
 		handleActiveParent(parent?.parent?.parentId);
+		handleActiveClinicId(parent?.clinicId);
 		handleActiveType('pets');
 	}, []);
 

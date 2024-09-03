@@ -22,4 +22,6 @@ export * from './lib/use-update-staff/update-staff';
 export * from './lib/use-pet-parents/pet-parents';
 export * from './lib/use-get-pets/get-pets';
 export * from './lib/use-get-pet-profile-image/get-pet-profile-image';
+export * from './lib/use-upload-medical-record/upload-medical-record';
+export * from './lib/use-get-medical-records/use-get-medical-records';
 export * from './lib/api';
