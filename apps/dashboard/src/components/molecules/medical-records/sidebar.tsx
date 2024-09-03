@@ -5,6 +5,8 @@ import { useCallback, useMemo } from 'react';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { BackIcon } from '@webservices/icons';
 import { ButtonWrapper } from '@webservices/ui';
+import { useRecordFilter } from '../../../context/record-filter-context';
+import { firstCharCapital } from '@webservices/helpers';
 
 const Upload = dynamic(() => import('../../atoms/upload'), {
 	loading: () => <p>Loading...</p>,
@@ -29,13 +31,15 @@ const ActiveContent = ({
 	parentId: string | null;
 	petId: string | null;
 }) => {
+	const filterRecords = useRecordFilter();
+	const btnTxt = `Upload ${firstCharCapital(filterRecords?.activeRecord as string)}`;
 	switch (activeType) {
 		case 'pet-parents':
 			return <SearchBar />;
 		case 'pets':
 			return <PetsList parentId={parentId as string} />;
 		case 'upload':
-			return <Upload parentId={parentId as string} petId={petId as string} />;
+			return <Upload btnTxt={btnTxt} parentId={parentId as string} petId={petId as string} />;
 		default:
 			return <SearchBar />;
 	}
@@ -84,9 +88,9 @@ const RecordsSidebar = () => {
 					<DialogPanel
 						as="section"
 						transition={true}
-						className="w-full rounded-8 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 h-screen px-16"
+						className="w-full rounded-8 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0 h-[calc(100vh-84px)]"
 					>
-						<section className="flex items-center py-24 w-full gap-16">
+						<section className="flex items-center py-24 w-full gap-16 px-16">
 							{activeType !== 'pet-parents' && (
 								<ButtonWrapper onClick={handleBack}>
 									<BackIcon />
