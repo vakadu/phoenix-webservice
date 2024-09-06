@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import { useGetMedicalRecords } from '@webservices/api';
 import MedicalRecord from '../../atoms/medical-record';
 import { CategoryLoader } from '@webservices/ui';

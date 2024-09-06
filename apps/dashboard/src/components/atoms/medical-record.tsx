@@ -1,49 +1,32 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { format } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
-import { useDownloadDocument, useUpdateMedicalRecord } from '@webservices/api';
-import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
-import { DeleteIcon, DownloadIcon, EditIcon, NotesIcon, PdfIcon } from '@webservices/icons';
+import { useUpdateMedicalRecord } from '@webservices/api';
+import { ButtonWrapper } from '@webservices/ui';
+import { DeleteIcon, DownloadIcon, EditIcon, NotesIcon } from '@webservices/icons';
 import { useRecordSidebar } from '../../context/record-sidebar-context';
 import { closeModal, openModal } from '@webservices/slices';
 import { ModalTypes } from '@webservices/primitives';
+import PreviewImage from './preview-image';
+import useDocumentDownlaod from '../../hooks/download-document';
 
 const CommentModal = dynamic(() => import('../molecules/medical-records/comment'), {
 	loading: () => <p>Loading...</p>,
 });
 
 const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {
-	const urlType = record?.url.split('.'),
-		imgType = urlType && urlType[urlType.length - 1];
-	const { mutateAsync: downloadDocument } = useDownloadDocument();
-	const [imageUrl, setImageUrl] = useState('');
 	const [show, setModal] = useState(false);
 	const { activeRecord, selectedDate } = useRecordSidebar();
-	const { mutate: updateMedicalRecord, isPending } = useUpdateMedicalRecord({
+	const { mutate: updateMedicalRecord } = useUpdateMedicalRecord({
 		id: record?._id,
 		type: activeRecord,
 		date: selectedDate,
 		handleClose: closeModal,
 	});
+	const { url, imgType } = useDocumentDownlaod({ url: record.url });
 	const dispatch = useDispatch();
-
-	const getImageUrl = useCallback(async () => {
-		try {
-			const payload = { key: record?.url as string };
-			const response = await downloadDocument(payload);
-			if (response?.data?.signedUrl) {
-				setImageUrl(response?.data?.signedUrl);
-			}
-		} catch (err) {
-			console.debug(err);
-		}
-	}, [record.url]);
-
-	useEffect(() => {
-		getImageUrl();
-	}, [getImageUrl]);
 
 	const onDelete = () => {
 		const commentData = {
@@ -74,14 +57,7 @@ const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {
 				id={record?._id}
 			/>
 			<section className="flex gap-12 col-span-1">
-				{imgType !== 'pdf' && (
-					<ImagePlaceholder
-						src={imageUrl}
-						imageClasses="rounded-8 object-contain"
-						containerClasses="w-[85px] h-[72px]"
-					/>
-				)}
-				{imgType === 'pdf' && <PdfIcon width={85} height={72} />}
+				<PreviewImage imgType={imgType} url={url as string} />
 				<div className="flex flex-col gap-6">
 					<p className="text-18 font-semibold">{record.pet.name}</p>
 					<p className="text-14">{record?.parent?.name}</p>
@@ -108,7 +84,7 @@ const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {
 			<section className="col-span-1 flex items-center justify-end gap-24">
 				<a
 					target="_blank"
-					href={imageUrl}
+					href={url as string}
 					className="w-[42px] h-[42px] flex items-center justify-center"
 				>
 					<DownloadIcon />
