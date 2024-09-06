@@ -9,6 +9,7 @@ const UploadRecord = ({
 	activeClinicId,
 	activeRecord,
 	handleSidebar,
+	selectedDate,
 }: {
 	parentId: string;
 	petId: string;
@@ -16,11 +17,13 @@ const UploadRecord = ({
 	activeClinicId: string;
 	activeRecord: string;
 	handleSidebar: (s: boolean) => void;
+	selectedDate: string;
 }) => {
-	const { mutate: uploadMedicalRecord } = useUploadMedicalRecord({
+	const { mutate: uploadMedicalRecord, isPending } = useUploadMedicalRecord({
 		petId,
 		activeRecord,
 		handleSidebar,
+		selectedDate,
 	});
 
 	const handleClick = (uploadFile: ICommonTypes.IUploadType) => {
@@ -44,7 +47,7 @@ const UploadRecord = ({
 
 	return (
 		<section className="h-full">
-			<Upload handleClick={handleClick} btnTxt={btnTxt} />
+			<Upload isLoading={isPending} handleClick={handleClick} btnTxt={btnTxt} />
 		</section>
 	);
 };

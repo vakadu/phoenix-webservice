@@ -214,6 +214,10 @@ declare namespace ICommonTypes {
 		handleActivePet: (p: string) => void;
 		activeClinicId: string;
 		handleActiveClinicId: (c: string) => void;
+		activeRecord: string;
+		selectedDate: string;
+		handleFilter: (id: string) => void;
+		handleDate: (date: string) => void;
 	}
 	interface IPetItem {
 		petId: string;

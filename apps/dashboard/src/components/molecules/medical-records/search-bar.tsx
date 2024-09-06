@@ -44,7 +44,7 @@ const SearchBar = () => {
 	}, []);
 
 	return (
-		<section className="px-16">
+		<section className="">
 			<Search
 				placeholder="Search by name, pet name etc..."
 				value={value}

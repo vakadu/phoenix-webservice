@@ -7,7 +7,10 @@ const { composePlugins, withNx } = require('@nx/next');
  **/
 const nextConfig = {
 	images: {
-		domains: ['pemilyy-assets.s3.ap-south-1.amazonaws.com'],
+		domains: [
+			'pemilyy-assets.s3.ap-south-1.amazonaws.com',
+			'pemily-test-docs.s3.ap-south-1.amazonaws.com',
+		],
 	},
 	reactStrictMode: true,
 	webpack(config) {

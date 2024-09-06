@@ -46,7 +46,7 @@ export function DaysHeader({
 				const active = selectedDate === day.fullDate;
 				return (
 					<ButtonWrapper
-						className={`shadow-base rounded-8 py-12 w-[140px] ${
+						className={`shadow-base rounded-8 py-6 w-[140px] ${
 							active ? 'bg-brand text-white' : 'bg-white'
 						}`}
 						key={i.toString()}

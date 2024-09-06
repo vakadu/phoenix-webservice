@@ -6,12 +6,17 @@ import { firstCharCapital } from '@webservices/helpers';
 import FilterItem, { FilterIcon, FilterLabel } from '../../atoms/filter-item';
 import { medicalRecordsFilters } from '@webservices/constants';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
-import { useRecordHeader } from '../../../context/record-header-context';
 
 const Header = () => {
-	const { showSidebar, handleActiveType, handleSidebar } = useRecordSidebar();
-	const { activeRecord, handleFilter, selectedDate, handleDate } = useRecordHeader();
-	console.log(activeRecord, handleFilter);
+	const {
+		showSidebar,
+		handleActiveType,
+		handleSidebar,
+		activeRecord,
+		handleFilter,
+		selectedDate,
+		handleDate,
+	} = useRecordSidebar();
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
@@ -28,15 +33,15 @@ const Header = () => {
 	};
 
 	return (
-		<section className="px-16 pt-24">
-			<section className="sticky top-0">
+		<section className="px-16 mt-6 sticky top-[74px] z-[10] bg-white py-8 mx-12 shadow-base rounded-8">
+			<section className="">
 				<DaysItem>
 					<DaysHeader selectedDate={selectedDate as string} handleDate={handleDate} />
 					<DaysCalender>
 						<CalenderIcon />
 					</DaysCalender>
 				</DaysItem>
-				<section className="flex justify-between items-center mt-32">
+				<section className="flex justify-between items-center mt-12">
 					<section onClick={handleClick} className="flex gap-12">
 						{medicalRecordsFilters.map((record) => {
 							const active = activeRecord === record.value;

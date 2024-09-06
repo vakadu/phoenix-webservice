@@ -8,9 +8,11 @@ import { useDropzone } from 'react-dropzone';
 const Upload = ({
 	btnTxt,
 	handleClick,
+	isLoading,
 }: {
 	btnTxt: string;
 	handleClick: (file: ICommonTypes.IUploadType) => void;
+	isLoading: boolean;
 }) => {
 	const [files, setFiles] = useState<ICommonTypes.IUploadType[]>([]);
 	const { getRootProps, getInputProps } = useDropzone({
@@ -36,10 +38,10 @@ const Upload = ({
 	return (
 		<section className="relative flex flex-col h-full">
 			<section className="flex-1 px-16">
-				<h3 className="text-22 font-semibold leading-[54px]">
+				<h3 className="text-22 font-semibold leading-[24px]">
 					Upload a photo of your Prescription
 				</h3>
-				<p className="text-18">You can upload JPEG or PNG up to 2MB</p>
+				<p className="text-18 mt-12">You can upload JPEG or PNG up to 2MB</p>
 				{files.length === 0 && (
 					<section
 						{...getRootProps({
@@ -90,15 +92,14 @@ const Upload = ({
 				</section>
 			</section>
 
-			<section className="p-16 shadow-deep">
-				<Button
-					disabled={files.length === 0}
-					className="px-16 w-full font-bold tracking-[-0.41px]"
-					onClick={() => handleClick(files[0])}
-				>
-					<span className="font-black tracking-[-0.41px]">{btnTxt}</span>
-				</Button>
-			</section>
+			<Button
+				disabled={files.length === 0 || isLoading}
+				className="px-16 w-full font-bold tracking-[-0.41px] mb-12"
+				onClick={() => handleClick(files[0])}
+				isLoading={isLoading}
+			>
+				<span className="font-black tracking-[-0.41px]">{btnTxt}</span>
+			</Button>
 		</section>
 	);
 };

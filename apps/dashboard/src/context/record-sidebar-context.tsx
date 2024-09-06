@@ -1,8 +1,10 @@
 'use client';
 
+import { medicalRecordsFilters } from '@webservices/constants';
+import { format } from 'date-fns';
 import { createContext, useContext, useState } from 'react';
 
-type IActiveType = 'pet-parents' | 'pets' | 'upload';
+type IActiveType = 'pet-parents' | 'pets' | 'upload' | 'comment';
 
 const RecordSidebarContext = createContext<ICommonTypes.IRecordSidebarContextType | null>(null);
 
@@ -12,6 +14,8 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 	const [activeParentId, setActiveParentId] = useState<string | null>(null);
 	const [activePetId, setActivePetId] = useState<string | null>(null);
 	const [activeClinicId, setActiveClinicId] = useState<string | null>(null);
+	const [activeRecord, setRecord] = useState(medicalRecordsFilters[0].value);
+	const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 
 	const handleSidebar = (side: boolean) => {
 		setSidebar(side);
@@ -33,6 +37,14 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 		setActiveClinicId(clinicId);
 	};
 
+	const handleFilter = (id: string) => {
+		setRecord(id);
+	};
+
+	const handleDate = (date: string) => {
+		setSelectedDate(date);
+	};
+
 	const resetSidebar = () => {
 		setSidebar(false);
 		setActiveType('pet-parents');
@@ -51,6 +63,10 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 		handleActivePet,
 		activeClinicId,
 		handleActiveClinicId,
+		activeRecord,
+		selectedDate,
+		handleFilter,
+		handleDate,
 	} as ICommonTypes.IRecordSidebarContextType;
 
 	return (

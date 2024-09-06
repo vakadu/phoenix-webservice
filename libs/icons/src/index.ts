@@ -26,4 +26,7 @@ export * from './lib/back-icon/back-icon';
 export * from './lib/image-placeholder-icon/image-placeholder-icon';
 export * from './lib/delete-icon/delete-icon';
 export * from './lib/pdf-icon/pdf-icon';
+export * from './lib/download-icon/download-icon';
+export * from './lib/view-icon/view-icon';
+export * from './lib/notes-icon/notes-icon';
 export * from './lib/icons';

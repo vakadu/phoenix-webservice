@@ -21,7 +21,7 @@ const PetsList = ({ parentId }: { parentId: string }) => {
 	}
 
 	return (
-		<section className="grid grid-cols-2 gap-16 px-16">
+		<section className="grid grid-cols-2 gap-16">
 			{data?.data?.pets?.map((pet) => {
 				return <Pet handlePet={handlePet} key={pet.petId} pet={pet} />;
 			})}
