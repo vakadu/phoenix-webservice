@@ -1,11 +1,14 @@
 'use client';
 
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, addDays, isToday, isTomorrow } from 'date-fns';
+import Calendar from 'react-calendar';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
+import Modal from '../modal/modal';
+import { CalenderIcon } from '@webservices/icons';
 
-export function DaysHeader({
+export function DaysItem({
 	defaultDays = 6,
 	selectedDate,
 	handleDate,
@@ -16,6 +19,7 @@ export function DaysHeader({
 }) {
 	const daysArray = Array.from({ length: defaultDays }, (_, i) => i);
 	const [daysHeader, setDaysData] = useState<ICommonTypes.IDayItem[]>([]);
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		setDaysHeaderData(selectedDate);
@@ -39,50 +43,56 @@ export function DaysHeader({
 		setDaysData([...daysData]);
 	};
 
-	return (
-		<section className="gap-16 flex justify-center items-center">
-			{daysHeader.map((day, i) => {
-				const split = day.displayDate.split(' ');
-				const active = selectedDate === day.fullDate;
-				return (
-					<ButtonWrapper
-						className={`shadow-base rounded-8 py-6 w-[140px] ${
-							active ? 'bg-brand text-white' : 'bg-white'
-						}`}
-						key={i.toString()}
-						onClick={() => handleDate(day.fullDate)}
-					>
-						<section className="flex flex-col">
-							<span className="text-24 font-medium">{split[0] + ' ' + split[1]}</span>
-							<span>{split[2]}</span>
-						</section>
-					</ButtonWrapper>
-				);
-			})}
-		</section>
-	);
-}
+	const handleCalender = (date: any) => {
+		const formatDate = format(date, 'yyyy-MM-dd');
+		setDaysHeaderData(date);
+		handleDate(formatDate);
+		setShow(false);
+	};
 
-export function DaysCalender({ children }: { children: ReactNode }) {
 	return (
-		<section className="relative">
-			<ButtonWrapper>{children}</ButtonWrapper>
-			{/* {showCalender && (
-				<section className="absolute right-0">
-					<Calender
-						className="mt-[4px] bg-white"
-						value={selectedDate}
-						onChange={handleDateChange}
-						maxDate={new Date()}
-					/>
+		<section className="flex justify-between items-center">
+			<Modal isOpen={show} handleClose={() => setShow(false)}>
+				<section className="mx-auto max-w-2xl flex justify-center items-center">
+					<div className="bg-white rounded-8 p-16">
+						<h2 className="pb-16 text-18 font-semibold">Select a date</h2>
+						<Calendar
+							value={selectedDate}
+							onChange={handleCalender}
+							className="!shadow-none border-none"
+						/>
+					</div>
 				</section>
-			)} */}
+			</Modal>
+			<section className="gap-16 flex justify-center items-center">
+				{daysHeader.map((day, i) => {
+					const split = day.displayDate.split(' ');
+					const active = selectedDate === day.fullDate;
+					return (
+						<ButtonWrapper
+							className={`shadow-base rounded-8 py-6 w-[140px] ${
+								active ? 'bg-brand text-white' : 'bg-white'
+							}`}
+							key={i.toString()}
+							onClick={() => handleDate(day.fullDate)}
+						>
+							<section className="flex flex-col">
+								<span className="text-24 font-medium">
+									{split[0] + ' ' + split[1]}
+								</span>
+								<span>{split[2]}</span>
+							</section>
+						</ButtonWrapper>
+					);
+				})}
+			</section>
+			<section className="relative">
+				<ButtonWrapper onClick={() => setShow(true)}>
+					<CalenderIcon />
+				</ButtonWrapper>
+			</section>
 		</section>
 	);
-}
-
-export function DaysItem({ children }: { children: ReactNode }) {
-	return <section className="flex justify-between items-center">{children}</section>;
 }
 
 export default DaysItem;
