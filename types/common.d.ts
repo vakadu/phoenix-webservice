@@ -203,6 +203,7 @@ declare namespace ICommonTypes {
 		handleRecordSelectedDate: (id: string) => void;
 	}
 	interface IRecordSidebarContextType {
+		recordType: string;
 		showSidebar: boolean;
 		handleSidebar: (s: boolean) => void;
 		activeType: string;

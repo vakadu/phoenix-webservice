@@ -1,6 +1,10 @@
 'use client';
 
-import { medicalRecordsFilters } from '@webservices/constants';
+import {
+	follwupFilters,
+	medicalRecordsFilters,
+	vaccinationClinicFilters,
+} from '@webservices/constants';
 import { format } from 'date-fns';
 import { createContext, useContext, useState } from 'react';
 
@@ -8,14 +12,27 @@ type IActiveType = 'pet-parents' | 'pets' | 'upload' | 'comment';
 
 const RecordSidebarContext = createContext<ICommonTypes.IRecordSidebarContextType | null>(null);
 
-export const RecordSidebarProvider = ({ children }: { children: React.ReactNode }) => {
+export const RecordSidebarProvider = ({
+	children,
+	record,
+}: {
+	children: React.ReactNode;
+	record: string;
+}) => {
+	const filters =
+		record === 'medical'
+			? medicalRecordsFilters[0].value
+			: record === 'vaccination'
+			? vaccinationClinicFilters[0].value
+			: follwupFilters[0].value;
 	const [showSidebar, setSidebar] = useState(false);
 	const [activeType, setActiveType] = useState<IActiveType>('pet-parents');
 	const [activeParentId, setActiveParentId] = useState<string | null>(null);
 	const [activePetId, setActivePetId] = useState<string | null>(null);
 	const [activeClinicId, setActiveClinicId] = useState<string | null>(null);
-	const [activeRecord, setRecord] = useState(medicalRecordsFilters[0].value);
+	const [activeRecord, setRecord] = useState(filters);
 	const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+	const [recordType, _] = useState(record);
 
 	const handleSidebar = (side: boolean) => {
 		setSidebar(side);
@@ -52,6 +69,7 @@ export const RecordSidebarProvider = ({ children }: { children: React.ReactNode 
 	};
 
 	const sidebarValue = {
+		recordType,
 		showSidebar,
 		handleSidebar,
 		activePetId,

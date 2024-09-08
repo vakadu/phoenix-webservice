@@ -74,6 +74,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 							data?.data?.user?.name as string,
 							authState.userId as string
 						)}
+						menuClasses="!top-[74px] origin-top-right right-0 w-[220px] "
 					>
 						{menu.map((m, i) => {
 							const isLast = menu.length - 1 === i;

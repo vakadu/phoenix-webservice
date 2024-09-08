@@ -466,9 +466,10 @@ export const vaccinationClinicFilters = [
 		name: 'Pending',
 		label: 'Pending',
 		value: 'PENDING',
+		icon: PrescriptionIcon,
 	},
-	{ id: 1, name: 'Complete', label: 'Complete', value: 'COMPLETE' },
-	{ id: 3, name: 'All', label: 'All', value: '' },
+	{ id: 1, name: 'Complete', label: 'Complete', value: 'COMPLETE', icon: PrescriptionIcon },
+	{ id: 3, name: 'All', label: 'All', value: '', icon: PrescriptionIcon },
 ] as ICommonTypes.IMedicalRecords[];
 
 export const vaccinationParentFilters = [

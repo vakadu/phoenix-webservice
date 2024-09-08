@@ -26,4 +26,8 @@ export * from './lib/use-upload-medical-record/upload-medical-record';
 export * from './lib/use-get-medical-records/use-get-medical-records';
 export * from './lib/use-download-document/download-document';
 export * from './lib/use-update-medical-record/update-medical-record';
+export * from './lib/use-get-vaccination-records/get-vaccination-records';
+export * from './lib/use-get-follow-records/get-follow-records';
+export * from './lib/use-create-vaccination-records/create-vaccination-records';
+export * from './lib/use-create-follow-records/create-follow-records';
 export * from './lib/api';

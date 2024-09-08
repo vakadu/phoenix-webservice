@@ -6,6 +6,7 @@ import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { BackIcon } from '@webservices/icons';
 import { ButtonWrapper, CategoryLoader } from '@webservices/ui';
 import { firstCharCapital } from '@webservices/helpers';
+import VaccinationForm from '../vaccination/form';
 
 const UploadRecord = dynamic(() => import('./upload-record'), {
 	loading: () => <CategoryLoader rows={1} columns={1} coverHeight={220} />,
@@ -31,6 +32,8 @@ const ActiveContent = () => {
 		activeRecord,
 		selectedDate,
 	} = useRecordSidebar();
+	console.log(activeType);
+
 	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
 	switch (activeType) {
 		case 'pet-parents':
@@ -49,13 +52,20 @@ const ActiveContent = () => {
 					selectedDate={selectedDate}
 				/>
 			);
+		case 'vaccination':
+			return <VaccinationForm />;
 		default:
 			return <SearchBar />;
 	}
 };
 
 const RecordsSidebar = () => {
-	const { showSidebar, resetSidebar, activeType, handleActiveType } = useRecordSidebar();
+	const { showSidebar, resetSidebar, activeType, handleActiveType, recordType } =
+		useRecordSidebar();
+
+	if (recordType === 'vaccination') {
+		backItems[backItems.length - 1] = 'vaccination';
+	}
 
 	const renderTitle = useMemo(() => {
 		switch (activeType) {
@@ -65,6 +75,8 @@ const RecordsSidebar = () => {
 				return 'Select Pet';
 			case 'upload':
 				return 'Upload';
+			case 'vaccination':
+				return '';
 			default:
 				return 'Search for Pet Parents';
 		}

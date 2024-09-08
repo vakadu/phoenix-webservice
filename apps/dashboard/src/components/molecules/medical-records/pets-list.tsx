@@ -9,11 +9,16 @@ import { useRecordSidebar } from '../../../context/record-sidebar-context';
 
 const PetsList = ({ parentId }: { parentId: string }) => {
 	const { data, isPending } = useGetPets(parentId as string);
-	const { handleActivePet, handleActiveType } = useRecordSidebar();
+	const { handleActivePet, handleActiveType, recordType } = useRecordSidebar();
 
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
-		handleActivePet(pet.petId);
-		handleActiveType('upload');
+		if (recordType === 'medical') {
+			handleActivePet(pet.petId);
+			handleActiveType('upload');
+		} else if (recordType === 'vaccination') {
+			handleActivePet(pet.petId);
+			handleActiveType('vaccination');
+		}
 	}, []);
 
 	if (isPending) {
