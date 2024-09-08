@@ -29,14 +29,6 @@ body {
 	@apply bg-grey-bg3;
 }
 
-.react-date-picker__wrapper {
-	@apply h-[52px] border-grey-divider rounded-8 px-12;
-}
-
-.react-date-picker__inputGroup__input {
-	@apply focus:outline-none;
-}
-
 .react-calendar__tile--active {
 	@apply bg-primary-1 rounded-8;
 }
@@ -50,10 +42,24 @@ body {
 	@apply text-red-1;
 }
 
-.react-date-picker__calendar .react-calendar {
-	@apply border-grey-divider rounded-8;
-}
-
 .react-calendar {
 	@apply border-grey-2 rounded-8 shadow-base;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--selected:hover {
+	@apply bg-primary-1;
+}
+
+.react-datepicker-wrapper {
+	@apply flex items-center gap-12 w-full justify-between relative;
+}
+
+.react-datepicker-wrapper input {
+	border: 1px solid #544c4c24;
+	@apply w-full h-54 px-12 rounded-8 text-14;
+}
+
+.react-datepicker-wrapper input:focus-visible {
+	@apply !outline-none;
 }

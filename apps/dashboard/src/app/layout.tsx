@@ -3,8 +3,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import '../assets/css/global.css';
 import '../assets/css/vendors/swiper.css';

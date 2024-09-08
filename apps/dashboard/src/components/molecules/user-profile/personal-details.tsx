@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import DatePicker from 'react-date-picker';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import DatePicker from 'react-datepicker';
 
 import { Button, Radio, TextInput } from '@webservices/ui';
 import { useGetUser, useUpdateUserDetails } from '@webservices/api';
@@ -95,10 +95,9 @@ const PersonalDetailsForm = () => {
 					<DatePicker
 						className="mt-[4px] bg-white"
 						onChange={setDob}
-						value={dob}
-						calendarIcon={<CalenderIcon width={18} height={18} />}
-						clearIcon={null}
+						selected={dob}
 						maxDate={new Date()}
+						dateFormat="yyyy-MM-dd"
 					/>
 				</section>
 			</section>
