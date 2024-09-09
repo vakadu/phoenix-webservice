@@ -71,3 +71,7 @@ body {
 .calender .react-datepicker-wrapper input {
 	@apply text-24 bg-purple text-white;
 }
+
+.edit-calender .react-datepicker-wrapper {
+	@apply w-[42px] h-[42px];
+}

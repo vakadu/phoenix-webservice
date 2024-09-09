@@ -1,5 +1,7 @@
 import { format, parseISO } from 'date-fns';
 import { useDispatch } from 'react-redux';
+import DatePicker from 'react-datepicker';
+import { useEffect, useState } from 'react';
 
 import { useSendVaccinationRemainder, useUpdateVaccinationRecord } from '@webservices/api';
 import { BellIcon, DeleteIcon, EditIcon } from '@webservices/icons';
@@ -32,6 +34,7 @@ const VaccinationRecord = ({
 		date: selectedDate,
 	});
 	const dispatch = useDispatch();
+	const [editDate, setEditDate] = useState(new Date());
 
 	const handleRemainder = () => {
 		const payload = {
@@ -68,6 +71,15 @@ const VaccinationRecord = ({
 		);
 	};
 
+	const handleEdit = (date: Date) => {
+		const payload = {
+			id: record._id,
+			active: record.active,
+			vaccinatedOnDate: format(date, 'yyyy-MM-dd'),
+		};
+		updateVaccination(payload);
+	};
+
 	return (
 		<div className="bg-white p-12 mb-12 rounded-8 shadow-base grid grid-cols-3 gap-12">
 			<div className="flex gap-16 col-span-1">
@@ -89,7 +101,7 @@ const VaccinationRecord = ({
 				</p>
 				<p className="leading-24  text-14">Due On: {vaccineDate}</p>
 			</div>
-			<div className="col-span-1 flex justify-end items-center">
+			<div className="col-span-1 flex justify-center items-center edit-calender">
 				<div className="flex items-end mr-32 gap-6">
 					<ButtonWrapper
 						disabled={notificationDisbaled || isPending}
@@ -102,9 +114,16 @@ const VaccinationRecord = ({
 					</ButtonWrapper>
 					<span className="text-14 font-medium">{record.notificationCount}/3 sent</span>
 				</div>
-				<ButtonWrapper className="w-[42px] h-[42px] flex items-center justify-center">
-					<EditIcon />
-				</ButtonWrapper>
+				<DatePicker
+					selected={editDate}
+					onChange={handleEdit}
+					customInput={
+						<div className="w-[42px] h-[42px] flex items-center justify-center cursor-pointer">
+							<EditIcon />
+						</div>
+					}
+				/>
+
 				<ButtonWrapper
 					onClick={handleDelete}
 					className="w-[42px] h-[42px] flex items-center justify-center"
