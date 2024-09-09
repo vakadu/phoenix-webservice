@@ -3,19 +3,22 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetVaccinationRecords from '../use-get-vaccination-records/get-vaccination-records';
+import useGetFollowRecords from '../use-get-follow-records/get-follow-records';
 
 interface IPayload {
-	vaccinatedOnDate?: string;
-	active: boolean;
+	parentMobile: number;
+	petName: string;
+	clinicName: string;
+	followUpDate: string;
+	followUpType: string;
 	id: string;
 }
 
-const updateVaccinationRecord = async (payload: IPayload) => {
+const follwupRemainder = async (payload: IPayload) => {
 	const { id, ...rest } = payload;
 	try {
 		const { data } = await HttpService.patch(
-			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.UpdateClinicVaccination}/${id}`,
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.ClinicFollowupRemainder}/${id}`,
 			rest
 		);
 		return data;
@@ -24,10 +27,13 @@ const updateVaccinationRecord = async (payload: IPayload) => {
 	}
 };
 
-export function useUpdateVaccinationRecord({ type, date }: { type: string; date: string }) {
-	const { refetch } = useGetVaccinationRecords({ type, date });
+export function useSendFollowUpRecord({ type, date }: { type: string; date: string }) {
+	const { refetch } = useGetFollowRecords({
+		type,
+		date,
+	});
 	return useMutation({
-		mutationFn: (payload: IPayload) => updateVaccinationRecord(payload),
+		mutationFn: follwupRemainder,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				refetch();
@@ -42,4 +48,4 @@ export function useUpdateVaccinationRecord({ type, date }: { type: string; date:
 	});
 }
 
-export default useUpdateVaccinationRecord;
+export default useSendFollowUpRecord;

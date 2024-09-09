@@ -75,6 +75,9 @@ const Header = () => {
 						{recordType === 'vaccination' && (
 							<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
 						)}
+						{recordType === 'followup' && (
+							<span className="font-black tracking-[-0.41px]">Add Followup</span>
+						)}
 					</Button>
 				</section>
 			</section>

@@ -7,6 +7,7 @@ import { BackIcon } from '@webservices/icons';
 import { ButtonWrapper, CategoryLoader } from '@webservices/ui';
 import { firstCharCapital } from '@webservices/helpers';
 import VaccinationForm from '../vaccination/form';
+import FollowupForm from '../followup/form';
 
 const UploadRecord = dynamic(() => import('./upload-record'), {
 	loading: () => <CategoryLoader rows={1} columns={1} coverHeight={220} />,
@@ -62,6 +63,17 @@ const ActiveContent = () => {
 					activeRecord={activeRecord}
 				/>
 			);
+		case 'followup':
+			return (
+				<FollowupForm
+					parentId={activeParentId as string}
+					petId={activePetId as string}
+					activeClinicId={activeClinicId as string}
+					handleSidebar={handleSidebar}
+					selectedDate={selectedDate}
+					activeRecord={activeRecord}
+				/>
+			);
 		default:
 			return <SearchBar />;
 	}
@@ -75,6 +87,10 @@ const RecordsSidebar = () => {
 		backItems[backItems.length - 1] = 'vaccination';
 	}
 
+	if (recordType === 'followup') {
+		backItems[backItems.length - 1] = 'followup';
+	}
+
 	const renderTitle = useMemo(() => {
 		switch (activeType) {
 			case 'pet-parents':
@@ -84,6 +100,8 @@ const RecordsSidebar = () => {
 			case 'upload':
 				return 'Upload';
 			case 'vaccination':
+				return '';
+			case 'followup':
 				return '';
 			default:
 				return 'Search for Pet Parents';

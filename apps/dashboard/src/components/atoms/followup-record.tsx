@@ -3,33 +3,29 @@ import { useDispatch } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import { useState } from 'react';
 
-import { useSendVaccinationRemainder, useUpdateVaccinationRecord } from '@webservices/api';
+import { useSendFollowUpRecord, useUpdateFollowUpRecord } from '@webservices/api';
 import { BellIcon, DeleteIcon, EditIcon } from '@webservices/icons';
 import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
 import { openModal } from '@webservices/slices';
 import { ModalTypes } from '@webservices/primitives';
 
-const VaccinationRecord = ({
+const FollowupRecord = ({
 	record,
 	activeRecord,
 	selectedDate,
 }: {
-	record: IClinicTypes.IVaccinationRecord;
+	record: IClinicTypes.IFollowUpRecord;
 	activeRecord: string;
 	selectedDate: string;
 }) => {
-	const tempVaccine = record?.vaccinationDate ? parseISO(record?.vaccinationDate as string) : '';
-	const vaccineDate = tempVaccine && format(tempVaccine, 'do MMMM yyyy');
-	const tempUpcoming = record?.vaccinatedOnDate
-		? parseISO(record?.vaccinatedOnDate as string)
-		: '';
-	const upcomingDate = tempUpcoming !== '' && format(tempUpcoming, 'do MMMM yyyy');
+	const tempFollowup = record?.followUpDate ? parseISO(record?.followUpDate as string) : '';
+	const followupDate = tempFollowup && format(tempFollowup, 'do MMMM yyyy');
 	const notificationDisbaled = record?.notificationCount >= 3;
-	const { mutate: vaccinationRemainder, isPending } = useSendVaccinationRemainder({
+	const { mutate: followupRemainder, isPending } = useSendFollowUpRecord({
 		type: activeRecord,
 		date: selectedDate,
 	});
-	const { mutate: updateVaccination } = useUpdateVaccinationRecord({
+	const { mutate: updateFollowup } = useUpdateFollowUpRecord({
 		type: activeRecord,
 		date: selectedDate,
 	});
@@ -44,11 +40,11 @@ const VaccinationRecord = ({
 					: record?.parent.mobile,
 			petName: record?.pet?.name,
 			clinicName: record?.clinic?.name,
-			nextVaccinationDate: record?.vaccinationDate,
-			vaccineName: record?.vaccineName,
+			followUpDate: record?.followUpDate,
+			followUpType: record?.followUpType,
 			id: record?._id,
 		};
-		vaccinationRemainder(payload);
+		followupRemainder(payload);
 	};
 
 	const onDelete = () => {
@@ -56,7 +52,7 @@ const VaccinationRecord = ({
 			id: record?._id,
 			active: false,
 		};
-		updateVaccination(payload);
+		updateFollowup(payload);
 	};
 
 	const handleDelete = () => {
@@ -64,7 +60,7 @@ const VaccinationRecord = ({
 			openModal({
 				isOpen: true,
 				view: ModalTypes.CONFIRMATION_MODAL,
-				confirmationTitle: 'Delete Vaccination Record',
+				confirmationTitle: 'Delete Followup Record',
 				confirmationHeading: 'Are you sure you want to record?',
 				onHandleConfirm: onDelete,
 			})
@@ -75,16 +71,16 @@ const VaccinationRecord = ({
 		const payload = {
 			id: record._id,
 			active: record.active,
-			vaccinatedOnDate: format(date, 'yyyy-MM-dd'),
+			followUpDate: format(date, 'yyyy-MM-dd'),
 		};
-		updateVaccination(payload);
+		updateFollowup(payload);
 	};
 
 	return (
 		<div className="bg-white p-12 mb-12 rounded-8 shadow-base grid grid-cols-3 gap-12">
 			<div className="flex gap-16 col-span-1">
 				<ImagePlaceholder
-					src="/images/vaccination-record.svg"
+					src="/images/follow-up-records.svg"
 					containerClasses="w-[85px] h-[72px]"
 				/>
 				<div>
@@ -93,13 +89,8 @@ const VaccinationRecord = ({
 				</div>
 			</div>
 			<div className="col-span-1">
-				<p className="text-14 leading-24 font-semibold">
-					Vaccination: {record.vaccineName}
-				</p>
-				<p className="leading-32 text-14">
-					Vaccinated On: {record?.vaccinatedOnDate ? upcomingDate : '(Not Updated)'}
-				</p>
-				<p className="leading-24  text-14">Due On: {vaccineDate}</p>
+				<p className="text-14 leading-24 font-semibold">Followup: {record.followUpType}</p>
+				<p className="leading-32 text-14">Follow-up On: {followupDate}</p>
 			</div>
 			<div className="col-span-1 flex justify-center items-center edit-calender">
 				<div className="flex items-end mr-32 gap-6">
@@ -135,4 +126,4 @@ const VaccinationRecord = ({
 	);
 };
 
-export default VaccinationRecord;
+export default FollowupRecord;

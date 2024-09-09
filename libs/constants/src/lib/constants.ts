@@ -472,31 +472,15 @@ export const vaccinationClinicFilters = [
 	{ id: 3, name: 'All', label: 'All', value: 'ALL', icon: PrescriptionIcon },
 ] as ICommonTypes.IMedicalRecords[];
 
-export const vaccinationParentFilters = [
-	{
-		id: 0,
-		name: 'Upcoming',
-		label: 'Pending',
-		value: 'PENDING',
-	},
-	{
-		id: 1,
-		name: 'Upcoming',
-		label: 'Upcoming',
-		value: 'UPCOMING',
-	},
-	{ id: 2, name: 'Complete', label: 'Complete', value: 'COMPLETE' },
-	{ id: 3, name: 'All', label: 'All', value: '' },
-] as ICommonTypes.IMedicalRecords[];
-
 export const follwupFilters = [
 	{
 		id: 0,
 		name: 'Upcoming',
 		label: 'Upcoming',
 		value: 'UPCOMING',
+		icon: PrescriptionIcon,
 	},
-	{ id: 1, name: 'All', label: 'All', value: 'ALL' },
+	{ id: 1, name: 'All', label: 'All', value: 'ALL', icon: PrescriptionIcon },
 ] as ICommonTypes.IMedicalRecords[];
 
 export const dogAndCatVaccines = [

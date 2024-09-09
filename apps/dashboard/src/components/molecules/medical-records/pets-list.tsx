@@ -18,6 +18,9 @@ const PetsList = ({ parentId }: { parentId: string }) => {
 		} else if (recordType === 'vaccination') {
 			handleActivePet(pet.petId);
 			handleActiveType('vaccination');
+		} else if (recordType === 'followup') {
+			handleActivePet(pet.petId);
+			handleActiveType('followup');
 		}
 	}, []);
 

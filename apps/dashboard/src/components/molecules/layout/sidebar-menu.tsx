@@ -18,7 +18,7 @@ const menu = [
 		type: 'image',
 	},
 	{
-		link: 'follow-ups',
+		link: 'follow-up',
 		path: '/images/follow-ups.png',
 		text: 'Follow Ups',
 		type: 'image',

@@ -3,24 +3,24 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
-import { dogAndCatVaccines } from '@webservices/constants';
+import { followupData } from '@webservices/constants';
 import { CloseIcon, DownIcon } from '@webservices/icons';
 import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateVaccinationRecords, useGetVaccinationRecords } from '@webservices/api';
+import { useCreateFollowUpRecords } from '@webservices/api';
 import { convertDates } from '../../../helpers';
 
-const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
+const Label = ({ selectedFollowup }: { selectedFollowup: string }) => {
 	return (
 		<div className="flex items-center gap-12 border border-grey-border1 w-full rounded-8 h-54 px-12 justify-between">
 			<span className="text-14">
-				{selectedVaccine !== '' ? selectedVaccine : 'Choose a Vaccine'}
+				{selectedFollowup !== '' ? selectedFollowup : 'Choose a Followup'}
 			</span>
 			<DownIcon />
 		</div>
 	);
 };
 
-const VaccinationForm = ({
+const FollowupForm = ({
 	parentId,
 	petId,
 	activeClinicId,
@@ -35,9 +35,9 @@ const VaccinationForm = ({
 	selectedDate: string;
 	activeRecord: string;
 }) => {
-	const [selectedVaccine, setVaccine] = useState('');
+	const [selectedFollowup, setFollowup] = useState('');
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
-	const { mutate: createVaccination } = useCreateVaccinationRecords({
+	const { mutate: createFollowup } = useCreateFollowUpRecords({
 		handleSidebar,
 		type: activeRecord,
 		date: selectedDate,
@@ -60,33 +60,33 @@ const VaccinationForm = ({
 		const data = {
 			petId,
 			parentId,
-			vaccineName: selectedVaccine,
-			vaccinationDates: dates as string[],
+			followUpType: selectedFollowup,
+			followUpDates: dates as string[],
 		};
-		createVaccination(data);
+		createFollowup(data);
 	};
 
 	return (
 		<section className="flex flex-col h-full">
-			<h2 className="text-24 font-semibold">Add Vaccination Details</h2>
-			<h6 className="text-14 mt-8 mb-24">We will remind you when vaccination is due</h6>
+			<h2 className="text-24 font-semibold">Add Follow-up Details</h2>
+			<h6 className="text-14 mt-8 mb-24">We will remind you when follow-up is due</h6>
 			<div className="flex-1">
 				<div>
-					<label className="text-14 leading-24">Choose a vaccine</label>
+					<label className="text-14 leading-24">Choose a follow-up</label>
 					<Dropdown
 						menuClasses="!max-h-[320px]"
-						label={<Label selectedVaccine={selectedVaccine} />}
+						label={<Label selectedFollowup={selectedFollowup} />}
 					>
-						{dogAndCatVaccines.map((vaccine) => {
+						{followupData.map((followup) => {
 							return (
-								<MenuItem key={vaccine.key}>
+								<MenuItem key={followup.key}>
 									<p
-										onClick={() => setVaccine(vaccine.key)}
+										onClick={() => setFollowup(followup.key)}
 										className={`px-12 py-12 cursor-pointer hover:bg-primary-3 ${
-											selectedVaccine === vaccine.key ? 'bg-primary-3' : ''
+											selectedFollowup === followup.key ? 'bg-primary-3' : ''
 										}`}
 									>
-										{vaccine.label}
+										{followup.label}
 									</p>
 								</MenuItem>
 							);
@@ -122,11 +122,11 @@ const VaccinationForm = ({
 					)}
 				</div>
 			</div>
-			<Button onClick={handleSubmit} disabled={selectedVaccine === ''}>
-				<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
+			<Button onClick={handleSubmit} disabled={selectedFollowup === ''}>
+				<span className="font-black tracking-[-0.41px]">Add Follow-up</span>
 			</Button>
 		</section>
 	);
 };
 
-export default VaccinationForm;
+export default FollowupForm;

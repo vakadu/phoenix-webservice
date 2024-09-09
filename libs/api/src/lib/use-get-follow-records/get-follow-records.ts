@@ -1,15 +1,38 @@
-import { useState, useCallback } from 'react';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface UseGetFollowRecords {
-	count: number;
-	increment: () => void;
-}
+import { ApiEndpoints } from '@webservices/primitives';
+import { HttpService } from '@webservices/services';
 
-export function useGetFollowRecords(): UseGetFollowRecords {
-	const [count, setCount] = useState(0);
-	const increment = useCallback(() => setCount((x) => x + 1), []);
-	return { count, increment };
+const getFollowupRecords = async ({
+	queryKey,
+}: QueryFunctionContext<[string, string, string | undefined, string | undefined]>) => {
+	const [_key, type, petId, date] = queryKey;
+	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}?searchType=${type}`;
+	if (petId) {
+		url += `&petId=${petId}`;
+	}
+	if (date) {
+		url += `&followUpDate=${date}`;
+	}
+	const { data } = await HttpService.get<
+		ICommonTypes.IApiResponse<IClinicTypes.IClinicFolowupRecordsApiResponse>
+	>(url);
+	return data;
+};
+
+export function useGetFollowRecords({
+	type,
+	petId,
+	date,
+}: {
+	type: string;
+	petId?: string;
+	date?: string;
+}) {
+	return useQuery({
+		queryKey: [ApiEndpoints.ClinicFollowupRecords, type, petId, date],
+		queryFn: getFollowupRecords,
+	});
 }
 
 export default useGetFollowRecords;

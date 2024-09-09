@@ -31,4 +31,6 @@ export * from './lib/use-create-vaccination-records/create-vaccination-records';
 export * from './lib/use-create-follow-records/create-follow-records';
 export * from './lib/use-send-vaccination-remainder/send-vaccination-remainder';
 export * from './lib/use-update-vaccination-record/update-vaccination-record';
+export * from './lib/use-update-follow-up-record/update-follow-up-record';
+export * from './lib/use-send-follow-up-record/send-follow-up-record';
 export * from './lib/api';
