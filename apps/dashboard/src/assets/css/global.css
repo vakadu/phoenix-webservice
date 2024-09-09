@@ -63,3 +63,11 @@ body {
 .react-datepicker-wrapper input:focus-visible {
 	@apply !outline-none;
 }
+
+.calender .react-datepicker-wrapper {
+	@apply max-w-[140px];
+}
+
+.calender .react-datepicker-wrapper input {
+	@apply text-24 bg-purple text-white;
+}

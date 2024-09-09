@@ -11,7 +11,6 @@ import DatePicker from 'react-datepicker';
 import { Button, Radio, TextInput } from '@webservices/ui';
 import { useGetUser, useUpdateUserDetails } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
-import { CalenderIcon } from '@webservices/icons';
 
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),

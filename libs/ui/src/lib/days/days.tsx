@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { format, addDays, isToday, isTomorrow } from 'date-fns';
-import Calendar from 'react-calendar';
+import DatePicker from 'react-datepicker';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
-import Modal from '../modal/modal';
 import { CalenderIcon } from '@webservices/icons';
 
 export function DaysItem({
@@ -19,7 +18,6 @@ export function DaysItem({
 }) {
 	const daysArray = Array.from({ length: defaultDays }, (_, i) => i);
 	const [daysHeader, setDaysData] = useState<ICommonTypes.IDayItem[]>([]);
-	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		setDaysHeaderData(selectedDate);
@@ -47,23 +45,10 @@ export function DaysItem({
 		const formatDate = format(date, 'yyyy-MM-dd');
 		setDaysHeaderData(date);
 		handleDate(formatDate);
-		setShow(false);
 	};
 
 	return (
-		<section className="flex justify-between items-center">
-			<Modal isOpen={show} handleClose={() => setShow(false)}>
-				<section className="mx-auto max-w-2xl flex justify-center items-center">
-					<div className="bg-white rounded-8 p-16">
-						<h2 className="pb-16 text-18 font-semibold">Select a date</h2>
-						<Calendar
-							value={selectedDate}
-							onChange={handleCalender}
-							className="!shadow-none border-none"
-						/>
-					</div>
-				</section>
-			</Modal>
+		<section className="flex items-center gap-[120px]">
 			<section className="gap-16 flex justify-center items-center">
 				{daysHeader.map((day, i) => {
 					const split = day.displayDate.split(' ');
@@ -86,10 +71,14 @@ export function DaysItem({
 					);
 				})}
 			</section>
-			<section className="relative">
-				<ButtonWrapper onClick={() => setShow(true)}>
-					<CalenderIcon />
-				</ButtonWrapper>
+			<section className="relative calender">
+				<DatePicker
+					className="cursor-pointer"
+					onChange={handleCalender}
+					selected={new Date(selectedDate)}
+					maxDate={new Date()}
+					customInput={<CalenderIcon />}
+				/>
 			</section>
 		</section>
 	);
