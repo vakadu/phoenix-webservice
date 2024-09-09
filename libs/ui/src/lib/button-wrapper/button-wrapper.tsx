@@ -4,14 +4,17 @@ import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import cn from 'classnames';
 
 import ButtonDrip from './button-drip';
+import { LoadingIcon } from '@webservices/icons';
 
 export interface ButtonViewProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
+	isLoading?: boolean;
+	disabled?: boolean;
 }
 
 export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>(
 	(
-		{ children, className, onClick, ...buttonProps },
+		{ children, className, onClick, isLoading, disabled, ...buttonProps },
 		ref: React.Ref<HTMLButtonElement | null>
 	) => {
 		const [dripShow, setDripShow] = useState<boolean>(false);
@@ -40,9 +43,15 @@ export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>(
 			<button
 				ref={buttonRef}
 				onClick={clickHandler}
-				className={cn('relative outline-none transition-all overflow-hidden', className)}
+				className={cn(
+					'relative outline-none transition-all overflow-hidden',
+					disabled ? '!bg-grey-light' : '',
+					className
+				)}
+				disabled={disabled}
 				{...buttonProps}
 			>
+				{isLoading && <LoadingIcon />}
 				{dripShow && (
 					<ButtonDrip
 						x={dripX}
@@ -51,7 +60,7 @@ export const ButtonWrapper = forwardRef<HTMLButtonElement, ButtonViewProps>(
 						onCompleted={dripCompletedHandle}
 					/>
 				)}
-				{children}
+				{isLoading ? null : children}
 			</button>
 		);
 	}

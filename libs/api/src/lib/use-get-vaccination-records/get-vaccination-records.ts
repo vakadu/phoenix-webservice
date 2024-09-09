@@ -8,7 +8,7 @@ const getVaccinationRecords = async ({
 }: QueryFunctionContext<[string, string, string | undefined, string | undefined]>) => {
 	const [_key, type, petId, date] = queryKey;
 	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}?`;
-	if (type !== '') {
+	if (type !== '' && type !== 'ALL') {
 		url += `searchType=${type}`;
 	}
 	if (petId) {
@@ -32,6 +32,8 @@ export function useGetVaccinationRecords({
 	petId?: string;
 	date?: string;
 }) {
+	console.log(type);
+
 	return useQuery({
 		queryKey: [ApiEndpoints.ClinicVaccinationRecords, type, petId, date],
 		queryFn: getVaccinationRecords,

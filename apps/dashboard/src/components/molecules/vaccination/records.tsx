@@ -1,6 +1,7 @@
 import { useGetVaccinationRecords } from '@webservices/api';
 import { CategoryLoader } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
+import VaccinationRecord from '../../atoms/vaccination-record';
 
 const Vaccination = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
@@ -27,9 +28,14 @@ const Vaccination = () => {
 
 	return (
 		<section className="px-16 mt-12">
-			{/* {data?.data?.vaccinationRecords?.map((vaccinationRecord) => (
-				<MedicalRecord key={medicalRecord._id} record={medicalRecord} />
-			))} */}
+			{data?.data?.vaccinationRecords?.map((vaccinationRecord) => (
+				<VaccinationRecord
+					key={vaccinationRecord._id}
+					record={vaccinationRecord}
+					activeRecord={activeRecord}
+					selectedDate={selectedDate}
+				/>
+			))}
 		</section>
 	);
 };

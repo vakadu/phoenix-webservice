@@ -3,20 +3,21 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
+import useGetMedicalRecords from '../use-get-medical-records/use-get-medical-records';
 import useGetVaccinationRecords from '../use-get-vaccination-records/get-vaccination-records';
 
 interface IPayload {
-	petId: string;
-	parentId: string;
-	vaccineName: string;
-	vaccinationDates: string[];
+	vaccinatedOnDate?: string;
+	active: boolean;
+	id: string;
 }
 
-const createVaccination = async (payload: IPayload) => {
+const updateVaccinationRecord = async (payload: IPayload) => {
+	const { id, ...rest } = payload;
 	try {
-		const { data } = await HttpService.post(
-			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.ClinicVaccination}`,
-			payload
+		const { data } = await HttpService.patch(
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.UpdateClinicVaccination}/${id}`,
+			rest
 		);
 		return data;
 	} catch (err) {
@@ -24,25 +25,13 @@ const createVaccination = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateVaccinationRecords({
-	handleSidebar,
-	type,
-	date,
-}: {
-	handleSidebar: (s: boolean) => void;
-	type: string;
-	date: string;
-}) {
-	const { refetch } = useGetVaccinationRecords({
-		type,
-		date,
-	});
+export function useUpdateVaccinationRecord({ type, date }: { type: string; date: string }) {
+	const { refetch } = useGetVaccinationRecords({ type, date });
 	return useMutation({
-		mutationFn: createVaccination,
+		mutationFn: (payload: IPayload) => updateVaccinationRecord(payload),
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				refetch();
-				handleSidebar(false);
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');
@@ -54,4 +43,4 @@ export function useCreateVaccinationRecords({
 	});
 }
 
-export default useCreateVaccinationRecords;
+export default useUpdateVaccinationRecord;

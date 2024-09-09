@@ -4,8 +4,10 @@ import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 
 import { dogAndCatVaccines } from '@webservices/constants';
-import { DownIcon } from '@webservices/icons';
-import { Button, Dropdown } from '@webservices/ui';
+import { CloseIcon, DownIcon } from '@webservices/icons';
+import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
+import { useCreateVaccinationRecords, useGetVaccinationRecords } from '@webservices/api';
+import { convertDates } from '../../../helpers';
 
 const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
 	return (
@@ -18,12 +20,50 @@ const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
 	);
 };
 
-const VaccinationForm = () => {
+const VaccinationForm = ({
+	parentId,
+	petId,
+	activeClinicId,
+	handleSidebar,
+	selectedDate,
+	activeRecord,
+}: {
+	parentId: string;
+	petId: string;
+	activeClinicId: string;
+	handleSidebar: (s: boolean) => void;
+	selectedDate: string;
+	activeRecord: string;
+}) => {
 	const [selectedVaccine, setVaccine] = useState('');
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
+	const { mutate: createVaccination } = useCreateVaccinationRecords({
+		handleSidebar,
+		type: activeRecord,
+		date: selectedDate,
+	});
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
+	};
+
+	const deleteDate = (date: Date) => {
+		const newDates = [...selectedDates];
+		const filteredDates = newDates.filter((d) => {
+			return d.getTime() !== date.getTime();
+		});
+		setSelectedDates(filteredDates);
+	};
+
+	const handleSubmit = () => {
+		const dates = convertDates(selectedDates);
+		const data = {
+			petId,
+			parentId,
+			vaccineName: selectedVaccine,
+			vaccinationDates: dates as string[],
+		};
+		createVaccination(data);
 	};
 
 	return (
@@ -62,10 +102,28 @@ const VaccinationForm = () => {
 						shouldCloseOnSelect={false}
 						disabledKeyboardNavigation
 					/>
+					{selectedDates.length > 1 && (
+						<div className="flex flex-wrap mt-12 gap-8">
+							{selectedDates.map((date) => {
+								const formattedDate = format(date, 'yyyy-MM-dd');
+								return (
+									<div
+										className="flex border border-grey-3 px-8 py-6 rounded-10 gap-8"
+										key={formattedDate}
+									>
+										<span className="text-12">{formattedDate}</span>
+										<ButtonWrapper onClick={() => deleteDate(date)}>
+											<CloseIcon />
+										</ButtonWrapper>
+									</div>
+								);
+							})}
+						</div>
+					)}
 				</div>
 			</div>
-			<Button>
-				<span>Add Vaccination</span>
+			<Button onClick={handleSubmit} disabled={selectedVaccine === ''}>
+				<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
 			</Button>
 		</section>
 	);

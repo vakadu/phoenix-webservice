@@ -32,7 +32,6 @@ const ActiveContent = () => {
 		activeRecord,
 		selectedDate,
 	} = useRecordSidebar();
-	console.log(activeType);
 
 	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
 	switch (activeType) {
@@ -53,7 +52,16 @@ const ActiveContent = () => {
 				/>
 			);
 		case 'vaccination':
-			return <VaccinationForm />;
+			return (
+				<VaccinationForm
+					parentId={activeParentId as string}
+					petId={activePetId as string}
+					activeClinicId={activeClinicId as string}
+					handleSidebar={handleSidebar}
+					selectedDate={selectedDate}
+					activeRecord={activeRecord}
+				/>
+			);
 		default:
 			return <SearchBar />;
 	}

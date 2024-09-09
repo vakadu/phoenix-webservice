@@ -3,7 +3,6 @@ export * from './lib/update-user-details/update-user-details';
 export * from './lib/profile-image/profile-image';
 export * from './lib/user-details/user-details';
 export * from './lib/check-user/check-user';
-// Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities
 export * from './lib/get-otp/get-otp';
 export * from './lib/signin/signin';
 export * from './lib/use-pincode/pincode';
@@ -30,4 +29,6 @@ export * from './lib/use-get-vaccination-records/get-vaccination-records';
 export * from './lib/use-get-follow-records/get-follow-records';
 export * from './lib/use-create-vaccination-records/create-vaccination-records';
 export * from './lib/use-create-follow-records/create-follow-records';
+export * from './lib/use-send-vaccination-remainder/send-vaccination-remainder';
+export * from './lib/use-update-vaccination-record/update-vaccination-record';
 export * from './lib/api';
