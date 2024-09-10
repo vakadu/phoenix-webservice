@@ -9,7 +9,7 @@ interface TextInputProps {
 	placeholder?: string;
 	register?: UseFormRegister<any>;
 	error?: FieldError;
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange?: any;
 	rest?: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
@@ -40,7 +40,6 @@ export function Textarea({
 					name={name}
 					className={`bg-white text-16 leading-16 px-12 transition duration-300 ease-in-out border focus:ring-1  focus:shadow-sm outline-none focus:border-none py-12 resize-none
    focus:outline-none focus:ring-opacity-90 rounded-8 w-full ${hasErrorInput} ${inputClasses}`}
-					type="text"
 					placeholder={placeholder}
 					onChange={onChange}
 					rows={10}

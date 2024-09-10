@@ -51,7 +51,7 @@ export function Snackbar(props: SnackbarProps) {
 			leave="transition-opacity ease-linear duration-300"
 			leaveFrom="opacity-100"
 			leaveTo="opacity-0"
-			className="fixed bottom-12 lg:bottom-32 left-1/2 lg:left-[14%] w-full px-12 md:min-w-[350px] md:max-w-[350px] transform -translate-x-1/2"
+			// className="fixed bottom-12 lg:bottom-32 left-1/2 lg:left-[14%] w-full px-12 md:min-w-[350px] md:max-w-[350px] transform -translate-x-1/2"
 		>
 			<section className="px-8 lg:px-12 py-8 bg-[#323232] rounded-6 flex justify-between items-center">
 				<p className="text-white text-14 font-medium">{message}</p>
