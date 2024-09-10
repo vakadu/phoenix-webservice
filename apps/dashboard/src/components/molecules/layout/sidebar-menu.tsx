@@ -24,6 +24,12 @@ const menu = [
 		type: 'image',
 	},
 	{
+		link: 'pet-parents',
+		path: '/images/follow-ups.png',
+		text: 'Pet Parents',
+		type: 'image',
+	},
+	{
 		link: 'user-profile',
 		path: <UserIcon className="text-primary-1" width={32} height={32} />,
 		text: 'Profile',
@@ -39,12 +45,7 @@ const SidebarMenu = ({ menuHover }: { menuHover: boolean }) => {
 			{menu.map((item) => {
 				return (
 					<li key={item.link}>
-						<Link
-							className={`flex ${
-								isCollapsed ? 'px-16 gap-12 items-center' : 'justify-center'
-							}`}
-							href={`/${item.link}`}
-						>
+						<Link className="px-16 flex gap-12 items-center" href={`/${item.link}`}>
 							{item?.type === 'icon' ? (
 								item?.path
 							) : (
@@ -53,7 +54,8 @@ const SidebarMenu = ({ menuHover }: { menuHover: boolean }) => {
 									src={item.path as string}
 								/>
 							)}
-							{isCollapsed && <span className="truncate flex-1">{item?.text}</span>}
+							{/* {isCollapsed && <span className="truncate flex-1">{item?.text}</span>} */}
+							<span className="truncate flex-1">{item?.text}</span>
 						</Link>
 					</li>
 				);

@@ -10,11 +10,7 @@ const Logo = ({ menuHover }: { menuHover: boolean }) => {
 	return (
 		<Link className={`px-12 flex gap-12`} href="/medical-records">
 			<ImagePlaceholder
-				src={
-					isCollapsed
-						? '/images/logo.jpg'
-						: 'https://pemilyy-assets.s3.ap-south-1.amazonaws.com/logos-new/logo-primary.png'
-				}
+				src="https://pemilyy-assets.s3.ap-south-1.amazonaws.com/logos-new/logo-primary.png"
 				containerClasses="h-[48px] flex-1"
 				imageClasses="object-contain"
 			/>

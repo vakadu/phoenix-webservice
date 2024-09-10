@@ -20,10 +20,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	}, [authState.loggedIn, router]);
 
 	const sidebarClasses = useMemo(() => {
-		return collapsed
-			? 'ml-[72px] transition-all duration-150'
-			: 'ml-[248px] transition-all duration-150';
-	}, [collapsed]);
+		return 'ml-[248px] transition-all duration-150';
+	}, []);
 
 	return (
 		<section className="max-w-screen-2xl">

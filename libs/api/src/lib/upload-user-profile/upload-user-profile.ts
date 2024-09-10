@@ -25,9 +25,9 @@ const uploadProfile = async (payload: FormData) => {
 	}
 };
 
-export function useUploadUserProfile() {
+export function useUploadUserProfile(id?: string) {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
-	const { refetch } = useGetUserProfileUrl(authState.userId as string);
+	const { refetch } = useGetUserProfileUrl(id ? id : (authState.userId as string));
 
 	return useMutation({
 		mutationFn: uploadProfile,

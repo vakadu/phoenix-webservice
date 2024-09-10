@@ -1,11 +1,7 @@
 import VaccinationRecords from '../../../components/organisms/vaccination-records';
 
 const Page = () => {
-	return (
-		<section>
-			<VaccinationRecords />
-		</section>
-	);
+	return <VaccinationRecords />;
 };
 
 export default Page;
