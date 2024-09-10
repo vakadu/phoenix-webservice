@@ -28,7 +28,7 @@ export const pemilyStore = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
 		process.env.NODE_ENV === 'development'
-			? getDefaultMiddleware({ serializableCheck: false }).concat(logger)
+			? getDefaultMiddleware({ serializableCheck: false }).concat(logger as any)
 			: getDefaultMiddleware({ serializableCheck: false }),
 });
 
