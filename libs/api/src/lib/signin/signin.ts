@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
-import { authenticateUser } from '@webservices/slices';
+import { authenticateUser, setOtp } from '@webservices/slices';
 import { useRouterQuery } from '@webservices/hooks';
 
 const signin = async (payload: IAuthTypes.ISigninFormData) => {
@@ -26,6 +26,7 @@ export const useSignin = () => {
 	return useMutation({
 		mutationFn: signin,
 		onSuccess: (data) => {
+			dispatch(setOtp({ showOtp: false }));
 			dispatch(
 				authenticateUser({
 					token: data?.data?.accessToken,

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { otpValidator, phoneValidator } from '@webservices/helpers';
 import { Button, ButtonWrapper, TextInput } from '@webservices/ui';
@@ -32,11 +33,23 @@ const LoginForm = () => {
 		watch,
 	} = useForm({
 		resolver: yupResolver(getSchema(layoutState.showOtp)),
-		mode: 'all',
 	});
 	const watchMobileNumber = watch('mobileNumber');
+	const watchOtp = watch('otp');
 	const { mutate: checkUser, isPending } = useCheckUser({ mobileNumber: watchMobileNumber });
 	const { mutate: signin, isPending: isLoading } = useSignin();
+
+	useEffect(() => {
+		if (watchMobileNumber?.length === 10) {
+			checkUser({ mobileNumber: watchMobileNumber });
+		}
+	}, [checkUser, watchMobileNumber]);
+
+	useEffect(() => {
+		if (watchMobileNumber?.length === 10 && watchOtp?.length === 6) {
+			signin({ mobile: Number(watchMobileNumber), otp: Number(watchOtp) });
+		}
+	}, [signin, watchMobileNumber, watchOtp]);
 
 	const resetMobileNumber = () => {
 		dispatch(setOtp({ showOtp: false }));
@@ -51,26 +64,24 @@ const LoginForm = () => {
 	};
 
 	return (
-		<form className="space-y-24" onSubmit={handleSubmit(onSubmit)}>
+		<form className="space-y-24 w-full mt-24" onSubmit={handleSubmit(onSubmit)}>
 			<TextInput
-				label="Mobile Number"
-				name="mobileNumber"
+				label=""
 				type="numeric"
 				placeholder="Enter your Mobile Number"
 				error={errors?.mobileNumber}
-				register={register}
 				maxLength={10}
 				readonly={layoutState?.showOtp}
 				disabled={layoutState.showOtp}
+				{...register('mobileNumber')}
 			/>
 			{layoutState?.showOtp && (
 				<TextInput
-					label="Enter OTP"
-					name="otp"
+					label=""
 					type="numeric"
-					placeholder=""
+					placeholder="Enter 6 digit OTP"
 					error={errors?.otp}
-					register={register}
+					{...register('otp')}
 					maxLength={6}
 				/>
 			)}

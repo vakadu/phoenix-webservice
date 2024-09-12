@@ -99,33 +99,29 @@ const AddEditDoctor = ({
 					<section className="grid grid-cols-2 gap-[42px]">
 						<TextInput
 							label="Name"
-							name="name"
 							placeholder=""
 							error={errors?.name}
-							register={register}
+							{...register('name')}
 						/>
 						<TextInput
 							label="Degree"
-							name="degree"
 							placeholder=""
 							error={errors?.degree}
-							register={register}
+							{...register('degree')}
 						/>
 					</section>
 					<section className="grid grid-cols-2 gap-[42px]">
 						<TextInput
 							label="Experience in Years"
-							name="experience"
 							placeholder=""
 							error={errors?.experience}
-							register={register}
+							{...register('experience')}
 						/>
 						<TextInput
 							label="Speciality"
-							name="speciality"
 							placeholder=""
 							error={errors?.speciality}
-							register={register}
+							{...register('speciality')}
 						/>
 					</section>
 					{modalType === 'edit' && (

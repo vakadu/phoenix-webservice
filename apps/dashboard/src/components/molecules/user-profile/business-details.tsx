@@ -60,35 +60,31 @@ const BusinessForm = () => {
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="Business Contact Number"
-					name="businessContact"
 					type="numeric"
 					placeholder=""
 					error={errors?.businessContact}
-					register={register}
 					maxLength={10}
+					{...register('businessContact')}
 				/>
 				<TextInput
 					label="Owner Name"
-					name="ownerName"
 					placeholder=""
 					error={errors?.ownerName}
-					register={register}
+					{...register('ownerName')}
 				/>
 			</section>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="PAN"
-					name="pan"
 					placeholder="FLKPXXXXXX"
 					error={errors?.pan}
-					register={register}
+					{...register('pan')}
 				/>
 				<TextInput
 					label="GST No"
-					name="gstNo"
 					placeholder="29AAXXXXXXXXXXX"
 					error={errors?.gstNo}
-					register={register}
+					{...register('gstNo')}
 				/>
 			</section>
 			<section className="!mt-[42px]">

@@ -84,10 +84,9 @@ const AddEditStaff = ({
 					<section className="">
 						<TextInput
 							label="Name"
-							name="name"
 							placeholder=""
 							error={errors?.name}
-							register={register}
+							{...register('name')}
 						/>
 					</section>
 					{modalType === 'edit' && (

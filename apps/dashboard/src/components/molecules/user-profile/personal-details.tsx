@@ -64,30 +64,27 @@ const PersonalDetailsForm = () => {
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="Name"
-					name="name"
 					placeholder="Enter your Mobile Number"
 					error={errors?.name}
-					register={register}
+					{...register('name')}
 				/>
 				<TextInput
 					label="Mobile Number"
-					name="mobile"
 					type="numeric"
 					placeholder=""
 					error={errors?.mobile}
-					register={register}
 					maxLength={10}
 					readonly={true}
 					disabled={true}
+					{...register('mobile')}
 				/>
 			</section>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="Email"
-					name="email"
 					placeholder="Enter your Email ID"
 					error={errors?.email}
-					register={register}
+					{...register('email')}
 				/>
 				<section className="flex flex-col">
 					<label className="text-14">Date of Birth</label>

@@ -32,6 +32,7 @@ export function useCheckUser({ mobileNumber }: { mobileNumber: string }) {
 				if (data?.data?.isUser) {
 					sendOtp({ mobile: mobileNumber });
 				} else {
+					toast.error('Your phone number is not registered');
 					dispatch(setIsNewUser({ isNewUser: true }));
 				}
 			} else {

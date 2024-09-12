@@ -96,50 +96,45 @@ const AddressForm = () => {
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="Line1"
-					name="line1"
 					placeholder=""
 					error={errors?.line1}
-					register={register}
+					{...register('line1')}
 				/>
 				<TextInput
 					label="Line2"
-					name="line2"
 					placeholder=""
 					error={errors?.line2}
-					register={register}
+					{...register('line2')}
 				/>
 			</section>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="Pincode"
-					name="pincode"
 					placeholder=""
 					error={errors?.pincode}
-					register={register}
 					type="numeric"
 					maxLength={6}
 					minLength={6}
-					onChange={handlePincode}
+					// onChange={handlePincode}
+					{...register('pincode')}
 				/>
 				<TextInput
 					label="District"
-					name="district"
 					placeholder=""
 					error={errors?.district}
-					register={register}
 					readonly={true}
 					disabled={true}
+					{...register('district')}
 				/>
 			</section>
 			<section className="grid grid-cols-2 gap-[42px]">
 				<TextInput
 					label="State"
-					name="state"
 					placeholder=""
 					error={errors?.state}
-					register={register}
 					readonly={true}
 					disabled={true}
+					{...register('state')}
 				/>
 				<section>
 					<label className="text-14 leading-14 block mb-10">Choose Gender</label>

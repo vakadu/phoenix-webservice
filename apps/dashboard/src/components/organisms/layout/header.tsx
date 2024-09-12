@@ -18,7 +18,7 @@ const ProfileLabel = (name: string, id: string) => {
 			{profileData?.data?.profileUrl && profileData?.data?.profileUrl !== '' ? (
 				<ImagePlaceholder
 					containerClasses="w-32 h-32"
-					imageClasses="rounded-full shadow-base2"
+					imageClasses="rounded-full shadow-base2 object-cover"
 					src={profileData?.data?.profileUrl as string}
 				/>
 			) : (
