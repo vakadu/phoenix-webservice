@@ -1,12 +1,8 @@
 import Link from 'next/link';
 
 import { ImagePlaceholder } from '@webservices/ui';
-import { useSidebar } from '@webservices/hooks';
 
-const Logo = ({ menuHover }: { menuHover: boolean }) => {
-	const { collapsed } = useSidebar();
-	const isCollapsed = collapsed && !menuHover;
-
+const Logo = () => {
 	return (
 		<Link className={`px-12 flex gap-12`} href="/medical-records">
 			<ImagePlaceholder

@@ -14,6 +14,7 @@ const Followup = () => {
 	return (
 		<RecordSidebarProvider record="followup">
 			<section>
+				<p className="text-24 px-16 font-semibold">Follow ups</p>
 				<Header />
 				<RecordsSidebar />
 				<Followups />

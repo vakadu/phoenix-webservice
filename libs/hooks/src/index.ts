@@ -1,7 +1,6 @@
 export * from './lib/use-rtl/rtl';
 export * from './lib/use-sidebar/sidebar';
 export * from './lib/use-mobile-menu/mobile-menu';
-// export * from './lib/use-razorpay/use-razorpay';
 export * from './lib/use-scroll-top/use-scroll-top';
 export * from './lib/use-scroll/use-scroll';
 export * from './lib/use-inview/use-inview';

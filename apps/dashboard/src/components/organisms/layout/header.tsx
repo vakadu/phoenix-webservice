@@ -66,7 +66,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 
 	return (
 		<header className="sticky top-0 z-[10]">
-			<section className={`h-[72px] px-16 bg-white shadow-base flex ${sidebarClasses}`}>
+			<section className={`h-[72px] px-16 bg-grey-bg3 flex ${sidebarClasses}`}>
 				<section className="flex-1"></section>
 				<section className="flex-1 flex justify-end items-center">
 					<Dropdown

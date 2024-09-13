@@ -6,9 +6,9 @@ import { useIsMobile } from '@webservices/hooks';
 export interface ProductLoaderProps {}
 
 export function ProductLoader(props: ProductLoaderProps) {
-	const { isMobile } = useIsMobile();
+	const { isDesktop } = useIsMobile();
 
-	if(isMobile) {
+	if (!isDesktop) {
 		return (
 			<ContentLoader
 				viewBox={`0 0 ${window.innerWidth} 760`}
@@ -18,24 +18,17 @@ export function ProductLoader(props: ProductLoaderProps) {
 				foregroundColor="#CACFD2"
 				{...props}
 			>
-				<rect
-					x="3"
-					y="12"
-					rx="10"
-					ry="10"
-					width={window.innerWidth}
-					height="280"
-				/>
+				<rect x="3" y="12" rx="10" ry="10" width={window.innerWidth} height="280" />
 				<rect x="6" y="310" rx="0" ry="0" width="292" height="20" />
 				<rect x="6" y="345" rx="0" ry="0" width="239" height="20" />
 				<rect x="4" y="382" rx="0" ry="0" width="274" height="20" />
 			</ContentLoader>
-		)
+		);
 	} else {
 		return (
-			<ContentLoader 
-				viewBox="0 0 1300 700" 
-				height={700} 
+			<ContentLoader
+				viewBox="0 0 1300 700"
+				height={700}
 				width="100%"
 				backgroundColor="#E5E7E9"
 				foregroundColor="#CACFD2"

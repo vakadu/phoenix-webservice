@@ -26,7 +26,7 @@ const ProfileImage = () => {
 					<ImagePlaceholder
 						src={data?.data?.profileUrl as string}
 						containerClasses="w-[160px] h-[160px] "
-						imageClasses="rounded-full"
+						imageClasses="rounded-full object-cover"
 					/>
 				) : (
 					<UserIcon width={160} height={160} />

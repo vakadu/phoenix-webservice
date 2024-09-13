@@ -38,14 +38,14 @@ const UserProfile = () => {
 							<PrescriptionIcon width={18} height={18} />
 							<span className="text-14">Business Details</span>
 						</Tab>
-						<Tab as="section" className={tabClass}>
+						{/* <Tab as="section" className={tabClass}>
 							<PrescriptionIcon width={18} height={18} />
 							<span className="text-14">My Doctors</span>
 						</Tab>
 						<Tab as="section" className={tabClass}>
 							<PrescriptionIcon width={18} height={18} />
 							<span className="text-14">My Staff</span>
-						</Tab>
+						</Tab> */}
 						<Tab as="section" className={tabClass}>
 							<PrescriptionIcon width={18} height={18} />
 							<span className="text-14">Contact Us</span>
@@ -61,7 +61,7 @@ const UserProfile = () => {
 						<TabPanel as="section">
 							<BusinessForm />
 						</TabPanel>
-						{authState.role === Roles.Clinic && (
+						{/* {authState.role === Roles.Clinic && (
 							<>
 								<TabPanel as="section">
 									<DoctorsList />
@@ -69,11 +69,11 @@ const UserProfile = () => {
 								<TabPanel as="section">
 									<StaffList />
 								</TabPanel>
-								<TabPanel as="section">
-									<Contact />
-								</TabPanel>
 							</>
-						)}
+						)} */}
+						<TabPanel as="section">
+							<Contact />
+						</TabPanel>
 					</TabPanels>
 				</TabGroup>
 			</section>

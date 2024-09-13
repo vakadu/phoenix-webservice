@@ -1,28 +1,30 @@
-import { useMemo } from 'react';
+'use client';
 
-const getMobileDetect = (userAgent: string) => {
-    const isAndroid = Boolean(userAgent.match(/Android/i));
-    const isIos = Boolean(userAgent.match(/iPhone|iPad|iPod/i));
-    const isOpera = Boolean(userAgent.match(/Opera Mini/i));
-    const isWindows = Boolean(userAgent.match(/IEMobile/i));
-    const isSSR = Boolean(userAgent.match(/SSR/i));
-    const isMobile = isAndroid || isIos || isOpera || isWindows;
-    const isDesktop = !isMobile && !isSSR;
-
-    return {
-        isMobile,
-        isDesktop,
-        isAndroid,
-        isIos,
-        isSSR
-    };
-};
+import { useEffect, useState } from 'react';
 
 export function useIsMobile() {
-    const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent;
-    const deviceInfo = useMemo(() => getMobileDetect(userAgent), [userAgent]);
+	const [isDesktop, setIsDesktop] = useState(() => {
+		if (typeof window !== 'undefined') {
+			return window.innerWidth >= 1024;
+		}
+		return false;
+	});
 
-    return deviceInfo;
+	useEffect(() => {
+		const updateDesktop = () => {
+			setIsDesktop(window.innerWidth >= 1024);
+		};
+
+		window.addEventListener('resize', updateDesktop);
+
+		updateDesktop();
+
+		return () => window.removeEventListener('resize', updateDesktop);
+	}, []);
+
+	return {
+		isDesktop,
+	};
 }
 
 export default useIsMobile;

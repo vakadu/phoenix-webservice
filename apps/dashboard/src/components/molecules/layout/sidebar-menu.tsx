@@ -1,61 +1,71 @@
 import Link from 'next/link';
 
-import { useSidebar } from '@webservices/hooks';
 import { UserIcon } from '@webservices/icons';
 import { ImagePlaceholder } from '@webservices/ui';
+import { useRouterQuery } from '@webservices/hooks';
 
 const menu = [
 	{
-		link: 'medical-records',
+		link: '/medical-records',
 		path: '/images/medical-records.png',
 		text: 'Medical Records',
 		type: 'image',
 	},
 	{
-		link: 'vaccination-records',
+		link: '/vaccination-records',
 		path: '/images/vaccination-records.png',
 		text: 'Vaccination Records',
 		type: 'image',
 	},
 	{
-		link: 'follow-up',
+		link: '/follow-up',
 		path: '/images/follow-ups.png',
 		text: 'Follow Ups',
 		type: 'image',
 	},
 	{
-		link: 'pet-parents',
+		link: '/pet-parents',
 		path: '/images/follow-ups.png',
 		text: 'Pet Parents',
 		type: 'image',
 	},
 	{
-		link: 'user-profile',
-		path: <UserIcon className="text-primary-1" width={32} height={32} />,
+		link: '/user-profile',
+		path: <UserIcon className="text-primary-1" width={24} height={24} />,
 		text: 'Profile',
 		type: 'icon',
 	},
 ];
 
-const SidebarMenu = ({ menuHover }: { menuHover: boolean }) => {
-	const { collapsed } = useSidebar();
-	const isCollapsed = menuHover || !collapsed;
+const SidebarMenu = () => {
+	const { pathname } = useRouterQuery();
+
 	return (
-		<ul className="mt-[52px] flex flex-col gap-24">
+		<ul className="mt-[52px] flex flex-col gap-6">
 			{menu.map((item) => {
+				const active = item.link === pathname;
+
 				return (
-					<li key={item.link}>
-						<Link className="px-16 flex gap-12 items-center" href={`/${item.link}`}>
+					<li
+						className={`${
+							active ? 'bg-white px-12 rounded-8 shadow-base' : ''
+						} mx-16 py-12`}
+						key={item.link}
+					>
+						<Link className="flex gap-12 items-center" href={`${item.link}`}>
 							{item?.type === 'icon' ? (
 								item?.path
 							) : (
 								<ImagePlaceholder
-									containerClasses="w-32 h-32"
+									containerClasses="w-24 h-24"
 									src={item.path as string}
 								/>
 							)}
-							{/* {isCollapsed && <span className="truncate flex-1">{item?.text}</span>} */}
-							<span className="truncate flex-1">{item?.text}</span>
+							<span
+								className={`truncate flex-1 text-14 ${active ? 'font-medium' : ''}`}
+							>
+								{item?.text}
+							</span>
 						</Link>
 					</li>
 				);
