@@ -13,7 +13,9 @@ const PetParent = ({
 	return (
 		<ButtonWrapper
 			onClick={() => handlePetParent(parent)}
-			className={`px-12 border mb-12 rounded-6 py-12 w-full ${active ? 'bg-brand' : ''}`}
+			className={`px-12 border mb-12 rounded-6 py-12 w-full ${
+				active ? 'bg-brand' : 'bg-white'
+			}`}
 		>
 			<section className="flex gap-24">
 				<UserProfileImage

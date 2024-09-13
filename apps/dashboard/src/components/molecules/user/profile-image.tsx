@@ -1,15 +1,11 @@
-'use client';
-
 import { useGetUserProfileUrl, useUploadUserProfile } from '@webservices/api';
 import { ImagePlaceholder } from '@webservices/ui';
 import { CameraIcon, UserIcon } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
-import { useRouterQuery } from '@webservices/hooks';
 
-const UserProfileImage = () => {
-	const { query } = useRouterQuery();
-	const { data } = useGetUserProfileUrl(query?.id as string);
-	const { mutate: uploadUserProfile } = useUploadUserProfile(query?.id as string);
+const UserProfileImage = ({ id }: { id: string }) => {
+	const { data } = useGetUserProfileUrl(id as string);
+	const { mutate: uploadUserProfile } = useUploadUserProfile(id as string);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -20,8 +16,8 @@ const UserProfileImage = () => {
 	};
 
 	return (
-		<section className="flex flex-col items-center bg-white h-[154px] relative">
-			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center absolute top-[100%] left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
+		<section className="flex flex-col items-center bg-white py-32">
+			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center relative">
 				{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 					<ImagePlaceholder
 						src={data?.data?.profileUrl as string}

@@ -14,7 +14,7 @@ const VaccinationRecords = () => {
 	return (
 		<RecordSidebarProvider record="vaccination">
 			<section>
-				<p className="text-24 px-16 font-semibold">Vaccination Records</p>
+				<h1 className="text-24 px-16 font-semibold">Vaccination Records</h1>
 				<Header />
 				<RecordsSidebar />
 				<Vaccination />

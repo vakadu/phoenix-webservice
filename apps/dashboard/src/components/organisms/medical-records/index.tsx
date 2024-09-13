@@ -14,7 +14,7 @@ const MedicalRecords = () => {
 	return (
 		<RecordSidebarProvider record="medical">
 			<section>
-				<p className="text-24 px-16 font-semibold">Medical Records</p>
+				<h1 className="text-24 px-16 font-semibold">Medical Records</h1>
 				<Header />
 				<RecordsSidebar />
 				<Records />
