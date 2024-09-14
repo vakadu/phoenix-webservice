@@ -33,4 +33,7 @@ export * from './lib/use-send-vaccination-remainder/send-vaccination-remainder';
 export * from './lib/use-update-vaccination-record/update-vaccination-record';
 export * from './lib/use-update-follow-up-record/update-follow-up-record';
 export * from './lib/use-send-follow-up-record/send-follow-up-record';
+export * from './lib/use-get-parent-by-id/get-parent-by-id';
+export * from './lib/use-update-parent/update-parent';
+export * from './lib/use-create-parent/create-parent';
 export * from './lib/api';

@@ -3,19 +3,18 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetDoctors from '../use-get-doctors/get-doctors';
+import useGetParentById from '../use-get-parent-by-id/get-parent-by-id';
 
 interface IPayload {
-	name: string;
-	degree: string;
-	experience: string;
-	speciality: string;
+	name?: string;
+	comment?: string;
+	active: boolean;
 }
 
-const createDoctor = async (payload: IPayload) => {
+const updateParent = async (payload: IPayload, parentId: string) => {
 	try {
-		const { data } = await HttpService.post(
-			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.AddClinicDoctor}`,
+		const { data } = await HttpService.patch(
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.UpdateParent}/${parentId}`,
 			payload
 		);
 		return data;
@@ -24,14 +23,20 @@ const createDoctor = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateDoctor(handleClose: () => void) {
-	const { refetch } = useGetDoctors();
+export function useUpdateParent(
+	memberId: string,
+	parentId: string,
+	handleClose: () => void,
+	refetchParents: () => void
+) {
+	const { refetch } = useGetParentById(parentId);
 
 	return useMutation({
-		mutationFn: createDoctor,
+		mutationFn: (payload: IPayload) => updateParent(payload, memberId),
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				refetch();
+				refetchParents();
 				handleClose();
 				toast.success('Updated Successfully!');
 			} else {
@@ -44,4 +49,4 @@ export function useCreateDoctor(handleClose: () => void) {
 	});
 }
 
-export default useCreateDoctor;
+export default useUpdateParent;

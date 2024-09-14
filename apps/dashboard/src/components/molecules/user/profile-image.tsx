@@ -16,7 +16,7 @@ const UserProfileImage = ({ id }: { id: string }) => {
 	};
 
 	return (
-		<section className="flex flex-col items-center bg-white py-32">
+		<section className="flex flex-col items-center">
 			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center relative">
 				{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 					<ImagePlaceholder

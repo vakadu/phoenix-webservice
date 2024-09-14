@@ -3,19 +3,16 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetDoctors from '../use-get-doctors/get-doctors';
+import { useGetPetParentsMutation } from '../use-pet-parents/pet-parents';
 
 interface IPayload {
-	name: string;
-	degree: string;
-	experience: string;
-	speciality: string;
+	mobileNumber: string;
 }
 
-const createDoctor = async (payload: IPayload) => {
+const createParent = async (payload: IPayload) => {
 	try {
-		const { data } = await HttpService.post(
-			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.AddClinicDoctor}`,
+		const { data } = await HttpService.patch(
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.AddParent}/${payload?.mobileNumber}`,
 			payload
 		);
 		return data;
@@ -24,15 +21,13 @@ const createDoctor = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateDoctor(handleClose: () => void) {
-	const { refetch } = useGetDoctors();
-
+export function useCreateParent(handleClose: () => void, refetchParents: () => void) {
 	return useMutation({
-		mutationFn: createDoctor,
+		mutationFn: createParent,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				refetch();
 				handleClose();
+				refetchParents();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');
@@ -44,4 +39,4 @@ export function useCreateDoctor(handleClose: () => void) {
 	});
 }
 
-export default useCreateDoctor;
+export default useCreateParent;

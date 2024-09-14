@@ -1,45 +1,39 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 import Search from '../../atoms/search';
 import { CategoryLoader } from '@webservices/ui';
 import PetParent from '../../atoms/pet-parent';
-import { debounce } from '@webservices/helpers';
-import { useGetPetParentsMutation } from '@webservices/api';
 
-const PetParentsSearch = ({ handleParent }: { handleParent: (p: string) => void }) => {
-	const [value, setValue] = useState('');
-	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
+interface IPetParent {
+	parentId: string;
+	memberId: string;
+}
 
-	useEffect(() => {
-		getPetParents('');
-	}, []);
-
-	const debouncedFilter = useCallback(
-		debounce((input: string) => {
-			getPetParents(input);
-		}, 300),
-		[]
-	);
-
-	const onChange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const val = e.target.value;
-			setValue(val);
-			debouncedFilter(val);
+const PetParentsSearch = ({
+	handleParent,
+	value,
+	onChange,
+	handleClear,
+	isPending,
+	data,
+}: {
+	handleParent: (p: IPetParent) => void;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleClear: () => void;
+	isPending: boolean;
+	data: IClinicTypes.IPetParent[];
+}) => {
+	const handlePetParent = useCallback(
+		(parent: IClinicTypes.IPetParent) => {
+			const parentData: IPetParent = {
+				parentId: parent.parent.parentId,
+				memberId: parent?.memberId,
+			};
+			handleParent(parentData);
 		},
-		[debouncedFilter]
+		[handleParent]
 	);
-
-	const handleClear = useCallback(() => {
-		getPetParents('');
-		setValue('');
-	}, []);
-
-	const handlePetParent = useCallback((parent: IClinicTypes.IPetParent) => {
-		// router.push(`/user/${parent.parent.parentId}`);
-		// setParentId(parent.parent.parentId);
-		handleParent(parent.parent.parentId);
-	}, []);
 
 	return (
 		<div className="col-span-3">
@@ -52,7 +46,7 @@ const PetParentsSearch = ({ handleParent }: { handleParent: (p: string) => void 
 			{isPending ? (
 				<CategoryLoader rows={3} columns={1} />
 			) : (
-				data?.data?.parents?.map((parent) => {
+				data?.map((parent) => {
 					return (
 						<PetParent
 							handlePetParent={handlePetParent}
