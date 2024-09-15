@@ -1,17 +1,21 @@
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
 
 interface IPayload {
-	mobileNumber: string;
+	name: string;
+	breed: string;
+	gender: string;
+	type: string;
+	dob: string;
+	parentId?: string;
 }
 
-const createParent = async (payload: IPayload) => {
+const createPet = async (payload: IPayload) => {
 	try {
-		const { data } = await HttpService.patch(
-			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.AddParent}/${payload?.mobileNumber}`,
+		const { data } = await HttpService.post(
+			`${process.env.NEXT_PUBLIC_BASE_PATH}/pet`,
 			payload
 		);
 		return data;
@@ -20,13 +24,13 @@ const createParent = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateParent(handleClose: () => void, refetchParents: () => void) {
+export function useCreatePet(handleClose: () => void) {
 	return useMutation({
-		mutationFn: createParent,
+		mutationFn: createPet,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				handleClose();
-				refetchParents();
+				// refetchParents();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');
@@ -38,4 +42,4 @@ export function useCreateParent(handleClose: () => void, refetchParents: () => v
 	});
 }
 
-export default useCreateParent;
+export default useCreatePet;

@@ -1,7 +1,7 @@
-import User from '../../../../components/organisms/user';
+import PetDetails from '../../../../components/organisms/pet';
 
 const Page = () => {
-	return <User />;
+	return <PetDetails />;
 };
 
 export default Page;
