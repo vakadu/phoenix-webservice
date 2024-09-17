@@ -12,7 +12,7 @@ export interface UseRouterQuery {
 }
 
 export function useRouterQuery() {
-	const router = useRouter();
+	const router = useRouter() as any;
 
 	return {
 		query: useParams(),

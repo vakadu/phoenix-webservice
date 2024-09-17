@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import Search from '../../atoms/search';
 import { CategoryLoader } from '@webservices/ui';
 import PetParent from '../../atoms/pet-parent';
+import { useRouterQuery } from '@webservices/hooks';
 
 interface IPetParent {
 	parentId: string;
@@ -24,15 +25,12 @@ const PetParentsSearch = ({
 	isPending: boolean;
 	data: IClinicTypes.IPetParent[];
 }) => {
+	const { router } = useRouterQuery();
 	const handlePetParent = useCallback(
 		(parent: IClinicTypes.IPetParent) => {
-			const parentData: IPetParent = {
-				parentId: parent.parent.parentId,
-				memberId: parent?.memberId,
-			};
-			handleParent(parentData);
+			router.push(`/user/${parent.parent.parentId}/${parent?.memberId}`);
 		},
-		[handleParent]
+		[router]
 	);
 
 	return (

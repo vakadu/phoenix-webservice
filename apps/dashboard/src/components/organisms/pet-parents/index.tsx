@@ -79,7 +79,7 @@ const PetParents = () => {
 					data={data?.data?.parents as IClinicTypes.IPetParent[]}
 					isPending={isPending}
 				/>
-				{parent.parentId !== '' && (
+				{/* {parent.parentId !== '' && (
 					<div className="sticky top-[calc(72px)] bg-white w-full shadow-base col-span-2 rounded-8 h-[calc(100vh-160px)] overflow-y-scroll no-scrollbar">
 						<div className="flex px-16 gap-32 py-32 items-center">
 							<UserProfileImage id={parent.parentId} />
@@ -90,7 +90,7 @@ const PetParents = () => {
 						</div>
 						<Pets id={parent.parentId} />
 					</div>
-				)}
+				)} */}
 			</div>
 			<AddEditParent
 				open={show}

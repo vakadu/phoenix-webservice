@@ -10,12 +10,14 @@ import { CloseIcon } from '@webservices/icons';
 import { Button, ButtonWrapper, Modal, TextInput, Switch, Radio } from '@webservices/ui';
 import {
 	useCreateDoctor,
+	useCreatePet,
 	useGetDoctorById,
 	useGetPetById,
 	useUpdateDoctor,
 	useUpdatePet,
 } from '@webservices/api';
 import { format } from 'date-fns';
+import { useRouterQuery } from '@webservices/hooks';
 
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),
@@ -49,7 +51,8 @@ const AddEditPet = ({
 	const [type, setType] = useState('DOG');
 
 	const { mutate: updatePet, isPending } = useUpdatePet(petId as string, handleClose);
-	// const { mutate: createDoctor, isPending: isLoading } = useCreateDoctor(handleClose);
+	const { mutate: createPet, isPending: isLoading } = useCreatePet(handleClose);
+	const { query } = useRouterQuery();
 
 	useEffect(() => {
 		if (modalType === 'edit' && name && petId) {
@@ -75,15 +78,22 @@ const AddEditPet = ({
 
 	const onSubmit = (values: any) => {
 		if (modalType === 'edit') {
-			const editData = {
+			const payload = {
 				...values,
 				gender,
 				type,
 				dob: format(dob, 'yyyy-MM-dd'),
 			};
-			updatePet(editData);
+			updatePet(payload);
 		} else {
-			// createDoctor(values);
+			const payload = {
+				...values,
+				gender,
+				type,
+				dob: format(dob, 'yyyy-MM-dd'),
+				parentId: query['parent-id'],
+			};
+			createPet(payload);
 		}
 	};
 
@@ -171,8 +181,8 @@ const AddEditPet = ({
 					<section className="flex justify-end items-center !mt-32">
 						<Button
 							className="min-w-[220px]"
-							// isLoading={isPending || isLoading}
-							// disabled={isPending || isLoading}
+							isLoading={isPending || isLoading}
+							disabled={isPending || isLoading}
 						>
 							<span className="font-semibold">
 								{modalType === 'add' ? 'Add Pet' : 'Edit Pet'}

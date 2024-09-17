@@ -2,6 +2,8 @@ import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { HttpService } from '@webservices/services';
+import useGetPets from '../use-get-pets/get-pets';
+import { useRouterQuery } from '@webservices/hooks';
 
 interface IPayload {
 	name: string;
@@ -25,12 +27,14 @@ const createPet = async (payload: IPayload) => {
 };
 
 export function useCreatePet(handleClose: () => void) {
+	const { query } = useRouterQuery();
+	const { refetch } = useGetPets(query['parent-id'] as string);
 	return useMutation({
 		mutationFn: createPet,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				handleClose();
-				// refetchParents();
+				refetch();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');
