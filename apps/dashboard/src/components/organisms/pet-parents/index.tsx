@@ -3,9 +3,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import PetParentsSearch from '../../molecules/pet-parents/search';
-import Pets from '../../molecules/user/pets';
-import UserProfileImage from '../../molecules/user/profile-image';
-import ParentDetails from '../../molecules/user/details';
 import AddEditParent from '../../molecules/user/add-edit-parent';
 import { Button } from '@webservices/ui';
 import { useGetPetParentsMutation } from '@webservices/api';
@@ -79,18 +76,6 @@ const PetParents = () => {
 					data={data?.data?.parents as IClinicTypes.IPetParent[]}
 					isPending={isPending}
 				/>
-				{/* {parent.parentId !== '' && (
-					<div className="sticky top-[calc(72px)] bg-white w-full shadow-base col-span-2 rounded-8 h-[calc(100vh-160px)] overflow-y-scroll no-scrollbar">
-						<div className="flex px-16 gap-32 py-32 items-center">
-							<UserProfileImage id={parent.parentId} />
-							<ParentDetails
-								handleEdit={() => handleModal('edit')}
-								id={parent.parentId}
-							/>
-						</div>
-						<Pets id={parent.parentId} />
-					</div>
-				)} */}
 			</div>
 			<AddEditParent
 				open={show}

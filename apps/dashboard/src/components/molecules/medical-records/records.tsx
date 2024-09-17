@@ -2,10 +2,17 @@ import { useGetMedicalRecords } from '@webservices/api';
 import MedicalRecord from '../../atoms/medical-record';
 import { CategoryLoader } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
+import { useRouterQuery } from '@webservices/hooks';
 
 const Records = () => {
+	const { params } = useRouterQuery();
+	const petId = params.get('petId') || undefined;
 	const { activeRecord, selectedDate } = useRecordSidebar();
-	const { data, isPending } = useGetMedicalRecords({ type: activeRecord, date: selectedDate });
+	const { data, isPending } = useGetMedicalRecords({
+		type: activeRecord,
+		date: selectedDate,
+		petId,
+	});
 
 	if (isPending) {
 		return (

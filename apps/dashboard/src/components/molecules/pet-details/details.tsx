@@ -5,9 +5,11 @@ import { useState } from 'react';
 import { useGetPetById } from '@webservices/api';
 import { useRouterQuery } from '@webservices/hooks';
 import AddEditPet from '../../atoms/add-edit-pet.atom';
+import { ButtonWrapper } from '@webservices/ui';
 
 const AboutPet = () => {
-	const { query } = useRouterQuery();
+	const { query, router, params } = useRouterQuery();
+	const parentId = params.get('parentId');
 	const { data } = useGetPetById(query?.id as string);
 	const { gender, dob, breed, type, name } = data?.data?.pet || {};
 	const containerClass =
@@ -51,6 +53,25 @@ const AboutPet = () => {
 					<span className="block text-14 text-grey-text3">Type</span>
 				</div>
 			</div>
+			<ButtonWrapper
+				onClick={() =>
+					router.push(`/medical-records?petId=${query?.id}&parentId=${parentId}`)
+				}
+			>
+				<span>Medical Records</span>
+			</ButtonWrapper>
+			<ButtonWrapper
+				onClick={() =>
+					router.push(`/vaccination-records?petId=${query?.id}&parentId=${parentId}`)
+				}
+			>
+				<span>Vaccination Records</span>
+			</ButtonWrapper>
+			<ButtonWrapper
+				onClick={() => router.push(`/follow-up?petId=${query?.id}&parentId=${parentId}`)}
+			>
+				<span>Follow Ups</span>
+			</ButtonWrapper>
 		</div>
 	);
 };

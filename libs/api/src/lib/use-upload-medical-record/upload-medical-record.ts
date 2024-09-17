@@ -34,7 +34,7 @@ export function useUploadMedicalRecord({
 	handleSidebar: (a: boolean) => void;
 	selectedDate?: string;
 }) {
-	const { refetch } = useGetMedicalRecords({ type: activeRecord, date: selectedDate });
+	const { refetch } = useGetMedicalRecords({ type: activeRecord, date: selectedDate, petId });
 	return useMutation({
 		mutationFn: (payload: FormData) => uploadMedicalRecord(payload, petId),
 		onSuccess: (data) => {

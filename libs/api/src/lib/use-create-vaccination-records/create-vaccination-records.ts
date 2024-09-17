@@ -28,14 +28,17 @@ export function useCreateVaccinationRecords({
 	handleSidebar,
 	type,
 	date,
+	petId,
 }: {
 	handleSidebar: (s: boolean) => void;
 	type: string;
 	date: string;
+	petId?: string;
 }) {
 	const { refetch } = useGetVaccinationRecords({
 		type,
 		date,
+		petId,
 	});
 	return useMutation({
 		mutationFn: createVaccination,

@@ -26,7 +26,7 @@ export function useGetMedicalRecords({
 	date,
 }: {
 	type: string;
-	petId?: string;
+	petId?: string | undefined;
 	date?: string;
 }) {
 	return useQuery({

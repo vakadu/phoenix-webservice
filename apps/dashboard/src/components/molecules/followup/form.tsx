@@ -41,6 +41,7 @@ const FollowupForm = ({
 		handleSidebar,
 		type: activeRecord,
 		date: selectedDate,
+		petId,
 	});
 
 	const onChange = (dates: any) => {

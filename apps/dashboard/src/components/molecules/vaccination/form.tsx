@@ -6,7 +6,7 @@ import DatePicker from 'react-datepicker';
 import { dogAndCatVaccines } from '@webservices/constants';
 import { CloseIcon, DownIcon } from '@webservices/icons';
 import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateVaccinationRecords, useGetVaccinationRecords } from '@webservices/api';
+import { useCreateVaccinationRecords } from '@webservices/api';
 import { convertDates } from '../../../helpers';
 
 const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
@@ -41,6 +41,7 @@ const VaccinationForm = ({
 		handleSidebar,
 		type: activeRecord,
 		date: selectedDate,
+		petId,
 	});
 
 	const onChange = (dates: any) => {

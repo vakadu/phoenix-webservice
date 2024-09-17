@@ -28,14 +28,17 @@ export function useCreateFollowUpRecords({
 	handleSidebar,
 	type,
 	date,
+	petId,
 }: {
 	handleSidebar: (s: boolean) => void;
 	type: string;
 	date: string;
+	petId?: string;
 }) {
 	const { refetch } = useGetFollowRecords({
 		type,
 		date,
+		petId,
 	});
 	return useMutation({
 		mutationFn: createFollowup,

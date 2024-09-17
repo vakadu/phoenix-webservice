@@ -10,6 +10,7 @@ import {
 	vaccinationClinicFilters,
 } from '@webservices/constants';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
+import { useRouterQuery } from '@webservices/hooks';
 
 const Header = () => {
 	const {
@@ -21,7 +22,12 @@ const Header = () => {
 		selectedDate,
 		handleDate,
 		recordType,
+		handleActiveParent,
+		handleActivePet,
 	} = useRecordSidebar();
+	const { params } = useRouterQuery();
+	const petId = params.get('petId') || undefined;
+	const parentId = params.get('parentId') || undefined;
 	const filters =
 		recordType === 'medical'
 			? medicalRecordsFilters
@@ -40,7 +46,19 @@ const Header = () => {
 
 	const onSidebarChange = () => {
 		handleSidebar(!showSidebar);
-		handleActiveType('pet-parents');
+		if (petId && parentId) {
+			handleActiveParent(parentId);
+			handleActivePet(petId);
+			if (recordType === 'vaccination') {
+				handleActiveType('vaccination');
+			} else if (recordType === 'followup') {
+				handleActiveType('followup');
+			} else {
+				handleActiveType('upload');
+			}
+		} else {
+			handleActiveType('pet-parents');
+		}
 	};
 
 	return (

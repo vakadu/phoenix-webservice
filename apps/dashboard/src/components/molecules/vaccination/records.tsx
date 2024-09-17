@@ -2,12 +2,16 @@ import { useGetVaccinationRecords } from '@webservices/api';
 import { CategoryLoader } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import VaccinationRecord from '../../atoms/vaccination-record';
+import { useRouterQuery } from '@webservices/hooks';
 
 const Vaccination = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
+	const { params } = useRouterQuery();
+	const petId = params.get('petId') || undefined;
 	const { data, isPending } = useGetVaccinationRecords({
 		type: activeRecord,
 		date: selectedDate,
+		petId,
 	});
 
 	if (isPending) {

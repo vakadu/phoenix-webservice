@@ -2,12 +2,16 @@ import { useGetFollowRecords } from '@webservices/api';
 import { CategoryLoader } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import FollowupRecord from '../../atoms/followup-record';
+import { useRouterQuery } from '@webservices/hooks';
 
 const Followups = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
+	const { params } = useRouterQuery();
+	const petId = params.get('petId') || undefined;
 	const { data, isPending } = useGetFollowRecords({
 		type: activeRecord,
 		date: selectedDate,
+		petId,
 	});
 
 	if (isPending) {

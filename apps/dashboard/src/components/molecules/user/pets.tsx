@@ -15,7 +15,7 @@ const Pets = ({ id }: { id: string }) => {
 	const [show, setShow] = useState(false);
 
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
-		router.push(`/pet/${pet.petId}`);
+		router.push(`/pet/${pet.petId}?parentId=${id}`);
 	}, []);
 
 	if (isPending) {
