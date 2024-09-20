@@ -30,10 +30,8 @@ export function useGetVaccinationRecords({
 }: {
 	type: string;
 	petId?: string;
-	date?: string;
+	date?: string | undefined;
 }) {
-	console.log(type);
-
 	return useQuery({
 		queryKey: [ApiEndpoints.ClinicVaccinationRecords, type, petId, date],
 		queryFn: getVaccinationRecords,

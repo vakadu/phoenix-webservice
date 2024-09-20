@@ -6,6 +6,7 @@ import { useGetPetById } from '@webservices/api';
 import { useRouterQuery } from '@webservices/hooks';
 import AddEditPet from '../../atoms/add-edit-pet.atom';
 import { ButtonWrapper } from '@webservices/ui';
+import { RightIcon } from '@webservices/icons';
 
 const AboutPet = () => {
 	const { query, router, params } = useRouterQuery();
@@ -53,25 +54,35 @@ const AboutPet = () => {
 					<span className="block text-14 text-grey-text3">Type</span>
 				</div>
 			</div>
-			<ButtonWrapper
-				onClick={() =>
-					router.push(`/medical-records?petId=${query?.id}&parentId=${parentId}`)
-				}
-			>
-				<span>Medical Records</span>
-			</ButtonWrapper>
-			<ButtonWrapper
-				onClick={() =>
-					router.push(`/vaccination-records?petId=${query?.id}&parentId=${parentId}`)
-				}
-			>
-				<span>Vaccination Records</span>
-			</ButtonWrapper>
-			<ButtonWrapper
-				onClick={() => router.push(`/follow-up?petId=${query?.id}&parentId=${parentId}`)}
-			>
-				<span>Follow Ups</span>
-			</ButtonWrapper>
+			<div className="mt-32">
+				<ButtonWrapper
+					onClick={() =>
+						router.push(`/medical-records?petId=${query?.id}&parentId=${parentId}`)
+					}
+					className="mb-24 border border-grey-border1 px-12 bg-white w-[320px] h-[54px] rounded-8 flex items-center justify-between"
+				>
+					<span className="text-14 font-medium">Medical Records</span>
+					<RightIcon />
+				</ButtonWrapper>
+				<ButtonWrapper
+					onClick={() =>
+						router.push(`/vaccination-records?petId=${query?.id}&parentId=${parentId}`)
+					}
+					className="mb-24 border border-grey-border1 px-12 bg-white w-[320px] h-[54px] rounded-8 flex items-center justify-between"
+				>
+					<span className="text-14 font-medium">Vaccination Records</span>
+					<RightIcon />
+				</ButtonWrapper>
+				<ButtonWrapper
+					onClick={() =>
+						router.push(`/follow-up?petId=${query?.id}&parentId=${parentId}`)
+					}
+					className="mb-24 border border-grey-border1 px-12 bg-white w-[320px] h-[54px] rounded-8 flex items-center justify-between"
+				>
+					<span className="text-14 font-medium">Follow Ups</span>
+					<RightIcon />
+				</ButtonWrapper>
+			</div>
 		</div>
 	);
 };

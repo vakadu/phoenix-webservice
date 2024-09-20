@@ -10,7 +10,7 @@ const Records = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
 	const { data, isPending } = useGetMedicalRecords({
 		type: activeRecord,
-		date: selectedDate,
+		date: !petId ? selectedDate : undefined,
 		petId,
 	});
 

@@ -10,7 +10,7 @@ const Vaccination = () => {
 	const petId = params.get('petId') || undefined;
 	const { data, isPending } = useGetVaccinationRecords({
 		type: activeRecord,
-		date: selectedDate,
+		date: !petId ? selectedDate : undefined,
 		petId,
 	});
 

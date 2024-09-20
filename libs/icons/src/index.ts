@@ -31,4 +31,5 @@ export * from './lib/view-icon/view-icon';
 export * from './lib/notes-icon/notes-icon';
 export * from './lib/bell-icon/bell-icon';
 export * from './lib/loading-icon/loading-icon';
+export * from './lib/right-icon/right-icon';
 export * from './lib/icons';
