@@ -1,12 +1,26 @@
 'use client';
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
+import dynamic from 'next/dynamic';
 
 import { PrescriptionIcon } from '@webservices/icons';
-import PersonalDetailsForm from '../../molecules/user-profile/personal-details';
-import AddressForm from '../../molecules/user-profile/address';
-import BusinessForm from '../../molecules/user-profile/business-details';
-import Contact from '../../molecules/user-profile/contact';
+import Loading from '../../atoms/loading';
+
+const PersonalDetailsForm = dynamic(() => import('../../molecules/user-profile/personal-details'), {
+	loading: () => <Loading />,
+});
+
+const AddressForm = dynamic(() => import('../../molecules/user-profile/address'), {
+	loading: () => <Loading />,
+});
+
+const BusinessForm = dynamic(() => import('../../molecules/user-profile/business-details'), {
+	loading: () => <Loading />,
+});
+
+const Contact = dynamic(() => import('../../molecules/user-profile/contact'), {
+	loading: () => <Loading />,
+});
 
 export default function UserTabs() {
 	const tabClass =
