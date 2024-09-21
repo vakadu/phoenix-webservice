@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { MenuItem } from '@headlessui/react';
 
-import { openModal, PemilyRootState } from '@webservices/slices';
-import { Dropdown, ImagePlaceholder } from '@webservices/ui';
-import { useGetUser, useGetUserProfileUrl } from '@webservices/api';
-import { DownIcon, LogoutIcon, UserIcon } from '@webservices/icons';
+import { openModal } from '@webservices/slices';
+import { ButtonWrapper, Dropdown, ImagePlaceholder } from '@webservices/ui';
+import { useGetUserProfileUrl } from '@webservices/api';
+import { DownIcon, LogoutIcon, UserIcon, UserOutlineIcon } from '@webservices/icons';
 import { ModalTypes } from '@webservices/primitives';
 import { useRouterQuery } from '@webservices/hooks';
 import { logout } from '../../../helpers';
@@ -32,8 +32,6 @@ const ProfileLabel = (name: string, id: string) => {
 };
 
 const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
-	const authState = useSelector((state: PemilyRootState) => state.auth);
-	const { data } = useGetUser(authState.userId as string);
 	const dispatch = useDispatch();
 	const { router } = useRouterQuery();
 
@@ -66,15 +64,16 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 
 	return (
 		<header className="sticky top-0 z-[10]">
-			<section className={`h-[72px] px-16 bg-grey-bg3 flex ${sidebarClasses}`}>
-				<section className="flex-1"></section>
-				<section className="flex-1 flex justify-end items-center">
+			<section className={`h-[72px] px-16 flex ${sidebarClasses}`}>
+				<div className="flex-1"></div>
+				<div className="flex-1 flex justify-end items-center">
 					<Dropdown
-						label={ProfileLabel(
-							data?.data?.user?.name as string,
-							authState.userId as string
-						)}
-						menuClasses="!top-[74px] origin-top-right right-0 w-[220px] "
+						label={
+							<ButtonWrapper className="w-32 h-32 flex justify-center items-center">
+								<UserOutlineIcon />
+							</ButtonWrapper>
+						}
+						menuClasses="!top-[54px] origin-top-right right-16 w-[220px] "
 					>
 						{menu.map((m, i) => {
 							const isLast = menu.length - 1 === i;
@@ -93,7 +92,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 							);
 						})}
 					</Dropdown>
-				</section>
+				</div>
 			</section>
 		</header>
 	);

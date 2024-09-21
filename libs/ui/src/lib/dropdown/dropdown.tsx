@@ -11,14 +11,13 @@ export function Dropdown({
 	menuClasses?: string;
 }) {
 	return (
-		<section className="relative">
-			<Menu as="section" className="block w-full py-2 relative">
+		<div className="relative">
+			<Menu as="div" className="block w-full py-2 relative">
 				<MenuButton className="block w-full">
 					<div className="">{label}</div>
 				</MenuButton>
 				<Transition>
 					<MenuItems
-						as="section"
 						anchor="bottom start"
 						className={`!fixed bg-white shadow-dropdown rounded-8 z-[99] ${menuClasses}`}
 					>
@@ -26,7 +25,7 @@ export function Dropdown({
 					</MenuItems>
 				</Transition>
 			</Menu>
-		</section>
+		</div>
 	);
 }
 

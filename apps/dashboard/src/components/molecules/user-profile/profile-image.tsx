@@ -53,9 +53,9 @@ const ProfileImage = () => {
 				</div>
 			</div>
 			<form className="w-full mt-32 gap-24 flex flex-col">
-				<TextInput label="Name" {...register('name')} readonly />
-				<TextInput label="Email" {...register('email')} readonly />
-				<TextInput label="Mobile Number" {...register('mobile')} readonly />
+				<TextInput disabled label="Name" {...register('name')} readonly />
+				<TextInput disabled label="Email" {...register('email')} readonly />
+				<TextInput disabled label="Mobile Number" {...register('mobile')} readonly />
 			</form>
 		</div>
 	);
