@@ -40,12 +40,6 @@ const LoginForm = () => {
 	const { mutate: signin, isPending: isLoading } = useSignin();
 
 	useEffect(() => {
-		if (watchMobileNumber?.length === 10) {
-			checkUser({ mobileNumber: watchMobileNumber });
-		}
-	}, [checkUser, watchMobileNumber]);
-
-	useEffect(() => {
 		if (watchMobileNumber?.length === 10 && watchOtp?.length === 6) {
 			signin({ mobile: Number(watchMobileNumber), otp: Number(watchOtp) });
 		}
@@ -97,6 +91,7 @@ const LoginForm = () => {
 				isLoading={isPending || isLoading}
 				disabled={isPending || isLoading}
 				className="w-full"
+				type="submit"
 			>
 				<span className="text-14 font-black tracking-[0.9px]">
 					{layoutState?.showOtp ? 'SUBMIT' : 'GET OTP'}

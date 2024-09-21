@@ -1,7 +1,7 @@
 import Login from '../../components/organisms/login';
 
-const LoginPage = () => {
+const Page = () => {
 	return <Login />;
 };
 
-export default LoginPage;
+export default Page;

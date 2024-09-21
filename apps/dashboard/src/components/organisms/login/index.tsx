@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import LoginForm from '../../molecules/login/form';
 import LoginImage from '../../molecules/login/image';
 import { ImagePlaceholder } from '@webservices/ui';
@@ -6,9 +7,9 @@ import { ImagePlaceholder } from '@webservices/ui';
 const Login = () => {
 	return (
 		<section className="min-h-screen w-full overflow-hidden">
-			<section className="grid grid-cols-3 overflow-hidden min-h-screen">
+			<div className="grid grid-cols-3 overflow-hidden min-h-screen">
 				<LoginImage />
-				<section className="col-span-1 bg-white flex flex-col">
+				<div className="col-span-1 bg-white flex flex-col">
 					<div className="flex-col flex flex-1  justify-center px-24">
 						<ImagePlaceholder
 							src="/images/logo.jpg"
@@ -41,8 +42,8 @@ const Login = () => {
 							terms of use
 						</Link>
 					</p>
-				</section>
-			</section>
+				</div>
+			</div>
 		</section>
 	);
 };

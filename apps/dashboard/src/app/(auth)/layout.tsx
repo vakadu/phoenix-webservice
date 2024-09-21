@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux';
 import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';
 import MobileOnly from '../../components/atoms/mobile-only';
+import { routes } from '../../routes';
+import { RouteList } from '../../routes/constants';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
@@ -14,7 +16,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		if (authState.loggedIn) {
-			router.push('/medical-records');
+			router.push(routes.get(RouteList.MEDICAL_RECORDS));
 		}
 	}, [authState.loggedIn, router]);
 
