@@ -37,48 +37,55 @@ const AddressForm = () => {
 		handleSubmit,
 		formState: { errors },
 		setValue,
+		watch,
 	} = useForm({
 		resolver: yupResolver(validationSchema),
 	});
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
-	const [type, setType] = useState('HOME');
+	const [addressType, setType] = useState('HOME');
 	const { mutate: getPincode } = usePincode();
 	const { mutate: updateAddress, isPending } = useUpdateAddress(
 		data?.data?.user?.addressId as string
 	);
 	const { mutate: createAddress, isPending: isLoading } = useCreateAddress();
+	const { line1, line2, pincode, district, state, type } = data?.data?.user?.address || {};
+	const watchPincode = watch('pincode');
 
 	useEffect(() => {
 		if (data?.data?.user) {
-			setValue('line1', data?.data?.user?.address?.line1 || '');
-			setValue('line2', data?.data?.user?.address?.line2 || '');
-			setValue('pincode', data?.data?.user?.address?.pincode || '');
-			setValue('district', data?.data?.user?.address?.district || '');
-			setValue('state', data?.data?.user?.address?.state || '');
-			setType(data?.data?.user?.address?.type || 'HOME');
+			setValue('line1', line1 || '');
+			setValue('line2', line2 || '');
+			setValue('pincode', pincode || '');
+			setValue('district', district || '');
+			setValue('state', state || '');
+			setType(type || 'HOME');
 		}
-	}, [data?.data?.user, setValue]);
+	}, [data?.data?.user, district, line1, line2, pincode, setValue, state, type]);
 
-	const handlePincode = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.value.length >= 6) {
-			getPincode(e.target.value, {
-				onSuccess: (addressData) => {
-					const { district, state } = addressData?.data?.address as IUserTypes.IAddress;
-					setValue('district', district);
-					setValue('state', state);
-				},
-				onError: (error) => {
-					console.error('Error fetching pincode:', error);
-				},
-			});
+	useEffect(() => {
+		if (watchPincode?.length === 6) {
+			handlePincode(watchPincode);
 		}
+	}, [watchPincode]);
+
+	const handlePincode = (pincode: string) => {
+		getPincode(pincode, {
+			onSuccess: (addressData) => {
+				const { district, state } = addressData?.data?.address as IUserTypes.IAddress;
+				setValue('district', district);
+				setValue('state', state);
+			},
+			onError: (error) => {
+				console.error('Error fetching pincode:', error);
+			},
+		});
 	};
 
 	const onSubmit = (values: any) => {
 		const payload = {
 			...values,
-			type,
+			type: addressType,
 		} as IPayload;
 		if (data?.data?.user?.addressId) {
 			updateAddress(payload);
@@ -89,11 +96,8 @@ const AddressForm = () => {
 	};
 
 	return (
-		<form
-			onSubmit={handleSubmit(onSubmit)}
-			className="max-w-screen-lg pb-[42px] space-y-24 mt-[54px]"
-		>
-			<section className="grid grid-cols-2 gap-[42px]">
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<section className="grid grid-cols-2 gap-24 mb-24">
 				<TextInput
 					label="Line1"
 					placeholder=""
@@ -107,7 +111,7 @@ const AddressForm = () => {
 					{...register('line2')}
 				/>
 			</section>
-			<section className="grid grid-cols-2 gap-[42px]">
+			<section className="grid grid-cols-2 gap-24 mb-24">
 				<TextInput
 					label="Pincode"
 					placeholder=""
@@ -115,7 +119,6 @@ const AddressForm = () => {
 					type="numeric"
 					maxLength={6}
 					minLength={6}
-					// onChange={handlePincode}
 					{...register('pincode')}
 				/>
 				<TextInput
@@ -127,7 +130,7 @@ const AddressForm = () => {
 					{...register('district')}
 				/>
 			</section>
-			<section className="grid grid-cols-2 gap-[42px]">
+			<section className="grid grid-cols-2 gap-24 mb-24">
 				<TextInput
 					label="State"
 					placeholder=""
@@ -142,21 +145,21 @@ const AddressForm = () => {
 						<Radio
 							label="Home"
 							value="HOME"
-							checked={type === 'HOME'}
+							checked={addressType === 'HOME'}
 							name="home"
 							onChange={() => setType('HOME')}
 						/>
 						<Radio
 							label="Work"
 							value="WORK"
-							checked={type === 'WORK'}
+							checked={addressType === 'WORK'}
 							name="work"
 							onChange={() => setType('WORK')}
 						/>
 						<Radio
 							label="Other"
 							value="OTHER"
-							checked={type === 'OTHER'}
+							checked={addressType === 'OTHER'}
 							name="other"
 							onChange={() => setType('OTHER')}
 						/>

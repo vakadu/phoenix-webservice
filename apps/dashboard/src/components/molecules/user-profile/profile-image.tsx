@@ -1,15 +1,29 @@
-import { useSelector } from 'react-redux';
+'use client';
 
-import { useGetUserProfileUrl, useUploadUserProfile } from '@webservices/api';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useGetUser, useGetUserProfileUrl, useUploadUserProfile } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
-import { ImagePlaceholder } from '@webservices/ui';
+import { ImagePlaceholder, TextInput } from '@webservices/ui';
 import { CameraIcon, UserIcon } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
 
 const ProfileImage = () => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
-	const { data } = useGetUserProfileUrl(authState.userId as string);
+	const { data: profileData } = useGetUserProfileUrl(authState.userId as string);
+	const { data: userData } = useGetUser(authState.userId as string);
 	const { mutate: uploadUserProfile } = useUploadUserProfile();
+	const { profileUrl } = profileData?.data || {};
+	const { name, mobile, email } = userData?.data?.user || {};
+	const { register, setValue } = useForm();
+
+	useEffect(() => {
+		setValue('name', name);
+		setValue('mobile', mobile);
+		setValue('email', email);
+	}, [email, mobile, name]);
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -20,23 +34,30 @@ const ProfileImage = () => {
 	};
 
 	return (
-		<section className="flex flex-col items-center bg-white h-[154px] relative">
-			<section className="border-[2px] border-primary-1 rounded-full p-4 w-[168px] h-[168px] flex justify-center items-center absolute top-[100%] left-1/2 -translate-y-1/2 -translate-x-1/2 bg-white">
-				{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
-					<ImagePlaceholder
-						src={data?.data?.profileUrl as string}
-						containerClasses="w-[160px] h-[160px] "
-						imageClasses="rounded-full object-cover"
-					/>
-				) : (
-					<UserIcon width={160} height={160} />
-				)}
-				<label className="cursor-pointer w-[42px] h-[42px] z-10 rounded-full absolute bg-primary-1 flex items-center justify-center shadow-base right-0 top-[106px]">
-					<input type="file" onChange={onChange} className="w-full hidden" />
-					<CameraIcon className="text-white" width={24} height={24} />
-				</label>
-			</section>
-		</section>
+		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16">
+			<div>
+				<div className=" rounded-full w-[168px] h-[168px] bg-white relative">
+					{profileUrl && profileUrl !== '' ? (
+						<ImagePlaceholder
+							src={profileUrl as string}
+							containerClasses="w-[160px] h-[160px] "
+							imageClasses="rounded-full object-cover"
+						/>
+					) : (
+						<UserIcon width={160} height={160} />
+					)}
+					<label className="cursor-pointer w-[32px] h-[32px] z-3 rounded-full absolute bg-primary-1 flex items-center justify-center right-0 top-[26px] shadow-base3">
+						<input type="file" onChange={onChange} className="w-full hidden" />
+						<CameraIcon className="text-white" width={18} height={18} />
+					</label>
+				</div>
+			</div>
+			<form className="w-full mt-32 gap-24 flex flex-col">
+				<TextInput label="Name" {...register('name')} readonly />
+				<TextInput label="Email" {...register('email')} readonly />
+				<TextInput label="Mobile Number" {...register('mobile')} readonly />
+			</form>
+		</div>
 	);
 };
 

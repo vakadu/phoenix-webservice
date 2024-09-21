@@ -9,12 +9,12 @@ import { useSelector } from 'react-redux';
 import { Button, TextInput } from '@webservices/ui';
 import { useGetUser, useUpdateBusiness } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
-import { phoneValidator } from '@webservices/helpers';
+import { gstValidator, panValidator, phoneValidator } from '@webservices/helpers';
 
 const validationSchema = yup.object().shape({
 	ownerName: yup.string().required('Owner Name is required'),
-	pan: yup.string(),
-	gstNo: yup.string(),
+	pan: yup.string().matches(panValidator, 'Pan is not valid').notRequired(),
+	gstNo: yup.string().matches(gstValidator, 'Gst is not valid').notRequired(),
 	businessContact: yup
 		.string()
 		.matches(phoneValidator, 'Phone number is not valid')
@@ -33,15 +33,16 @@ const BusinessForm = () => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
 	const { mutate: updateBusiness, isPending } = useUpdateBusiness();
+	const { ownerName, pan, gstNo, businessContact } = data?.data?.user || {};
 
 	useEffect(() => {
 		if (data?.data?.user) {
-			setValue('ownerName', data?.data?.user?.ownerName || '');
-			setValue('pan', data?.data?.user?.pan || '');
-			setValue('gstNo', data?.data?.user?.gstNo || '');
-			setValue('businessContact', data?.data?.user?.businessContact || '');
+			setValue('ownerName', ownerName || '');
+			setValue('pan', pan || '');
+			setValue('gstNo', gstNo || '');
+			setValue('businessContact', businessContact || '');
 		}
-	}, [data?.data?.user, setValue]);
+	}, [businessContact, data?.data?.user, gstNo, ownerName, pan, setValue]);
 
 	const onSubmit = (values: any) => {
 		const { businessContact, ...restValues } = values;
@@ -53,11 +54,8 @@ const BusinessForm = () => {
 	};
 
 	return (
-		<form
-			onSubmit={handleSubmit(onSubmit)}
-			className="max-w-screen-lg pb-[42px] space-y-24 mt-[54px]"
-		>
-			<section className="grid grid-cols-2 gap-[42px]">
+		<form onSubmit={handleSubmit(onSubmit)}>
+			<section className="grid grid-cols-2 gap-24 mb-24">
 				<TextInput
 					label="Business Contact Number"
 					type="numeric"
@@ -73,7 +71,7 @@ const BusinessForm = () => {
 					{...register('ownerName')}
 				/>
 			</section>
-			<section className="grid grid-cols-2 gap-[42px]">
+			<section className="grid grid-cols-2 gap-24 mb-24">
 				<TextInput
 					label="PAN"
 					placeholder="FLKPXXXXXX"

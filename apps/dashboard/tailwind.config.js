@@ -40,7 +40,7 @@ module.exports = {
 					4: '#EFEFEF',
 					bg1: '#F8FAFB',
 					bg2: '#6B779A0D',
-					bg3: '#F3F3F3',
+					bg3: '#eaecee',
 					text1: '#D9D9D9',
 					text2: '#5F5B5B',
 					divider: '#D3DADD',
