@@ -81,7 +81,11 @@ const PetParents = () => {
 					isPending={isPending}
 				/>
 				{parentDetails && (
-					<PetParentDetails parentDetails={parentDetails} refetch={refetchParents} />
+					<PetParentDetails
+						memberId={parentDetails?.memberId}
+						parentId={parentDetails?.parent?.parentId}
+						refetch={refetchParents}
+					/>
 				)}
 			</div>
 		</>

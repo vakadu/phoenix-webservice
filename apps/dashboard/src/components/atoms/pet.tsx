@@ -4,24 +4,26 @@ import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
 const Pet = ({
 	pet,
 	handlePet,
+	height = 'h-[160px]',
 }: {
 	pet: ICommonTypes.IPet;
 	handlePet: (pet: ICommonTypes.IPet) => void;
+	height?: string;
 }) => {
 	const { data } = useGetPetProfileImage(pet?.petId as string);
 
 	return (
-		<ButtonWrapper onClick={() => handlePet(pet)}>
+		<ButtonWrapper className="border p-8 rounded-8" onClick={() => handlePet(pet)}>
 			{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 				<ImagePlaceholder
 					src={data?.data?.profileUrl as string}
-					containerClasses={`w-[160px] h-[160px]`}
-					imageClasses={`rounded-full`}
+					containerClasses={`w-full ${height}`}
+					imageClasses={`rounded-10 object-cover`}
 				/>
 			) : (
 				<ImagePlaceholder
 					src={pet.type === 'CAT' ? '/images/Cat.png' : '/images/Dog.png'}
-					containerClasses={`w-full h-[175px]`}
+					containerClasses={`w-full ${height}`}
 					imageClasses="rounded-10 object-cover"
 				/>
 			)}
