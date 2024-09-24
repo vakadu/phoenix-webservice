@@ -6,7 +6,6 @@ import UserProfileImage from '../../molecules/user/profile-image';
 import Pets from '../../molecules/user/pets';
 import { useRouterQuery } from '@webservices/hooks';
 import { useGetParentById } from '@webservices/api';
-import AddEditParent from '../../molecules/user/add-edit-parent';
 
 const User = () => {
 	const { query } = useRouterQuery();
@@ -16,16 +15,6 @@ const User = () => {
 
 	return (
 		<section className="grid grid-cols-5 px-16 gap-[42px]">
-			<AddEditParent
-				open={show}
-				handleClose={() => setShow(false)}
-				parent={{
-					parentId: query['parent-id'] as string,
-					memberId: query['member-id'] as string,
-				}}
-				modalType={'edit'}
-				refetchParents={refetch}
-			/>
 			<div className="col-span-1">
 				<UserProfileImage id={query['parent-id'] as string} />
 			</div>

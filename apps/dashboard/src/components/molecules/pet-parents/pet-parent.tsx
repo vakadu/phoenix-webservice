@@ -1,3 +1,6 @@
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+
 import {
 	useGetParentById,
 	useGetPets,
@@ -5,13 +8,11 @@ import {
 	useUpdateClinicMemberProfile,
 } from '@webservices/api';
 import { createFormDataForImage } from '@webservices/helpers';
-import { CameraIcon, EditIcon, UserIcon } from '@webservices/icons';
+import { CameraIcon, EditIcon, PlusIcon, UserIcon } from '@webservices/icons';
 import { ModalTypes } from '@webservices/primitives';
 import { openModal } from '@webservices/slices';
 import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
-import { useDispatch } from 'react-redux';
 import Pet from '../../atoms/pet';
-import { useCallback } from 'react';
 import { useRouterQuery } from '@webservices/hooks';
 
 export default function PetParentDetails({
@@ -60,6 +61,20 @@ export default function PetParentDetails({
 		router.push(`/pet/${pet.petId}?parentId=${parentId}`);
 	}, []);
 
+	const handleAddPet = useCallback(() => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.ADD_EDIT_PET,
+				type: 'add',
+				data: {
+					parentId,
+				},
+				refetch: refetch,
+			})
+		);
+	}, []);
+
 	return (
 		<div className="col-span-2 sticky top-[12px] z-10">
 			<div className="bg-white w-full px-16 shadow-base rounded-8 py-12 ">
@@ -102,6 +117,15 @@ export default function PetParentDetails({
 							/>
 						);
 					})}
+					<ButtonWrapper
+						onClick={handleAddPet}
+						className="h-[210px] border rounded-8 border-grey-border2 flex flex-col gap-6 items-center justify-center"
+					>
+						<span className="w-42 h-42 bg-primary-1 flex items-center justify-center rounded-full">
+							<PlusIcon color="#FFF" />
+						</span>
+						<span className="text-14 font-medium">Add Pet</span>
+					</ButtonWrapper>
 				</div>
 			</div>
 		</div>

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { useCreateParent, useGetParentById, useUpdateParent } from '@webservices/api';
 import { phoneValidator } from '@webservices/helpers';
@@ -30,7 +30,6 @@ const getValidationSchema = (type: 'add' | 'edit') =>
 	});
 
 const AddEditParent = () => {
-	const dispatch = useDispatch();
 	const modalState = useSelector((state: PemilyRootState) => state.modal);
 	const { parentId, memberId } = modalState.data;
 	const validationSchema = getValidationSchema(modalState.type as 'add' | 'edit');

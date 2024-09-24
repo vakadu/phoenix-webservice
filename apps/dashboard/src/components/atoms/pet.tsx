@@ -13,7 +13,10 @@ const Pet = ({
 	const { data } = useGetPetProfileImage(pet?.petId as string);
 
 	return (
-		<ButtonWrapper className="border p-8 rounded-8" onClick={() => handlePet(pet)}>
+		<ButtonWrapper
+			className="border border-grey-border2 p-8 rounded-8"
+			onClick={() => handlePet(pet)}
+		>
 			{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 				<ImagePlaceholder
 					src={data?.data?.profileUrl as string}
