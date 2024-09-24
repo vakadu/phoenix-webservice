@@ -3,7 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { ModalTypes } from '@webservices/primitives';
 
-export type MODAL_VIEW = ModalTypes.CONFIRMATION_MODAL | ModalTypes.SIDEBAR_MENU | '';
+export type MODAL_VIEW =
+	| ModalTypes.CONFIRMATION_MODAL
+	| ModalTypes.SIDEBAR_MENU
+	| ModalTypes.ADD_EDIT_PARENT
+	| ModalTypes.ADD_EDIT_PET
+	| '';
 
 type ModalState = {
 	isOpen: boolean;
@@ -11,6 +16,9 @@ type ModalState = {
 	onHandleConfirm?: () => void;
 	confirmationTitle?: string;
 	confirmationHeading?: string;
+	data?: any;
+	type?: 'add' | 'edit';
+	refetch?: () => void;
 };
 
 const initialState: ModalState = {

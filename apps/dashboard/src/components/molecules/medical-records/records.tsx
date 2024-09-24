@@ -24,14 +24,14 @@ const Records = () => {
 
 	if (data && data?.data?.medicalRecords?.length <= 0) {
 		return (
-			<section className="px-16 mt-24">
+			<section className="mt-24">
 				<p className="text-16 font-semibold">No records found</p>
 			</section>
 		);
 	}
 
 	return (
-		<section className="px-16 mt-12">
+		<section className="mt-12">
 			{data?.data?.medicalRecords?.map((medicalRecord) => (
 				<MedicalRecord key={medicalRecord._id} record={medicalRecord} />
 			))}

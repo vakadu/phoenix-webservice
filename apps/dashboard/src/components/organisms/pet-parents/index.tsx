@@ -1,27 +1,21 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import PetParentsSearch from '../../molecules/pet-parents/search';
-import AddEditParent from '../../molecules/user/add-edit-parent';
 import { Button } from '@webservices/ui';
 import { useGetPetParentsMutation } from '@webservices/api';
 import { debounce } from '@webservices/helpers';
-
-interface IPetParent {
-	parentId: string;
-	memberId: string;
-}
+import { openModal } from '@webservices/slices';
+import { ModalTypes } from '@webservices/primitives';
+import PetParentDetails from '../../molecules/pet-parents/pet-parent';
 
 const PetParents = () => {
-	const [parent, setParent] = useState<IPetParent>({
-		parentId: '',
-		memberId: '',
-	});
-	const [show, setShow] = useState(false);
-	const [type, setType] = useState<'add' | 'edit'>('add');
+	const [parentDetails, setParentDetails] = useState<IClinicTypes.IPetParent>();
 	const [value, setValue] = useState('');
 	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getPetParents('');
@@ -52,39 +46,45 @@ const PetParents = () => {
 		setValue('');
 	}, []);
 
-	const handleModal = (type: 'add' | 'edit') => {
-		setShow(true);
-		setType(type);
+	const handleAddParent = () => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.ADD_EDIT_PARENT,
+				type: 'add',
+				data: {
+					parentId: parentDetails?.parent?.parentId,
+					memberId: parentDetails?.memberId,
+				},
+				refetch: refetchParents,
+			})
+		);
 	};
 
 	return (
-		<div className="px-16">
+		<>
 			<div className="grid grid-cols-5 gap-24 mb-24">
 				<div className="flex items-center justify-between col-span-3">
 					<h1 className="text-24 font-semibold">Search</h1>
-					<Button onClick={() => handleModal('add')}>
+					<Button onClick={handleAddParent}>
 						<span className="font-black tracking-[-0.41px]">Add Parent</span>
 					</Button>
 				</div>
 			</div>
-			<div className="grid grid-cols-5 gap-24">
+			<div className="grid grid-cols-5 gap-24 items-start">
 				<PetParentsSearch
-					handleParent={setParent}
+					handleParent={setParentDetails}
 					value={value}
 					onChange={onChange}
 					handleClear={handleClear}
 					data={data?.data?.parents as IClinicTypes.IPetParent[]}
 					isPending={isPending}
 				/>
+				{parentDetails && (
+					<PetParentDetails parentDetails={parentDetails} refetch={refetchParents} />
+				)}
 			</div>
-			<AddEditParent
-				open={show}
-				handleClose={() => setShow(false)}
-				parent={parent}
-				modalType={type}
-				refetchParents={refetchParents}
-			/>
-		</div>
+		</>
 	);
 };
 

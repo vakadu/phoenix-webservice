@@ -1,9 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
 import useGetParentById from '../use-get-parent-by-id/get-parent-by-id';
+import { closeModal } from '@webservices/slices';
 
 interface IPayload {
 	name?: string;
@@ -23,12 +25,16 @@ const updateParent = async (payload: IPayload, parentId: string) => {
 	}
 };
 
-export function useUpdateParent(
-	memberId: string,
-	parentId: string,
-	handleClose: () => void,
-	refetchParents: () => void
-) {
+export function useUpdateParent({
+	memberId,
+	parentId,
+	refetchParents,
+}: {
+	memberId: string;
+	parentId: string;
+	refetchParents: () => void;
+}) {
+	const dispatch = useDispatch();
 	const { refetch } = useGetParentById(parentId);
 
 	return useMutation({
@@ -37,7 +43,7 @@ export function useUpdateParent(
 			if (data?.status === 'SUCCESS') {
 				refetch();
 				refetchParents();
-				handleClose();
+				dispatch(closeModal());
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

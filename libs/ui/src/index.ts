@@ -1,3 +1,6 @@
+export * from './lib/add-edit-pet/add-edit-pet';
+export * from './lib/add-edit-parent/add-edit-parent';
+export * from './lib/loading/loading';
 export * from './lib/radio/radio';
 export * from './lib/confirmation-modal/confirmation-modal';
 export * from './lib/text-input/text-input';

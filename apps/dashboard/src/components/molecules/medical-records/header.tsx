@@ -62,7 +62,7 @@ const Header = () => {
 	};
 
 	return (
-		<section className="px-16 mt-6 sticky top-[74px] z-[3] bg-white py-8 mx-12 shadow-base rounded-8">
+		<section className="px-16 mt-6 sticky top-[74px] z-[3] bg-white py-8 shadow-base rounded-8">
 			<section className="">
 				{!petId && <DaysItem selectedDate={selectedDate} handleDate={handleDate} />}
 				<section className="flex justify-between items-center mt-12">

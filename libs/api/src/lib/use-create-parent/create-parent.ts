@@ -1,8 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
+import { closeModal } from '@webservices/slices';
 
 interface IPayload {
 	mobileNumber: string;
@@ -20,13 +22,15 @@ const createParent = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateParent(handleClose: () => void, refetchParents: () => void) {
+export function useCreateParent({ refetch }: { refetch: () => void }) {
+	const dispatch = useDispatch();
+
 	return useMutation({
 		mutationFn: createParent,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				handleClose();
-				refetchParents();
+				dispatch(closeModal());
+				refetch();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');
