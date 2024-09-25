@@ -31,7 +31,7 @@ const Records = () => {
 	}
 
 	return (
-		<section className="mt-12">
+		<section className="mt-12 pb-32">
 			{data?.data?.medicalRecords?.map((medicalRecord) => (
 				<MedicalRecord key={medicalRecord._id} record={medicalRecord} />
 			))}

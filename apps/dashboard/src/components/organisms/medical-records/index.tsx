@@ -2,9 +2,10 @@
 
 import dynamic from 'next/dynamic';
 
-import Header from '../../molecules/medical-records/header';
 import { RecordSidebarProvider } from '../../../context/record-sidebar-context';
 import Records from '../../molecules/medical-records/records';
+import Days from '../../molecules/medical-records/days';
+import Filters from '../../molecules/medical-records/filters';
 
 const RecordsSidebar = dynamic(() => import('../../molecules/medical-records/sidebar'), {
 	loading: () => <p>Loading...</p>,
@@ -13,12 +14,15 @@ const RecordsSidebar = dynamic(() => import('../../molecules/medical-records/sid
 const MedicalRecords = () => {
 	return (
 		<RecordSidebarProvider record="medical">
-			<section>
-				<h1 className="text-24 font-semibold">Medical Records</h1>
-				<Header />
-				<RecordsSidebar />
-				<Records />
-			</section>
+			<h1 className="text-24 font-semibold">Medical Records</h1>
+			<div className="px-16 mt-12 sticky top-[0px] z-[11] bg-white py-8 shadow-base rounded-8">
+				<Days />
+				<Filters />
+			</div>
+			<Records />
+			{/* 
+			<RecordsSidebar />
+			 */}
 		</RecordSidebarProvider>
 	);
 };
