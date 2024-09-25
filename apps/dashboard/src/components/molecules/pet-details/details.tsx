@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import { useGetPetById } from '@webservices/api';
 import { useRouterQuery } from '@webservices/hooks';
-import AddEditPet from '../../atoms/add-edit-pet.atom';
 import { ButtonWrapper } from '@webservices/ui';
 import { RightIcon } from '@webservices/icons';
 
@@ -19,12 +18,6 @@ const AboutPet = () => {
 
 	return (
 		<div>
-			<AddEditPet
-				open={show}
-				petId={query?.id as string}
-				modalType="edit"
-				handleClose={() => setShow(false)}
-			/>
 			<div className="flex gap-12 mb-24 items-end">
 				<h2 className="text-32 font-semibold">{name}</h2>
 				<span

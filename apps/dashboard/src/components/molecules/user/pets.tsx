@@ -7,7 +7,6 @@ import { ButtonWrapper, CategoryLoader } from '@webservices/ui';
 import Pet from '../../atoms/pet';
 import { useRouterQuery } from '@webservices/hooks';
 import { PlusIcon } from '@webservices/icons';
-import AddEditPet from '../../atoms/add-edit-pet.atom';
 
 const Pets = ({ id }: { id: string }) => {
 	const { router } = useRouterQuery();
@@ -28,12 +27,6 @@ const Pets = ({ id }: { id: string }) => {
 
 	return (
 		<div>
-			<AddEditPet
-				open={show}
-				petId={null}
-				modalType="add"
-				handleClose={() => setShow(false)}
-			/>
 			<section className="px-24 grid grid-cols-4 gap-24 mb-32">
 				{data?.data?.pets?.map((pet) => {
 					return <Pet handlePet={handlePet} key={pet.petId} pet={pet} />;

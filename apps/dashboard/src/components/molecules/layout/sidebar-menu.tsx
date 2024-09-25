@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { UserIcon } from '@webservices/icons';
+import { PetParentIcon, UserIcon } from '@webservices/icons';
 import { ImagePlaceholder } from '@webservices/ui';
 import { useRouterQuery } from '@webservices/hooks';
 
@@ -25,9 +25,9 @@ const menu = [
 	},
 	{
 		link: '/pet-parents',
-		path: '/images/follow-ups.png',
+		path: <PetParentIcon />,
 		text: 'Pet Parents',
-		type: 'image',
+		type: 'icon',
 	},
 	{
 		link: '/user-profile',
