@@ -1,5 +1,5 @@
 import { useGetFollowRecords } from '@webservices/api';
-import { CategoryLoader } from '@webservices/ui';
+import { CategoryLoader, ImagePlaceholder } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import FollowupRecord from '../../atoms/followup-record';
 import { useRouterQuery } from '@webservices/hooks';
@@ -15,23 +15,23 @@ const Followups = () => {
 	});
 
 	if (isPending) {
-		return (
-			<section className="px-16 mt-12">
-				<CategoryLoader columns={1} rows={4} />
-			</section>
-		);
+		return <CategoryLoader columns={1} rows={4} />;
 	}
 
 	if (data && data?.data?.followUpRecords?.length <= 0) {
 		return (
-			<section className="px-16 mt-24">
-				<p className="text-16 font-semibold">No records found</p>
-			</section>
+			<div className="mt-[124px] flex flex-col gap-24 justify-center items-center">
+				<ImagePlaceholder
+					containerClasses="w-[120px] h-[120px]"
+					src="/images/no-records.svg"
+				/>
+				<p className="text-18 font-medium">No Records found.</p>
+			</div>
 		);
 	}
 
 	return (
-		<section className="px-16 mt-12">
+		<section className="mt-12 pb-32">
 			{data?.data?.followUpRecords?.map((followUpRecord) => (
 				<FollowupRecord
 					key={followUpRecord._id}

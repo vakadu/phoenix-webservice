@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetFollowRecords from '../use-get-follow-records/get-follow-records';
 
 interface IPayload {
 	petId: string;
@@ -24,28 +23,11 @@ const createFollowup = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateFollowUpRecords({
-	handleSidebar,
-	type,
-	date,
-	petId,
-}: {
-	handleSidebar: (s: boolean) => void;
-	type: string;
-	date: string;
-	petId?: string;
-}) {
-	const { refetch } = useGetFollowRecords({
-		type,
-		date,
-		petId,
-	});
+export function useCreateFollowUpRecords() {
 	return useMutation({
 		mutationFn: createFollowup,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				refetch();
-				handleSidebar(false);
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

@@ -5,7 +5,6 @@ import { useCallback, useMemo } from 'react';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { BackIcon } from '@webservices/icons';
 import { ButtonWrapper, CategoryLoader } from '@webservices/ui';
-import { firstCharCapital } from '@webservices/helpers';
 import VaccinationForm from '../vaccination/form';
 import FollowupForm from '../followup/form';
 
@@ -35,17 +34,8 @@ const ActiveContent = () => {
 			return <UploadRecord />;
 		case 'vaccination':
 			return <VaccinationForm />;
-		// case 'followup':
-		// 	return (
-		// 		<FollowupForm
-		// 			parentId={activeParentId as string}
-		// 			petId={activePetId as string}
-		// 			activeClinicId={activeClinicId as string}
-		// 			handleSidebar={handleSidebar}
-		// 			selectedDate={selectedDate}
-		// 			activeRecord={activeRecord}
-		// 		/>
-		// 	);
+		case 'followup':
+			return <FollowupForm />;
 		default:
 			return <SearchBar />;
 	}

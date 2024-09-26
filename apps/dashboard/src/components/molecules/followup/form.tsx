@@ -6,8 +6,9 @@ import DatePicker from 'react-datepicker';
 import { followupData } from '@webservices/constants';
 import { CloseIcon, DownIcon } from '@webservices/icons';
 import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateFollowUpRecords } from '@webservices/api';
+import { useCreateFollowUpRecords, useGetFollowRecords } from '@webservices/api';
 import { convertDates } from '../../../helpers';
+import { useRecordSidebar } from '../../../context/record-sidebar-context';
 
 const Label = ({ selectedFollowup }: { selectedFollowup: string }) => {
 	return (
@@ -20,29 +21,13 @@ const Label = ({ selectedFollowup }: { selectedFollowup: string }) => {
 	);
 };
 
-const FollowupForm = ({
-	parentId,
-	petId,
-	activeClinicId,
-	handleSidebar,
-	selectedDate,
-	activeRecord,
-}: {
-	parentId: string;
-	petId: string;
-	activeClinicId: string;
-	handleSidebar: (s: boolean) => void;
-	selectedDate: string;
-	activeRecord: string;
-}) => {
+const FollowupForm = () => {
 	const [selectedFollowup, setFollowup] = useState('');
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
-	const { mutate: createFollowup } = useCreateFollowUpRecords({
-		handleSidebar,
-		type: activeRecord,
-		date: selectedDate,
-		petId,
-	});
+	const { activePetId, handleSidebar, activeParentId, activeRecord, selectedDate } =
+		useRecordSidebar();
+	const { mutateAsync: createFollowup } = useCreateFollowUpRecords();
+	const { refetch } = useGetFollowRecords({ type: activeRecord, date: selectedDate });
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
@@ -56,15 +41,21 @@ const FollowupForm = ({
 		setSelectedDates(filteredDates);
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const dates = convertDates(selectedDates);
 		const data = {
-			petId,
-			parentId,
+			petId: activePetId,
+			parentId: activeParentId,
 			followUpType: selectedFollowup,
 			followUpDates: dates as string[],
 		};
-		createFollowup(data);
+		const response = (await createFollowup(
+			data
+		)) as ICommonTypes.IApiResponse<IClinicTypes.IFollowUpRecord>;
+		if (response.status === 'SUCCESS') {
+			refetch();
+			handleSidebar(false);
+		}
 	};
 
 	return (

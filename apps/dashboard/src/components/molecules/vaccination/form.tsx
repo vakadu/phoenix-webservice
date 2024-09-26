@@ -24,14 +24,8 @@ const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
 const VaccinationForm = () => {
 	const [selectedVaccine, setVaccine] = useState('');
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
-	const {
-		activePetId,
-		activeClinicId,
-		handleSidebar,
-		activeParentId,
-		activeRecord,
-		selectedDate,
-	} = useRecordSidebar();
+	const { activePetId, handleSidebar, activeParentId, activeRecord, selectedDate } =
+		useRecordSidebar();
 	const { mutateAsync: createVaccination } = useCreateVaccinationRecords();
 	const { refetch } = useGetVaccinationRecords({ type: activeRecord, date: selectedDate });
 
