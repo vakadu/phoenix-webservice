@@ -47,7 +47,7 @@ const AboutPet = () => {
 					<span className="block text-14 text-grey-text3">Type</span>
 				</div>
 			</div>
-			<div className="mt-32">
+			{/* <div className="mt-32">
 				<ButtonWrapper
 					onClick={() =>
 						router.push(`/medical-records?petId=${query?.id}&parentId=${parentId}`)
@@ -75,7 +75,7 @@ const AboutPet = () => {
 					<span className="text-14 font-medium">Follow Ups</span>
 					<RightIcon />
 				</ButtonWrapper>
-			</div>
+			</div> */}
 		</div>
 	);
 };
