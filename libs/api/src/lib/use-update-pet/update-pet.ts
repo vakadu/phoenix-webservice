@@ -1,8 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
 import { HttpService } from '@webservices/services';
 import useGetPetById from '../use-get-pet-by-id/get-pet-by-id';
+import { closeModal } from '@webservices/slices';
 
 interface IPayload {
 	name: string;
@@ -24,14 +26,15 @@ const updatePet = async (payload: IPayload, petId: string) => {
 	}
 };
 
-export function useUpdatePet(petId: string, handleClose: () => void) {
+export function useUpdatePet(petId: string) {
 	const { refetch } = useGetPetById(petId as string);
+	const dispatch = useDispatch();
 	return useMutation({
 		mutationFn: (payload: IPayload) => updatePet(payload, petId),
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				refetch();
-				handleClose();
+				dispatch(closeModal());
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

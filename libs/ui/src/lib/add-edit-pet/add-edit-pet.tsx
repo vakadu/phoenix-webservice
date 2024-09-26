@@ -30,48 +30,58 @@ export function AddEditPet() {
 	} = useForm({
 		resolver: yupResolver(validationSchema),
 	});
-	// const { data } = useGetPetById(petId as string);
-	// const { name, breed, type: petType, dob: petDob, gender: petGender } = data?.data?.pet || {};
+	const { data } = useGetPetById(modalState.data?.petId as string);
+	const { name, breed, type: petType, dob: petDob, gender: petGender } = data?.data?.pet || {};
 	const [dob, setDob] = useState<any>(new Date());
 	const [gender, setGender] = useState('M');
 	const [type, setType] = useState('DOG');
-	// const { mutate: updatePet, isPending } = useUpdatePet(petId as string, handleClose);
+	const { mutate: updatePet, isPending } = useUpdatePet(modalState.data?.petId as string);
 	const { mutate: createPet, isPending: isLoading } = useCreatePet({
 		parentId: modalState?.data?.parentId,
 		refetchParents: modalState?.refetch as () => void,
 	});
 
-	// useEffect(() => {
-	// 	if (modalType === 'edit' && name && petId) {
-	// 		setValue('name', name);
-	// 		setValue('breed', breed || '');
-	// 		if (petDob) {
-	// 			setDob(new Date(petDob));
-	// 		}
-	// 		setType(petType || 'DOG');
-	// 		setGender(petGender || 'M');
-	// 	} else {
-	// 		reset({
-	// 			name: '',
-	// 			breed: '',
-	// 		});
-	// 		setType(petType || 'DOG');
-	// 		setGender(petGender || 'M');
-	// 		if (petDob) {
-	// 			setDob(new Date(petDob));
-	// 		}
-	// 	}
-	// }, [breed, modalType, name, petDob, petGender, petId, petType, reset, setValue]);
+	useEffect(() => {
+		if (modalState.type === 'edit' && name && modalState.data?.petId) {
+			setValue('name', name);
+			setValue('breed', breed || '');
+			if (petDob) {
+				setDob(new Date(petDob));
+			}
+			setType(petType || 'DOG');
+			setGender(petGender || 'M');
+		} else {
+			reset({
+				name: '',
+				breed: '',
+			});
+			setType(petType || 'DOG');
+			setGender(petGender || 'M');
+			if (petDob) {
+				setDob(new Date(petDob));
+			}
+		}
+	}, [
+		breed,
+		modalState.data?.petId,
+		modalState.type,
+		name,
+		petDob,
+		petGender,
+		petType,
+		reset,
+		setValue,
+	]);
 
 	const onSubmit = (values: any) => {
 		if (modalState.type === 'edit') {
-			// const payload = {
-			// 	...values,
-			// 	gender,
-			// 	type,
-			// 	dob: format(dob, 'yyyy-MM-dd'),
-			// };
-			// updatePet(payload);
+			const payload = {
+				...values,
+				gender,
+				type,
+				dob: format(dob, 'yyyy-MM-dd'),
+			};
+			updatePet(payload);
 		} else {
 			const payload = {
 				...values,
@@ -164,8 +174,8 @@ export function AddEditPet() {
 				<div className="flex justify-end items-center !mt-32">
 					<Button
 						className="min-w-[220px]"
-						// isLoading={isPending || isLoading}
-						// disabled={isPending || isLoading}
+						isLoading={isPending || isLoading}
+						disabled={isPending || isLoading}
 					>
 						<span className="font-semibold">
 							{modalState.type === 'add' ? 'Add Pet' : 'Edit Pet'}

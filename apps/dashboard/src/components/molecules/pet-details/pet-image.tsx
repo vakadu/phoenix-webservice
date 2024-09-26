@@ -2,21 +2,25 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 
 import { useGetPetById, useGetPetProfileImage, useUpdatePetImage } from '@webservices/api';
-import { ImagePlaceholder, TextInput } from '@webservices/ui';
-import { CameraIcon } from '@webservices/icons';
+import { ButtonWrapper, ImagePlaceholder, TextInput } from '@webservices/ui';
+import { CameraIcon, EditIcon } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
+import { openModal } from '@webservices/slices';
+import { ModalTypes } from '@webservices/primitives';
 
 const PetImage = () => {
 	const { query } = useRouterQuery();
-	const { data: profileData } = useGetPetById(query?.id as string);
+	const { data: profileData, refetch } = useGetPetById(query?.id as string);
 	const { data: profileImage } = useGetPetProfileImage(query?.id as string);
 	const { profileUrl } = profileImage?.data || {};
 	const { name, breed, gender, type, dob } = profileData?.data?.pet || {};
 	const { mutate: updatePetImage } = useUpdatePetImage(query?.id as string);
 	const { register, setValue } = useForm();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		setValue('name', name);
@@ -34,8 +38,28 @@ const PetImage = () => {
 		}
 	};
 
+	const handleEditPet = () => {
+		dispatch(
+			openModal({
+				view: ModalTypes.ADD_EDIT_PET,
+				type: 'edit',
+				data: {
+					petId: query?.id,
+				},
+				refetch,
+			})
+		);
+	};
+
 	return (
-		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16">
+		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16 relative">
+			<ButtonWrapper
+				onClick={handleEditPet}
+				className="!absolute bg-primary-1 top-12 right-12 flex px-12 py-8 items-center justify-center rounded-8 gap-8"
+			>
+				<EditIcon width={14} height={14} color="#FFF" />
+				<span className="text-14 text-white font-medium">Edit</span>
+			</ButtonWrapper>
 			<div>
 				<div className=" rounded-full w-[168px] h-[168px] bg-white relative">
 					{profileUrl && profileUrl !== '' ? (
