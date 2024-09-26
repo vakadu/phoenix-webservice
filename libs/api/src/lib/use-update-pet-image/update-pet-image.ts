@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetPets from '../use-get-pets/get-pets';
 import useGetPetProfileImage from '../use-get-pet-profile-image/get-pet-profile-image';
 
 const updatePetImage = async (payload: FormData, petId: string) => {
