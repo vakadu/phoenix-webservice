@@ -1,10 +1,12 @@
+'use client';
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
 import { useUpdateMedicalRecord } from '@webservices/api';
-import { ButtonWrapper } from '@webservices/ui';
+import { ButtonWrapper, Loading } from '@webservices/ui';
 import { DeleteIcon, DownloadIcon, EditIcon, NotesIcon } from '@webservices/icons';
 import { useRecordSidebar } from '../../context/record-sidebar-context';
 import { closeModal, openModal } from '@webservices/slices';
@@ -13,7 +15,7 @@ import PreviewImage from './preview-image';
 import useDocumentDownlaod from '../../hooks/download-document';
 
 const CommentModal = dynamic(() => import('../molecules/medical-records/comment'), {
-	loading: () => <p>Loading...</p>,
+	loading: () => <Loading />,
 });
 
 const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {

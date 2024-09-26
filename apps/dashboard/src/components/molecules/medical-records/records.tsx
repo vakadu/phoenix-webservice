@@ -1,6 +1,6 @@
 import { useGetMedicalRecords } from '@webservices/api';
 import MedicalRecord from '../../atoms/medical-record';
-import { CategoryLoader } from '@webservices/ui';
+import { CategoryLoader, ImagePlaceholder } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
 
@@ -15,18 +15,18 @@ const Records = () => {
 	});
 
 	if (isPending) {
-		return (
-			<section className="px-16 mt-12">
-				<CategoryLoader columns={1} rows={4} />
-			</section>
-		);
+		return <CategoryLoader columns={1} rows={4} />;
 	}
 
 	if (data && data?.data?.medicalRecords?.length <= 0) {
 		return (
-			<section className="mt-24">
-				<p className="text-16 font-semibold">No records found</p>
-			</section>
+			<div className="mt-[124px] flex flex-col gap-24 justify-center items-center">
+				<ImagePlaceholder
+					containerClasses="w-[120px] h-[120px]"
+					src="/images/no-records.svg"
+				/>
+				<p className="text-18 font-medium">No Records found.</p>
+			</div>
 		);
 	}
 

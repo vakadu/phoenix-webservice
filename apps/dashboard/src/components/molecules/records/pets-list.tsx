@@ -7,9 +7,9 @@ import { CategoryLoader } from '@webservices/ui';
 import Pet from '../../atoms/pet';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 
-const PetsList = ({ parentId }: { parentId: string }) => {
-	const { data, isPending } = useGetPets(parentId as string);
-	const { handleActivePet, handleActiveType, recordType } = useRecordSidebar();
+const PetsList = () => {
+	const { handleActivePet, handleActiveType, recordType, activeParentId } = useRecordSidebar();
+	const { data, isPending } = useGetPets(activeParentId as string);
 
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
 		if (recordType === 'medical') {

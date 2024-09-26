@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { format, addDays, isToday, isTomorrow } from 'date-fns';
-import DatePicker from 'react-datepicker';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
 import { CalenderIcon } from '@webservices/icons';
@@ -18,6 +17,7 @@ export function DaysItem({
 }) {
 	const daysArray = Array.from({ length: defaultDays }, (_, i) => i);
 	const [daysHeader, setDaysData] = useState<ICommonTypes.IDayItem[]>([]);
+	const dateInputRef = useRef<any>(null);
 
 	useEffect(() => {
 		setDaysHeaderData(selectedDate);
@@ -41,15 +41,21 @@ export function DaysItem({
 		setDaysData([...daysData]);
 	};
 
-	const handleCalender = (date: any) => {
-		const formatDate = format(date, 'yyyy-MM-dd');
-		setDaysHeaderData(date);
-		handleDate(formatDate);
+	const handleCalender = (e: any) => {
+		const newDate = e.target.value;
+		setDaysHeaderData(newDate);
+		handleDate(newDate);
+	};
+
+	const openDatePicker = () => {
+		if (dateInputRef.current) {
+			dateInputRef.current.showPicker();
+		}
 	};
 
 	return (
-		<section className="flex items-center gap-[120px]">
-			<section className="gap-16 flex justify-center items-center">
+		<div className="flex items-center justify-between">
+			<div className="gap-16 flex justify-center items-center">
 				{daysHeader.map((day, i) => {
 					const split = day.displayDate.split(' ');
 					const active = selectedDate === day.fullDate;
@@ -61,26 +67,29 @@ export function DaysItem({
 							key={i.toString()}
 							onClick={() => handleDate(day.fullDate)}
 						>
-							<section className="flex flex-col">
+							<div className="flex flex-col">
 								<span className="text-24 font-medium">
 									{split[0] + ' ' + split[1]}
 								</span>
 								<span>{split[2]}</span>
-							</section>
+							</div>
 						</ButtonWrapper>
 					);
 				})}
-			</section>
-			<section className="relative calender">
-				<DatePicker
-					className="cursor-pointer"
+			</div>
+
+			<div className="relative cursor-pointer">
+				<input
+					ref={dateInputRef}
 					onChange={handleCalender}
-					selected={new Date(selectedDate)}
-					maxDate={new Date()}
-					customInput={<CalenderIcon />}
+					type="date"
+					className="absolute inset-0 w-full h-full opacity-0 text-42 cursor-pointer"
 				/>
-			</section>
-		</section>
+				<div className="cursor-pointer" onClick={openDatePicker}>
+					<CalenderIcon />
+				</div>
+			</div>
+		</div>
 	);
 }
 

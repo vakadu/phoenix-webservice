@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetMedicalRecords from '../use-get-medical-records/use-get-medical-records';
 
 const uploadMedicalRecord = async (payload: FormData, petId: string) => {
 	try {
@@ -23,24 +22,11 @@ const uploadMedicalRecord = async (payload: FormData, petId: string) => {
 	}
 };
 
-export function useUploadMedicalRecord({
-	petId,
-	activeRecord,
-	handleSidebar,
-	selectedDate,
-}: {
-	petId: string;
-	activeRecord: string;
-	handleSidebar: (a: boolean) => void;
-	selectedDate?: string;
-}) {
-	const { refetch } = useGetMedicalRecords({ type: activeRecord, date: selectedDate, petId });
+export function useUploadMedicalRecord({ petId }: { petId: string }) {
 	return useMutation({
 		mutationFn: (payload: FormData) => uploadMedicalRecord(payload, petId),
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				refetch();
-				handleSidebar(false);
 				toast.success('Medical record updated!');
 			} else {
 				toast.error('Unable to upload');

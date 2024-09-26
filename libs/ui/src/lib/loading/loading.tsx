@@ -1,6 +1,6 @@
 import ImagePlaceholder from '../image-placeholder/image-placeholder';
 
-const Loading = () => {
+export function Loading() {
 	return (
 		<section className="relative w-[42px] h-[42px] flex justify-center items-center bg-white rounded-full shadow-base mx-auto">
 			<ImagePlaceholder
@@ -11,6 +11,6 @@ const Loading = () => {
 			<section className="absolute inset-0 rounded-full border-2 border-t-primary-1 border-transparent animate-spin"></section>
 		</section>
 	);
-};
+}
 
 export default Loading;

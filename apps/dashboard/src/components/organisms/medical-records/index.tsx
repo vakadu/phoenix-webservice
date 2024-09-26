@@ -6,9 +6,10 @@ import { RecordSidebarProvider } from '../../../context/record-sidebar-context';
 import Records from '../../molecules/medical-records/records';
 import Days from '../../molecules/medical-records/days';
 import Filters from '../../molecules/medical-records/filters';
+import { Loading } from '@webservices/ui';
 
-const RecordsSidebar = dynamic(() => import('../../molecules/medical-records/sidebar'), {
-	loading: () => <p>Loading...</p>,
+const RecordsSidebar = dynamic(() => import('../../molecules/records/sidebar'), {
+	loading: () => <Loading />,
 });
 
 const MedicalRecords = () => {
@@ -20,9 +21,7 @@ const MedicalRecords = () => {
 				<Filters />
 			</div>
 			<Records />
-			{/* 
 			<RecordsSidebar />
-			 */}
 		</RecordSidebarProvider>
 	);
 };

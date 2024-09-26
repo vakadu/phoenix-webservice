@@ -24,56 +24,37 @@ const PetsList = dynamic(() => import('./pets-list'), {
 const backItems = ['pet-parents', 'pets', 'upload'];
 
 const ActiveContent = () => {
-	const {
-		activeType,
-		activeParentId,
-		activePetId,
-		activeClinicId,
-		handleSidebar,
-		activeRecord,
-		selectedDate,
-	} = useRecordSidebar();
+	const { activeType } = useRecordSidebar();
 
-	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
 	switch (activeType) {
 		case 'pet-parents':
 			return <SearchBar />;
 		case 'pets':
-			return <PetsList parentId={activeParentId as string} />;
+			return <PetsList />;
 		case 'upload':
-			return (
-				<UploadRecord
-					btnTxt={btnTxt}
-					parentId={activeParentId as string}
-					petId={activePetId as string}
-					activeClinicId={activeClinicId as string}
-					activeRecord={activeRecord as string}
-					handleSidebar={handleSidebar}
-					selectedDate={selectedDate}
-				/>
-			);
-		case 'vaccination':
-			return (
-				<VaccinationForm
-					parentId={activeParentId as string}
-					petId={activePetId as string}
-					activeClinicId={activeClinicId as string}
-					handleSidebar={handleSidebar}
-					selectedDate={selectedDate}
-					activeRecord={activeRecord}
-				/>
-			);
-		case 'followup':
-			return (
-				<FollowupForm
-					parentId={activeParentId as string}
-					petId={activePetId as string}
-					activeClinicId={activeClinicId as string}
-					handleSidebar={handleSidebar}
-					selectedDate={selectedDate}
-					activeRecord={activeRecord}
-				/>
-			);
+			return <UploadRecord />;
+		// case 'vaccination':
+		// 	return (
+		// 		<VaccinationForm
+		// 			parentId={activeParentId as string}
+		// 			petId={activePetId as string}
+		// 			activeClinicId={activeClinicId as string}
+		// 			handleSidebar={handleSidebar}
+		// 			selectedDate={selectedDate}
+		// 			activeRecord={activeRecord}
+		// 		/>
+		// 	);
+		// case 'followup':
+		// 	return (
+		// 		<FollowupForm
+		// 			parentId={activeParentId as string}
+		// 			petId={activePetId as string}
+		// 			activeClinicId={activeClinicId as string}
+		// 			handleSidebar={handleSidebar}
+		// 			selectedDate={selectedDate}
+		// 			activeRecord={activeRecord}
+		// 		/>
+		// 	);
 		default:
 			return <SearchBar />;
 	}
