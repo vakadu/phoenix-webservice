@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetVaccinationRecords from '../use-get-vaccination-records/get-vaccination-records';
 
 interface IPayload {
 	petId: string;
@@ -24,28 +23,11 @@ const createVaccination = async (payload: IPayload) => {
 	}
 };
 
-export function useCreateVaccinationRecords({
-	handleSidebar,
-	type,
-	date,
-	petId,
-}: {
-	handleSidebar: (s: boolean) => void;
-	type: string;
-	date: string;
-	petId?: string;
-}) {
-	const { refetch } = useGetVaccinationRecords({
-		type,
-		date,
-		petId,
-	});
+export function useCreateVaccinationRecords() {
 	return useMutation({
 		mutationFn: createVaccination,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				refetch();
-				handleSidebar(false);
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

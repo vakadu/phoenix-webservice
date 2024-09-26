@@ -33,17 +33,8 @@ const ActiveContent = () => {
 			return <PetsList />;
 		case 'upload':
 			return <UploadRecord />;
-		// case 'vaccination':
-		// 	return (
-		// 		<VaccinationForm
-		// 			parentId={activeParentId as string}
-		// 			petId={activePetId as string}
-		// 			activeClinicId={activeClinicId as string}
-		// 			handleSidebar={handleSidebar}
-		// 			selectedDate={selectedDate}
-		// 			activeRecord={activeRecord}
-		// 		/>
-		// 	);
+		case 'vaccination':
+			return <VaccinationForm />;
 		// case 'followup':
 		// 	return (
 		// 		<FollowupForm

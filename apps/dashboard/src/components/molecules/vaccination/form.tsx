@@ -6,8 +6,9 @@ import DatePicker from 'react-datepicker';
 import { dogAndCatVaccines } from '@webservices/constants';
 import { CloseIcon, DownIcon } from '@webservices/icons';
 import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateVaccinationRecords } from '@webservices/api';
+import { useCreateVaccinationRecords, useGetVaccinationRecords } from '@webservices/api';
 import { convertDates } from '../../../helpers';
+import { useRecordSidebar } from '../../../context/record-sidebar-context';
 
 const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
 	return (
@@ -20,29 +21,19 @@ const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
 	);
 };
 
-const VaccinationForm = ({
-	parentId,
-	petId,
-	activeClinicId,
-	handleSidebar,
-	selectedDate,
-	activeRecord,
-}: {
-	parentId: string;
-	petId: string;
-	activeClinicId: string;
-	handleSidebar: (s: boolean) => void;
-	selectedDate: string;
-	activeRecord: string;
-}) => {
+const VaccinationForm = () => {
 	const [selectedVaccine, setVaccine] = useState('');
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
-	const { mutate: createVaccination } = useCreateVaccinationRecords({
+	const {
+		activePetId,
+		activeClinicId,
 		handleSidebar,
-		type: activeRecord,
-		date: selectedDate,
-		petId,
-	});
+		activeParentId,
+		activeRecord,
+		selectedDate,
+	} = useRecordSidebar();
+	const { mutateAsync: createVaccination } = useCreateVaccinationRecords();
+	const { refetch } = useGetVaccinationRecords({ type: activeRecord, date: selectedDate });
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
@@ -56,15 +47,21 @@ const VaccinationForm = ({
 		setSelectedDates(filteredDates);
 	};
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		const dates = convertDates(selectedDates);
 		const data = {
-			petId,
-			parentId,
+			petId: activePetId,
+			parentId: activeParentId,
 			vaccineName: selectedVaccine,
 			vaccinationDates: dates as string[],
 		};
-		createVaccination(data);
+		const response = (await createVaccination(
+			data
+		)) as ICommonTypes.IApiResponse<IClinicTypes.IVaccinationRecord>;
+		if (response.status === 'SUCCESS') {
+			refetch();
+			handleSidebar(false);
+		}
 	};
 
 	return (
