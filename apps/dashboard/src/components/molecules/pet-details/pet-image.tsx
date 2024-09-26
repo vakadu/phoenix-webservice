@@ -1,17 +1,11 @@
 'use client';
 
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import {
-	useGetPetById,
-	useGetPetProfileImage,
-	useUpdatePetImage,
-	useUploadUserProfile,
-} from '@webservices/api';
+import { useGetPetById, useGetPetProfileImage, useUpdatePetImage } from '@webservices/api';
 import { ImagePlaceholder, TextInput } from '@webservices/ui';
-import { CameraIcon, UserIcon } from '@webservices/icons';
+import { CameraIcon } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
 

@@ -23,8 +23,7 @@ const Filters = () => {
 		handleActiveParent,
 		handleActivePet,
 	} = useRecordSidebar();
-	const { params } = useRouterQuery();
-	const petId = params.get('petId') || undefined;
+	const { params, query } = useRouterQuery();
 	const parentId = params.get('parentId') || undefined;
 	const filters =
 		recordType === 'medical'
@@ -44,9 +43,9 @@ const Filters = () => {
 
 	const onSidebarChange = () => {
 		handleSidebar(!showSidebar);
-		if (petId && parentId) {
+		if (query?.id && parentId) {
 			handleActiveParent(parentId);
-			handleActivePet(petId);
+			handleActivePet(query?.id as string);
 			if (recordType === 'vaccination') {
 				handleActiveType('vaccination');
 			} else if (recordType === 'followup') {
@@ -73,26 +72,28 @@ const Filters = () => {
 						);
 					})}
 				</div>
-				<Button
-					onClick={onSidebarChange}
-					variant="ghost"
-					className="min-w-[230px] rounded-10 gap-16"
-				>
-					{recordType === 'medical' && (
-						<>
-							<UploadIcon height={32} width={24} />
-							<span className="font-black tracking-[-0.41px]">
-								Upload {firstCharCapital(activeRecord as string)}
-							</span>
-						</>
-					)}
-					{recordType === 'vaccination' && (
-						<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
-					)}
-					{recordType === 'followup' && (
-						<span className="font-black tracking-[-0.41px]">Add Followup</span>
-					)}
-				</Button>
+				{!query?.id && (
+					<Button
+						onClick={onSidebarChange}
+						variant="ghost"
+						className="min-w-[230px] rounded-10 gap-16"
+					>
+						{recordType === 'medical' && (
+							<>
+								<UploadIcon height={32} width={24} />
+								<span className="font-black tracking-[-0.41px]">
+									Upload {firstCharCapital(activeRecord as string)}
+								</span>
+							</>
+						)}
+						{recordType === 'vaccination' && (
+							<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
+						)}
+						{recordType === 'followup' && (
+							<span className="font-black tracking-[-0.41px]">Add Followup</span>
+						)}
+					</Button>
+				)}
 			</div>
 		</div>
 	);
