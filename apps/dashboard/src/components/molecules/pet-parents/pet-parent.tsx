@@ -1,19 +1,15 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import {
-	useGetParentById,
-	useGetPets,
-	useGetUserProfileUrl,
-	useUpdateClinicMemberProfile,
-} from '@webservices/api';
+import { useGetParentById, useGetPets, useGetUserProfileUrl } from '@webservices/api';
 import { createFormDataForImage } from '@webservices/helpers';
 import { CameraIcon, EditIcon, PlusIcon, UserIcon } from '@webservices/icons';
-import { ModalTypes } from '@webservices/primitives';
+import { ApiEndpoints, ModalTypes } from '@webservices/primitives';
 import { openModal } from '@webservices/slices';
 import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
 import Pet from '../../atoms/pet';
 import { useRouterQuery } from '@webservices/hooks';
+import { HttpService } from '@webservices/services';
 
 export default function PetParentDetails({
 	memberId,
@@ -24,9 +20,8 @@ export default function PetParentDetails({
 	parentId: string;
 	refetch: () => void;
 }) {
-	const { data } = useGetUserProfileUrl(parentId as string);
-	const { mutate: uploadClinicMemberProfile } = useUpdateClinicMemberProfile(memberId as string);
-	const { data: parentData } = useGetParentById(parentId);
+	const { data, refetch: refetchUrl } = useGetUserProfileUrl(parentId as string);
+	const { data: parentData, refetch: refecthUser } = useGetParentById(parentId);
 	const { profileUrl } = data?.data || {};
 	const { parent } = parentData?.data?.parents?.[0] || {};
 	const dispatch = useDispatch();
@@ -34,11 +29,28 @@ export default function PetParentDetails({
 	const { pets } = petsData?.data || {};
 	const { router } = useRouterQuery();
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (file) {
 			const formData = createFormDataForImage(file, 'file');
-			uploadClinicMemberProfile(formData);
+			try {
+				const { data } = await HttpService.patch(
+					`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.UploadClinicMemberProfile}/${parentId}`,
+					formData,
+					{
+						headers: {
+							'Content-Type': 'multipart/form-data',
+							'cache-control': 'no-cache',
+						},
+					}
+				);
+				if (data.status === 'SUCCESS') {
+					refetchUrl();
+					refecthUser();
+				}
+			} catch (err) {
+				throw new Error('Network Error');
+			}
 		}
 	};
 

@@ -23,10 +23,16 @@ const uploadClinicMemberProfile = async (payload: FormData, clinicMemberUserId: 
 	}
 };
 
-export function useUpdateClinicMemberProfile(clinicMemberUserId: string) {
-	const { refetch } = useGetUserProfileUrl(clinicMemberUserId as string);
+export function useUpdateClinicMemberProfile({
+	memberId,
+	parentId,
+}: {
+	memberId: string;
+	parentId: string;
+}) {
+	const { refetch } = useGetUserProfileUrl(parentId as string);
 	return useMutation({
-		mutationFn: (payload: FormData) => uploadClinicMemberProfile(payload, clinicMemberUserId),
+		mutationFn: (payload: FormData) => uploadClinicMemberProfile(payload, memberId),
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				refetch();
