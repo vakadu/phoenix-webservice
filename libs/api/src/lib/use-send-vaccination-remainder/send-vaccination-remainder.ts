@@ -27,11 +27,7 @@ const vaccinationRemainder = async (payload: IPayload) => {
 	}
 };
 
-export function useSendVaccinationRemainder({ type, date }: { type: string; date: string }) {
-	const { refetch } = useGetVaccinationRecords({
-		type,
-		date,
-	});
+export function useSendVaccinationRemainder({ refetch }: { refetch: () => void }) {
 	return useMutation({
 		mutationFn: vaccinationRemainder,
 		onSuccess: (data) => {

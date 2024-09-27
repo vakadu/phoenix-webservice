@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
-import Records from '../../molecules/medical-records/records';
+import Vaccination from '../../molecules/vaccination/records';
 import Filters from '../../molecules/medical-records/filters';
 import { Loading } from '@webservices/ui';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
@@ -13,34 +13,33 @@ const Sidebar = dynamic(() => import('./sidebar'), {
 	loading: () => <Loading />,
 });
 
-const MedicalRecords = () => {
+const VaccinationRecords = () => {
 	const { query, params } = useRouterQuery();
 	const parentId = params.get('parentId') || undefined;
 
-	const { handleActiveType, handleActiveParent, handleActivePet, handleRecordType } =
-		useRecordSidebar();
-
-	useEffect(() => {
-		handleActiveType('upload');
-		handleActiveParent(parentId as string);
-		handleActivePet(query.id as string);
-		handleRecordType('medical');
-	}, [
+	const {
+		handleActiveType,
 		handleActiveParent,
 		handleActivePet,
-		handleActiveType,
 		handleRecordType,
-		parentId,
-		query.id,
-	]);
+		handleFilter,
+	} = useRecordSidebar();
+
+	useEffect(() => {
+		handleActiveType('vaccination');
+		handleActiveParent(parentId as string);
+		handleActivePet(query.id as string);
+		handleRecordType('vaccination');
+		handleFilter('PENDING');
+	}, [query.id]);
 
 	return (
 		<div>
 			<Filters />
-			<Records />
+			<Vaccination />
 			<Sidebar />
 		</div>
 	);
 };
 
-export default MedicalRecords;
+export default VaccinationRecords;

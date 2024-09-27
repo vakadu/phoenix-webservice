@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetVaccinationRecords from '../use-get-vaccination-records/get-vaccination-records';
 
 interface IPayload {
 	vaccinatedOnDate?: string;
@@ -24,8 +23,7 @@ const updateVaccinationRecord = async (payload: IPayload) => {
 	}
 };
 
-export function useUpdateVaccinationRecord({ type, date }: { type: string; date: string }) {
-	const { refetch } = useGetVaccinationRecords({ type, date });
+export function useUpdateVaccinationRecord({ refetch }: { refetch: () => void }) {
 	return useMutation({
 		mutationFn: (payload: IPayload) => updateVaccinationRecord(payload),
 		onSuccess: (data) => {

@@ -13,10 +13,12 @@ const VaccinationRecord = ({
 	record,
 	activeRecord,
 	selectedDate,
+	refetch,
 }: {
 	record: IClinicTypes.IVaccinationRecord;
 	activeRecord: string;
 	selectedDate: string;
+	refetch: () => void;
 }) => {
 	const tempVaccine = record?.vaccinationDate ? parseISO(record?.vaccinationDate as string) : '';
 	const vaccineDate = tempVaccine && format(tempVaccine, 'do MMMM yyyy');
@@ -26,12 +28,10 @@ const VaccinationRecord = ({
 	const upcomingDate = tempUpcoming !== '' && format(tempUpcoming, 'do MMMM yyyy');
 	const notificationDisbaled = record?.notificationCount >= 3;
 	const { mutate: vaccinationRemainder, isPending } = useSendVaccinationRemainder({
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 	});
 	const { mutate: updateVaccination } = useUpdateVaccinationRecord({
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 	});
 	const dispatch = useDispatch();
 	const [editDate, setEditDate] = useState(new Date());

@@ -8,7 +8,6 @@ const Records = () => {
 	const { query } = useRouterQuery();
 	const petId = (query?.id as string) || undefined;
 	const { activeRecord, selectedDate } = useRecordSidebar();
-
 	const { data, isPending, refetch } = useGetMedicalRecords({
 		type: activeRecord,
 		date: !petId ? selectedDate : undefined,

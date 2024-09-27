@@ -219,6 +219,7 @@ declare namespace ICommonTypes {
 		selectedDate: string;
 		handleFilter: (id: string) => void;
 		handleDate: (date: string) => void;
+		handleRecordType: (record: string) => void;
 	}
 	interface IPetItem {
 		petId: string;

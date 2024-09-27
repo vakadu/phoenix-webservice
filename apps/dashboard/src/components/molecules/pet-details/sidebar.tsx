@@ -9,13 +9,17 @@ const UploadRecord = dynamic(() => import('./upload-record'), {
 	loading: () => <CategoryLoader rows={1} columns={1} coverHeight={220} />,
 });
 
+const VaccinationForm = dynamic(() => import('./vaccination-form'), {
+	loading: () => <CategoryLoader rows={1} columns={1} coverHeight={220} />,
+});
+
 const ActiveContent = () => {
 	const { activeType } = useRecordSidebar();
 	switch (activeType) {
 		case 'upload':
 			return <UploadRecord />;
-		// case 'vaccination':
-		// 	return <VaccinationForm />;
+		case 'vaccination':
+			return <VaccinationForm />;
 		// case 'followup':
 		// 	return <FollowupForm />;
 		default:

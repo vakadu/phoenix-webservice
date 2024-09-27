@@ -9,14 +9,8 @@ import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
 
 const UploadRecord = () => {
-	const {
-		activePetId,
-		activeClinicId,
-		handleSidebar,
-		activeParentId,
-		activeRecord,
-		selectedDate,
-	} = useRecordSidebar();
+	const { activePetId, activeClinicId, handleSidebar, activeParentId, activeRecord } =
+		useRecordSidebar();
 
 	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
 	const { query } = useRouterQuery();

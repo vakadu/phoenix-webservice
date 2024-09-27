@@ -33,7 +33,7 @@ export const RecordSidebarProvider = ({
 	const [activeClinicId, setActiveClinicId] = useState<string | null>(null);
 	const [activeRecord, setRecord] = useState(filters);
 	const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
-	const [recordType, _] = useState(record);
+	const [recordType, setRecordType] = useState(record);
 
 	const handleSidebar = (side: boolean) => {
 		setSidebar(side);
@@ -63,6 +63,10 @@ export const RecordSidebarProvider = ({
 		setSelectedDate(date);
 	};
 
+	const handleRecordType = (record: string) => {
+		setRecordType(record);
+	};
+
 	const resetSidebar = () => {
 		setSidebar(false);
 		setActiveType('pet-parents');
@@ -86,6 +90,7 @@ export const RecordSidebarProvider = ({
 		selectedDate,
 		handleFilter,
 		handleDate,
+		handleRecordType,
 	} as ICommonTypes.IRecordSidebarContextType;
 
 	return (

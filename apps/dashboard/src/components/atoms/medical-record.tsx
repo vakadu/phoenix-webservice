@@ -69,7 +69,7 @@ const MedicalRecord = ({
 				<div className="flex flex-col gap-6">
 					<p className="text-18 font-semibold">{record.pet.name}</p>
 					<p className="text-14">{record?.parent?.name}</p>
-					<p className="text-14">
+					<p className="text-12">
 						Uploaded on: {format(new Date(record?.createdAtIST), 'do MMMM yyyy')}
 					</p>
 				</div>

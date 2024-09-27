@@ -8,6 +8,7 @@ import Loading from '../../atoms/loading';
 import { useState } from 'react';
 import { RecordSidebarProvider } from '../../../context/record-sidebar-context';
 import UploadBtn from './upload-btn';
+import VaccinationRecords from './vaccination-records';
 
 const MedicalRecords = dynamic(() => import('./medical-records'), {
 	loading: () => <Loading />,
@@ -94,6 +95,9 @@ export default function PetTabs() {
 					<TabPanels className="mt-6">
 						<TabPanel>
 							<MedicalRecords />
+						</TabPanel>
+						<TabPanel>
+							<VaccinationRecords />
 						</TabPanel>
 					</TabPanels>
 				</TabGroup>

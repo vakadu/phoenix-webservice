@@ -6,9 +6,10 @@ import { useRouterQuery } from '@webservices/hooks';
 
 const Vaccination = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
-	const { params } = useRouterQuery();
-	const petId = params.get('petId') || undefined;
-	const { data, isPending } = useGetVaccinationRecords({
+	const { query } = useRouterQuery();
+	const petId = (query?.id as string) || undefined;
+
+	const { data, isPending, refetch } = useGetVaccinationRecords({
 		type: activeRecord,
 		date: !petId ? selectedDate : undefined,
 		petId,
@@ -38,6 +39,7 @@ const Vaccination = () => {
 					record={vaccinationRecord}
 					activeRecord={activeRecord}
 					selectedDate={selectedDate}
+					refetch={refetch}
 				/>
 			))}
 		</section>
