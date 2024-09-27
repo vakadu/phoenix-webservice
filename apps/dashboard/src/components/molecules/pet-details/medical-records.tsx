@@ -17,22 +17,21 @@ const MedicalRecords = () => {
 	const { query, params } = useRouterQuery();
 	const parentId = params.get('parentId') || undefined;
 
-	const { handleActiveType, handleActiveParent, handleActivePet, handleRecordType } =
-		useRecordSidebar();
+	const {
+		handleActiveType,
+		handleActiveParent,
+		handleActivePet,
+		handleRecordType,
+		handleFilter,
+	} = useRecordSidebar();
 
 	useEffect(() => {
 		handleActiveType('upload');
 		handleActiveParent(parentId as string);
 		handleActivePet(query.id as string);
 		handleRecordType('medical');
-	}, [
-		handleActiveParent,
-		handleActivePet,
-		handleActiveType,
-		handleRecordType,
-		parentId,
-		query.id,
-	]);
+		handleFilter('PRESCRIPTION');
+	}, [query.id]);
 
 	return (
 		<div>
