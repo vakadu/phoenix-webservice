@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetFollowRecords from '../use-get-follow-records/get-follow-records';
 
 interface IPayload {
 	followUpDate?: string;
@@ -24,8 +23,7 @@ const updateFollowupRecord = async (payload: IPayload) => {
 	}
 };
 
-export function useUpdateFollowUpRecord({ type, date }: { type: string; date: string }) {
-	const { refetch } = useGetFollowRecords({ type, date });
+export function useUpdateFollowUpRecord({ refetch }: { refetch: () => void }) {
 	return useMutation({
 		mutationFn: (payload: IPayload) => updateFollowupRecord(payload),
 		onSuccess: (data) => {

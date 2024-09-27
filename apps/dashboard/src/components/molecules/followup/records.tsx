@@ -6,9 +6,9 @@ import { useRouterQuery } from '@webservices/hooks';
 
 const Followups = () => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
-	const { params } = useRouterQuery();
-	const petId = params.get('petId') || undefined;
-	const { data, isPending } = useGetFollowRecords({
+	const { query } = useRouterQuery();
+	const petId = (query?.id as string) || undefined;
+	const { data, isPending, refetch } = useGetFollowRecords({
 		type: activeRecord,
 		date: !petId ? selectedDate : undefined,
 		petId,
@@ -38,6 +38,7 @@ const Followups = () => {
 					record={followUpRecord}
 					activeRecord={activeRecord}
 					selectedDate={selectedDate}
+					refetch={refetch}
 				/>
 			))}
 		</section>

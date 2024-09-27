@@ -13,21 +13,21 @@ const FollowupRecord = ({
 	record,
 	activeRecord,
 	selectedDate,
+	refetch,
 }: {
 	record: IClinicTypes.IFollowUpRecord;
 	activeRecord: string;
 	selectedDate: string;
+	refetch: () => void;
 }) => {
 	const tempFollowup = record?.followUpDate ? parseISO(record?.followUpDate as string) : '';
 	const followupDate = tempFollowup && format(tempFollowup, 'do MMMM yyyy');
 	const notificationDisbaled = record?.notificationCount >= 3;
 	const { mutate: followupRemainder, isPending } = useSendFollowUpRecord({
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 	});
 	const { mutate: updateFollowup } = useUpdateFollowUpRecord({
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 	});
 	const dispatch = useDispatch();
 	const [editDate, setEditDate] = useState(new Date());

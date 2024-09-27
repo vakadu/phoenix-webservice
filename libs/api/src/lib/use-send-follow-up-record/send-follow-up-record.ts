@@ -27,16 +27,11 @@ const follwupRemainder = async (payload: IPayload) => {
 	}
 };
 
-export function useSendFollowUpRecord({ type, date }: { type: string; date: string }) {
-	const { refetch } = useGetFollowRecords({
-		type,
-		date,
-	});
+export function useSendFollowUpRecord({ refetch }: { refetch: () => void }) {
 	return useMutation({
 		mutationFn: follwupRemainder,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
-				refetch();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

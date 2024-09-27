@@ -8,9 +8,16 @@ import Loading from '../../atoms/loading';
 import { useState } from 'react';
 import { RecordSidebarProvider } from '../../../context/record-sidebar-context';
 import UploadBtn from './upload-btn';
-import VaccinationRecords from './vaccination-records';
 
 const MedicalRecords = dynamic(() => import('./medical-records'), {
+	loading: () => <Loading />,
+});
+
+const VaccinationRecords = dynamic(() => import('./vaccination-records'), {
+	loading: () => <Loading />,
+});
+
+const Followup = dynamic(() => import('./follow-up'), {
 	loading: () => <Loading />,
 });
 
@@ -98,6 +105,9 @@ export default function PetTabs() {
 						</TabPanel>
 						<TabPanel>
 							<VaccinationRecords />
+						</TabPanel>
+						<TabPanel>
+							<Followup />
 						</TabPanel>
 					</TabPanels>
 				</TabGroup>
