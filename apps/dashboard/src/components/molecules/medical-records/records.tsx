@@ -5,10 +5,11 @@ import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
 
 const Records = () => {
-	const { params } = useRouterQuery();
-	const petId = params.get('petId') || undefined;
+	const { query } = useRouterQuery();
+	const petId = (query?.id as string) || undefined;
 	const { activeRecord, selectedDate } = useRecordSidebar();
-	const { data, isPending } = useGetMedicalRecords({
+
+	const { data, isPending, refetch } = useGetMedicalRecords({
 		type: activeRecord,
 		date: !petId ? selectedDate : undefined,
 		petId,
@@ -33,7 +34,7 @@ const Records = () => {
 	return (
 		<section className="mt-12 pb-32">
 			{data?.data?.medicalRecords?.map((medicalRecord) => (
-				<MedicalRecord key={medicalRecord._id} record={medicalRecord} />
+				<MedicalRecord key={medicalRecord._id} record={medicalRecord} refetch={refetch} />
 			))}
 		</section>
 	);

@@ -6,6 +6,7 @@ import {
 	firstCharCapital,
 } from '@webservices/helpers';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
+import { useRouterQuery } from '@webservices/hooks';
 
 const UploadRecord = () => {
 	const {
@@ -16,10 +17,13 @@ const UploadRecord = () => {
 		activeRecord,
 		selectedDate,
 	} = useRecordSidebar();
-	console.log(activePetId);
 
 	const btnTxt = `Upload ${firstCharCapital(activeRecord as string)}`;
-	const { refetch } = useGetMedicalRecords({ type: activeRecord, date: selectedDate });
+	const { query } = useRouterQuery();
+	const { refetch } = useGetMedicalRecords({
+		type: activeRecord,
+		petId: query?.id as string,
+	});
 	const { mutateAsync: uploadMedicalRecord, isPending } = useUploadMedicalRecord({
 		petId: activePetId,
 	});

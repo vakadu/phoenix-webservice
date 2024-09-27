@@ -91,7 +91,7 @@ export default function PetTabs() {
 						</div>
 						<UploadBtn record={activeRecord} />
 					</TabList>
-					<TabPanels className="mt-32">
+					<TabPanels className="mt-6">
 						<TabPanel>
 							<MedicalRecords />
 						</TabPanel>

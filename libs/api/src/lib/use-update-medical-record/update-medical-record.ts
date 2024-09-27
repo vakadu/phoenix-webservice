@@ -3,7 +3,6 @@ import toast from 'react-hot-toast';
 
 import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
-import useGetMedicalRecords from '../use-get-medical-records/use-get-medical-records';
 
 interface IPayload {
 	comment?: string;
@@ -25,16 +24,13 @@ const updateMedicalRecord = async (payload: IPayload, id: string) => {
 
 export function useUpdateMedicalRecord({
 	id,
-	type,
-	date,
+	refetch,
 	handleClose,
 }: {
 	id: string;
-	type: string;
-	date: string;
+	refetch: () => void;
 	handleClose?: () => void;
 }) {
-	const { refetch } = useGetMedicalRecords({ type, date });
 	return useMutation({
 		mutationFn: (payload: IPayload) => updateMedicalRecord(payload, id),
 		onSuccess: (data) => {

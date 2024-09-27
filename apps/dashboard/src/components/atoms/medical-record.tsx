@@ -18,13 +18,18 @@ const CommentModal = dynamic(() => import('../molecules/medical-records/comment'
 	loading: () => <Loading />,
 });
 
-const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {
+const MedicalRecord = ({
+	record,
+	refetch,
+}: {
+	record: IClinicTypes.IMedicalRecord;
+	refetch: () => void;
+}) => {
 	const [show, setModal] = useState(false);
-	const { activeRecord, selectedDate } = useRecordSidebar();
+	const { activeRecord } = useRecordSidebar();
 	const { mutate: updateMedicalRecord } = useUpdateMedicalRecord({
 		id: record?._id,
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 		handleClose: closeModal,
 	});
 	const { url, imgType } = useDocumentDownlaod({ url: record.url });
@@ -57,6 +62,7 @@ const MedicalRecord = ({ record }: { record: IClinicTypes.IMedicalRecord }) => {
 				isOpen={show}
 				handleClose={() => setModal(false)}
 				id={record?._id}
+				refetch={refetch}
 			/>
 			<section className="flex gap-12 col-span-1">
 				<PreviewImage imgType={imgType} url={url as string} />

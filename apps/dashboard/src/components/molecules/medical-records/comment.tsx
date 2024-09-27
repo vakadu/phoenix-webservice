@@ -18,11 +18,13 @@ const CommentModal = ({
 	handleClose,
 	id,
 	comment,
+	refetch,
 }: {
 	isOpen: boolean;
 	handleClose: () => void;
 	id: string;
 	comment: string;
+	refetch: () => void;
 }) => {
 	const { activeRecord, selectedDate } = useRecordSidebar();
 	const {
@@ -35,8 +37,7 @@ const CommentModal = ({
 	});
 	const { mutate: updateMedicalRecord, isPending } = useUpdateMedicalRecord({
 		id,
-		type: activeRecord,
-		date: selectedDate,
+		refetch,
 		handleClose,
 	});
 

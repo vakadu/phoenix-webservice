@@ -52,7 +52,7 @@ const PetImage = () => {
 	};
 
 	return (
-		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16 relative">
+		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16 sticky top-54">
 			<ButtonWrapper
 				onClick={handleEditPet}
 				className="!absolute bg-primary-1 top-12 right-12 flex px-12 py-8 items-center justify-center rounded-8 gap-8"
