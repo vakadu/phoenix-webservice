@@ -5,6 +5,7 @@ import { format, addDays, isToday, isTomorrow } from 'date-fns';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
 import { CalenderIcon } from '@webservices/icons';
+import DatePicker from 'react-datepicker';
 
 export function DaysItem({
 	defaultDays = 6,
@@ -56,6 +57,17 @@ export function DaysItem({
 	return (
 		<div className="flex items-center justify-between">
 			<div className="gap-16 flex justify-center items-center">
+				<div className="calender flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8">
+					<DatePicker
+						className="cursor-pointer w-auto"
+						onChange={handleCalender}
+						selected={new Date(selectedDate)}
+						maxDate={new Date()}
+						customInput={<CalenderIcon />}
+					/>
+					<p className="text-12">Choose from Calender</p>
+				</div>
+
 				{daysHeader.map((day, i) => {
 					const split = day.displayDate.split(' ');
 					const active = selectedDate === day.fullDate;
@@ -65,6 +77,7 @@ export function DaysItem({
 								active ? 'bg-brand text-white' : 'bg-white'
 							}`}
 							key={i.toString()}
+							data-id={day.fullDate}
 							onClick={() => handleDate(day.fullDate)}
 						>
 							<div className="flex flex-col">
@@ -76,18 +89,6 @@ export function DaysItem({
 						</ButtonWrapper>
 					);
 				})}
-			</div>
-
-			<div className="relative cursor-pointer">
-				<input
-					ref={dateInputRef}
-					onChange={handleCalender}
-					type="date"
-					className="absolute inset-0 w-full h-full opacity-0 text-42 cursor-pointer"
-				/>
-				<div className="cursor-pointer" onClick={openDatePicker}>
-					<CalenderIcon />
-				</div>
 			</div>
 		</div>
 	);

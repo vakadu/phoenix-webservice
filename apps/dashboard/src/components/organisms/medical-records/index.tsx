@@ -15,7 +15,6 @@ const RecordsSidebar = dynamic(() => import('../../molecules/records/sidebar'), 
 const MedicalRecords = () => {
 	return (
 		<RecordSidebarProvider record="medical">
-			<h1 className="text-24 font-semibold">Medical Records</h1>
 			<div className="px-16 mt-12 sticky top-[0px] z-[11] bg-white py-8 shadow-base rounded-8">
 				<Days />
 				<Filters />

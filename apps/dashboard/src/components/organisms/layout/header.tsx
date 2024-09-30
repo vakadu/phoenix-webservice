@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { MenuItem } from '@headlessui/react';
 
-import { openModal } from '@webservices/slices';
+import { openModal, PemilyRootState } from '@webservices/slices';
 import { ButtonWrapper, Dropdown, ImagePlaceholder } from '@webservices/ui';
-import { useGetUserProfileUrl } from '@webservices/api';
+import { useGetUser, useGetUserProfileUrl } from '@webservices/api';
 import { DownIcon, LogoutIcon, UserIcon, UserOutlineIcon } from '@webservices/icons';
 import { ModalTypes } from '@webservices/primitives';
 import { useRouterQuery } from '@webservices/hooks';
@@ -34,6 +34,10 @@ const ProfileLabel = (name: string, id: string) => {
 const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	const dispatch = useDispatch();
 	const { router } = useRouterQuery();
+	const authState = useSelector((state: PemilyRootState) => state.auth);
+	const { data } = useGetUser(authState.userId as string);
+	const { name } = data?.data?.user || {};
+	console.log(data);
 
 	const menu = useMemo(() => {
 		return [
@@ -63,9 +67,11 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	}, []);
 
 	return (
-		<header className="sticky top-0 z-[10]">
-			<section className={`h-[72px] px-16 flex ${sidebarClasses}`}>
-				<div className="flex-1"></div>
+		<header className="sticky top-0 z-[10] bg-grey-bg3">
+			<section className={`h-[72px] flex ${sidebarClasses}`}>
+				<div className="flex-1 items-center flex">
+					<p className="text-24 font-semibold">{name}</p>
+				</div>
 				<div className="flex-1 flex justify-end items-center">
 					<Dropdown
 						label={
