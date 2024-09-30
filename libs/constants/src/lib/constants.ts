@@ -472,6 +472,12 @@ export const vaccinationClinicFilters = [
 	{ id: 3, name: 'All', label: 'All', value: 'ALL', icon: PrescriptionIcon },
 ] as ICommonTypes.IMedicalRecords[];
 
+export const vaccinationPetFilters = [
+	...vaccinationClinicFilters.slice(0, 1),
+	{ id: 4, name: 'Upcoming', label: 'Upcoming', value: 'UPCOMING', icon: PrescriptionIcon },
+	...vaccinationClinicFilters.slice(1),
+] as ICommonTypes.IMedicalRecords[];
+
 export const follwupFilters = [
 	{
 		id: 0,

@@ -8,6 +8,7 @@ import {
 	follwupFilters,
 	medicalRecordsFilters,
 	vaccinationClinicFilters,
+	vaccinationPetFilters,
 } from '@webservices/constants';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
@@ -29,7 +30,9 @@ const Filters = () => {
 		recordType === 'medical'
 			? medicalRecordsFilters
 			: recordType === 'vaccination'
-			? vaccinationClinicFilters
+			? parentId
+				? vaccinationPetFilters
+				: vaccinationClinicFilters
 			: follwupFilters;
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {

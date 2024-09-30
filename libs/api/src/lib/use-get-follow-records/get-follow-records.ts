@@ -5,9 +5,12 @@ import { HttpService } from '@webservices/services';
 
 const getFollowupRecords = async ({
 	queryKey,
-}: QueryFunctionContext<[string, string, string | undefined, string | undefined]>) => {
+}: QueryFunctionContext<[string, string | undefined, string | undefined, string | undefined]>) => {
 	const [_key, type, petId, date] = queryKey;
-	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}?searchType=${type}`;
+	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}?`;
+	if (type) {
+		url += `&searchType=${type}`;
+	}
 	if (petId) {
 		url += `&petId=${petId}`;
 	}
@@ -25,7 +28,7 @@ export function useGetFollowRecords({
 	petId,
 	date,
 }: {
-	type: string;
+	type?: string;
 	petId?: string;
 	date?: string;
 }) {

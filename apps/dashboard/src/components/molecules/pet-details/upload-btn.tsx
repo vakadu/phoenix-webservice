@@ -12,7 +12,7 @@ export default function UploadBtn({ record }: { record: string }) {
 	return (
 		<ButtonWrapper
 			onClick={onSidebarChange}
-			className="flex shadow-base border bg-purple border-purple py-12 px-12 rounded-full"
+			className="flex shadow-base border bg-primary-1 py-12 px-12 rounded-full"
 		>
 			{record === 'medical' && (
 				<>

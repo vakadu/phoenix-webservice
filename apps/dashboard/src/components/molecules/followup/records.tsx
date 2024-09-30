@@ -9,7 +9,7 @@ const Followups = () => {
 	const { query } = useRouterQuery();
 	const petId = (query?.id as string) || undefined;
 	const { data, isPending, refetch } = useGetFollowRecords({
-		type: activeRecord,
+		type: petId ? activeRecord : undefined,
 		date: !petId ? selectedDate : undefined,
 		petId,
 	});
