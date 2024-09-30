@@ -57,7 +57,7 @@ export function DaysItem({
 						selected={new Date(selectedDate)}
 						maxDate={new Date()}
 						customInput={
-							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8">
+							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8 ">
 								<CalenderIcon />
 								<p className="text-12">Choose from Calender</p>
 							</div>
