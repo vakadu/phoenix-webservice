@@ -33,7 +33,9 @@ const Filters = () => {
 			? parentId
 				? vaccinationPetFilters
 				: vaccinationClinicFilters
-			: follwupFilters;
+			: parentId
+			? follwupFilters
+			: null;
 
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
@@ -65,7 +67,7 @@ const Filters = () => {
 		<div className="">
 			<div className="flex justify-between items-center mt-12">
 				<div onClick={handleClick} className="flex gap-12">
-					{filters.map((record) => {
+					{filters?.map((record) => {
 						const active = activeRecord === record.value;
 						return (
 							<FilterItem active={active} value={record.value} key={record.id}>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, addDays, isToday, isTomorrow } from 'date-fns';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
@@ -18,7 +18,6 @@ export function DaysItem({
 }) {
 	const daysArray = Array.from({ length: defaultDays }, (_, i) => i);
 	const [daysHeader, setDaysData] = useState<ICommonTypes.IDayItem[]>([]);
-	const dateInputRef = useRef<any>(null);
 
 	useEffect(() => {
 		setDaysHeaderData(selectedDate);
@@ -42,30 +41,28 @@ export function DaysItem({
 		setDaysData([...daysData]);
 	};
 
-	const handleCalender = (e: any) => {
-		const newDate = e.target.value;
-		setDaysHeaderData(newDate);
-		handleDate(newDate);
-	};
-
-	const openDatePicker = () => {
-		if (dateInputRef.current) {
-			dateInputRef.current.showPicker();
-		}
+	const handleCalender = (date: any) => {
+		const formatDate = format(date, 'yyyy-MM-dd');
+		setDaysHeaderData(date);
+		handleDate(formatDate);
 	};
 
 	return (
 		<div className="flex items-center justify-between">
 			<div className="gap-16 flex justify-center items-center">
-				<div className="calender flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8">
+				<div className="calender">
 					<DatePicker
 						className="cursor-pointer w-auto"
 						onChange={handleCalender}
 						selected={new Date(selectedDate)}
 						maxDate={new Date()}
-						customInput={<CalenderIcon />}
+						customInput={
+							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8">
+								<CalenderIcon />
+								<p className="text-12">Choose from Calender</p>
+							</div>
+						}
 					/>
-					<p className="text-12">Choose from Calender</p>
 				</div>
 
 				{daysHeader.map((day, i) => {
