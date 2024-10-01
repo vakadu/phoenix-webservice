@@ -1,6 +1,7 @@
 declare namespace IAuthTypes {
 	interface IsUserRegisteredInterface {
 		isUser: boolean;
+		role: string;
 	}
 	interface ILoginOtpApiResponse {
 		type: string;

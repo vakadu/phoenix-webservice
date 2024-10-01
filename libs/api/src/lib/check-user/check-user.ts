@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 
-import { ApiEndpoints } from '@webservices/primitives';
+import { ApiEndpoints, Roles } from '@webservices/primitives';
 import useGetOtp from '../get-otp/get-otp';
 import { setIsNewUser } from '@webservices/slices';
 
@@ -30,7 +30,12 @@ export function useCheckUser({ mobileNumber }: { mobileNumber: string }) {
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
 				if (data?.data?.isUser) {
-					sendOtp({ mobile: mobileNumber });
+					if (data?.data?.role === Roles.Clinic || data?.data?.role === Roles.Staff) {
+						sendOtp({ mobile: mobileNumber });
+					} else {
+						toast.error('User is not allowed');
+						dispatch(setIsNewUser({ isNewUser: true }));
+					}
 				} else {
 					toast.error('Your phone number is not registered');
 					dispatch(setIsNewUser({ isNewUser: true }));

@@ -17,6 +17,7 @@ declare namespace IUserTypes {
 		active: boolean;
 		address: IAddress;
 		addressId: string;
+		clinicId: string;
 		category: string;
 		createdAt: string;
 		dob: string;

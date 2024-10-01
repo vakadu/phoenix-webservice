@@ -9,6 +9,7 @@ import { DownIcon, LogoutIcon, UserIcon, UserOutlineIcon } from '@webservices/ic
 import { ModalTypes } from '@webservices/primitives';
 import { useRouterQuery } from '@webservices/hooks';
 import { logout } from '../../../helpers';
+import HeaderDetails from '../../molecules/layout/details';
 
 const ProfileLabel = (name: string, id: string) => {
 	const { data: profileData } = useGetUserProfileUrl(id as string);
@@ -36,8 +37,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	const { router } = useRouterQuery();
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
-	const { name } = data?.data?.user || {};
-	console.log(data);
+	const { name, clinicId } = data?.data?.user || {};
 
 	const menu = useMemo(() => {
 		return [
@@ -69,9 +69,7 @@ const Header = ({ sidebarClasses }: { sidebarClasses: string }) => {
 	return (
 		<header className="sticky top-0 z-[10] bg-grey-bg3">
 			<section className={`h-[72px] flex ${sidebarClasses}`}>
-				<div className="flex-1 items-center flex">
-					<p className="text-24 font-semibold">{name}</p>
-				</div>
+				<HeaderDetails name={name} role={authState.role as string} clinicId={clinicId} />
 				<div className="flex-1 flex justify-end items-center">
 					<Dropdown
 						label={

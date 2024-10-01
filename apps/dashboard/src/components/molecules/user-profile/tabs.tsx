@@ -34,20 +34,22 @@ export default function UserTabs() {
 		<div className="col-span-2 bg-white py-32 px-16 rounded-[16px]">
 			<TabGroup className="flex-1 overflow-hidden px-16">
 				<TabList className="flex gap-32">
-					<Tab className={tabClass}>
-						{({ selected }) => (
-							<>
-								<PrescriptionIcon
-									className={selected ? 'text-purple' : ''}
-									width={18}
-									height={18}
-								/>
-								<span className={`${selected ? 'text-purple' : ''} text-14`}>
-									Personal Details
-								</span>
-							</>
-						)}
-					</Tab>
+					{authState.role === Roles.Clinic && (
+						<Tab className={tabClass}>
+							{({ selected }) => (
+								<>
+									<PrescriptionIcon
+										className={selected ? 'text-purple' : ''}
+										width={18}
+										height={18}
+									/>
+									<span className={`${selected ? 'text-purple' : ''} text-14`}>
+										Personal Details
+									</span>
+								</>
+							)}
+						</Tab>
+					)}
 					{authState.role === Roles.Clinic && (
 						<Tab className={tabClass}>
 							{({ selected }) => (
@@ -96,15 +98,21 @@ export default function UserTabs() {
 					</Tab>
 				</TabList>
 				<TabPanels className="mt-32">
-					<TabPanel>
-						<PersonalDetailsForm />
-					</TabPanel>
-					<TabPanel>
-						<AddressForm />
-					</TabPanel>
-					<TabPanel>
-						<BusinessForm />
-					</TabPanel>
+					{authState.role === Roles.Clinic && (
+						<TabPanel>
+							<PersonalDetailsForm />
+						</TabPanel>
+					)}
+					{authState.role === Roles.Clinic && (
+						<TabPanel>
+							<AddressForm />
+						</TabPanel>
+					)}
+					{authState.role === Roles.Clinic && (
+						<TabPanel>
+							<BusinessForm />
+						</TabPanel>
+					)}
 					<TabPanel>
 						<Contact />
 					</TabPanel>

@@ -84,6 +84,7 @@ const LoginForm = () => {
 									onKeyDown={(e) => handleKeyDown(e, i)}
 									value={otpRefs.current[i]?.value as string}
 									onClick={(e) => handleClick(e, i)}
+									maxLength={1}
 								/>
 							);
 						})}
