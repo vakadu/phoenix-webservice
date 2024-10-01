@@ -3,6 +3,7 @@ export const enum ModalTypes {
 	SIDEBAR_MENU = 'sidebar-menu',
 	ADD_EDIT_PARENT = 'add_edit_parent',
 	ADD_EDIT_PET = 'add_edit_pet',
+	LOADING_MODAL = 'loading',
 }
 
 export enum PaymentScripts {

@@ -8,6 +8,7 @@ export type MODAL_VIEW =
 	| ModalTypes.SIDEBAR_MENU
 	| ModalTypes.ADD_EDIT_PARENT
 	| ModalTypes.ADD_EDIT_PET
+	| ModalTypes.LOADING_MODAL
 	| '';
 
 type ModalState = {

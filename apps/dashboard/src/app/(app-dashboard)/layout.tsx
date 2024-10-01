@@ -7,21 +7,15 @@ import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';
 import Header from '../../components/organisms/layout/header';
 import Sidebar from '../../components/organisms/layout/sidebar';
-import { Roles } from '@webservices/primitives';
-import { logout } from '../../helpers';
 import MobileOnly from '../../components/atoms/mobile-only';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { router } = useRouterQuery();
-	const roles = [Roles.Clinic, Roles.Staff];
 	const { isDesktop } = useIsMobile();
 
 	useEffect(() => {
 		if (!authState.loggedIn) {
-			router.push('/');
-		} else if (!roles.includes(authState.role as Roles)) {
-			logout();
 			router.push('/');
 		}
 	}, [authState.loggedIn, router]);

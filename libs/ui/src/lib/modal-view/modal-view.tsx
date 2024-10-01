@@ -22,6 +22,10 @@ const AddEditPetModal = dynamic(() => import('../add-edit-pet/add-edit-pet'), {
 	loading: () => <Loading />,
 });
 
+const LoadingModal = dynamic(() => import('../loading-modal/loading-modal'), {
+	loading: () => <Loading />,
+});
+
 /* eslint-disable-next-line */
 export interface ModalViewsProps {}
 
@@ -33,6 +37,8 @@ function renderModalContent(view: MODAL_VIEW | string) {
 			return <AddEditParentModal />;
 		case ModalTypes.ADD_EDIT_PET:
 			return <AddEditPetModal />;
+		case ModalTypes.LOADING_MODAL:
+			return <LoadingModal />;
 		default:
 			return null;
 	}

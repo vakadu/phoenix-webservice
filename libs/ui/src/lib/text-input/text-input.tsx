@@ -42,18 +42,20 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 		const hasErrorLabel = error ? 'text-red-1' : 'text-grey-text2';
 
 		return (
-			<section className="relative">
-				<label
-					className={`text-14 leading-14 mb-[10px] block cursor-pointer ${hasErrorLabel}`}
-				>
-					{label}
-				</label>
-				<section className="relative">
+			<div className="relative">
+				{label !== '' && (
+					<label
+						className={`text-14 leading-14 mb-[10px] block cursor-pointer ${hasErrorLabel}`}
+					>
+						{label}
+					</label>
+				)}
+				<div className="relative">
 					<input
 						{...rest}
 						ref={ref}
 						name={name}
-						className={`bg-white text-16 leading-16 h-[52px] px-12 transition duration-300 ease-in-out border focus:ring-1  focus:shadow-sm outline-none focus:border-none
+						className={`bg-white text-14 leading-16 h-[52px] px-12 transition duration-300 ease-in-out border focus:ring-1  focus:shadow-sm outline-none focus:border-none
    focus:outline-none focus:ring-opacity-90 rounded-8 w-full ${hasErrorInput} ${inputClasses}`}
 						type={type}
 						placeholder={placeholder}
@@ -63,9 +65,9 @@ export const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(
 						{...(maxLength ? { maxLength } : {})}
 						{...(minLength ? { minLength } : {})}
 					/>
-				</section>
+				</div>
 				{error && <p className={`text-12 ${hasErrorLabel}`}>{error.message}</p>}
-			</section>
+			</div>
 		);
 	}
 );
