@@ -55,7 +55,6 @@ export function DaysItem({
 						className="cursor-pointer w-auto"
 						onChange={handleCalender}
 						selected={new Date(selectedDate)}
-						maxDate={new Date()}
 						customInput={
 							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8 ">
 								<CalenderIcon />

@@ -32,6 +32,7 @@ export function useSendFollowUpRecord({ refetch }: { refetch: () => void }) {
 		mutationFn: follwupRemainder,
 		onSuccess: (data) => {
 			if (data?.status === 'SUCCESS') {
+				refetch();
 				toast.success('Updated Successfully!');
 			} else {
 				toast.error('Something went wrong. Please try again');

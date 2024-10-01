@@ -5,6 +5,9 @@ import dynamic from 'next/dynamic';
 
 import { PrescriptionIcon } from '@webservices/icons';
 import Loading from '../../atoms/loading';
+import { useSelector } from 'react-redux';
+import { PemilyRootState } from '@webservices/slices';
+import { Roles } from '@webservices/primitives';
 
 const PersonalDetailsForm = dynamic(() => import('../../molecules/user-profile/personal-details'), {
 	loading: () => <Loading />,
@@ -25,6 +28,7 @@ const Contact = dynamic(() => import('../../molecules/user-profile/contact'), {
 export default function UserTabs() {
 	const tabClass =
 		'data-[selected]:font-semibold focus:outline-none cursor-pointer text-center data-[selected]:border-b-2 data-[selected]:border-purple flex items-center gap-8 pb-6 ';
+	const authState = useSelector((state: PemilyRootState) => state.auth);
 
 	return (
 		<div className="col-span-2 bg-white py-32 px-16 rounded-[16px]">
@@ -44,34 +48,38 @@ export default function UserTabs() {
 							</>
 						)}
 					</Tab>
-					<Tab className={tabClass}>
-						{({ selected }) => (
-							<>
-								<PrescriptionIcon
-									className={selected ? 'text-purple' : ''}
-									width={18}
-									height={18}
-								/>
-								<span className={`${selected ? 'text-purple' : ''} text-14`}>
-									Primary Address
-								</span>
-							</>
-						)}
-					</Tab>
-					<Tab className={tabClass}>
-						{({ selected }) => (
-							<>
-								<PrescriptionIcon
-									className={selected ? 'text-purple' : ''}
-									width={18}
-									height={18}
-								/>
-								<span className={`${selected ? 'text-purple' : ''} text-14`}>
-									Business Details
-								</span>
-							</>
-						)}
-					</Tab>
+					{authState.role === Roles.Clinic && (
+						<Tab className={tabClass}>
+							{({ selected }) => (
+								<>
+									<PrescriptionIcon
+										className={selected ? 'text-purple' : ''}
+										width={18}
+										height={18}
+									/>
+									<span className={`${selected ? 'text-purple' : ''} text-14`}>
+										Primary Address
+									</span>
+								</>
+							)}
+						</Tab>
+					)}
+					{authState.role === Roles.Clinic && (
+						<Tab className={tabClass}>
+							{({ selected }) => (
+								<>
+									<PrescriptionIcon
+										className={selected ? 'text-purple' : ''}
+										width={18}
+										height={18}
+									/>
+									<span className={`${selected ? 'text-purple' : ''} text-14`}>
+										Business Details
+									</span>
+								</>
+							)}
+						</Tab>
+					)}
 					<Tab className={tabClass}>
 						{({ selected }) => (
 							<>

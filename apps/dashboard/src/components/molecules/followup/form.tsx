@@ -23,11 +23,11 @@ const Label = ({ selectedFollowup }: { selectedFollowup: string }) => {
 
 const FollowupForm = () => {
 	const [selectedFollowup, setFollowup] = useState('');
-	const [selectedDates, setSelectedDates] = useState([new Date()]);
+	const [selectedDates, setSelectedDates] = useState<any[]>([]);
 	const { activePetId, handleSidebar, activeParentId, activeRecord, selectedDate } =
 		useRecordSidebar();
 	const { mutateAsync: createFollowup } = useCreateFollowUpRecords();
-	const { refetch } = useGetFollowRecords({ type: activeRecord, date: selectedDate });
+	const { refetch } = useGetFollowRecords({ date: selectedDate });
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
