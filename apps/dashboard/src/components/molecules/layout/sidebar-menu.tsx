@@ -25,13 +25,13 @@ const menu = [
 	},
 	{
 		link: '/pet-parents',
-		path: <PetParentIcon />,
+		path: <PetParentIcon className="text-primary-1" width={24} height={24} />,
 		text: 'Pet Parents',
 		type: 'icon',
 	},
 	{
 		link: '/user-profile',
-		path: <UserIcon className="text-primary-1" width={24} height={24} />,
+		path: <UserIcon width={24} height={24} />,
 		text: 'Profile',
 		type: 'icon',
 	},
