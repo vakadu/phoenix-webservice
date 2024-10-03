@@ -1,4 +1,4 @@
-import { MainIcon, PhoneIcon, WebIcon } from '@webservices/icons';
+import { MailIcon, PhoneIcon, WebIcon } from '@webservices/icons';
 import { ImagePlaceholder } from '@webservices/ui';
 
 const Contact = () => {
@@ -25,7 +25,7 @@ const Contact = () => {
 						imageClasses="bg-contain"
 					/>
 				</div>
-				<MainIcon />
+				<MailIcon />
 				<a target="_blank" className="font-bold text-18" href="mailto:care@pemilly.com">
 					care@pemilly.com
 				</a>

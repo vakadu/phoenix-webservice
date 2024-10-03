@@ -21,7 +21,6 @@ const ProfileImage = () => {
 	const { mutate: uploadUserProfile } = useUploadUserProfile();
 	const { profileUrl } = profileData?.data || {};
 	const { name, mobile, email } = userData?.data?.user || {};
-	console.log('render');
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];

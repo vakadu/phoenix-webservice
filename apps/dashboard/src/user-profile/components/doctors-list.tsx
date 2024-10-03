@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 import { useGetDoctors, useUpdateClinicMemberProfile } from '@webservices/api';
-import UserProfileImage from '../../atoms/user-profile';
 import { EditIcon, PlusIcon, UploadIcon } from '@webservices/icons';
 import { BoxLoader, ButtonWrapper } from '@webservices/ui';
 import AddEditDoctor from './add-edit-doctor';
 import { createFormDataForImage } from '@webservices/helpers';
+import UserProfileImage from '../../components/atoms/user-profile';
 
 const DoctorsList = () => {
 	const { data, isPending } = useGetDoctors();
