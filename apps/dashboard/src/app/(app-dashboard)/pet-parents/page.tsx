@@ -1,7 +1,7 @@
-import PetParents from '../../../components/organisms/pet-parents';
+import PageDetails from '../../../pet-parents/components/page-details';
 
 const Page = () => {
-	return <PetParents />;
+	return <PageDetails />;
 };
 
 export default Page;
