@@ -10,7 +10,7 @@ import { Button, ButtonWrapper, TextInput } from '@webservices/ui';
 import { useCheckUser } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
 import { BackIcon } from '@webservices/icons';
-import useLoginOtpHook from '../otp-hook';
+import useLoginOtpHook from '../hooks/otp-hook';
 
 const validationSchema = yup.object().shape({
 	mobileNumber: yup
