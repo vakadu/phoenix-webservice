@@ -4,24 +4,24 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import dynamic from 'next/dynamic';
 
 import { PrescriptionIcon } from '@webservices/icons';
-import Loading from '../../atoms/loading';
 import { useSelector } from 'react-redux';
 import { PemilyRootState } from '@webservices/slices';
 import { Roles } from '@webservices/primitives';
+import { Loading } from '@webservices/ui';
 
-const PersonalDetailsForm = dynamic(() => import('../../molecules/user-profile/personal-details'), {
+const PersonalDetailsForm = dynamic(() => import('./personal-details'), {
 	loading: () => <Loading />,
 });
 
-const AddressForm = dynamic(() => import('../../molecules/user-profile/address'), {
+const AddressForm = dynamic(() => import('./address'), {
 	loading: () => <Loading />,
 });
 
-const BusinessForm = dynamic(() => import('../../molecules/user-profile/business-details'), {
+const BusinessForm = dynamic(() => import('./business-details'), {
 	loading: () => <Loading />,
 });
 
-const Contact = dynamic(() => import('../../molecules/user-profile/contact'), {
+const Contact = dynamic(() => import('./contact'), {
 	loading: () => <Loading />,
 });
 

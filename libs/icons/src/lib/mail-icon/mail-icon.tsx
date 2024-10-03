@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-types
-export const MainIcon: React.FC<React.SVGAttributes<{}>> = (props) => {
+export const MailIcon: React.FC<React.SVGAttributes<{}>> = (props) => {
 	return (
 		<svg
 			width="32"

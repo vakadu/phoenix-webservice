@@ -1,13 +1,17 @@
 'use client';
 
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
 
 import { useGetUser, useGetUserProfileUrl, useUploadUserProfile } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
-import { ImagePlaceholder, TextInput } from '@webservices/ui';
-import { CameraIcon, UserIcon } from '@webservices/icons';
+import { ImagePlaceholder } from '@webservices/ui';
+import {
+	CameraIcon,
+	MailIcon,
+	PhoneOutlineIcon,
+	UserIcon,
+	UserOutlineIcon,
+} from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
 
 const ProfileImage = () => {
@@ -17,13 +21,7 @@ const ProfileImage = () => {
 	const { mutate: uploadUserProfile } = useUploadUserProfile();
 	const { profileUrl } = profileData?.data || {};
 	const { name, mobile, email } = userData?.data?.user || {};
-	const { register, setValue } = useForm();
-
-	useEffect(() => {
-		setValue('name', name);
-		setValue('mobile', mobile);
-		setValue('email', email);
-	}, [email, mobile, name]);
+	console.log('render');
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
@@ -52,11 +50,23 @@ const ProfileImage = () => {
 					</label>
 				</div>
 			</div>
-			<form className="w-full mt-32 gap-24 flex flex-col">
-				<TextInput disabled label="Name" {...register('name')} readonly />
-				<TextInput disabled label="Email" {...register('email')} readonly />
-				<TextInput disabled label="Mobile Number" {...register('mobile')} readonly />
-			</form>
+			<div className="flex flex-col gap-16 mt-24 px-12 w-full">
+				<div className="flex items-center border border-grey-border1 gap-12 py-12 px-12 rounded-8">
+					<UserOutlineIcon width={24} height={24} />
+					<span className="font-medium text-14">{name}</span>
+				</div>
+				<div className="flex items-center border border-grey-border1 gap-12 py-12 px-12 rounded-8">
+					<MailIcon width={24} height={24} />
+					<span className="font-medium text-14">{email}</span>
+				</div>
+				<a
+					href={`tel:${mobile}`}
+					className="flex items-center border border-grey-border1 gap-12 py-12 px-12 rounded-8"
+				>
+					<PhoneOutlineIcon width={24} height={24} />
+					<span className="font-medium text-14">{mobile}</span>
+				</a>
+			</div>
 		</div>
 	);
 };
