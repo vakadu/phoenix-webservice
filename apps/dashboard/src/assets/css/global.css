@@ -87,3 +87,7 @@ body {
 .edit-calender .react-datepicker-wrapper {
 	@apply w-[42px] h-[42px];
 }
+
+.react-select__control {
+	@apply h-full;
+}

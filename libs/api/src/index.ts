@@ -40,4 +40,5 @@ export * from './lib/use-update-pet-image/update-pet-image';
 export * from './lib/use-get-pet-by-id/get-pet-by-id';
 export * from './lib/use-create-pet/create-pet';
 export * from './lib/use-update-pet/update-pet';
+export * from './lib/use-pet-breed/pet-breed';
 export * from './lib/api';

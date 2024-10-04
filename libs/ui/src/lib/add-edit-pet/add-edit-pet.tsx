@@ -6,18 +6,38 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import Select, { StylesConfig, SingleValue } from 'react-select';
 
 import TextInput from '../text-input/text-input';
 import Button from '../button/button';
 import { PemilyRootState } from '@webservices/slices';
-import { useCreatePet, useGetPetById, useUpdatePet } from '@webservices/api';
+import { useCreatePet, useGetPetById, usePetBreed, useUpdatePet } from '@webservices/api';
 import DatePicker from 'react-datepicker';
 import Radio from '../radio/radio';
+import toast from 'react-hot-toast';
+
+interface OptionType {
+	value: string;
+	label: string;
+}
 
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),
-	breed: yup.string().required('Breed is required'),
 });
+
+const customStyles: StylesConfig<OptionType, false> = {
+	control: (provided, state) => ({
+		...provided,
+		borderColor: state.isFocused ? '#007A65' : '#D3DADD',
+		boxShadow: 'none',
+	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isFocused ? '#007A65' : undefined,
+		color: state.isFocused ? '#fff' : '#000',
+		fontSize: '14px',
+	}),
+};
 
 export function AddEditPet() {
 	const modalState = useSelector((state: PemilyRootState) => state.modal);
@@ -34,28 +54,35 @@ export function AddEditPet() {
 	const { name, breed, type: petType, dob: petDob, gender: petGender } = data?.data?.pet || {};
 	const [dob, setDob] = useState<any>(new Date());
 	const [gender, setGender] = useState('M');
-	const [type, setType] = useState('DOG');
+	const [type, setType] = useState<string>('');
 	const { mutate: updatePet, isPending } = useUpdatePet(modalState.data?.petId as string);
 	const { mutate: createPet, isPending: isLoading } = useCreatePet({
 		parentId: modalState?.data?.parentId,
 		refetchParents: modalState?.refetch as () => void,
 	});
+	const { data: breedData } = usePetBreed({ type });
+	const [selectedBreed, setSelectedBreed] = useState<SingleValue<OptionType>>(null);
+	console.log(breed);
 
 	useEffect(() => {
 		if (modalState.type === 'edit' && name && modalState.data?.petId) {
 			setValue('name', name);
-			setValue('breed', breed || '');
+			if (breed) {
+				setSelectedBreed({ value: breed, label: breed });
+			}
 			if (petDob) {
 				setDob(new Date(petDob));
 			}
-			setType(petType || 'DOG');
+			if (petType) {
+				setType(petType);
+			}
 			setGender(petGender || 'M');
 		} else {
 			reset({
 				name: '',
-				breed: '',
 			});
-			setType(petType || 'DOG');
+			setType('');
+			setSelectedBreed(null);
 			setGender(petGender || 'M');
 			if (petDob) {
 				setDob(new Date(petDob));
@@ -73,11 +100,24 @@ export function AddEditPet() {
 		setValue,
 	]);
 
+	const handleChange = (option: SingleValue<OptionType>) => {
+		setSelectedBreed(option);
+	};
+
 	const onSubmit = (values: any) => {
+		if (!type) {
+			toast.error('Choose type');
+			return;
+		}
+		if (!selectedBreed) {
+			toast.error('Choose Breed');
+			return;
+		}
 		if (modalState.type === 'edit') {
 			const payload = {
 				...values,
 				gender,
+				breed: selectedBreed?.value,
 				type,
 				dob: format(dob, 'yyyy-MM-dd'),
 			};
@@ -87,6 +127,7 @@ export function AddEditPet() {
 				...values,
 				gender,
 				type,
+				breed: selectedBreed?.value,
 				dob: format(dob, 'yyyy-MM-dd'),
 				parentId: modalState?.data?.parentId,
 			};
@@ -112,12 +153,58 @@ export function AddEditPet() {
 						error={errors?.name}
 						{...register('name')}
 					/>
-					<TextInput
-						label="Breed"
-						placeholder=""
-						error={errors?.breed}
-						{...register('breed')}
-					/>
+					<div className="flex flex-col">
+						<label className="text-14">Date of Birth</label>
+						<DatePicker
+							className="mt-[4px] bg-white"
+							onChange={setDob}
+							selected={dob}
+							maxDate={new Date()}
+							dateFormat="yyyy-MM-dd"
+						/>
+					</div>
+				</div>
+				<div className="grid grid-cols-2 gap-[42px]">
+					<div>
+						<label className="text-14 leading-14 block mb-10">Choose Type</label>
+						<div className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px] bg-white">
+							<Radio
+								label="Dog"
+								value="DOG"
+								checked={type === 'DOG'}
+								name="male"
+								onChange={() => {
+									setType('DOG');
+									setSelectedBreed(null);
+								}}
+							/>
+							<Radio
+								label="Cat"
+								value="CAT"
+								checked={type === 'CAT'}
+								name="female"
+								onChange={() => {
+									setType('CAT');
+									setSelectedBreed(null);
+								}}
+							/>
+						</div>
+					</div>
+					{type && (
+						<div>
+							<label className="text-14 leading-14 mb-[10px] block cursor-pointer">
+								Choose Breed
+							</label>
+							<Select
+								options={breedData}
+								className="h-[52px] react-select-container"
+								classNamePrefix="react-select"
+								styles={customStyles}
+								onChange={handleChange}
+								value={selectedBreed}
+							/>
+						</div>
+					)}
 				</div>
 				<div className="grid grid-cols-2 gap-[42px]">
 					<div>
@@ -138,37 +225,6 @@ export function AddEditPet() {
 								onChange={() => setGender('F')}
 							/>
 						</div>
-					</div>
-					<div>
-						<label className="text-14 leading-14 block mb-10">Choose Type</label>
-						<div className="flex gap-24 items-center px-12 rounded-8 border border-grey-divider h-[52px] bg-white">
-							<Radio
-								label="Dog"
-								value="DOG"
-								checked={type === 'DOG'}
-								name="male"
-								onChange={() => setType('DOG')}
-							/>
-							<Radio
-								label="Cat"
-								value="CAT"
-								checked={type === 'CAT'}
-								name="female"
-								onChange={() => setType('CAT')}
-							/>
-						</div>
-					</div>
-				</div>
-				<div className="grid grid-cols-2 gap-[42px]">
-					<div className="flex flex-col">
-						<label className="text-14">Date of Birth</label>
-						<DatePicker
-							className="mt-[4px] bg-white"
-							onChange={setDob}
-							selected={dob}
-							maxDate={new Date()}
-							dateFormat="yyyy-MM-dd"
-						/>
 					</div>
 				</div>
 				<div className="flex justify-end items-center !mt-32">
