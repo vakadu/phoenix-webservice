@@ -3,11 +3,11 @@
 import { useState } from 'react';
 
 import { useGetStaff, useUpdateClinicMemberProfile } from '@webservices/api';
-import UserProfileImage from '../../atoms/user-profile';
 import { EditIcon, PlusIcon, UploadIcon } from '@webservices/icons';
 import { BoxLoader, ButtonWrapper } from '@webservices/ui';
 import { createFormDataForImage } from '@webservices/helpers';
 import AddEditStaff from './add-edit-staff';
+import UserProfileImage from '../../components/atoms/user-profile';
 
 const StaffList = () => {
 	const { data, isPending } = useGetStaff();
