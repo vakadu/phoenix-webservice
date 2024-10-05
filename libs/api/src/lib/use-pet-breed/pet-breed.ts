@@ -14,15 +14,10 @@ const getBreed = async ({
 	if (query) {
 		url += `&query=${query}`;
 	}
-	const { data } = await HttpService.get<ICommonTypes.IApiResponse<{ breeds: string[] }>>(url);
-	const tempData = data?.data?.breeds;
-	const breedsData = tempData.map((breed) => {
-		return {
-			label: breed,
-			value: breed,
-		};
-	});
-	return breedsData as { label: string; value: string }[];
+	const { data } = await HttpService.get<
+		ICommonTypes.IApiResponse<{ breeds: { label: string; value: string }[] }>
+	>(url);
+	return data;
 };
 
 export function usePetBreed({ type, query }: { type: string; query?: string }) {

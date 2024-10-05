@@ -41,4 +41,6 @@ export * from './lib/use-get-pet-by-id/get-pet-by-id';
 export * from './lib/use-create-pet/create-pet';
 export * from './lib/use-update-pet/update-pet';
 export * from './lib/use-pet-breed/pet-breed';
+export * from './lib/use-get-vaccination-list/get-vaccination-list';
+export * from './lib/use-get-followup-list/get-followup-list';
 export * from './lib/api';

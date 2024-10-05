@@ -1,30 +1,28 @@
-import { MenuItem } from '@headlessui/react';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
+import Select, { SingleValue } from 'react-select';
 
-import { dogAndCatVaccines } from '@webservices/constants';
-import { CloseIcon, DownIcon } from '@webservices/icons';
-import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateVaccinationRecords, useGetVaccinationRecords } from '@webservices/api';
+import { CloseIcon } from '@webservices/icons';
+import { Button, ButtonWrapper } from '@webservices/ui';
+import {
+	useCreateVaccinationRecords,
+	useGetVaccinationList,
+	useGetVaccinationRecords,
+} from '@webservices/api';
 import { convertDates } from '../../../helpers';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
+import { customSelectBoxStyles } from '@webservices/helpers';
 
-const Label = ({ selectedVaccine }: { selectedVaccine: string }) => {
-	return (
-		<div className="flex items-center gap-12 border border-grey-border1 w-full rounded-8 h-54 px-12 justify-between">
-			<span className="text-14">
-				{selectedVaccine !== '' ? selectedVaccine : 'Choose a Vaccine'}
-			</span>
-			<DownIcon />
-		</div>
-	);
-};
+interface OptionType {
+	value: string;
+	label: string;
+}
 
 const VaccinationForm = () => {
 	const { query } = useRouterQuery();
-	const [selectedVaccine, setVaccine] = useState('');
+	const [selectedVaccine, setVaccine] = useState<SingleValue<OptionType>>(null);
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
 	const { activePetId, handleSidebar, activeParentId, activeRecord } = useRecordSidebar();
 	const { mutateAsync: createVaccination, isPending } = useCreateVaccinationRecords();
@@ -32,6 +30,7 @@ const VaccinationForm = () => {
 		type: activeRecord,
 		petId: query?.id as string,
 	});
+	const { data } = useGetVaccinationList();
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
@@ -50,7 +49,7 @@ const VaccinationForm = () => {
 		const data = {
 			petId: activePetId,
 			parentId: activeParentId,
-			vaccineName: selectedVaccine,
+			vaccineName: selectedVaccine?.value as string,
 			vaccinationDates: dates as string[],
 		};
 		const response = (await createVaccination(
@@ -62,6 +61,10 @@ const VaccinationForm = () => {
 		}
 	};
 
+	const handleChange = (option: SingleValue<OptionType>) => {
+		setVaccine(option);
+	};
+
 	return (
 		<section className="flex flex-col h-full">
 			<h2 className="text-24 font-semibold">Add Vaccination Details</h2>
@@ -69,25 +72,14 @@ const VaccinationForm = () => {
 			<div className="flex-1">
 				<div>
 					<label className="text-14 leading-24">Choose a vaccine</label>
-					<Dropdown
-						menuClasses="!max-h-[320px]"
-						label={<Label selectedVaccine={selectedVaccine} />}
-					>
-						{dogAndCatVaccines.map((vaccine) => {
-							return (
-								<MenuItem key={vaccine.key}>
-									<p
-										onClick={() => setVaccine(vaccine.key)}
-										className={`px-12 py-12 cursor-pointer hover:bg-primary-3 ${
-											selectedVaccine === vaccine.key ? 'bg-primary-3' : ''
-										}`}
-									>
-										{vaccine.label}
-									</p>
-								</MenuItem>
-							);
-						})}
-					</Dropdown>
+					<Select
+						options={data?.data?.vaccination}
+						className="h-[52px] react-select-container"
+						classNamePrefix="react-select"
+						styles={customSelectBoxStyles}
+						onChange={handleChange}
+						value={selectedVaccine}
+					/>
 				</div>
 				<div className="mt-24">
 					<label className="text-14 leading-24 block">Choose Date</label>
@@ -121,7 +113,7 @@ const VaccinationForm = () => {
 			<Button
 				isLoading={isPending}
 				onClick={handleSubmit}
-				disabled={selectedVaccine === '' || isPending}
+				disabled={!selectedVaccine || isPending}
 			>
 				<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
 			</Button>

@@ -1,34 +1,33 @@
-import { MenuItem } from '@headlessui/react';
 import { useState } from 'react';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
+import Select, { SingleValue } from 'react-select';
 
-import { followupData } from '@webservices/constants';
-import { CloseIcon, DownIcon } from '@webservices/icons';
-import { Button, ButtonWrapper, Dropdown } from '@webservices/ui';
-import { useCreateFollowUpRecords, useGetFollowRecords } from '@webservices/api';
+import { CloseIcon } from '@webservices/icons';
+import { Button, ButtonWrapper } from '@webservices/ui';
+import {
+	useCreateFollowUpRecords,
+	useGetFollowRecords,
+	useGetFollowupList,
+} from '@webservices/api';
 import { convertDates } from '../../../helpers';
 import { useRecordSidebar } from '../../../context/record-sidebar-context';
 import { useRouterQuery } from '@webservices/hooks';
+import { customSelectBoxStyles } from '@webservices/helpers';
 
-const Label = ({ selectedFollowup }: { selectedFollowup: string }) => {
-	return (
-		<div className="flex items-center gap-12 border border-grey-border1 w-full rounded-8 h-54 px-12 justify-between">
-			<span className="text-14">
-				{selectedFollowup !== '' ? selectedFollowup : 'Choose a Followup'}
-			</span>
-			<DownIcon />
-		</div>
-	);
-};
+interface OptionType {
+	value: string;
+	label: string;
+}
 
 const FollowupForm = () => {
 	const { query } = useRouterQuery();
-	const [selectedFollowup, setFollowup] = useState('');
+	const [selectedFollowup, setFollowup] = useState<SingleValue<OptionType>>(null);
 	const [selectedDates, setSelectedDates] = useState([new Date()]);
 	const { activePetId, handleSidebar, activeParentId, activeRecord } = useRecordSidebar();
 	const { mutateAsync: createFollowup } = useCreateFollowUpRecords();
 	const { refetch } = useGetFollowRecords({ type: activeRecord, petId: query?.id as string });
+	const { data } = useGetFollowupList();
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
@@ -47,7 +46,7 @@ const FollowupForm = () => {
 		const data = {
 			petId: activePetId,
 			parentId: activeParentId,
-			followUpType: selectedFollowup,
+			followUpType: selectedFollowup?.value as string,
 			followUpDates: dates as string[],
 		};
 		const response = (await createFollowup(
@@ -59,6 +58,10 @@ const FollowupForm = () => {
 		}
 	};
 
+	const handleChange = (option: SingleValue<OptionType>) => {
+		setFollowup(option);
+	};
+
 	return (
 		<section className="flex flex-col h-full">
 			<h2 className="text-24 font-semibold">Add Follow-up Details</h2>
@@ -66,25 +69,14 @@ const FollowupForm = () => {
 			<div className="flex-1">
 				<div>
 					<label className="text-14 leading-24">Choose a follow-up</label>
-					<Dropdown
-						menuClasses="!max-h-[320px]"
-						label={<Label selectedFollowup={selectedFollowup} />}
-					>
-						{followupData.map((followup) => {
-							return (
-								<MenuItem key={followup.key}>
-									<p
-										onClick={() => setFollowup(followup.key)}
-										className={`px-12 py-12 cursor-pointer hover:bg-primary-3 ${
-											selectedFollowup === followup.key ? 'bg-primary-3' : ''
-										}`}
-									>
-										{followup.label}
-									</p>
-								</MenuItem>
-							);
-						})}
-					</Dropdown>
+					<Select
+						options={data?.data?.followup}
+						className="h-[52px] react-select-container"
+						classNamePrefix="react-select"
+						styles={customSelectBoxStyles}
+						onChange={handleChange}
+						value={selectedFollowup}
+					/>
 				</div>
 				<div className="mt-24">
 					<label className="text-14 leading-24 block">Choose Date</label>
@@ -115,7 +107,7 @@ const FollowupForm = () => {
 					)}
 				</div>
 			</div>
-			<Button onClick={handleSubmit} disabled={selectedFollowup === ''}>
+			<Button onClick={handleSubmit} disabled={!selectedFollowup}>
 				<span className="font-black tracking-[-0.41px]">Add Follow-up</span>
 			</Button>
 		</section>

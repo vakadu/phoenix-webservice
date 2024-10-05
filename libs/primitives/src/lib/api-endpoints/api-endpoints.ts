@@ -47,4 +47,6 @@ export const enum ApiEndpoints {
 	DeleteAccount = 'user/deactivate',
 	FirebaseToken = 'user/firebaseToken',
 	PetBreed = 'app/utils/breeds',
+	VaccinationList = 'app/utils/vaccination-list',
+	FollowupList = 'app/utils/follow-list',
 }

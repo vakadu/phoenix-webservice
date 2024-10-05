@@ -15,6 +15,7 @@ import { PemilyRootState } from '@webservices/slices';
 import { useCreatePet, useGetPetById, usePetBreed, useUpdatePet } from '@webservices/api';
 import DatePicker from 'react-datepicker';
 import Radio from '../radio/radio';
+import { customSelectBoxStyles } from '@webservices/helpers';
 
 interface OptionType {
 	value: string;
@@ -24,20 +25,6 @@ interface OptionType {
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),
 });
-
-const customStyles: StylesConfig<OptionType, false> = {
-	control: (provided, state) => ({
-		...provided,
-		borderColor: state.isFocused ? '#007A65' : '#D3DADD',
-		boxShadow: 'none',
-	}),
-	option: (provided, state) => ({
-		...provided,
-		backgroundColor: state.isFocused ? '#007A65' : undefined,
-		color: state.isFocused ? '#fff' : '#000',
-		fontSize: '14px',
-	}),
-};
 
 export function AddEditPet() {
 	const modalState = useSelector((state: PemilyRootState) => state.modal);
@@ -61,9 +48,9 @@ export function AddEditPet() {
 		parentId: modalState?.data?.parentId,
 		refetchParents: modalState?.refetch as () => void,
 	});
-	const { data: breedData } = usePetBreed({ type });
+	const { data: breedsData } = usePetBreed({ type });
+	const breedData = breedsData?.data?.breeds;
 	const [selectedBreed, setSelectedBreed] = useState<SingleValue<OptionType>>(null);
-	console.log(breed);
 
 	useEffect(() => {
 		if (modalState.type === 'edit' && name && modalState.data?.petId) {
@@ -191,21 +178,20 @@ export function AddEditPet() {
 							/>
 						</div>
 					</div>
-					{type && (
-						<div>
-							<label className="text-14 leading-14 mb-[10px] block cursor-pointer">
-								Choose Breed
-							</label>
-							<Select
-								options={breedData}
-								className="h-[52px] react-select-container"
-								classNamePrefix="react-select"
-								styles={customStyles}
-								onChange={handleChange}
-								value={selectedBreed}
-							/>
-						</div>
-					)}
+					<div>
+						<label className="text-14 leading-14 mb-[10px] block cursor-pointer">
+							Choose Breed
+						</label>
+						<Select
+							options={breedData}
+							className="h-[52px] react-select-container"
+							classNamePrefix="react-select"
+							styles={customSelectBoxStyles}
+							onChange={handleChange}
+							value={selectedBreed}
+							isDisabled={!type}
+						/>
+					</div>
 				</div>
 				<div className="grid grid-cols-2 gap-[42px]">
 					<div>

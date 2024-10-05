@@ -1,4 +1,5 @@
 import { pemilyStore, resetUser } from '@webservices/slices';
+import { StylesConfig } from 'react-select';
 
 export const shimmer = () => `
 <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
@@ -106,4 +107,18 @@ export const debounce = <T extends (...args: any[]) => void>(func: T, delay: num
 			func(...args);
 		}, delay);
 	};
+};
+
+export const customSelectBoxStyles: StylesConfig<{ value: string; label: string }, false> = {
+	control: (provided, state) => ({
+		...provided,
+		borderColor: state.isFocused ? '#007A65' : '#D3DADD',
+		boxShadow: 'none',
+	}),
+	option: (provided, state) => ({
+		...provided,
+		backgroundColor: state.isFocused ? '#007A65' : undefined,
+		color: state.isFocused ? '#fff' : '#000',
+		fontSize: '14px',
+	}),
 };
