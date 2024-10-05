@@ -39,7 +39,6 @@ const AddEditDoctor = ({
 	} = useForm({
 		resolver: yupResolver(validationSchema),
 	});
-
 	const [checked, setChecked] = useState(false);
 	const { data } = useGetDoctorById(doctorId as string);
 	const doctorData = data?.data?.doctors?.[0] || (null as IClinicTypes.IClinicDoctor | null);
