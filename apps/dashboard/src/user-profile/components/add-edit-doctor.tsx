@@ -46,6 +46,7 @@ const AddEditDoctor = ({
 		doctorData?.doctor?.doctorId as string,
 		handleClose
 	);
+
 	const { mutate: createDoctor, isPending: isLoading } = useCreateDoctor(handleClose);
 
 	useEffect(() => {
