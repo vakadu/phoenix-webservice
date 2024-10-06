@@ -4,7 +4,7 @@ import SidebarMenu from '../../molecules/layout/sidebar-menu';
 const Sidebar = () => {
 	return (
 		<nav
-			className="w-[272px] fixed h-screen top-0 z-[11] transition-width duration-200 ease-ease1"
+			className="w-[282px] fixed h-screen top-0 z-[11] transition-width duration-200 ease-ease1"
 			// className={`${
 			// 	collapsed ? 'w-[72px]' : 'w-[248px]'
 			// } fixed h-screen top-0 z-[11] bg-white shadow-base transition-width duration-200 ease-ease1 ${
