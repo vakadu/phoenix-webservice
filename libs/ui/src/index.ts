@@ -1,3 +1,4 @@
+export * from './lib/dashboard-layout-header/dashboard-layout-header';
 export * from './lib/add-edit-pet/add-edit-pet';
 export * from './lib/add-edit-parent/add-edit-parent';
 export * from './lib/loading/loading';

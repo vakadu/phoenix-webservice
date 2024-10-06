@@ -18,8 +18,7 @@ export function Dropdown({
 				</MenuButton>
 				<Transition>
 					<MenuItems
-						anchor="bottom start"
-						className={`!fixed bg-white shadow-dropdown rounded-8 z-[99] ${menuClasses}`}
+						className={`!absolute origin-top-right bg-white shadow-dropdown rounded-6 z-[999] right-0 ${menuClasses}`}
 					>
 						{children && children}
 					</MenuItems>

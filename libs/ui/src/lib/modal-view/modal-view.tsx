@@ -59,7 +59,7 @@ export function ModalView(props: ModalViewsProps) {
 
 	return (
 		<Dialog
-			className="relative z-[12] focus:outline-none"
+			className="relative z-[999] focus:outline-none"
 			onClose={handleClose}
 			open={modalData.isOpen}
 		>
