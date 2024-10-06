@@ -51,7 +51,7 @@ export default function UserDetails() {
 						<UserOutlineIcon />
 					</div>
 				}
-				menuClasses="w-[180px] top-[50px]"
+				menuClasses="w-[180px] top-[32px]"
 			>
 				{menu.map((item) => {
 					return (
