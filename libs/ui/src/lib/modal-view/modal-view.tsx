@@ -70,7 +70,7 @@ export function ModalView(props: ModalViewsProps) {
 						transition
 						className="w-full max-w-2xl rounded-8 duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
 					>
-						<div className="relative z-50 text-left align-middle inline-block w-full">
+						<div className="relative z-[999] text-left align-middle inline-block w-full">
 							{modalData.view && renderModalContent(modalData.view)}
 						</div>
 					</DialogPanel>
