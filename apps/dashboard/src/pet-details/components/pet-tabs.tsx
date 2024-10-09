@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
 import { PrescriptionIcon } from '@webservices/icons';
-import { MedicalRecord } from '@webservices/ui';
+import { MedicalRecord, Vaccination } from '@webservices/ui';
 
 export default function PetTabs() {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -73,7 +73,9 @@ export default function PetTabs() {
 					<TabPanel>
 						<MedicalRecord showDays />
 					</TabPanel>
-					<TabPanel></TabPanel>
+					<TabPanel>
+						<Vaccination showDays />
+					</TabPanel>
 					<TabPanel></TabPanel>
 				</TabPanels>
 			</TabGroup>

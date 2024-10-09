@@ -31,4 +31,6 @@ export * from './lib/days/days';
 export * from './lib/textarea/textarea';
 export * from './lib/loading/loading';
 export * from './lib/loading-modal/loading-modal';
+export * from './lib/vaccination/vaccination';
+export * from './lib/followup/followup';
 export * from './lib/ui';
