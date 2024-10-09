@@ -5,10 +5,10 @@ import VaccinationRecords from './components/records';
 import useVaccination from './hooks/use-vaccination.hook';
 
 interface IVaccination {
-	showDays: boolean;
+	showDays?: boolean;
 }
 
-export function Vaccination({ showDays }: IVaccination) {
+export function Vaccination({ showDays = true }: IVaccination) {
 	const { activeFilter, setActiveFilter, petId } = useVaccination();
 
 	return (

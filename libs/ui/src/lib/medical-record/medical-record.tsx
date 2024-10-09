@@ -5,10 +5,10 @@ import Records from './components/records';
 import useMedicalRecord from './hooks/medical-record.hook';
 
 interface IMedicalRecords {
-	showDays: boolean;
+	showDays?: boolean;
 }
 
-export function MedicalRecord({ showDays }: IMedicalRecords) {
+export function MedicalRecord({ showDays = true }: IMedicalRecords) {
 	const { activeFilter, setActiveFilter, petId } = useMedicalRecord();
 
 	return (
