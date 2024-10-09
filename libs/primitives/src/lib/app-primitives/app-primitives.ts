@@ -8,3 +8,9 @@ export const enum Roles {
 	Grooming = 'GROOMING',
 	PetParents = 'PET_PARENTS',
 }
+
+export const enum DashboardTypes {
+	MedicalRecord = 'medical-record',
+	Vaccination = 'vaccination',
+	Followup = 'followup',
+}

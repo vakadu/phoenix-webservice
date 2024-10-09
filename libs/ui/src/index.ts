@@ -1,3 +1,5 @@
+export * from './lib/filter-item/filter-item';
+export * from './lib/medical-record/medical-record';
 export * from './lib/dashboard-layout-sidebar/dashboard-layout-sidebar';
 export * from './lib/dashboard-layout-header/dashboard-layout-header';
 export * from './lib/add-edit-pet/add-edit-pet';
