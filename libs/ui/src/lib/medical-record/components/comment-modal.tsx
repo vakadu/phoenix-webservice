@@ -42,7 +42,6 @@ const CommentModal = ({
 		refetch,
 		handleClose,
 	});
-	console.log('comment');
 
 	useEffect(() => {
 		if (comment && comment !== '') {
@@ -57,8 +56,6 @@ const CommentModal = ({
 		};
 		updateMedicalRecord(commentData);
 	};
-
-	if (!isOpen) return null;
 
 	return (
 		<Modal isOpen={isOpen} handleClose={handleClose}>

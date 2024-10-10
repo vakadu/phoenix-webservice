@@ -33,7 +33,6 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 		handleClose: closeModal,
 	});
 	const [showModal, setShowModal] = useState(false);
-	console.log('record');
 
 	const onDelete = () => {
 		const commentData = {
