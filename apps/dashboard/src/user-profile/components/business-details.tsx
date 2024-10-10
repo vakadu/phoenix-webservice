@@ -11,15 +11,12 @@ import { useGetUser, useUpdateBusiness } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
 import { gstValidator, panValidator, phoneValidator } from '@webservices/helpers';
 
-const validationSchema = yup.object().shape({
-	ownerName: yup.string().required('Owner Name is required'),
-	pan: yup.string().matches(panValidator, 'Pan is not valid').notRequired(),
-	gstNo: yup.string().matches(gstValidator, 'Gst is not valid').notRequired(),
-	businessContact: yup
-		.string()
-		.matches(phoneValidator, 'Phone number is not valid')
-		.notRequired(),
-});
+// const validationSchema = yup.object().shape({
+// 	ownerName: yup.string(),
+// 	pan: yup.string().matches(panValidator, 'Pan is not valid'),
+// 	gstNo: yup.string().matches(gstValidator, 'Gst is not valid'),
+// 	businessContact: yup.string().matches(phoneValidator, 'Phone number is not valid'),
+// });
 
 const BusinessForm = () => {
 	const {
@@ -27,9 +24,7 @@ const BusinessForm = () => {
 		handleSubmit,
 		formState: { errors },
 		setValue,
-	} = useForm({
-		resolver: yupResolver(validationSchema),
-	});
+	} = useForm();
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { data } = useGetUser(authState.userId as string);
 	const { mutate: updateBusiness, isPending } = useUpdateBusiness();
@@ -60,30 +55,14 @@ const BusinessForm = () => {
 					label="Business Contact Number"
 					type="numeric"
 					placeholder=""
-					error={errors?.businessContact}
 					maxLength={10}
 					{...register('businessContact')}
 				/>
-				<TextInput
-					label="Owner Name"
-					placeholder=""
-					error={errors?.ownerName}
-					{...register('ownerName')}
-				/>
+				<TextInput label="Owner Name" placeholder="" {...register('ownerName')} />
 			</section>
 			<section className="grid grid-cols-2 gap-24 mb-24">
-				<TextInput
-					label="PAN"
-					placeholder="FLKPXXXXXX"
-					error={errors?.pan}
-					{...register('pan')}
-				/>
-				<TextInput
-					label="GST No"
-					placeholder="29AAXXXXXXXXXXX"
-					error={errors?.gstNo}
-					{...register('gstNo')}
-				/>
+				<TextInput label="PAN" placeholder="FLKPXXXXXX" {...register('pan')} />
+				<TextInput label="GST No" placeholder="29AAXXXXXXXXXXX" {...register('gstNo')} />
 			</section>
 			<section className="!mt-[42px]">
 				<Button className="min-w-[250px]" isLoading={isPending} disabled={isPending}>
