@@ -14,6 +14,7 @@ export default function PageDetails() {
 		handlePetParent,
 		parentDetails,
 		refetchParents,
+		handleAddParent,
 	} = useSearchHook();
 
 	return (
@@ -25,6 +26,7 @@ export default function PageDetails() {
 				isPending={isPending}
 				parents={parents}
 				handlePetParent={handlePetParent}
+				handleAddParent={handleAddParent}
 			/>
 			{parentDetails && (
 				<PetParent

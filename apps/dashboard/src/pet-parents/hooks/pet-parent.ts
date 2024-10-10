@@ -64,6 +64,18 @@ export default function usePetParentHook(
 		);
 	}, []);
 
+	const handleAddParent = useCallback(() => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.ADD_EDIT_PARENT,
+				type: 'add',
+				data: null,
+				refetch: refetchParents,
+			})
+		);
+	}, []);
+
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
 		router.push(`/pet/${pet.petId}?parentId=${parentId}`);
 	}, []);
@@ -90,5 +102,6 @@ export default function usePetParentHook(
 		profileUrl,
 		parent,
 		pets,
+		handleAddParent,
 	};
 }

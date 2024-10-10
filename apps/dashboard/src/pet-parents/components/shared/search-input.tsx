@@ -13,6 +13,7 @@ function SearchInput({
 	isPending,
 	parents,
 	handlePetParent,
+	handleAddParent,
 }: {
 	searchValue: string;
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -20,12 +21,13 @@ function SearchInput({
 	isPending: boolean;
 	parents: IClinicTypes.IPetParent[] | undefined;
 	handlePetParent: (parent: IClinicTypes.IPetParent) => void;
+	handleAddParent: () => void;
 }) {
 	return (
 		<div className="col-span-3">
 			<div className="flex items-center justify-between my-12">
 				<h1 className="text-24 font-semibold">Search</h1>
-				<Button>
+				<Button onClick={handleAddParent}>
 					<span className="font-black tracking-[-0.41px]">Add Parent</span>
 				</Button>
 			</div>
