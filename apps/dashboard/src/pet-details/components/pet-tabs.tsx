@@ -5,14 +5,34 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
 import { PrescriptionIcon } from '@webservices/icons';
 import { Followup, MedicalRecord, Vaccination } from '@webservices/ui';
+import { DashboardTypes } from '@webservices/primitives';
 
 export default function PetTabs() {
 	const [selectedIndex, setSelectedIndex] = useState(0);
 	const tabClass =
 		'data-[selected]:font-semibold focus:outline-none cursor-pointer text-center data-[selected]:border-b-2 data-[selected]:border-purple flex items-center gap-8 pb-6 ';
+	// const { updateQueryParams } = useRouterQuery();
+
+	// useEffect(() => {
+	// 	updateQueryParams({ key: 'type', value: DashboardTypes.MedicalRecord });
+	// }, []);
+
+	const updateType = (index: number) => {
+		switch (index) {
+			case 0:
+				return DashboardTypes.MedicalRecord;
+			case 1:
+				return DashboardTypes.Vaccination;
+			case 2:
+				return DashboardTypes.Followup;
+			default:
+				return DashboardTypes.MedicalRecord;
+		}
+	};
 
 	const onChange = (index: number) => {
 		setSelectedIndex(index);
+		// updateQueryParams({ key: 'type', value: updateType(index) });
 	};
 
 	return (
@@ -67,11 +87,10 @@ export default function PetTabs() {
 							)}
 						</Tab>
 					</div>
-					{/* <UploadBtn record={activeRecord} /> */}
 				</TabList>
 				<TabPanels className="mt-6">
 					<TabPanel>
-						<MedicalRecord />
+						<MedicalRecord selected={updateType(selectedIndex)} />
 					</TabPanel>
 					<TabPanel>
 						<Vaccination />

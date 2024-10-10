@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';

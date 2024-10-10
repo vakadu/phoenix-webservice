@@ -1,3 +1,5 @@
+export * from './lib/sidebar/sidebar';
+export * from './lib/tooltip/tooltip';
 export * from './lib/filter-item/filter-item';
 export * from './lib/medical-record/medical-record';
 export * from './lib/dashboard-layout-sidebar/dashboard-layout-sidebar';
