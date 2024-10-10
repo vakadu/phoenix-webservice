@@ -21,7 +21,7 @@ function PetParent({
 
 	return (
 		<div className="col-span-2 sticky top-[12px] z-10">
-			<div className="bg-white w-full px-16 shadow-base rounded-8 py-12 ">
+			<div className="bg-white w-full px-16 shadow-base rounded-8 py-12 max-h-[calc(100vh-62px)] overflow-y-scroll">
 				<div className="flex gap-32 items-start">
 					<div className=" rounded-full w-[142px] h-[142px] bg-white relative">
 						{profileUrl && profileUrl !== '' ? (

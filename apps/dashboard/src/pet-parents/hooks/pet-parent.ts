@@ -62,7 +62,7 @@ export default function usePetParentHook(
 				refetch: refetchParents,
 			})
 		);
-	}, []);
+	}, [memberId, parentId]);
 
 	const handleAddParent = useCallback(() => {
 		dispatch(
@@ -92,7 +92,7 @@ export default function usePetParentHook(
 				refetch: refetchParents,
 			})
 		);
-	}, []);
+	}, [parentId]);
 
 	return {
 		handleAddPet,
