@@ -62,6 +62,18 @@ export default function usePetParentHook(
 				refetch: refetchParents,
 			})
 		);
+	}, [memberId, parentId]);
+
+	const handleAddParent = useCallback(() => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.ADD_EDIT_PARENT,
+				type: 'add',
+				data: null,
+				refetch: refetchParents,
+			})
+		);
 	}, []);
 
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
@@ -80,7 +92,7 @@ export default function usePetParentHook(
 				refetch: refetchParents,
 			})
 		);
-	}, []);
+	}, [parentId]);
 
 	return {
 		handleAddPet,
@@ -90,5 +102,6 @@ export default function usePetParentHook(
 		profileUrl,
 		parent,
 		pets,
+		handleAddParent,
 	};
 }
