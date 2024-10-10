@@ -1,4 +1,5 @@
 import { pemilyStore, resetUser } from '@webservices/slices';
+import { format } from 'date-fns';
 import { StylesConfig } from 'react-select';
 
 export const shimmer = () => `
@@ -121,4 +122,16 @@ export const customSelectBoxStyles: StylesConfig<{ value: string; label: string 
 		color: state.isFocused ? '#fff' : '#000',
 		fontSize: '14px',
 	}),
+};
+
+export const convertDates = (dates: Date[] | Date) => {
+	const isArray = Array.isArray(dates);
+	if (isArray) {
+		const mappedDates = dates.map((date) => {
+			return format(date, 'yyyy-MM-dd');
+		});
+		return mappedDates;
+	} else {
+		return format(dates, 'yyyy-MM-dd');
+	}
 };

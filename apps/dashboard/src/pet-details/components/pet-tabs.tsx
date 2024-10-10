@@ -93,7 +93,7 @@ export default function PetTabs() {
 						<MedicalRecord selected={updateType(selectedIndex)} />
 					</TabPanel>
 					<TabPanel>
-						<Vaccination />
+						<Vaccination selected={updateType(selectedIndex)} />
 					</TabPanel>
 					<TabPanel>
 						<Followup />
