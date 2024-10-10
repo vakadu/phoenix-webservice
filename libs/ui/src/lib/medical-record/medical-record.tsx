@@ -9,10 +9,9 @@ import { firstCharCapital } from '@webservices/helpers';
 
 interface IMedicalRecords {
 	showDays?: boolean;
-	selected: string;
 }
 
-export function MedicalRecord({ showDays = true, selected }: IMedicalRecords) {
+export function MedicalRecord({ showDays = true }: IMedicalRecords) {
 	const {
 		activeFilter,
 		setActiveFilter,

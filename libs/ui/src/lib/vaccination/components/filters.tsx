@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { vaccinationClinicFilters, vaccinationPetFilters } from '@webservices/constants';
 import FilterItem, { FilterIcon, FilterLabel } from '../../filter-item/filter-item';
 import Tooltip from '../../tooltip/tooltip';
-import { firstCharCapital } from '@webservices/helpers';
 import { UploadIcon } from '@webservices/icons';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
 

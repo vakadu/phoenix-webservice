@@ -8,10 +8,9 @@ import useVaccination from './hooks/use-vaccination.hook';
 
 interface IVaccination {
 	showDays?: boolean;
-	selected: string;
 }
 
-export function Vaccination({ showDays = true, selected }: IVaccination) {
+export function Vaccination({ showDays = true }: IVaccination) {
 	const { activeFilter, setActiveFilter, petId, setShowSidebar, showSidebar, refetch, parentId } =
 		useVaccination();
 
