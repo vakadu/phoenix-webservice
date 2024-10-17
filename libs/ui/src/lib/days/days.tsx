@@ -50,20 +50,6 @@ export function DaysItem({
 	return (
 		<div className="flex items-center justify-between">
 			<div className="gap-16 flex justify-center items-center">
-				<div className="calender">
-					<DatePicker
-						className="cursor-pointer w-auto"
-						onChange={handleCalender}
-						selected={new Date(selectedDate)}
-						customInput={
-							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8 ">
-								<CalenderIcon />
-								<p className="text-12">Choose from Calender</p>
-							</div>
-						}
-					/>
-				</div>
-
 				{daysHeader.map((day, i) => {
 					const split = day.displayDate.split(' ');
 					const active = selectedDate === day.fullDate;
@@ -85,6 +71,19 @@ export function DaysItem({
 						</ButtonWrapper>
 					);
 				})}
+				<div className="calender">
+					<DatePicker
+						className="cursor-pointer w-auto"
+						onChange={handleCalender}
+						selected={new Date(selectedDate)}
+						customInput={
+							<div className=" flex-col shadow-base rounded-8 px-6 flex items-center justify-center py-8 bg-white">
+								<CalenderIcon />
+								<p className="text-12">Choose from Calender</p>
+							</div>
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);

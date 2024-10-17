@@ -1,5 +1,6 @@
 'use client';
 
+import DaysItem from '../days/days';
 import Sidebar from '../sidebar/sidebar';
 import Filters from './components/filters';
 import Records from './components/records';
@@ -11,7 +12,7 @@ interface IMedicalRecords {
 	showDays?: boolean;
 }
 
-export function MedicalRecord({ showDays = true }: IMedicalRecords) {
+export function MedicalRecord({ showDays = false }: IMedicalRecords) {
 	const {
 		activeFilter,
 		setActiveFilter,
@@ -20,17 +21,24 @@ export function MedicalRecord({ showDays = true }: IMedicalRecords) {
 		setShowSidebar,
 		handleUploadClick,
 		uploadMedicalRecordPending,
+		handleDate,
+		selectedDate,
 	} = useMedicalRecord();
 
 	return (
-		<div>
+		<>
+			{showDays && <DaysItem selectedDate={selectedDate} handleDate={handleDate} />}
 			<Filters
 				activeFilter={activeFilter}
 				setActiveFilter={setActiveFilter}
 				petId={petId as string | undefined}
 				setShowSidebar={setShowSidebar}
 			/>
-			<Records activeFilter={activeFilter} petId={petId as string} />
+			<Records
+				activeFilter={activeFilter}
+				petId={petId as string}
+				selectedDate={selectedDate}
+			/>
 			<Sidebar isOpen={showSidebar} handleClose={() => setShowSidebar(false)}>
 				<Upload
 					isLoading={uploadMedicalRecordPending}
@@ -41,7 +49,7 @@ export function MedicalRecord({ showDays = true }: IMedicalRecords) {
 					)}`}
 				/>
 			</Sidebar>
-		</div>
+		</>
 	);
 }
 

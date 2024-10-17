@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
 
 import { medicalRecordsFilters } from '@webservices/constants';
 import FilterItem, { FilterIcon, FilterLabel } from '../../filter-item/filter-item';
@@ -6,6 +7,9 @@ import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import { UploadIcon } from '@webservices/icons';
 import Tooltip from '../../tooltip/tooltip';
 import { firstCharCapital } from '@webservices/helpers';
+import Button from '../../button/button';
+import { openModal } from '@webservices/slices';
+import { ModalTypes } from '@webservices/primitives';
 
 export default function Filters({
 	activeFilter,
@@ -18,6 +22,20 @@ export default function Filters({
 	petId: string | undefined;
 	setShowSidebar: (sidebar: boolean) => void;
 }) {
+	const dispatch = useDispatch();
+
+	const openParents = () => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.SEARCH_PARENTS,
+				center: false,
+				maxWidth: 'max-w-3xl',
+				data: {},
+			})
+		);
+	};
+
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 		const buttonElement = (event.target as HTMLElement).closest('button');
@@ -40,7 +58,7 @@ export default function Filters({
 					);
 				})}
 			</div>
-			{petId && (
+			{petId ? (
 				<Tooltip
 					content={`Upload ${firstCharCapital(activeFilter)}`}
 					placement="top"
@@ -60,6 +78,12 @@ export default function Filters({
 						</motion.div>
 					</ButtonWrapper>
 				</Tooltip>
+			) : (
+				<Button onClick={openParents} className="min-w-[180px] max-w-[240px] !px-12">
+					<span className="text-14 font-bold">{`Upload ${firstCharCapital(
+						activeFilter
+					)}`}</span>
+				</Button>
 			)}
 		</div>
 	);

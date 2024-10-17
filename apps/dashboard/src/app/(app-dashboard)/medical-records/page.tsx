@@ -1,7 +1,11 @@
-import MedicalRecords from '../../../components/organisms/medical-records';
+import { MedicalRecord } from '@webservices/ui';
 
 const Page = () => {
-	return <MedicalRecords />;
+	return (
+		<section className="bg-white p-16 rounded-8">
+			<MedicalRecord showDays />
+		</section>
+	);
 };
 
 export default Page;

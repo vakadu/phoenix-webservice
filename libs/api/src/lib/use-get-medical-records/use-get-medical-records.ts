@@ -32,6 +32,7 @@ export function useGetMedicalRecords({
 	return useQuery({
 		queryKey: [ApiEndpoints.ClinicMedicalRecords, type, petId, date],
 		queryFn: getMedicalRecords,
+		enabled: !!petId || !!date,
 	});
 }
 

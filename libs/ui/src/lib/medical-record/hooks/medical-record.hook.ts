@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouterQuery } from '@webservices/hooks';
 import { createFormDataForDocument, createFormDataForImage } from '@webservices/helpers';
 import { useGetMedicalRecords, useUploadMedicalRecord } from '@webservices/api';
+import { format } from 'date-fns';
 
 export default function useMedicalRecord() {
 	const [activeFilter, setActiveFilter] = useState('PRESCRIPTION');
@@ -14,9 +15,10 @@ export default function useMedicalRecord() {
 		useUploadMedicalRecord({
 			petId: petId as string,
 		});
+	const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
 	const { refetch: refetchRecords } = useGetMedicalRecords({
 		type: activeFilter,
-		...(petId ? { petId } : { date: '' }),
+		...(petId ? { petId } : { date: selectedDate }),
 	});
 
 	const handleUploadClick = async (
@@ -48,6 +50,10 @@ export default function useMedicalRecord() {
 		}
 	};
 
+	const handleDate = (date: string) => {
+		setSelectedDate(date);
+	};
+
 	return {
 		activeFilter,
 		setActiveFilter,
@@ -57,5 +63,7 @@ export default function useMedicalRecord() {
 		showSidebar,
 		handleUploadClick,
 		uploadMedicalRecordPending,
+		selectedDate,
+		handleDate,
 	};
 }

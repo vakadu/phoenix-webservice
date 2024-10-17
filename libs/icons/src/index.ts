@@ -1,3 +1,6 @@
+export * from './lib/radio-filled-icon/radio-filled-icon';
+export * from './lib/radio-unfilled-icon/radio-unfilled-icon';
+export * from './lib/search-icon/search-icon';
 export * from './lib/camera-icon/camera-icon';
 export * from './lib/mail-icon/mail-icon';
 export * from './lib/phone-icon/phone-icon';

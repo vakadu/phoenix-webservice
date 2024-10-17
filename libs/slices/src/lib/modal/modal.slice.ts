@@ -9,6 +9,7 @@ export type MODAL_VIEW =
 	| ModalTypes.ADD_EDIT_PARENT
 	| ModalTypes.ADD_EDIT_PET
 	| ModalTypes.LOADING_MODAL
+	| ModalTypes.SEARCH_PARENTS
 	| '';
 
 type ModalState = {
@@ -20,11 +21,15 @@ type ModalState = {
 	data?: any;
 	type?: 'add' | 'edit';
 	refetch?: () => void;
+	center?: boolean;
+	maxWidth?: string;
 };
 
 const initialState: ModalState = {
 	isOpen: false,
 	view: '',
+	center: true,
+	maxWidth: 'max-w-2xl',
 };
 
 const modalSlice = createSlice({

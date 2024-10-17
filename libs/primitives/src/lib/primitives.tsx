@@ -4,6 +4,7 @@ export const enum ModalTypes {
 	ADD_EDIT_PARENT = 'add_edit_parent',
 	ADD_EDIT_PET = 'add_edit_pet',
 	LOADING_MODAL = 'loading',
+	SEARCH_PARENTS = 'search_parents',
 }
 
 export enum PaymentScripts {

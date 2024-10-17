@@ -4,12 +4,13 @@ import { useCallback } from 'react';
 interface IProps {
 	activeFilter: string;
 	petId: string;
+	selectedDate: string;
 }
 
-export default function useRecord({ activeFilter, petId }: IProps) {
+export default function useRecord({ activeFilter, petId, selectedDate }: IProps) {
 	const { data, isPending, refetch } = useGetMedicalRecords({
 		type: activeFilter,
-		...(petId ? { petId } : { date: '' }),
+		...(petId ? { petId } : { date: selectedDate }),
 	});
 
 	const handleRefetch = useCallback(() => {
