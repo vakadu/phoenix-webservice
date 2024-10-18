@@ -1,3 +1,6 @@
+export * from './lib/enter-icon/enter-icon';
+export * from './lib/down-arrow-icon/down-arrow-icon';
+export * from './lib/up-arrow-icon/up-arrow-icon';
 export * from './lib/radio-filled-icon/radio-filled-icon';
 export * from './lib/radio-unfilled-icon/radio-unfilled-icon';
 export * from './lib/search-icon/search-icon';
