@@ -91,3 +91,23 @@ body {
 .react-select__control {
 	@apply h-full;
 }
+
+.pet .swiper-button-prev:after,
+.swiper-button-next:after {
+	@apply !text-[18px];
+}
+
+.pet .swiper-button-prev:after,
+.swiper-button-next:after {
+	@apply !text-[18px];
+}
+
+.pet .swiper-button-prev,
+.swiper-container-rtl .swiper-button-next {
+	@apply left-0 bg-white rounded-tr-8 rounded-br-8;
+}
+
+.pet .swiper-button-next,
+.swiper-container-rtl .swiper-button-prev {
+	@apply right-0 bg-white rounded-tl-8 rounded-bl-8;
+}
