@@ -68,11 +68,7 @@ export function ModalView(props: ModalViewsProps) {
 		<Dialog className="relative z-[999] focus:outline-none" onClose={handleClose} open={isOpen}>
 			<DialogBackdrop className="fixed inset-0 bg-gray-700 bg-opacity-60 backdrop-blur" />
 			<div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-				<div
-					className={`flex min-h-full justify-center  ${
-						center ? center : 'items-center'
-					} p-4`}
-				>
+				<div className={`flex min-h-full justify-center  ${center && 'items-center'} p-4`}>
 					<DialogPanel
 						transition
 						className={`w-full ${

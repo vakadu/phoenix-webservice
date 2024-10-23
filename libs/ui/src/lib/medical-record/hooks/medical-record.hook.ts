@@ -65,5 +65,6 @@ export default function useMedicalRecord() {
 		uploadMedicalRecordPending,
 		selectedDate,
 		handleDate,
+		refetchRecords,
 	};
 }

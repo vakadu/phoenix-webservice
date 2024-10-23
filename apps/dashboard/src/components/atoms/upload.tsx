@@ -1,9 +1,10 @@
 'use client';
 
-import { DeleteIcon, ImagePlaceholderIcon, PdfIcon } from '@webservices/icons';
-import { Button, ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import { DeleteIcon, ImagePlaceholderIcon, PdfIcon } from '@webservices/icons';
+import { Button, ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
 
 const Upload = ({
 	btnTxt,

@@ -8,18 +8,21 @@ function Parent({
 	handleParent,
 	activeParent,
 	focusedIndex,
+	activeClinic,
 }: {
 	data: IClinicTypes.IPetParent[];
 	handleParent: (e: React.MouseEvent<HTMLDivElement>) => void;
 	activeParent: string;
 	focusedIndex: number;
+	activeClinic: string;
 }) {
 	return (
 		<div onClick={handleParent}>
 			{data?.map((item, index) => {
 				const {
 					_id,
-					parent: { name, petNames, mobile },
+					clinicId,
+					parent: { name, petNames, mobile, parentId },
 				} = item;
 				const active = focusedIndex === index;
 				const currentActiveParent = activeParent === _id;
@@ -28,6 +31,8 @@ function Parent({
 						key={_id}
 						id={_id}
 						data-id={_id}
+						data-parentid={parentId}
+						data-clinicid={clinicId}
 						className={`py-16 border-b px-16 border-b-grey-border1 cursor-pointer hover:bg-primary-3 ${
 							active ? 'bg-primary-3' : ''
 						}`}
@@ -65,7 +70,9 @@ function Parent({
 								</div>
 							)}
 						</div>
-						{currentActiveParent && <Pets activeParent={activeParent} />}
+						{currentActiveParent && (
+							<Pets activeParent={activeParent} activeClinic={activeClinic} />
+						)}
 					</div>
 				);
 			})}

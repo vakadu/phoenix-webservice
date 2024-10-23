@@ -1,24 +1,26 @@
+import { memo } from 'react';
+
 import { useGetPetProfileImage } from '@webservices/api';
-import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import ImagePlaceholder from '../../image-placeholder/image-placeholder';
 
 const Pet = ({
 	pet,
-	handlePet,
 	height = 'h-[160px]',
 	containerStyles,
+	index,
 }: {
 	pet: ICommonTypes.IPet;
-	handlePet: (pet: ICommonTypes.IPet) => void;
 	height?: string;
 	containerStyles?: string;
+	index?: number;
 }) => {
 	const { data } = useGetPetProfileImage(pet?.petId as string);
 
 	return (
-		<ButtonWrapper
-			className={`border border-grey-border2 rounded-8 w-full ${containerStyles}`}
-			onClick={() => handlePet(pet)}
+		<div
+			className={`cursor-pointer rounded-8 w-full ${containerStyles}`}
+			data-id={pet.petId}
+			data-index={index}
 		>
 			{data?.data?.profileUrl && data?.data?.profileUrl !== '' ? (
 				<ImagePlaceholder
@@ -34,8 +36,8 @@ const Pet = ({
 				/>
 			)}
 			<p className="font-semibold text-14 text-left pt-8">{pet.name}</p>
-		</ButtonWrapper>
+		</div>
 	);
 };
 
-export default Pet;
+export default memo(Pet);

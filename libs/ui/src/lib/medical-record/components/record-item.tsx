@@ -50,6 +50,7 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 				confirmationTitle: 'Delete Record',
 				confirmationHeading: 'Are you sure you want to delete the record?',
 				onHandleConfirm: onDelete,
+				center: true,
 			})
 		);
 	};

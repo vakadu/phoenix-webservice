@@ -7,15 +7,23 @@ interface CategoryLoaderProps {
 	columns?: number;
 	coverHeight?: number;
 	speed?: number;
+	backgroundColor?: string;
 }
 
 export const CategoryLoader: React.FC<CategoryLoaderProps> = (props) => {
-	const { rows = 2, columns = 5, coverHeight = 85, speed = 1, ...rest } = props;
+	const {
+		rows = 2,
+		columns = 5,
+		coverHeight = 85,
+		speed = 1,
+		backgroundColor = '#E5E7E9',
+		...rest
+	} = props;
 	const { width } = useWindowSize();
 
-	const containerPadding = 0; // Padding on left and right of the container
-	const horizontalBoxMargin = 52; // Increased margin between boxes horizontally
-	const verticalBoxMargin = 12; // Maintain original vertical margin
+	const containerPadding = 0;
+	const horizontalBoxMargin = 52;
+	const verticalBoxMargin = 12;
 	const totalHorizontalMargin = (columns - 1) * horizontalBoxMargin;
 	const totalAvailableWidth =
 		100 - 2 * ((containerPadding / width) * 100) - (totalHorizontalMargin / width) * 100;
@@ -27,7 +35,7 @@ export const CategoryLoader: React.FC<CategoryLoaderProps> = (props) => {
 			speed={speed}
 			width="100%"
 			height={rows * coverHeight + (rows - 1) * verticalBoxMargin + 2 * containerPadding}
-			backgroundColor="#E5E7E9"
+			backgroundColor={backgroundColor}
 			foregroundColor="#CACFD2"
 			{...rest}
 		>

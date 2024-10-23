@@ -23,6 +23,7 @@ export function MedicalRecord({ showDays = false }: IMedicalRecords) {
 		uploadMedicalRecordPending,
 		handleDate,
 		selectedDate,
+		refetchRecords,
 	} = useMedicalRecord();
 
 	return (
@@ -33,6 +34,7 @@ export function MedicalRecord({ showDays = false }: IMedicalRecords) {
 				setActiveFilter={setActiveFilter}
 				petId={petId as string | undefined}
 				setShowSidebar={setShowSidebar}
+				refetchRecords={refetchRecords}
 			/>
 			<Records
 				activeFilter={activeFilter}

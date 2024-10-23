@@ -12,6 +12,7 @@ export function SearchParentsModal() {
 	const [value, setValue] = useState('');
 	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
 	const [activeParent, setActiveParent] = useState<string>('');
+	const [activeClinic, setActiveClinic] = useState<string>('');
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,11 +39,19 @@ export function SearchParentsModal() {
 	const handleParent = useCallback(
 		(e: React.MouseEvent<HTMLDivElement>) => {
 			e.stopPropagation();
-			const id = (e.target as HTMLElement).closest('[data-id]')?.getAttribute('data-id');
-			if (id) {
-				setActiveParent(id);
+			const parentId = (e.target as HTMLElement)
+				.closest('[data-parentid]')
+				?.getAttribute('data-parentid');
+			const clinicId = (e.target as HTMLElement)
+				.closest('[data-clinicid]')
+				?.getAttribute('data-clinicid') as string;
+			if (parentId) {
+				setActiveParent(parentId);
+				setActiveClinic(clinicId);
 				const parentsData = data?.data?.parents || [];
-				const index = parentsData.findIndex((parent) => parent._id === id);
+				const index = parentsData.findIndex(
+					(parent) => parent.parent.parentId === parentId
+				);
 				setFocusedIndex(index);
 			}
 		},
@@ -51,11 +60,11 @@ export function SearchParentsModal() {
 
 	const onClear = useCallback(() => {
 		setValue('');
+		getPetParents('');
 	}, []);
 
 	const handleKeyDown = useCallback(
 		(e: KeyboardEvent) => {
-			e.preventDefault();
 			const parentsData = data?.data?.parents || [];
 			if (parentsData.length <= 0) {
 				return;
@@ -69,9 +78,12 @@ export function SearchParentsModal() {
 			if (e.code === 'ArrowUp') {
 				setFocusedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
 			}
+
 			if (e.code === 'Enter' && focusedIndex >= 0) {
-				const selectedParent = parentsData[focusedIndex]._id;
+				const selectedParent = parentsData[focusedIndex].parent.parentId;
+				const selectedClinic = parentsData[focusedIndex].clinicId;
 				setActiveParent(selectedParent);
+				setActiveClinic(selectedClinic);
 			}
 		},
 		[data?.data?.parents, focusedIndex]
@@ -118,6 +130,7 @@ export function SearchParentsModal() {
 						handleParent={handleParent}
 						activeParent={activeParent}
 						focusedIndex={focusedIndex}
+						activeClinic={activeClinic}
 					/>
 				)}
 			</div>

@@ -16,11 +16,13 @@ export default function Filters({
 	setActiveFilter,
 	petId,
 	setShowSidebar,
+	refetchRecords,
 }: {
 	activeFilter: string;
 	setActiveFilter: (filter: string) => void;
 	petId: string | undefined;
 	setShowSidebar: (sidebar: boolean) => void;
+	refetchRecords: () => void;
 }) {
 	const dispatch = useDispatch();
 
@@ -31,7 +33,11 @@ export default function Filters({
 				view: ModalTypes.SEARCH_PARENTS,
 				center: false,
 				maxWidth: 'max-w-3xl',
-				data: {},
+				data: {
+					type: 'medical-records',
+					activeFilter,
+					refetch: refetchRecords,
+				},
 			})
 		);
 	};
