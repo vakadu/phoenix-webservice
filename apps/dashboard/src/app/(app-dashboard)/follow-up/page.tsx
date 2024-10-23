@@ -1,7 +1,5 @@
-import Followup from '../../../components/organisms/follow-up';
-
 const Page = () => {
-	return <Followup />;
+	return <div></div>;
 };
 
 export default Page;
