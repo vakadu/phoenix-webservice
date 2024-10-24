@@ -3,6 +3,7 @@
 import { memo, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { useDispatch } from 'react-redux';
+import dynamic from 'next/dynamic';
 
 import { BellIcon, DeleteIcon } from '@webservices/icons';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
@@ -10,7 +11,11 @@ import { openModal } from '@webservices/slices';
 import { ModalTypes } from '@webservices/primitives';
 import { useSendVaccinationRemainder, useUpdateVaccinationRecord } from '@webservices/api';
 import ImagePlaceholder from '../../image-placeholder/image-placeholder';
-import UpdateVaccination from './update-vaccination';
+import Loading from '../../loading/loading';
+
+const UpdateVaccination = dynamic(() => import('./update-vaccination'), {
+	loading: () => <Loading />,
+});
 
 interface IRecordItem {
 	record: IClinicTypes.IVaccinationRecord;
