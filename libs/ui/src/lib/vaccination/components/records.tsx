@@ -8,10 +8,15 @@ import RecordItem from './record-item';
 interface IRecord {
 	activeFilter: string;
 	petId: string;
+	selectedDate: string;
 }
 
-function VaccinationRecords({ activeFilter, petId }: IRecord) {
-	const { isPending, vaccinationRecords, refetch } = useRecord({ activeFilter, petId });
+function VaccinationRecords({ activeFilter, petId, selectedDate }: IRecord) {
+	const { isPending, vaccinationRecords, refetch } = useRecord({
+		activeFilter,
+		petId,
+		selectedDate,
+	});
 
 	if (isPending) {
 		return <CategoryLoader columns={1} rows={4} />;

@@ -1,9 +1,10 @@
 'use client';
 
+import DaysItem from '../days/days';
 import Sidebar from '../sidebar/sidebar';
+import VaccinationForm from '../vaccination-form/vaccination-form';
 import Filters from './components/filters';
 import VaccinationRecords from './components/records';
-import VaccinationForm from './components/vaccination-form';
 import useVaccination from './hooks/use-vaccination.hook';
 
 interface IVaccination {
@@ -11,18 +12,33 @@ interface IVaccination {
 }
 
 export function Vaccination({ showDays = true }: IVaccination) {
-	const { activeFilter, setActiveFilter, petId, setShowSidebar, showSidebar, refetch, parentId } =
-		useVaccination();
+	const {
+		activeFilter,
+		setActiveFilter,
+		petId,
+		setShowSidebar,
+		showSidebar,
+		refetch,
+		parentId,
+		selectedDate,
+		handleDate,
+	} = useVaccination();
 
 	return (
 		<div>
+			{showDays && <DaysItem selectedDate={selectedDate} handleDate={handleDate} />}
 			<Filters
 				activeFilter={activeFilter}
 				setActiveFilter={setActiveFilter}
 				petId={petId as string | undefined}
 				setShowSidebar={setShowSidebar}
+				refetch={refetch}
 			/>
-			<VaccinationRecords activeFilter={activeFilter} petId={petId as string} />
+			<VaccinationRecords
+				activeFilter={activeFilter}
+				petId={petId as string}
+				selectedDate={selectedDate}
+			/>
 			<Sidebar isOpen={showSidebar} handleClose={() => setShowSidebar(false)}>
 				<VaccinationForm
 					refetch={refetch}

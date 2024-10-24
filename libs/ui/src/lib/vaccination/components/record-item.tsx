@@ -66,6 +66,7 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 				confirmationTitle: 'Delete Vaccination Record',
 				confirmationHeading: 'Are you sure you want to record?',
 				onHandleConfirm: onDelete,
+				center: true,
 			})
 		);
 	};

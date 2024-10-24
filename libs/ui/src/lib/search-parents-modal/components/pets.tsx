@@ -3,13 +3,14 @@
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useGetPets } from '@webservices/api';
 import CategoryLoader from '../../category-loader/category-loader';
 import Pet from './pet';
-import { useSelector } from 'react-redux';
-import { PemilyRootState } from '@webservices/slices';
+import { closeModal, PemilyRootState } from '@webservices/slices';
 import RecordUpload from './record-upload';
+import VaccinationForm from '../../vaccination-form/vaccination-form';
 
 function PetsList({ activeParent, activeClinic }: { activeParent: string; activeClinic: string }) {
 	const { data, isPending } = useGetPets(activeParent as string);
@@ -19,6 +20,7 @@ function PetsList({ activeParent, activeClinic }: { activeParent: string; active
 	const recordType = modalData?.data?.type;
 	const activeFilter = modalData?.data?.activeFilter;
 	const refetch = modalData?.data?.refetch;
+	const dispatch = useDispatch();
 
 	const petsData = useMemo(() => {
 		return data?.data?.pets || [];
@@ -66,6 +68,10 @@ function PetsList({ activeParent, activeClinic }: { activeParent: string; active
 		[petsData]
 	);
 
+	const handleClose = useCallback(() => {
+		dispatch(closeModal());
+	}, []);
+
 	if (isPending) {
 		return (
 			<div className="pt-16 ml-[48px] text-14 font-medium">
@@ -110,6 +116,15 @@ function PetsList({ activeParent, activeClinic }: { activeParent: string; active
 					petId={activePet}
 					refetch={refetch}
 					activeClinic={activeClinic}
+				/>
+			)}
+			{Boolean(activePet) && recordType === 'vaccination' && (
+				<VaccinationForm
+					parentId={activeParent}
+					petId={activePet}
+					refetch={refetch}
+					handleClose={handleClose}
+					type="modal"
 				/>
 			)}
 		</div>

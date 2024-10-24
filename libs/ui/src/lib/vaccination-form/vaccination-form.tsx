@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
@@ -6,8 +8,8 @@ import Select, { SingleValue } from 'react-select';
 import { CloseIcon } from '@webservices/icons';
 import { useCreateVaccinationRecords, useGetVaccinationList } from '@webservices/api';
 import { convertDates, customSelectBoxStyles } from '@webservices/helpers';
-import Button from '../../button/button';
-import ButtonWrapper from '../../button-wrapper/button-wrapper';
+import ButtonWrapper from '../button-wrapper/button-wrapper';
+import Button from '../button/button';
 
 interface OptionType {
 	value: string;
@@ -19,15 +21,17 @@ const VaccinationForm = ({
 	petId,
 	parentId,
 	handleClose,
+	type = 'sidebar',
 }: {
 	refetch: () => void;
 	petId: string;
 	parentId: string;
 	handleClose: () => void;
+	type?: string;
 }) => {
 	const [selectedVaccine, setVaccine] = useState<SingleValue<OptionType>>(null);
 	const [selectedDates, setSelectedDates] = useState<any[]>([]);
-	const { mutateAsync: createVaccination } = useCreateVaccinationRecords();
+	const { mutateAsync: createVaccination, isPending } = useCreateVaccinationRecords();
 	const { data } = useGetVaccinationList();
 
 	const onChange = (dates: any) => {
@@ -64,11 +68,11 @@ const VaccinationForm = ({
 	};
 
 	return (
-		<section className="flex flex-col h-full px-16">
-			<h2 className="text-24 font-semibold mt-24">Add Vaccination Details</h2>
+		<section className="flex flex-col h-full px-16 bg-white rounded-8 mt-16">
+			<h2 className="text-24 font-semibold pt-16">Add Vaccination Details</h2>
 			<h6 className="text-14 mt-8 mb-24">We will remind you when vaccination is due</h6>
-			<div className="flex-1">
-				<div>
+			<div className={`flex-1 ${type === 'modal' ? 'grid grid-cols-2 gap-24' : ''}`}>
+				<div className="col-span-1">
 					<label className="text-14 leading-24">Choose a vaccine</label>
 					<Select
 						options={data?.data?.vaccination}
@@ -79,7 +83,7 @@ const VaccinationForm = ({
 						value={selectedVaccine}
 					/>
 				</div>
-				<div className="mt-24">
+				<div className={` col-span-1 ${type === 'modal' ? '' : 'mt-24'}`}>
 					<label className="text-14 leading-24 block">Choose Date</label>
 					<DatePicker
 						selectedDates={selectedDates}
@@ -88,7 +92,7 @@ const VaccinationForm = ({
 						shouldCloseOnSelect={false}
 						disabledKeyboardNavigation
 					/>
-					{selectedDates.length > 1 && (
+					{type === 'sidebar' && selectedDates.length > 1 && (
 						<div className="flex flex-wrap mt-12 gap-8">
 							{selectedDates.map((date) => {
 								const formattedDate = format(date, 'yyyy-MM-dd');
@@ -109,9 +113,10 @@ const VaccinationForm = ({
 				</div>
 			</div>
 			<Button
-				className="mb-32"
+				className="my-16"
 				onClick={handleSubmit}
-				disabled={!selectedVaccine || selectedDates.length <= 0}
+				disabled={!selectedVaccine || selectedDates.length <= 0 || isPending}
+				isLoading={isPending}
 			>
 				<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
 			</Button>
