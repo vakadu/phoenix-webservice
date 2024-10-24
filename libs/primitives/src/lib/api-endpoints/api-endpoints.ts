@@ -49,4 +49,5 @@ export const enum ApiEndpoints {
 	PetBreed = 'app/utils/breeds',
 	VaccinationList = 'app/utils/vaccination-list',
 	FollowupList = 'app/utils/follow-list',
+	DropdownList = 'app/utils/dropdown',
 }

@@ -36,7 +36,7 @@ export default function PetTabs() {
 	};
 
 	return (
-		<div className="col-span-2 bg-white py-32 px-16 rounded-[16px]">
+		<div className="col-span-3 bg-white py-32 px-16 rounded-[16px]">
 			<TabGroup
 				selectedIndex={selectedIndex}
 				onChange={onChange}

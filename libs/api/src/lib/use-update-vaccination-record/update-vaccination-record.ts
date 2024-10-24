@@ -6,8 +6,9 @@ import { HttpService } from '@webservices/services';
 
 interface IPayload {
 	vaccinatedOnDate?: string;
-	active: boolean;
+	active?: boolean;
 	id: string;
+	repeatAfter?: string;
 }
 
 const updateVaccinationRecord = async (payload: IPayload) => {

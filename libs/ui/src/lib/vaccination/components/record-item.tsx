@@ -3,14 +3,14 @@
 import { memo, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { useDispatch } from 'react-redux';
-import DatePicker from 'react-datepicker';
 
-import { BellIcon, DeleteIcon, EditIcon } from '@webservices/icons';
+import { BellIcon, DeleteIcon } from '@webservices/icons';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import { openModal } from '@webservices/slices';
 import { ModalTypes } from '@webservices/primitives';
 import { useSendVaccinationRemainder, useUpdateVaccinationRecord } from '@webservices/api';
 import ImagePlaceholder from '../../image-placeholder/image-placeholder';
+import UpdateVaccination from './update-vaccination';
 
 interface IRecordItem {
 	record: IClinicTypes.IVaccinationRecord;
@@ -18,22 +18,26 @@ interface IRecordItem {
 	activeFilter: string;
 }
 
-function Record({ record, refetch, activeFilter }: IRecordItem) {
+function Record({ record, refetch }: IRecordItem) {
 	const tempVaccine = record?.vaccinationDate ? parseISO(record?.vaccinationDate as string) : '';
 	const vaccineDate = tempVaccine && format(tempVaccine, 'do MMM yy');
 	const tempUpcoming = record?.vaccinatedOnDate
 		? parseISO(record?.vaccinatedOnDate as string)
 		: '';
 	const upcomingDate = tempUpcoming !== '' && format(tempUpcoming, 'do MMM yy');
-	const notificationDisbaled = record?.notificationCount >= 3;
 	const dispatch = useDispatch();
 	const { mutate: vaccinationRemainder, isPending } = useSendVaccinationRemainder({
 		refetch,
 	});
-	const { mutate: updateVaccination } = useUpdateVaccinationRecord({
+	const { mutate: updateVaccination, isPending: updateLoading } = useUpdateVaccinationRecord({
 		refetch,
 	});
-	const [editDate, setEditDate] = useState(new Date());
+	const [open, setOpen] = useState(false);
+	const notificationDisbaled =
+		record?.notificationCount >= 3 ||
+		isPending ||
+		updateLoading ||
+		typeof record?.vaccinatedOnDate === 'string';
 
 	const handleRemainder = () => {
 		const payload = {
@@ -71,17 +75,18 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 		);
 	};
 
-	const handleEdit = (date: any) => {
-		const payload = {
-			id: record._id,
-			active: record.active,
-			vaccinatedOnDate: format(date, 'yyyy-MM-dd'),
-		};
-		updateVaccination(payload);
+	const handleEdit = () => {
+		setOpen(true);
 	};
 
 	return (
-		<div className="grid grid-cols-3 gap-12 bg-white mb-12 rounded-8 shadow-base px-16 py-12">
+		<div className="grid grid-cols-4 gap-24 bg-white mb-12 rounded-8 shadow-base px-16 py-12">
+			<UpdateVaccination
+				isOpen={open}
+				handleClose={() => setOpen(false)}
+				refetch={refetch}
+				id={record._id}
+			/>
 			<div className="flex gap-16 col-span-1">
 				<ImagePlaceholder
 					src="/images/vaccination-record.svg"
@@ -92,27 +97,26 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 					<p className="text-14">{record?.parent?.name}</p>
 				</div>
 			</div>
-			<div className="col-span-1">
-				<div className="flex justify-between items-center gap-12">
+			<div className="col-span-2 flex justify-between items-center">
+				<div className="gap-12">
 					<p className="text-14 leading-24 font-semibold">
 						Vaccination: {record.vaccineName}
 					</p>
-					<div>
-						<DatePicker
-							selected={editDate}
-							onChange={handleEdit}
-							customInput={
-								<div className="w-[32px] h-[32px] flex items-center justify-center cursor-pointer">
-									<EditIcon />
-								</div>
-							}
-						/>
-					</div>
+					<p className="leading-32 text-14">
+						Vaccinated On: {record?.vaccinatedOnDate ? upcomingDate : '(Not Updated)'}
+					</p>
+					<p className="leading-24  text-14">Due On: {vaccineDate}</p>
 				</div>
-				<p className="leading-32 text-14">
-					Vaccinated On: {record?.vaccinatedOnDate ? upcomingDate : '(Not Updated)'}
-				</p>
-				<p className="leading-24  text-14">Due On: {vaccineDate}</p>
+				{record?.vaccinatedOnDate === null || !record?.vaccinatedOnDate ? (
+					<ButtonWrapper
+						onClick={handleEdit}
+						className="flex items-center justify-center border border-primary-1 px-12 rounded-full py-6"
+					>
+						<span className="text-14 font-bold text-primary-1">Complete</span>
+					</ButtonWrapper>
+				) : (
+					<span className="text-14 font-bold text-grey-text3">Completed</span>
+				)}
 			</div>
 			<div className="col-span-1 flex justify-end items-center edit-calender">
 				<div className="flex items-end gap-6">

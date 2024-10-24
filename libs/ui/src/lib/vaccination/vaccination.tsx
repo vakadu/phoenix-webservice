@@ -11,7 +11,7 @@ interface IVaccination {
 	showDays?: boolean;
 }
 
-export function Vaccination({ showDays = true }: IVaccination) {
+export function Vaccination({ showDays = false }: IVaccination) {
 	const {
 		activeFilter,
 		setActiveFilter,

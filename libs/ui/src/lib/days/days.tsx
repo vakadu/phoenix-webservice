@@ -66,7 +66,7 @@ export function DaysItem({
 								<span className="text-24 font-medium">
 									{split[0] + ' ' + split[1]}
 								</span>
-								<span>{split[2]}</span>
+								<span className="text-14">{split[2]}</span>
 							</div>
 						</ButtonWrapper>
 					);
