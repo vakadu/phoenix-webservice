@@ -3,8 +3,8 @@
 import { memo } from 'react';
 
 import { Button, CategoryLoader } from '@webservices/ui';
-import Search from '../../../components/atoms/search';
-import PetParent from '../../../components/atoms/pet-parent';
+import Search from '../../../ui/search';
+import PetParent from '../../../ui/pet-parent';
 import { PlusIcon } from '@webservices/icons';
 
 function SearchInput({

@@ -4,7 +4,7 @@ import { memo } from 'react';
 
 import { CameraIcon, EditIcon, PlusIcon, UserIcon } from '@webservices/icons';
 import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
-import Pet from '../../../components/atoms/pet';
+import Pet from '../../../ui/pet';
 import usePetParentHook from '../../hooks/pet-parent';
 
 function PetParent({

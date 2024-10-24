@@ -7,7 +7,7 @@ import { EditIcon, PlusIcon, UploadIcon } from '@webservices/icons';
 import { BoxLoader, ButtonWrapper } from '@webservices/ui';
 import { createFormDataForImage } from '@webservices/helpers';
 import AddEditStaff from './add-edit-staff';
-import UserProfileImage from '../../components/atoms/user-profile';
+import UserProfileImage from '../../ui/user-profile';
 
 const StaffList = () => {
 	const { data, isPending } = useGetStaff();

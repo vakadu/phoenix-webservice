@@ -1,4 +1,4 @@
-import Loading from '../components/atoms/loading';
+import Loading from '../ui/loading';
 
 const Page = () => {
 	return (

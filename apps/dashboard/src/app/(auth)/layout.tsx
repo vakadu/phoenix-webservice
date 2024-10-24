@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';
-import MobileOnly from '../../components/atoms/mobile-only';
+import MobileOnly from '../../ui/mobile-only';
 import { routes } from '../../routes';
 import { RouteList } from '../../routes/constants';
 

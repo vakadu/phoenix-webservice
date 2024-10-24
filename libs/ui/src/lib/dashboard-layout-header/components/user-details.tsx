@@ -44,7 +44,7 @@ export default function UserDetails() {
 	}, []);
 
 	return (
-		<div>
+		<div className="flex-1 flex justify-end items-center">
 			<Dropdown
 				label={
 					<div className="w-32 h-32 flex justify-center items-center cursor-pointer">

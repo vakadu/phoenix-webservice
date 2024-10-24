@@ -1,6 +1,5 @@
 'use client';
 
-import { PlusIcon } from '@webservices/icons';
 import useSearchHook from '../hooks/search';
 import PetParent from './shared/pet-parent';
 import SearchInput from './shared/search-input';
