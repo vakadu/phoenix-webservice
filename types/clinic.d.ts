@@ -157,6 +157,7 @@ declare namespace IClinicTypes {
 		recordId: string;
 		createdAtUTC: string;
 		updatedAtUTC: string;
+		followUpCompleteDate: string;
 	}
 	interface IClinicFolowupRecordsApiResponse {
 		followUpRecords: IFollowUpRecord[];

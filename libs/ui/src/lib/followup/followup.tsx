@@ -1,31 +1,51 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
+import DaysItem from '../days/days';
 import Sidebar from '../sidebar/sidebar';
 import Filters from './components/filters';
-import FollowupForm from './components/follow-up-form';
 import Records from './components/records';
 import useFollowup from './hooks/use-follwup';
+import Loading from '../loading/loading';
+
+const FollowupForm = dynamic(() => import('../followup-form/followup-form'), {
+	loading: () => <Loading />,
+});
 
 interface IFollowup {
 	showDays?: boolean;
 	showFilters?: boolean;
 }
 
-export function Followup({ showDays = true, showFilters = true }: IFollowup) {
-	const { activeFilter, setActiveFilter, petId, setShowSidebar, showSidebar, parentId, refetch } =
-		useFollowup();
+export function Followup({ showDays = false }: IFollowup) {
+	const {
+		activeFilter,
+		setActiveFilter,
+		petId,
+		setShowSidebar,
+		showSidebar,
+		parentId,
+		refetch,
+		selectedDate,
+		handleDate,
+	} = useFollowup();
 
 	return (
 		<div>
-			{showFilters && (
-				<Filters
-					activeFilter={activeFilter}
-					setActiveFilter={setActiveFilter}
-					petId={petId as string | undefined}
-					setShowSidebar={setShowSidebar}
-				/>
-			)}
-			<Records activeFilter={activeFilter} petId={petId as string} />
+			{showDays && <DaysItem selectedDate={selectedDate} handleDate={handleDate} />}
+			<Filters
+				activeFilter={activeFilter}
+				setActiveFilter={setActiveFilter}
+				petId={petId as string | undefined}
+				setShowSidebar={setShowSidebar}
+				refetch={refetch}
+			/>
+			<Records
+				activeFilter={activeFilter}
+				petId={petId as string}
+				selectedDate={selectedDate}
+			/>
 			<Sidebar isOpen={showSidebar} handleClose={() => setShowSidebar(false)}>
 				<FollowupForm
 					refetch={refetch}

@@ -1,4 +1,4 @@
-export * from './lib/follow-form/follow-form';
+export * from './lib/followup-form/followup-form';
 export * from './lib/vaccination-form/vaccination-form';
 export * from './lib/search-parents-modal/search-parents-modal';
 export * from './lib/sidebar/sidebar';

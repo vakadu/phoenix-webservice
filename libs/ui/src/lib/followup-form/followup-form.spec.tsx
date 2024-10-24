@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import FollowForm from './follow-form';
+import FollowupForm from './followup-form';
 
-describe('FollowForm', () => {
+describe('FollowupForm', () => {
 	it('should render successfully', () => {
-		const { baseElement } = render(<FollowForm />);
+		const { baseElement } = render(<FollowupForm />);
 		expect(baseElement).toBeTruthy();
 	});
 });

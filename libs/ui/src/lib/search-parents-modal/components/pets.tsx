@@ -4,13 +4,25 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import { useDispatch, useSelector } from 'react-redux';
+import dynamic from 'next/dynamic';
 
 import { useGetPets } from '@webservices/api';
 import CategoryLoader from '../../category-loader/category-loader';
 import Pet from './pet';
 import { closeModal, PemilyRootState } from '@webservices/slices';
-import RecordUpload from './record-upload';
-import VaccinationForm from '../../vaccination-form/vaccination-form';
+import Loading from '../../loading/loading';
+
+const RecordUpload = dynamic(() => import('./record-upload'), {
+	loading: () => <Loading />,
+});
+
+const VaccinationForm = dynamic(() => import('../../vaccination-form/vaccination-form'), {
+	loading: () => <Loading />,
+});
+
+const FollowupForm = dynamic(() => import('../../followup-form/followup-form'), {
+	loading: () => <Loading />,
+});
 
 function PetsList({ activeParent, activeClinic }: { activeParent: string; activeClinic: string }) {
 	const { data, isPending } = useGetPets(activeParent as string);
@@ -120,6 +132,15 @@ function PetsList({ activeParent, activeClinic }: { activeParent: string; active
 			)}
 			{Boolean(activePet) && recordType === 'vaccination' && (
 				<VaccinationForm
+					parentId={activeParent}
+					petId={activePet}
+					refetch={refetch}
+					handleClose={handleClose}
+					type="modal"
+				/>
+			)}
+			{Boolean(activePet) && recordType === 'follow-up' && (
+				<FollowupForm
 					parentId={activeParent}
 					petId={activePet}
 					refetch={refetch}

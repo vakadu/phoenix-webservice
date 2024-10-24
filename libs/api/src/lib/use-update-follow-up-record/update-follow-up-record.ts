@@ -5,7 +5,8 @@ import { ApiEndpoints } from '@webservices/primitives';
 import { HttpService } from '@webservices/services';
 
 interface IPayload {
-	followUpDate?: string;
+	followUpCompleteDate?: string;
+	repeatAfter?: string;
 	active: boolean;
 	id: string;
 }

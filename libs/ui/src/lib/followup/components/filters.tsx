@@ -1,22 +1,31 @@
 import { motion } from 'framer-motion';
+import { useDispatch } from 'react-redux';
 
-import { follwupFilters } from '@webservices/constants';
+import { vaccinationClinicFilters, vaccinationPetFilters } from '@webservices/constants';
 import FilterItem, { FilterIcon, FilterLabel } from '../../filter-item/filter-item';
 import Tooltip from '../../tooltip/tooltip';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import { UploadIcon } from '@webservices/icons';
+import Button from '../../button/button';
+import { openModal } from '@webservices/slices';
+import { ModalTypes } from '@webservices/primitives';
 
 export default function Filters({
 	activeFilter,
 	setActiveFilter,
 	petId,
 	setShowSidebar,
+	refetch,
 }: {
 	activeFilter: string;
 	setActiveFilter: (filter: string) => void;
 	petId: string | undefined;
 	setShowSidebar: (sidebar: boolean) => void;
+	refetch: () => void;
 }) {
+	const dispatch = useDispatch();
+	const filters = petId ? vaccinationPetFilters : vaccinationClinicFilters;
+
 	const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 		const buttonElement = (event.target as HTMLElement).closest('button');
@@ -26,10 +35,26 @@ export default function Filters({
 		}
 	};
 
+	const openParents = () => {
+		dispatch(
+			openModal({
+				isOpen: true,
+				view: ModalTypes.SEARCH_PARENTS,
+				center: false,
+				maxWidth: 'max-w-3xl',
+				data: {
+					type: 'follow-up',
+					activeFilter,
+					refetch,
+				},
+			})
+		);
+	};
+
 	return (
 		<div className="flex justify-between items-center gap-12 my-12" onClick={handleClick}>
 			<div className="flex gap-12">
-				{follwupFilters?.map((record) => {
+				{filters?.map((record) => {
 					const active = activeFilter === record.value;
 					return (
 						<FilterItem active={active} value={record.value} key={record.id}>
@@ -39,7 +64,7 @@ export default function Filters({
 					);
 				})}
 			</div>
-			{petId && (
+			{petId ? (
 				<Tooltip content="Upload Followup" placement="top" arrow animation="shift-away">
 					<ButtonWrapper
 						onClick={() => setShowSidebar(true)}
@@ -54,6 +79,10 @@ export default function Filters({
 						</motion.div>
 					</ButtonWrapper>
 				</Tooltip>
+			) : (
+				<Button onClick={openParents} className="min-w-[180px] max-w-[240px] !px-12">
+					<span className="text-14 font-bold">Add Follow-up</span>
+				</Button>
 			)}
 		</div>
 	);

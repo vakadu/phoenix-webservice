@@ -103,7 +103,7 @@ function Record({ record, refetch }: IRecordItem) {
 				</div>
 			</div>
 			<div className="col-span-2 flex justify-between items-center">
-				<div className="gap-12">
+				<div>
 					<p className="text-14 leading-24 font-semibold">
 						Vaccination: {record.vaccineName}
 					</p>

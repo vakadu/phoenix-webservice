@@ -1,32 +1,38 @@
+'use client';
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import Select, { SingleValue } from 'react-select';
 
 import { CloseIcon } from '@webservices/icons';
-import { Button, ButtonWrapper } from '@webservices/ui';
-import {
-	useCreateVaccinationRecords,
-	useGetVaccinationList,
-	useGetVaccinationRecords,
-} from '@webservices/api';
-import { convertDates } from '../../../helpers';
-import { useRecordSidebar } from '../../../context/record-sidebar-context';
-import { customSelectBoxStyles } from '@webservices/helpers';
+import { useCreateFollowUpRecords, useGetFollowupList } from '@webservices/api';
+import { convertDates, customSelectBoxStyles } from '@webservices/helpers';
+import ButtonWrapper from '../button-wrapper/button-wrapper';
+import Button from '../button/button';
 
 interface OptionType {
 	value: string;
 	label: string;
 }
 
-const VaccinationForm = () => {
-	const [selectedVaccine, setVaccine] = useState<SingleValue<OptionType>>(null);
+const FollowupForm = ({
+	refetch,
+	petId,
+	parentId,
+	handleClose,
+	type = 'sidebar',
+}: {
+	refetch: () => void;
+	petId: string;
+	parentId: string;
+	handleClose: () => void;
+	type?: string;
+}) => {
+	const [selectedFollowup, setFollowup] = useState<SingleValue<OptionType>>(null);
 	const [selectedDates, setSelectedDates] = useState<any[]>([]);
-	const { activePetId, handleSidebar, activeParentId, activeRecord, selectedDate } =
-		useRecordSidebar();
-	const { mutateAsync: createVaccination } = useCreateVaccinationRecords();
-	const { refetch } = useGetVaccinationRecords({ type: activeRecord, date: selectedDate });
-	const { data } = useGetVaccinationList();
+	const { mutateAsync: createFollowup, isPending } = useCreateFollowUpRecords();
+	const { data } = useGetFollowupList();
 
 	const onChange = (dates: any) => {
 		setSelectedDates(dates);
@@ -43,41 +49,41 @@ const VaccinationForm = () => {
 	const handleSubmit = async () => {
 		const dates = convertDates(selectedDates);
 		const data = {
-			petId: activePetId,
-			parentId: activeParentId,
-			vaccineName: selectedVaccine?.value as string,
-			vaccinationDates: dates as string[],
+			petId,
+			parentId,
+			followUpType: selectedFollowup?.value as string,
+			followUpDates: dates as string[],
 		};
-		const response = (await createVaccination(
+		const response = (await createFollowup(
 			data
-		)) as ICommonTypes.IApiResponse<IClinicTypes.IVaccinationRecord>;
+		)) as ICommonTypes.IApiResponse<IClinicTypes.IFollowUpRecord>;
 		if (response.status === 'SUCCESS') {
 			refetch();
-			handleSidebar(false);
+			handleClose();
 		}
 	};
 
 	const handleChange = (option: SingleValue<OptionType>) => {
-		setVaccine(option);
+		setFollowup(option);
 	};
 
 	return (
-		<section className="flex flex-col h-full">
-			<h2 className="text-24 font-semibold">Add Vaccination Details</h2>
-			<h6 className="text-14 mt-8 mb-24">We will remind you when vaccination is due</h6>
-			<div className="flex-1">
-				<div>
-					<label className="text-14 leading-24">Choose a vaccine</label>
+		<section className="flex flex-col h-full px-16 bg-white rounded-8 mt-16">
+			<h2 className="text-24 font-semibold pt-16">Add Follow-up Details</h2>
+			<h6 className="text-14 mt-8 mb-24">We will remind you when follow-up is due</h6>
+			<div className={`flex-1 ${type === 'modal' ? 'grid grid-cols-2 gap-24' : ''}`}>
+				<div className="col-span-1">
+					<label className="text-14 leading-24">Choose a follow-up</label>
 					<Select
-						options={data?.data?.vaccination}
+						options={data?.data?.followup}
 						className="h-[52px] react-select-container"
 						classNamePrefix="react-select"
 						styles={customSelectBoxStyles}
 						onChange={handleChange}
-						value={selectedVaccine}
+						value={selectedFollowup}
 					/>
 				</div>
-				<div className="mt-24">
+				<div className={` col-span-1 ${type === 'modal' ? '' : 'mt-24'}`}>
 					<label className="text-14 leading-24 block">Choose Date</label>
 					<DatePicker
 						selectedDates={selectedDates}
@@ -86,7 +92,7 @@ const VaccinationForm = () => {
 						shouldCloseOnSelect={false}
 						disabledKeyboardNavigation
 					/>
-					{selectedDates.length > 1 && (
+					{type === 'sidebar' && selectedDates.length > 1 && (
 						<div className="flex flex-wrap mt-12 gap-8">
 							{selectedDates.map((date) => {
 								const formattedDate = format(date, 'yyyy-MM-dd');
@@ -106,11 +112,16 @@ const VaccinationForm = () => {
 					)}
 				</div>
 			</div>
-			<Button onClick={handleSubmit} disabled={!selectedVaccine || selectedDates.length <= 0}>
-				<span className="font-black tracking-[-0.41px]">Add Vaccination</span>
+			<Button
+				className="my-16"
+				onClick={handleSubmit}
+				disabled={!selectedFollowup || selectedDates.length <= 0 || isPending}
+				isLoading={isPending}
+			>
+				<span className="font-black tracking-[-0.41px]">Add Follow-up</span>
 			</Button>
 		</section>
 	);
 };
 
-export default VaccinationForm;
+export default FollowupForm;
