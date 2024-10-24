@@ -47,12 +47,8 @@ const PetImage = () => {
 
 	return (
 		<div className="col-span-1 bg-white rounded-[16px] shadow-base flex justify-center items-center flex-col py-32 px-16 sticky top-54">
-			<ButtonWrapper
-				onClick={handleEditPet}
-				className="!absolute bg-primary-1 top-12 right-12 flex px-12 py-8 items-center justify-center rounded-8 gap-8"
-			>
-				<EditIcon width={14} height={14} color="#FFF" />
-				<span className="text-14 text-white font-medium">Edit</span>
+			<ButtonWrapper onClick={handleEditPet} className="!absolute top-12 right-12">
+				<EditIcon width={18} height={18} />
 			</ButtonWrapper>
 			<div>
 				<div className=" rounded-full w-[168px] h-[168px] bg-white relative">
