@@ -28,10 +28,10 @@ const PetParent = ({
 				/>
 				<section className={`flex-1 ${active ? 'text-white' : 'text-black-1'}`}>
 					<p className="text-16 font-medium text-left">{parent?.parent?.name}</p>
-					<p className="leading-[30px] text-left">
+					<p className="leading-[30px] text-left text-14">
 						Pets: {parent?.parent?.petNames.join(',')}
 					</p>
-					<p className="leading-[30px] text-left">{parent?.parent?.mobile}</p>
+					<p className="leading-[30px] text-left text-14">{parent?.parent?.mobile}</p>
 				</section>
 			</section>
 		</ButtonWrapper>

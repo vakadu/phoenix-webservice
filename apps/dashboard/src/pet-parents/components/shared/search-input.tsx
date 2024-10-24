@@ -5,6 +5,7 @@ import { memo } from 'react';
 import { Button, CategoryLoader } from '@webservices/ui';
 import Search from '../../../components/atoms/search';
 import PetParent from '../../../components/atoms/pet-parent';
+import { PlusIcon } from '@webservices/icons';
 
 function SearchInput({
 	searchValue,
@@ -25,18 +26,18 @@ function SearchInput({
 }) {
 	return (
 		<div className="col-span-3">
-			<div className="flex items-center justify-between my-12">
-				<h1 className="text-24 font-semibold">Search</h1>
+			<div className="flex gap-24">
+				<Search
+					placeholder="Search by name, pet name etc..."
+					value={searchValue}
+					handleChange={onChange}
+					handleClear={handleClear}
+				/>
 				<Button onClick={handleAddParent}>
+					<PlusIcon />
 					<span className="font-black tracking-[-0.41px]">Add Parent</span>
 				</Button>
 			</div>
-			<Search
-				placeholder="Search by name, pet name etc..."
-				value={searchValue}
-				handleChange={onChange}
-				handleClear={handleClear}
-			/>
 			{isPending ? (
 				<CategoryLoader rows={3} columns={1} />
 			) : (

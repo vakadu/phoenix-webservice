@@ -1,5 +1,6 @@
 'use client';
 
+import { PlusIcon } from '@webservices/icons';
 import useSearchHook from '../hooks/search';
 import PetParent from './shared/pet-parent';
 import SearchInput from './shared/search-input';
@@ -18,7 +19,7 @@ export default function PageDetails() {
 	} = useSearchHook();
 
 	return (
-		<div className="grid grid-cols-5 gap-24 items-start">
+		<div className="grid grid-cols-5 gap-24 items-start relative mt-12">
 			<SearchInput
 				searchValue={searchValue}
 				onChange={onChange}

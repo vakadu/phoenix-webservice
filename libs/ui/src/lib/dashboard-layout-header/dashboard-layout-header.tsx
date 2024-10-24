@@ -3,7 +3,7 @@ import UserDetails from './components/user-details';
 
 export function DashboardLayoutHeader() {
 	return (
-		<header className="sticky top-0 ml-[282px] pr-16 transition-all duration-150 z-[99] bg-grey-bg3">
+		<header className="fixed w-full top-0 ml-[282px] pr-16 transition-all duration-150 z-[99] bg-grey-bg3">
 			<div className="py-24 gap-12 flex justify-between items-center">
 				<ClinicDetails />
 				<div>

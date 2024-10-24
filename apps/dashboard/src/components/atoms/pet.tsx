@@ -30,7 +30,7 @@ const Pet = ({
 					imageClasses="rounded-10 object-cover"
 				/>
 			)}
-			<p className="font-semibold text-left pt-8">{pet.name}</p>
+			<p className="font-semibold text-left pt-8 text-14">{pet.name}</p>
 		</ButtonWrapper>
 	);
 };
