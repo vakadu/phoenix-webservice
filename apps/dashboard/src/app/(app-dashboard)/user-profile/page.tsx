@@ -1,5 +1,5 @@
-import ProfileImage from '../../../user-profile/components/profile-image';
-import UserTabs from '../../../user-profile/components/tabs';
+import ProfileImage from './ui/profile-image';
+import UserTabs from './ui/tabs';
 
 const Page = () => {
 	return (

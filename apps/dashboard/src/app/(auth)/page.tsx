@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { ImagePlaceholder } from '@webservices/ui';
-import LoginForm from '../../features/login/ui/form';
+import LoginForm from './ui/form';
 
 const Page = () => {
 	return (

@@ -1,4 +1,4 @@
-import PageDetails from '../../../features/pet-parents/ui/page-details';
+import PageDetails from './ui/page-details';
 
 const Page = () => {
 	return <PageDetails />;
