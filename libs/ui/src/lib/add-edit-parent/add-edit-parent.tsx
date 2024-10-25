@@ -76,7 +76,11 @@ const AddEditParent = () => {
 			};
 			updateParent(updateData);
 		} else {
-			createParent(values);
+			const payload = {
+				mobileNumber: values.mobileNumber,
+				...(values.name.length > 0 && { name: values.name }),
+			};
+			createParent(payload);
 		}
 	};
 
@@ -98,6 +102,12 @@ const AddEditParent = () => {
 							placeholder=""
 							error={errors?.mobileNumber}
 							{...register('mobileNumber')}
+						/>
+						<TextInput
+							label="Name"
+							placeholder=""
+							error={errors?.name}
+							{...register('name')}
 						/>
 					</section>
 				)}

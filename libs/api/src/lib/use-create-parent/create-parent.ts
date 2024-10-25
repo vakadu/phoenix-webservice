@@ -8,13 +8,14 @@ import { closeModal } from '@webservices/slices';
 
 interface IPayload {
 	mobileNumber: string;
+	name?: string;
 }
 
 const createParent = async (payload: IPayload) => {
 	try {
 		const { data } = await HttpService.patch(
 			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.AddParent}/${payload?.mobileNumber}`,
-			payload
+			{ name: payload.name }
 		);
 		return data;
 	} catch (err) {

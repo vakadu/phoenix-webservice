@@ -26,6 +26,10 @@ interface IRecordItem {
 function Record({ record, refetch, activeFilter }: IRecordItem) {
 	const tempFollowup = record?.followUpDate ? parseISO(record?.followUpDate as string) : '';
 	const followupDate = tempFollowup && format(tempFollowup, 'do MMM yyyy');
+	const tempUpcoming = record?.followUpCompleteDate
+		? parseISO(record?.followUpCompleteDate as string)
+		: '';
+	const upcomingDate = tempUpcoming !== '' && format(tempUpcoming, 'do MMMM yyyy');
 	const { mutate: followupRemainder, isPending } = useSendFollowUpRecord({
 		refetch,
 	});
@@ -105,6 +109,9 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 						Followup: {record.followUpType}
 					</p>
 					<p className="leading-32 text-14">Follow-up On: {followupDate}</p>
+					<p className="leading-32 text-14">
+						Completed On: {record?.followUpCompleteDate ? upcomingDate : '(Pending)'}
+					</p>
 				</div>
 				{record?.followUpCompleteDate === null || !record?.followUpCompleteDate ? (
 					<ButtonWrapper

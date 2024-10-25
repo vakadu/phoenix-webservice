@@ -1,6 +1,5 @@
 import localFont from 'next/font/local';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'react-calendar/dist/Calendar.css';
@@ -105,8 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 		<html lang="en" className={`${sathoshi.variable} font-sathoshi scroll-smooth`}>
 			<body>
 				<Providers>{children}</Providers>
-				<Analytics />
-				<SpeedInsights />
+				<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_MESSUREMENT_ID as string} />
 			</body>
 		</html>
 	);
