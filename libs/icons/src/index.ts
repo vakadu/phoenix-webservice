@@ -1,3 +1,4 @@
+export * from './lib/tick-success-icon/tick-success-icon';
 export * from './lib/enter-icon/enter-icon';
 export * from './lib/down-arrow-icon/down-arrow-icon';
 export * from './lib/up-arrow-icon/up-arrow-icon';
