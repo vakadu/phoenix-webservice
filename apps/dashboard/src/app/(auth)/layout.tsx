@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux';
 
 import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';
-import MobileOnly from '../../ui/mobile-only';
-import { routes } from '../../routes';
-import { RouteList } from '../../routes/constants';
+import MobileOnly from '../../core/ui/mobile-only';
+import { routes } from '../../core/routes';
+import { RouteList } from '../../core/routes/constants';
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);

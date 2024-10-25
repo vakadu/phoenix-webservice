@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import '../assets/css/global.css';
 import '../assets/css/vendors/swiper.css';
-import Providers from '../providers/index';
+import Providers from '../core/providers/index';
 
 const sathoshi = localFont({
 	src: [

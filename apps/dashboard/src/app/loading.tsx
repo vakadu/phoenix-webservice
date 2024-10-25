@@ -1,4 +1,4 @@
-import Loading from '../ui/loading';
+import Loading from '../core/ui/loading';
 
 const Page = () => {
 	return (

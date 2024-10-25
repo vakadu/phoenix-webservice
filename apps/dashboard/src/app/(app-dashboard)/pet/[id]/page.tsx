@@ -1,5 +1,5 @@
-import PetTabs from '../../../../pet-details/components/pet-tabs';
-import PetImage from '../../../../pet-details/components/pet-image';
+import PetTabs from '../../../../features/pet-details/components/pet-tabs';
+import PetImage from '../../../../features/pet-details/components/pet-image';
 
 const Page = () => {
 	return (
