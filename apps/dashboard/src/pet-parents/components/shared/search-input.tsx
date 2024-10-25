@@ -34,7 +34,6 @@ function SearchInput({
 					handleClear={handleClear}
 				/>
 				<Button onClick={handleAddParent}>
-					<PlusIcon />
 					<span className="font-black tracking-[-0.41px]">Add Parent</span>
 				</Button>
 			</div>

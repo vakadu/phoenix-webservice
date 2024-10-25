@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -13,12 +13,27 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 	const { router, pathname } = useRouterQuery();
 	const { isDesktop } = useIsMobile();
+	const [scrolled, setScrolled] = useState(false);
 
 	useEffect(() => {
 		if (!authState.loggedIn) {
 			router.push('/');
 		}
 	}, [authState.loggedIn, router]);
+
+	const handleScroll = () => {
+		if (window.scrollY > 6) {
+			setScrolled(true);
+		} else {
+			setScrolled(false);
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener('scroll', handleScroll);
+
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	const sidebarClasses = useMemo(() => {
 		return 'ml-[282px] transition-all duration-150 mr-16 pt-[84px]';
@@ -30,7 +45,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<section className="max-w-screen-2xl">
-			<DashboardLayoutHeader />
+			<DashboardLayoutHeader scrolled={scrolled} />
 			<DashboardLayoutSidebar />
 			<div className={`${sidebarClasses} `}>
 				<motion.div

@@ -37,6 +37,7 @@ const PetImage = () => {
 					petId: query?.id,
 				},
 				refetch,
+				center: true,
 			})
 		);
 	};
