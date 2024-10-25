@@ -468,7 +468,7 @@ export const vaccinationClinicFilters = [
 		value: 'PENDING',
 		icon: PrescriptionIcon,
 	},
-	{ id: 1, name: 'Complete', label: 'Complete', value: 'COMPLETE', icon: PrescriptionIcon },
+	{ id: 1, name: 'Complete', label: 'Completed', value: 'COMPLETE', icon: PrescriptionIcon },
 	{ id: 3, name: 'All', label: 'All', value: 'ALL', icon: PrescriptionIcon },
 ] as ICommonTypes.IMedicalRecords[];
 

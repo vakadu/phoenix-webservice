@@ -121,8 +121,8 @@ function Record({ record, refetch }: IRecordItem) {
 					</ButtonWrapper>
 				) : (
 					<div className="flex gap-4 items-center">
-						<TickSuccessIcon className="text-primary-1 w-22 h-22" />
-						<span className="text-14 font-bold text-primary-1">Completed</span>
+						<TickSuccessIcon className="text-[#4caf50] w-22 h-22" />
+						<span className="text-14 font-bold text-[#4caf50]">Completed</span>
 					</div>
 				)}
 			</div>
