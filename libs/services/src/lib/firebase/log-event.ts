@@ -15,6 +15,7 @@ const logEvent = ({ name, events }: { name: string; events?: { [key: string]: an
 		gender: authState.gender,
 		role: authState.role,
 		browser: browserType,
+		mode: process.env.mode,
 	};
 
 	if (analytics) {
