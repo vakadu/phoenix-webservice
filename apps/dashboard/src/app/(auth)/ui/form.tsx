@@ -11,6 +11,8 @@ import { useCheckUser } from '@webservices/api';
 import { PemilyRootState } from '@webservices/slices';
 import { BackIcon } from '@webservices/icons';
 import useLoginOtpHook from '../hooks/otp-hook';
+import { logEvent } from '@webservices/services';
+import { USER_EVENTS } from '@webservices/primitives';
 
 const validationSchema = yup.object().shape({
 	mobileNumber: yup
@@ -35,6 +37,7 @@ const LoginForm = () => {
 		useLoginOtpHook({ mobile: watchMobileNumber });
 
 	const onSubmit = (values: { mobileNumber: string }) => {
+		logEvent({ name: USER_EVENTS.GET_OTP, events: { mobileNumber: values.mobileNumber } });
 		checkUser({ mobileNumber: values.mobileNumber });
 	};
 
