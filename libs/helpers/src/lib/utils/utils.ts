@@ -135,3 +135,25 @@ export const convertDates = (dates: Date[] | Date) => {
 		return format(dates, 'yyyy-MM-dd');
 	}
 };
+
+export const getBrowserType = (): string | null => {
+	if (typeof window === 'undefined') {
+		return 'window-not-defined';
+	}
+
+	const userAgent = navigator.userAgent;
+
+	if (/chrome|chromium|crios/i.test(userAgent)) {
+		return 'Chrome';
+	} else if (/firefox|fxios/i.test(userAgent)) {
+		return 'Firefox';
+	} else if (/safari/i.test(userAgent) && !/chrome|chromium|crios/i.test(userAgent)) {
+		return 'Safari';
+	} else if (/edg/i.test(userAgent)) {
+		return 'Edge';
+	} else if (/msie|trident/i.test(userAgent)) {
+		return 'Internet Explorer';
+	} else {
+		return 'Other';
+	}
+};

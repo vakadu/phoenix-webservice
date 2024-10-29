@@ -1,3 +1,4 @@
+export * from './lib/use-get-browser-type/get-browser-type';
 export * from './lib/use-rtl/rtl';
 export * from './lib/use-sidebar/sidebar';
 export * from './lib/use-mobile-menu/mobile-menu';
