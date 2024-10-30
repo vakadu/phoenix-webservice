@@ -12,6 +12,9 @@ const USER_EVENTS = {
 	COMMENT_SUBMIT: 'user_comment_submitted',
 	USER_PROFILE_IMAGE: 'user_profile_image_submitted',
 	USER_PROFILE_TAB: 'user_profile_tab_clicked',
+	SEARCH_PET_PARENT_ITEM_SUGGESTION: 'search_pet_parent_suggestion_clicked',
+	SEARCH_PET_PARENT_CLEAR: 'search_pet_parent_clear',
+	SEARCH_PET_PARENT_ADD_PARENT_MODAL: 'search_pet_parent_add_parent_modal',
 };
 
 export { USER_EVENTS };

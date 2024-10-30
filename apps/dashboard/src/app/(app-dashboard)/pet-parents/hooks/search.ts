@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { useGetPetParentsMutation } from '@webservices/api';
 import { debounce } from '@webservices/helpers';
 import { openModal } from '@webservices/slices';
-import { ModalTypes } from '@webservices/primitives';
+import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
+import { logEvent } from '@webservices/services';
 
 export default function useSearchHook() {
 	const [parentDetails, setParentDetails] = useState<IClinicTypes.IPetParent>();
@@ -39,15 +40,36 @@ export default function useSearchHook() {
 	);
 
 	const handleClear = useCallback(() => {
+		logEvent({
+			name: USER_EVENTS.SEARCH_PET_PARENT_CLEAR,
+			events: {
+				clearedValue: value,
+			},
+		});
 		getPetParents('');
 		setValue('');
 	}, []);
 
 	const handlePetParent = useCallback((parent: IClinicTypes.IPetParent) => {
+		logEvent({
+			name: USER_EVENTS.SEARCH_PET_PARENT_ITEM_SUGGESTION,
+			events: {
+				searchValue: value,
+				...parent,
+			},
+		});
 		setParentDetails(parent);
 	}, []);
 
 	const handleAddParent = () => {
+		logEvent({
+			name: USER_EVENTS.SEARCH_PET_PARENT_ADD_PARENT_MODAL,
+			events: {
+				parentId: parentDetails?.parent?.parentId,
+				memberId: parentDetails?.memberId,
+				type: 'add',
+			},
+		});
 		dispatch(
 			openModal({
 				isOpen: true,
