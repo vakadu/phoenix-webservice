@@ -15,6 +15,14 @@ const USER_EVENTS = {
 	SEARCH_PET_PARENT_ITEM_SUGGESTION: 'search_pet_parent_suggestion_clicked',
 	SEARCH_PET_PARENT_CLEAR: 'search_pet_parent_clear',
 	SEARCH_PET_PARENT_ADD_PARENT_MODAL: 'search_pet_parent_add_parent_modal',
+	PARENT_EDIT_PROFILE_IMAGE: 'parent_edit_profile_image',
+	PARENT_MODAL: 'parent_modal',
+	PET_MODAL: 'pet_modal',
+	PARENT_PET_CLICK: 'parent_pet_click',
+	HEADER_PROFILE_USER_ICON: 'header_profile_user_icon_click',
+	HEADER_PROFILE_LOGOUT_ICON_MODAL: 'header_profile_logout_icon_click_modal',
+	PET_PROFILE_IMAGE_CLICK: 'pet_profile_image_click',
+	PET_PROFILE_TABS: 'pet_profile_tabs',
 };
 
 export { USER_EVENTS };

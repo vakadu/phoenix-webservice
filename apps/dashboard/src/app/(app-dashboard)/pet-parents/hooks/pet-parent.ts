@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { createFormDataForImage } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
-import { ApiEndpoints, ModalTypes } from '@webservices/primitives';
-import { HttpService } from '@webservices/services';
+import { ApiEndpoints, ModalTypes, USER_EVENTS } from '@webservices/primitives';
+import { HttpService, logEvent } from '@webservices/services';
 import { openModal } from '@webservices/slices';
 import { useCallback } from 'react';
 import { useGetParentById, useGetPets, useGetUserProfileUrl } from '@webservices/api';
@@ -26,6 +26,7 @@ export default function usePetParentHook(
 
 	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
+		logEvent({ name: USER_EVENTS.PARENT_EDIT_PROFILE_IMAGE, events: { url: profileUrl } });
 		if (file) {
 			const formData = createFormDataForImage(file, 'file');
 			try {
@@ -50,6 +51,10 @@ export default function usePetParentHook(
 	};
 
 	const handleEditParent = useCallback(() => {
+		logEvent({
+			name: USER_EVENTS.PARENT_MODAL,
+			events: { parentId: parentId, memberId: memberId, type: 'edit' },
+		});
 		dispatch(
 			openModal({
 				isOpen: true,
@@ -65,6 +70,10 @@ export default function usePetParentHook(
 	}, [memberId, parentId]);
 
 	const handleAddParent = useCallback(() => {
+		logEvent({
+			name: USER_EVENTS.PARENT_MODAL,
+			events: { parentId: parentId, memberId: memberId, type: 'add' },
+		});
 		dispatch(
 			openModal({
 				isOpen: true,
@@ -77,10 +86,18 @@ export default function usePetParentHook(
 	}, []);
 
 	const handlePet = useCallback((pet: ICommonTypes.IPet) => {
+		logEvent({
+			name: USER_EVENTS.PARENT_PET_CLICK,
+			events: { ...pet },
+		});
 		router.push(`/pet/${pet.petId}?parentId=${parentId}`);
 	}, []);
 
 	const handleAddPet = useCallback(() => {
+		logEvent({
+			name: USER_EVENTS.PET_MODAL,
+			events: { parentId, type: 'add' },
+		});
 		dispatch(
 			openModal({
 				isOpen: true,

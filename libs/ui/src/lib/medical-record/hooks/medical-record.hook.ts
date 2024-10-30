@@ -53,7 +53,10 @@ export default function useMedicalRecord() {
 	};
 
 	const handleDate = (date: string) => {
-		logEvent({ name: USER_EVENTS.DATE_CLICK, events: { date, type: 'medical-records' } });
+		logEvent({
+			name: USER_EVENTS.DATE_CLICK,
+			events: { date, type: 'medical-records', petId, parentId, filter: activeFilter },
+		});
 		setSelectedDate(date);
 	};
 

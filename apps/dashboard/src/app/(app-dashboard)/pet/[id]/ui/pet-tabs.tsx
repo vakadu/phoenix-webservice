@@ -5,7 +5,8 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 
 import { PrescriptionIcon } from '@webservices/icons';
 import { Followup, MedicalRecord, Vaccination } from '@webservices/ui';
-import { DashboardTypes } from '@webservices/primitives';
+import { DashboardTypes, USER_EVENTS } from '@webservices/primitives';
+import { logEvent } from '@webservices/services';
 
 export default function PetTabs() {
 	const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,6 +36,15 @@ export default function PetTabs() {
 		// updateQueryParams({ key: 'type', value: updateType(index) });
 	};
 
+	const handleTab = (tab: string) => {
+		logEvent({
+			name: USER_EVENTS.PET_PROFILE_TABS,
+			events: {
+				tab,
+			},
+		});
+	};
+
 	return (
 		<div className="col-span-3 bg-white py-32 px-16 rounded-[16px]">
 			<TabGroup
@@ -44,7 +54,7 @@ export default function PetTabs() {
 			>
 				<TabList className="flex justify-between items-center">
 					<div className="flex gap-32">
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('medical-records')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon
@@ -58,7 +68,7 @@ export default function PetTabs() {
 								</>
 							)}
 						</Tab>
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('vaccinations')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon
@@ -72,7 +82,7 @@ export default function PetTabs() {
 								</>
 							)}
 						</Tab>
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('follow-ups')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon

@@ -8,8 +8,9 @@ import { CameraIcon, EditIcon } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
 import { openModal } from '@webservices/slices';
-import { ModalTypes } from '@webservices/primitives';
+import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import PetBasicDetails from './shared/pet-basic-details';
+import { logEvent } from '@webservices/services';
 
 const PetImage = () => {
 	const { query } = useRouterQuery();
@@ -24,11 +25,13 @@ const PetImage = () => {
 		const file = e.target.files?.[0];
 		if (file) {
 			const formData = createFormDataForImage(file, 'file');
+			logEvent({ name: USER_EVENTS.PET_PROFILE_IMAGE_CLICK });
 			updatePetImage(formData);
 		}
 	};
 
 	const handleEditPet = () => {
+		logEvent({ name: USER_EVENTS.PET_MODAL, events: { petId: query?.id, type: 'edit' } });
 		dispatch(
 			openModal({
 				view: ModalTypes.ADD_EDIT_PET,

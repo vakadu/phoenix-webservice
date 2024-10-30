@@ -5,12 +5,13 @@ import { useDispatch } from 'react-redux';
 
 import { LogoutIcon, UserIcon, UserOutlineIcon } from '@webservices/icons';
 import { openModal } from '@webservices/slices';
-import { ModalTypes } from '@webservices/primitives';
+import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import { useRouterQuery } from '@webservices/hooks';
 import { pemilyyLogout } from '@webservices/helpers';
 import Dropdown from '../../dropdown/dropdown';
 import { MenuItem } from '@headlessui/react';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
+import { logEvent } from '@webservices/services';
 
 export default function UserDetails() {
 	const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function UserDetails() {
 				label: 'Profile',
 				icon: <UserIcon width={16} height={16} />,
 				action: () => {
+					logEvent({ name: USER_EVENTS.HEADER_PROFILE_USER_ICON });
 					router.push('/user-profile');
 				},
 			},
@@ -29,6 +31,7 @@ export default function UserDetails() {
 				label: 'Logout',
 				icon: <LogoutIcon width={16} height={16} />,
 				action: () => {
+					logEvent({ name: USER_EVENTS.HEADER_PROFILE_LOGOUT_ICON_MODAL });
 					dispatch(
 						openModal({
 							isOpen: true,
