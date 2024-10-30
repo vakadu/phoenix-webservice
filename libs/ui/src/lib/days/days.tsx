@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import { format, addDays, isToday, isTomorrow } from 'date-fns';
+import DatePicker from 'react-datepicker';
 
 import ButtonWrapper from '../button-wrapper/button-wrapper';
 import { CalenderIcon } from '@webservices/icons';
-import DatePicker from 'react-datepicker';
+import { logEvent } from '@webservices/services';
+import { USER_EVENTS } from '@webservices/primitives';
 
 export function DaysItem({
 	defaultDays = 6,
@@ -43,6 +45,10 @@ export function DaysItem({
 
 	const handleCalender = (date: any) => {
 		const formatDate = format(date, 'yyyy-MM-dd');
+		logEvent({
+			name: USER_EVENTS.CALENDER_ICON,
+			events: { date: formatDate, type: 'medical-records' },
+		});
 		setDaysHeaderData(date);
 		handleDate(formatDate);
 	};

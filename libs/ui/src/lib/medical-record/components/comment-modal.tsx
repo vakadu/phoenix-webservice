@@ -9,6 +9,8 @@ import { useUpdateMedicalRecord } from '@webservices/api';
 import Modal from '../../modal/modal';
 import Textarea from '../../textarea/textarea';
 import Button from '../../button/button';
+import { logEvent } from '@webservices/services';
+import { USER_EVENTS } from '@webservices/primitives';
 
 const validationSchema = yup.object().shape({
 	comment: yup.string().required('Comment is required'),
@@ -54,6 +56,10 @@ const CommentModal = ({
 			type: activeFilter,
 			comment: values.comment,
 		};
+		logEvent({
+			name: USER_EVENTS.COMMENT_SUBMIT,
+			events: { id, ...commentData },
+		});
 		updateMedicalRecord(commentData);
 	};
 

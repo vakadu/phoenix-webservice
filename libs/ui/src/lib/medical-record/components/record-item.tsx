@@ -10,9 +10,10 @@ import useDocumentDownlaod from '../hooks/use-download-document.hook';
 import { DeleteIcon, DownloadIcon, EditIcon, NotesIcon } from '@webservices/icons';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import { closeModal, openModal } from '@webservices/slices';
-import { ModalTypes } from '@webservices/primitives';
+import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import { useUpdateMedicalRecord } from '@webservices/api';
 import Loading from '../../loading/loading';
+import { logEvent } from '@webservices/services';
 
 const CommentModal = dynamic(() => import('./comment-modal'), {
 	loading: () => <Loading />,
@@ -39,10 +40,18 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 			type: activeFilter,
 			active: false,
 		};
+		logEvent({
+			name: USER_EVENTS.MEDICAL_RECORD_DELETE,
+			events: { filter: activeFilter, url, recordId: record._id, type: 'medical-records' },
+		});
 		updateMedicalRecord(commentData);
 	};
 
 	const handleDelete = () => {
+		logEvent({
+			name: USER_EVENTS.MEDICAL_RECORD_DELETE_MODAL,
+			events: { filter: activeFilter, url, recordId: record._id, type: 'medical-records' },
+		});
 		dispatch(
 			openModal({
 				isOpen: true,
@@ -53,6 +62,13 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 				center: true,
 			})
 		);
+	};
+
+	const handleDownload = () => {
+		logEvent({
+			name: USER_EVENTS.MEDICAL_RECORD_DOWNLAOD,
+			events: { filter: activeFilter, url, recordId: record._id, type: 'medical-records' },
+		});
 	};
 
 	const handleModalClose = () => {
@@ -105,6 +121,7 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 					target="_blank"
 					href={url as string}
 					rel="noreferrer"
+					onClick={handleDownload}
 					className="w-[32px] h-[32px] flex items-center justify-center"
 				>
 					<DownloadIcon />

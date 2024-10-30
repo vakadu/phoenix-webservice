@@ -2,12 +2,13 @@
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import dynamic from 'next/dynamic';
+import { useSelector } from 'react-redux';
 
 import { PrescriptionIcon } from '@webservices/icons';
-import { useSelector } from 'react-redux';
 import { PemilyRootState } from '@webservices/slices';
-import { Roles } from '@webservices/primitives';
+import { Roles, USER_EVENTS } from '@webservices/primitives';
 import { Loading } from '@webservices/ui';
+import { logEvent } from '@webservices/services';
 
 const PersonalDetailsForm = dynamic(() => import('./personal-details'), {
 	loading: () => <Loading />,
@@ -30,12 +31,21 @@ export default function UserTabs() {
 		'data-[selected]:font-semibold focus:outline-none cursor-pointer text-center data-[selected]:border-b-2 data-[selected]:border-purple flex items-center gap-8 pb-6 ';
 	const authState = useSelector((state: PemilyRootState) => state.auth);
 
+	const handleTab = (tab: string) => {
+		logEvent({
+			name: USER_EVENTS.USER_PROFILE_TAB,
+			events: {
+				tab,
+			},
+		});
+	};
+
 	return (
 		<div className="col-span-2 bg-white py-32 px-16 rounded-[16px]">
 			<TabGroup className="flex-1 overflow-hidden px-16">
 				<TabList className="flex gap-32">
 					{authState.role === Roles.Clinic && (
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('personal')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon
@@ -51,7 +61,7 @@ export default function UserTabs() {
 						</Tab>
 					)}
 					{authState.role === Roles.Clinic && (
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('prmiary-address')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon
@@ -67,7 +77,7 @@ export default function UserTabs() {
 						</Tab>
 					)}
 					{authState.role === Roles.Clinic && (
-						<Tab className={tabClass}>
+						<Tab onClick={() => handleTab('business-details')} className={tabClass}>
 							{({ selected }) => (
 								<>
 									<PrescriptionIcon
@@ -82,7 +92,7 @@ export default function UserTabs() {
 							)}
 						</Tab>
 					)}
-					<Tab className={tabClass}>
+					<Tab onClick={() => handleTab('contact-us')} className={tabClass}>
 						{({ selected }) => (
 							<>
 								<PrescriptionIcon

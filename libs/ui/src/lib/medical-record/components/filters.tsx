@@ -9,7 +9,8 @@ import Tooltip from '../../tooltip/tooltip';
 import { firstCharCapital } from '@webservices/helpers';
 import Button from '../../button/button';
 import { openModal } from '@webservices/slices';
-import { ModalTypes } from '@webservices/primitives';
+import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
+import { logEvent } from '@webservices/services';
 
 export default function Filters({
 	activeFilter,
@@ -27,6 +28,10 @@ export default function Filters({
 	const dispatch = useDispatch();
 
 	const openParents = () => {
+		logEvent({
+			name: USER_EVENTS.UPLOAD_RECORD_SIDEBAR,
+			events: { filter: activeFilter, type: 'medical-records' },
+		});
 		dispatch(
 			openModal({
 				isOpen: true,
@@ -46,6 +51,7 @@ export default function Filters({
 		event.stopPropagation();
 		const buttonElement = (event.target as HTMLElement).closest('button');
 		const filter = buttonElement?.getAttribute('data-id') as string;
+		logEvent({ name: USER_EVENTS.FILTER_ITEM, events: { filter, type: 'medical-records' } });
 		if (filter) {
 			setActiveFilter(filter);
 		}

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { format } from 'date-fns';
 
 import { useRouterQuery } from '@webservices/hooks';
 import { createFormDataForDocument, createFormDataForImage } from '@webservices/helpers';
 import { useGetMedicalRecords, useUploadMedicalRecord } from '@webservices/api';
-import { format } from 'date-fns';
+import { logEvent } from '@webservices/services';
+import { USER_EVENTS } from '@webservices/primitives';
 
 export default function useMedicalRecord() {
 	const [activeFilter, setActiveFilter] = useState('PRESCRIPTION');
@@ -51,6 +53,7 @@ export default function useMedicalRecord() {
 	};
 
 	const handleDate = (date: string) => {
+		logEvent({ name: USER_EVENTS.DATE_CLICK, events: { date, type: 'medical-records' } });
 		setSelectedDate(date);
 	};
 

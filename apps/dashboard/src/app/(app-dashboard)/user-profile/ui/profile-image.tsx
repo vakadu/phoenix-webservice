@@ -13,6 +13,8 @@ import {
 	UserOutlineIcon,
 } from '@webservices/icons';
 import { createFormDataForImage } from '@webservices/helpers';
+import { logEvent } from '@webservices/services';
+import { USER_EVENTS } from '@webservices/primitives';
 
 const ProfileImage = () => {
 	const authState = useSelector((state: PemilyRootState) => state.auth);
@@ -26,6 +28,12 @@ const ProfileImage = () => {
 		const file = e.target.files?.[0];
 		if (file) {
 			const formData = createFormDataForImage(file, 'file');
+			logEvent({
+				name: USER_EVENTS.USER_PROFILE_IMAGE,
+				events: {
+					oldUrl: profileUrl,
+				},
+			});
 			uploadUserProfile(formData);
 		}
 	};
