@@ -7,6 +7,7 @@ import 'swiper/css/pagination';
 import './assets/css/global.css';
 import './assets/css/vendors/swiper.css';
 import Providers from './providers';
+import { Viewport } from 'next';
 
 const sathoshi = localFont({
 	src: [
@@ -51,11 +52,6 @@ export const metadata = {
 		shortcut: ['/favicon/favicon-16x16.png'],
 		apple: [{ url: '/favicon/apple-touch-icon.png' }],
 	},
-	viewport: {
-		width: 'device-width',
-		initialScale: 1,
-		maximumScale: 1,
-	},
 	generator: 'Next.js',
 	applicationName: 'Pemilyy',
 	referrer: 'origin-when-cross-origin',
@@ -72,7 +68,6 @@ export const metadata = {
 		'family',
 	],
 	authors: [{ name: 'Vinod Kumar', url: 'https://vakaduvinod.in' }, { name: 'Avishek Singh' }],
-	colorScheme: 'light',
 	creator: 'Pemilyy',
 	publisher: 'Pemilyy',
 	formatDetection: {
@@ -97,6 +92,13 @@ export const metadata = {
 		type: 'website',
 	},
 };
+
+export const viewport: Viewport = {
+	width: 'device-width',
+	initialScale: 1,
+	maximumScale: 1,
+	colorScheme: 'light',
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
