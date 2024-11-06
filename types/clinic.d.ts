@@ -162,4 +162,51 @@ declare namespace IClinicTypes {
 	interface IClinicFolowupRecordsApiResponse {
 		followUpRecords: IFollowUpRecord[];
 	}
+	interface IAddress {
+		_id: string;
+		userId: string;
+		pincode: string;
+		line1: string;
+		line2: string;
+		state: string;
+		district: string;
+		type: string;
+	}
+
+	interface IClinicData {
+		_id: string;
+		userId: string;
+		mobile: string;
+		name: string;
+		businessContact: string;
+		address: IAddress;
+		logoUrl: string;
+	}
+
+	interface Parent {
+		name: string;
+		mobile: string;
+	}
+
+	interface IPetAndParentDetail {
+		_id: string;
+		petId: string;
+		name: string;
+		dob: string;
+		gender: string;
+		type: string;
+		breed: string;
+		parent: Parent;
+		parentAddress: Record<string, unknown>;
+	}
+	interface ICertificateData {
+		clinicData: IClinicData;
+		petAndParentDetail: {
+			petAndParentDetail: IPetAndParentDetail;
+		};
+		vaccinations: any[];
+	}
+	interface ICertificateApiResponse {
+		certificateData: ICertificateData;
+	}
 }

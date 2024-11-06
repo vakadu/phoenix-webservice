@@ -1,3 +1,4 @@
+export * from './lib/use-pet-certificate-vaccination/use-pet-certificate-vaccination';
 export * from './lib/use-get-dropdown-list/get-dropdown-list';
 export * from './lib/upload-user-profile/upload-user-profile';
 export * from './lib/update-user-details/update-user-details';

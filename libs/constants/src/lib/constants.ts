@@ -535,3 +535,15 @@ export const followupData = [
 	{ key: 'Diet and Nutrition Review', label: 'Diet and Nutrition Review' },
 	{ key: 'Diagnostic Test', label: 'Diagnostic Test' },
 ];
+
+export const certificateData = [
+	{ value: 'ARV_CERTIFICATE', label: 'Arv Certificate' },
+	{ value: 'HEALTH_CUM_VACCINATION_CERTIFICATE', label: 'Health & Vaccination Certificate' },
+	{ value: 'TRAVEL_CUM_VACCINATION_CERTIFICATE', label: 'Travel & Vaccination Certificate' },
+	{ value: 'EUTHANASIA_CERTIFICATE', label: 'Euthanasia Certificate' },
+	{ value: 'DEATH_CERTIFICATE', label: 'Death Certificate' },
+	{ value: 'MICROCHIP_IMPLANTATION_CERTIFICATE', label: 'Microchip Implantation Certificate' },
+	{ value: 'IDENTIFICATION_CERTIFICATE', label: 'Identification Certificate' },
+	{ value: 'BOARDING_AND_LODGING', label: 'Boarding & Lodging' },
+	{ value: 'SURGICAL_RISK_NOTE', label: 'Surgical Risk Note' },
+];
