@@ -181,6 +181,7 @@ declare namespace IClinicTypes {
 		businessContact: string;
 		address: IAddress;
 		logoUrl: string;
+		email: string;
 	}
 
 	interface Parent {

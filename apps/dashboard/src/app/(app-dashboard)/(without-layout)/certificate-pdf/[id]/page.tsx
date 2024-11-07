@@ -1,9 +1,11 @@
 import CertificatePdf from './ui/pdf';
+import Print from './ui/print';
 
 const Page = () => {
 	return (
-		<section className="bg-white rounded-8">
+		<section className="">
 			<CertificatePdf />
+			<Print />
 		</section>
 	);
 };
