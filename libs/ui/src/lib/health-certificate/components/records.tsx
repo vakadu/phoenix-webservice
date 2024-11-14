@@ -1,8 +1,14 @@
 import ImagePlaceholder from '../../image-placeholder/image-placeholder';
 import useCertificate from '../hooks/use-certificate';
+import RecordItem from '../components/item';
+import CategoryLoader from '../../category-loader/category-loader';
 
 export default function Certificate({ activeFilter }: { activeFilter: string }) {
-	const { records } = useCertificate({ activeFilter });
+	const { records, refetch, isPending } = useCertificate({ activeFilter });
+
+	if (isPending) {
+		return <CategoryLoader columns={1} rows={4} />;
+	}
 
 	if (records && records?.length <= 0) {
 		return (
@@ -16,5 +22,18 @@ export default function Certificate({ activeFilter }: { activeFilter: string }) 
 		);
 	}
 
-	return <div></div>;
+	return (
+		<div className="mt-12">
+			{records?.map((record) => {
+				return (
+					<RecordItem
+						key={record._id}
+						record={record}
+						refetch={refetch}
+						activeFilter={activeFilter}
+					/>
+				);
+			})}
+		</div>
+	);
 }

@@ -184,9 +184,10 @@ declare namespace IClinicTypes {
 		email: string;
 	}
 
-	interface Parent {
+	interface IParent {
 		name: string;
 		mobile: string;
+		parentId: string;
 	}
 
 	interface IPetAndParentDetail {
@@ -197,15 +198,19 @@ declare namespace IClinicTypes {
 		gender: string;
 		type: string;
 		breed: string;
-		parent: Parent;
+		parent: IParent;
 		parentAddress: Record<string, unknown>;
+	}
+	interface IVaccinationType {
+		lastCompleteDate: string;
+		nextDueDate: string;
+		petId: string;
+		vaccineName: string;
 	}
 	interface ICertificateData {
 		clinicData: IClinicData;
-		petAndParentDetail: {
-			petAndParentDetail: IPetAndParentDetail;
-		};
-		vaccinations: any[];
+		petAndParentDetail: IPetAndParentDetail;
+		vaccinations: IVaccinationType[];
 	}
 	interface ICertificateApiResponse {
 		certificateData: ICertificateData;

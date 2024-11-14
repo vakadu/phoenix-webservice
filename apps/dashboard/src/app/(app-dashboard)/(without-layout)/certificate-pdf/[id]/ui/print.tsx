@@ -1,13 +1,57 @@
 'use client';
 
-import { ButtonWrapper, ImagePlaceholder } from '@webservices/ui';
+import { usePetCertificateVaccination, useUploadMedicalRecord } from '@webservices/api';
+import { createFormDataForDocument } from '@webservices/helpers';
+import { useRouterQuery } from '@webservices/hooks';
+import { ImagePlaceholder } from '@webservices/ui';
 
 export default function Print() {
+	const { query, params } = useRouterQuery();
+	const petId = query?.id as string;
+	const heading = params.get('type');
+
+	const { data, isPending } = usePetCertificateVaccination({ type: heading as string, petId });
+	const { petAndParentDetail } = data?.data?.certificateData || {};
+	const parentDetails = petAndParentDetail?.parent;
+
+	const { mutateAsync: uploadMedicalRecord, isPending: uploadMedicalRecordPending } =
+		useUploadMedicalRecord({
+			petId: petId as string,
+		});
+
 	const handlePdf = async () => {
 		const htmltopdf = await require('html2pdf.js');
+		var opt = {
+			filename: 'myfile.pdf',
+			// html2canvas: { scale: 2, letterRendering: true },
+			// jsPDF: { unit: 'pt', format: 'legal', orientation: 'portrait' },
+			// pagebreak: { before: '.page-break', mode: 'css' },
 
+			image: { type: 'jpeg', quality: 1 },
+			pagebreak: { avoid: 'tr', mode: 'css', before: '#page-break', after: '1cm' },
+			html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+			jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait', putTotalPages: true },
+		};
 		let element = document.querySelector('#pdf');
-		htmltopdf(element);
+		htmltopdf()
+			.set(opt)
+			.from(element)
+			.toPdf()
+			.output('blob')
+			.then(async (pdfBlob: any) => {
+				let formData;
+				formData = createFormDataForDocument(pdfBlob, 'file', {
+					type: heading,
+					parentId: parentDetails?.parentId,
+					clinicId: '',
+				});
+				htmltopdf().set(opt).from(element).save();
+				try {
+					const response = (await uploadMedicalRecord(
+						formData,
+					)) as ICommonTypes.IApiResponse<IClinicTypes.IMedicalRecord>;
+				} catch (err) {}
+			});
 	};
 
 	return (

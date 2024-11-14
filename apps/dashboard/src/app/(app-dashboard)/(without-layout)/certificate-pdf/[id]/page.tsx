@@ -3,10 +3,10 @@ import Print from './ui/print';
 
 const Page = () => {
 	return (
-		<section className="">
+		<div className="pb-[100px]">
 			<CertificatePdf />
 			<Print />
-		</section>
+		</div>
 	);
 };
 

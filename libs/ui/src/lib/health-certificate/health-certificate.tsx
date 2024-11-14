@@ -2,18 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import Select, { SingleValue } from 'react-select';
+import Link from 'next/link';
 
-import { useGetMedicalRecords } from '@webservices/api';
-import { ApiEndpoints } from '@webservices/primitives';
-import { HttpService } from '@webservices/services';
 import { certificateData } from '@webservices/constants';
 import { customSelectBoxStyles } from '@webservices/helpers';
-import ImagePlaceholder from '../image-placeholder/image-placeholder';
 import Certificate from './components/records';
 import useCertificate from './hooks/use-certificate';
-import ButtonWrapper from '../button-wrapper/button-wrapper';
-import Button from '../button/button';
-import Link from 'next/link';
 import { useRouterQuery } from '@webservices/hooks';
 
 interface OptionType {

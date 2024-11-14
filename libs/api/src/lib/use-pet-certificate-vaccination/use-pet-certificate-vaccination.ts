@@ -7,7 +7,7 @@ const getPetCertificateVaccination = async ({
 	queryKey,
 }: QueryFunctionContext<[string, string, string | undefined]>) => {
 	const [_key, type, petId] = queryKey;
-	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}/${petId}/${type}`;
+	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/${_key}/${petId}/VACCINATION`;
 	const { data } =
 		await HttpService.get<ICommonTypes.IApiResponse<IClinicTypes.ICertificateApiResponse>>(url);
 	return data;
@@ -17,6 +17,7 @@ export function usePetCertificateVaccination({ type, petId }: { type: string; pe
 	return useQuery({
 		queryKey: [ApiEndpoints.VaccinationCertificate, type, petId],
 		queryFn: getPetCertificateVaccination,
+		enabled: !!type,
 	});
 }
 
