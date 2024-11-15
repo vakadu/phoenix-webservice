@@ -36,8 +36,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet, owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
 						</span>
 						(description given above), has been inspected and deemed fit for boarding
 						under the terms and conditions agreed upon by the owner and the facility.
@@ -47,8 +47,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
 						</span>
 						(description given above) has been examined by the undersigned and is found
 						to be in perfect health as on date.The pet is duly immunized against
@@ -59,8 +59,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
 						</span>
 						(description given above) has been examined by the undersigned and is found
 						to be in perfect health as on date and is fit to travel by Air/Road/Rail.The
@@ -74,7 +74,7 @@ export default function CertificatePdf() {
 						I, the undersigned (mentioned as owner) do hereby certify that I am the
 						rightful owner of the animal mentioned above(mentioned as patient). I do
 						hereby give{' '}
-						<span className="font-bold text-14">{clinicData?.name.toUpperCase()}</span>{' '}
+						<span className="font-bold text-12">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
 						full and complete authority to euthanize the said animal in whatever manner
 						he deems fit. I do hereby, and by these presents forever release the said
 						Vets, his/her agents, servants, or representatives from any and all
@@ -90,8 +90,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
 						</span>
 						(description given above) has been examined by the undersigned, to be dead.
 						This information is true to the best of my knowledge.
@@ -101,8 +101,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
 						</span>
 						(description given above) has been implanted with microchip by the
 						undersigned for the purpose of identification.
@@ -112,8 +112,8 @@ export default function CertificatePdf() {
 				return (
 					<div>
 						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-14">
-							Mr./Ms. {parentDetails?.name.toUpperCase()}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
 						</span>
 						(description given above) has been examined for the purpose of
 						identification. The information provided is true to the best of the
@@ -127,7 +127,7 @@ export default function CertificatePdf() {
 						rightful owner of the animal mentioned above(mentioned as patient). I
 						request the vets to keep my pet in boarding for above mentioned dates. I
 						will not hold{' '}
-						<span className="font-bold text-14">{clinicData?.name.toUpperCase()}</span>{' '}
+						<span className="font-bold text-14">{clinicData?.name?.trim()?.trim()?.toUpperCase()}</span>{' '}
 						responsible or caim any compensation for any untoward happening.
 						<div className="my-12">
 							<div>Normal pick up and drop time - 9.30 a.m to 9.30 p.m</div>
@@ -145,11 +145,11 @@ export default function CertificatePdf() {
 							</div>
 							<div className="ml-8">
 								2. The pet should be free from skin infections/communicable diseases
-								Otherwise necessary treatment would be done at owner's expense
+								Otherwise necessary treatment would be done at owner's expense.
 							</div>
 							<div className="ml-8">
 								3. If during the course of boarding the pet fells ill, the necessary
-								treatment would be done as deemed fit by the vets
+								treatment would be done as deemed fit by the vets.
 							</div>
 							<div className="ml-8">
 								4. We undertake maximum precautions for the safety of your pet but
@@ -183,14 +183,14 @@ export default function CertificatePdf() {
 						fully aware and take full responsibility for the complication and risk
 						involved in the anesthesia and surgery of this animal. I give my full
 						consent for the necessary surgery to be performed and will not hold{' '}
-						<span className="font-bold text-14">{clinicData?.name.toUpperCase()}</span>{' '}
+						<span className="font-bold text-14">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
 						responsible or claim any compensation for any untoward happening.
 					</div>
 				);
 			default:
 				return null;
 		}
-	}, []);
+	}, [parentDetails, heading, clinicData]);
 
 	if (isPending) {
 		return (
@@ -201,24 +201,41 @@ export default function CertificatePdf() {
 	}
 
 	return (
-		<div id="pdf" className="mx-auto bg-white max-w-[820px]">
-			<div className="bg-purple flex justify-between p-16 gap-16">
-				<ImagePlaceholder
-					src={clinicData?.logoUrl as string}
-					containerClasses="w-[114px] h-[114px] "
-					imageClasses="rounded-full object-center"
-				/>
-				<div className="flex-1 flex justify-center flex-col">
-					<h1 className="text-white text-32 font-bold">{clinicData?.name}</h1>
-					<div className="flex mt-8">
-						<p className="text-white text-16 text-left">
-							<span className="font-medium">Tel. Ph: </span>
+		<div id="pdf" className="mx-auto bg-white max-w-[1240px] p-24">
+			<div className="bg-purple flex justify-between py-6">
+				{/* <div className="justify-center flex-col mx-6">
+					<ImagePlaceholder
+						src={clinicData?.logoUrl as string}
+						containerClasses="w-[100px] h-[100px] "
+						imageClasses="rounded-full object-center"
+					/>
+				</div> */}
+				<div className="justify-center flex-col mx-6 relative">
+					<ImagePlaceholder
+						src={clinicData?.logoUrl as string}
+						containerClasses="w-[100px] h-[100px] relative"
+						imageClasses="rounded-full absolute inset-0 w-full h-full"
+						style={{
+							width: '100px',
+							height: '100px',
+							display: 'block',
+							margin: 'auto',
+							objectFit: 'cover',
+						}}
+					/>
+				</div>
+
+				<div className="flex-1 flex justify-center flex-col mx-18">
+					<h1 className="text-white text-22 font-bold">{clinicData?.name}</h1>
+					<div className="flex">
+						<p className="text-white text-14 text-left">
+							<span className="font-medium">Mob. : </span>
 							{clinicData?.businessContact
 								? clinicData?.businessContact
 								: clinicData?.mobile}
 							<span className="pr-8">,</span>
 						</p>
-						<p className="text-white text-16">
+						<p className="text-white text-14">
 							<span className="font-medium">Address: </span>
 							{clinicData?.address?.line1 && `${clinicData?.address?.line1}, `}
 							{clinicData?.address?.line2 && `${clinicData?.address?.line2}, `}
@@ -229,82 +246,80 @@ export default function CertificatePdf() {
 					</div>
 				</div>
 			</div>
-			<h2 className="font-bold text-center my-24 text-24">{renderTitle}</h2>
-			<div className="p-24">
-				<div className="py-12 border-b-[3px] border-purple text-18 font-bold grid grid-cols-3 gap-32">
+			<h2 className="font-bold text-center my-6 text-18">{renderTitle}</h2>
+			<div className="px-24">
+				<div className="py-2 border-b-[3px] border-purple text-14 font-bold grid grid-cols-3 gap-32">
 					<div className="col-span-1">Owner Details</div>
 					<div className="col-span-2">Pet Details</div>
 				</div>
-				<div className="grid grid-cols-3 gap-32 mt-16 pb-32 mb-32 border-b border-dashed border-purple ">
+				<div className="py-2 grid grid-cols-3 gap-32 border-b border-dashed border-purple">
 					<div className="col-span-1">
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Owner:</div>
-							<div className="pl-8">{parentDetails?.name}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Owner Name:</div>
+							<div className="pl-8 text-14">{parentDetails?.name}</div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Owner Ph.:</div>
-							<div className="pl-8">{parentDetails?.mobile}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Owner Mob.:</div>
+							<div className="pl-8 text-14">{parentDetails?.mobile}</div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Address:</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Address:</div>
 							{/* <div className="pl-8">{petAndParentDetail?.petAndParentDetail?.parentAddress}</div> */}
 						</div>
 					</div>
 					<div className="col-span-1">
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Contact No.:</div>
-							<div className="pl-8">{parentDetails?.mobile}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Pet Name:</div>
+							<div className="pl-8 text-14">{petDetails?.name}</div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Pet Name:</div>
-							<div className="pl-8">{petDetails?.name}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Pet Sex:</div>
+							<div className="pl-8 text-14">{petDetails?.gender}</div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Pet Sex:</div>
-							<div className="pl-8">{petDetails?.gender}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Pet Color:</div>
+							<div className="pl-8 text-14"></div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Pet Color:</div>
-							<div className="pl-8"></div>
-						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Breed:</div>
-							<div className="pl-8">{petDetails?.breed}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Breed:</div>
+							<div className="pl-8 text-14">{petDetails?.breed}</div>
 						</div>
 					</div>
 					<div className="col-span-1">
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Microchip No.:</div>
-							<div className="pl-8"></div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Microchip No.:</div>
+							<div className="pl-8 text-14"></div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Pet DOB:</div>
-							<div className="pl-8">{petDetails?.dob}</div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Pet DOB:</div>
+							<div className="pl-8 text-14">{petDetails?.dob}</div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Pet Age:</div>
-							<div className="pl-8"></div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Pet Age:</div>
+							<div className="pl-8 text-14"></div>
 						</div>
-						<div className="flex items-center py-8">
-							<div className="text-16 font-medium">Patient code:</div>
-							<div className="pl-8"></div>
+						<div className="flex items-center py-2">
+							<div className="text-14 font-medium">Patient code:</div>
+							<div className="pl-8 text-14"></div>
 						</div>
 					</div>
 				</div>
+
+
 			</div>
-			<div id="page-break" className="px-16 mt-16 mb-24 font-medium">
+			<div id="page-break" className="text-14 px-24 mt-16 font-medium">
 				{renderDesc}
 			</div>
 			{heading === 'ARV_CERTIFICATE' && (
-				<div className="px-16 mb-42 pt-24">
+				<div className="p-24 mb-42">
 					<table className="w-full text-sm font-light">
 						<thead className="bg-gray-200">
 							<tr>
-								<th className="py-3 px-6 text-left font-medium">Vaccine</th>
-								<th className="py-3 px-6 text-left font-medium">Brand/Mfr.</th>
-								<th className="py-3 px-6 text-left font-medium">Batch/Lot No.</th>
-								<th className="py-3 px-6 text-left font-medium">Given On</th>
-								<th className="py-3 px-6 text-left font-medium">Due Date</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Vaccine</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Brand/Mfr.</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Batch/Lot No.</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Given On</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Due Date</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -320,14 +335,15 @@ export default function CertificatePdf() {
 										: '';
 
 									return (
-										<tr key={vaccineName}>
-											<td className="py-4 px-6 font-normal">{vaccineName}</td>
-											<td className="py-4 px-6 font-normal"></td>
-											<td className="py-4 px-6 font-normal"></td>
-											<td className="py-4 px-6 font-normal">
+
+										<tr className='border-b border-dashed border-purple' key={vaccineName}>
+											<td className="py-4 px-6 text-12 font-medium">{vaccineName}</td>
+											<td className="py-4 px-6 text-12 font-medium"></td>
+											<td className="py-4 px-6 text-12 font-medium"></td>
+											<td className="py-4 px-6 text-12 font-medium">
 												{completeDate}
 											</td>
-											<td className="py-4 px-6 font-normal">{dueDate}</td>
+											<td className="py-4 px-6 text-12 font-medium">{dueDate}</td>
 										</tr>
 									);
 								}
@@ -337,15 +353,15 @@ export default function CertificatePdf() {
 				</div>
 			)}
 			{verifyHealth && (
-				<div className="px-16 mb-42 pt-24">
+				<div className="p-24 mb-42">
 					<table className="w-full text-sm font-light">
 						<thead className="bg-gray-200">
 							<tr>
-								<th className="py-3 px-6 text-left font-medium">Vaccine</th>
-								<th className="py-3 px-6 text-left font-medium">Brand/Mfr.</th>
-								<th className="py-3 px-6 text-left font-medium">Batch/Lot No.</th>
-								<th className="py-3 px-6 text-left font-medium">Given On</th>
-								<th className="py-3 px-6 text-left font-medium">Due Date</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Vaccine</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Brand/Mfr.</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Batch/Lot No.</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Given On</th>
+								<th className="py-3 px-6 text-left text-12 font-bold">Due Date</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -370,7 +386,7 @@ export default function CertificatePdf() {
 									: '';
 
 								return (
-									<tr key={vaccineName}>
+									<tr className='border-b border-dashed border-purple' key={vaccineName}>
 										<td className="py-4 px-6 font-normal">{vaccineName}</td>
 										<td className="py-4 px-6 font-normal"></td>
 										<td className="py-4 px-6 font-normal"></td>
@@ -384,7 +400,7 @@ export default function CertificatePdf() {
 				</div>
 			)}
 			{heading === 'BOARDING_AND_LODGING' || heading === 'SURGICAL_RISK_NOTE' ? (
-				<div className="px-16 py-24">
+				<div className="p-24">
 					<div className="grid grid-cols-2">
 						<div className="flex flex-col gap-16">
 							<span className="h-1 w-[292px] bg-black-1 block"></span>
@@ -417,7 +433,7 @@ export default function CertificatePdf() {
 					)}
 				</div>
 			) : (
-				<div className="grid grid-cols-2 px-16 py-24">
+				<div className="grid grid-cols-2 p-24">
 					<div className="flex items-end">
 						<span className="font-medium text-14">Date:</span>
 						<span className="h-1 w-[172px] bg-black-1 block"></span>
@@ -426,26 +442,26 @@ export default function CertificatePdf() {
 						<span className="h-1 w-[292px] bg-black-1 block"></span>
 						<span className="font-medium text-14">
 							{heading === 'EUTHANASIA_CERTIFICATE' ||
-							heading === 'IDENTIFICATION_CERTIFICATE'
+								heading === 'IDENTIFICATION_CERTIFICATE'
 								? 'Signature of Owner/Agent'
 								: 'Signature of Doctor'}
 						</span>
 					</div>
 				</div>
 			)}
-			<div className="p-16">
-				<div className=" bg-purple text-white font-bold text-18 py-12 text-center">
-					Please call for an Appointment
+			<div className="mb-auto">
+				<div className=" bg-purple text-white font-bold text-14 py-6 text-center">
+					Please call for an Appointment!
 				</div>
-				<div className="py-12 flex justify-between items-center">
-					<p className="text-16">
-						<span className="font-medium">Tel. Ph: </span>
+				<div className="py-2 flex justify-between items-center">
+					<p className="text-14 font-medium">
+						<span>Mob. : </span>
 						{clinicData?.businessContact
 							? clinicData?.businessContact
 							: clinicData?.mobile}
 					</p>
-					<p>
-						<span className="font-medium">Email: </span>
+					<p className="text-14 font-medium">
+						<span>Email: </span>
 						{clinicData?.email}
 					</p>
 				</div>
