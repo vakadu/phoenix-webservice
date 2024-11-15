@@ -7,7 +7,7 @@ import { useDownloadDocument } from '@webservices/api';
 const useDocumentDownlaod = ({ url }: { url: string }) => {
 	const { mutateAsync: downloadDocument } = useDownloadDocument();
 	const [imageUrl, setImageUrl] = useState<string | null>();
-	const urlType = url.split('.'),
+	const urlType = url?.split('.'),
 		imgType = urlType && urlType[urlType.length - 1];
 
 	const getImageUrl = useCallback(async () => {

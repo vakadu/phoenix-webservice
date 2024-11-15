@@ -92,9 +92,9 @@ function RecordItem({ record, refetch, activeFilter }: IRecordItem) {
 					href={url as string}
 					rel="noreferrer"
 					onClick={handleDownload}
-					className="w-[32px] h-[32px] flex items-center justify-center"
+					className="font-bold text-primary-1 flex items-center justify-center"
 				>
-					<DownloadIcon />
+					View
 				</a>
 				<ButtonWrapper
 					onClick={handleDelete}

@@ -1,17 +1,18 @@
 'use client';
 
-import { usePetCertificateVaccination, useUploadMedicalRecord } from '@webservices/api';
+import { useDownloadDocument, usePetCertificateVaccination, useUploadMedicalRecord } from '@webservices/api';
 import { createFormDataForDocument } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
 import { ImagePlaceholder } from '@webservices/ui';
 
 export default function Print() {
-	const { query, params } = useRouterQuery();
+	const { query, params, back } = useRouterQuery();
 	const petId = query?.id as string;
 	const heading = params.get('type');
+	const { mutateAsync: downloadDocument } = useDownloadDocument();
 
 	const { data, isPending } = usePetCertificateVaccination({ type: heading as string, petId });
-	const { petAndParentDetail } = data?.data?.certificateData || {};
+	const { petAndParentDetail, clinicData } = data?.data?.certificateData || {};
 	const parentDetails = petAndParentDetail?.parent;
 
 	const { mutateAsync: uploadMedicalRecord, isPending: uploadMedicalRecordPending } =
@@ -22,7 +23,7 @@ export default function Print() {
 	const handlePdf = async () => {
 		const htmltopdf = await require('html2pdf.js');
 		var opt = {
-			filename: 'myfile.pdf',
+			filename: 'certificate.pdf',
 			// html2canvas: { scale: 2, letterRendering: true },
 			// jsPDF: { unit: 'pt', format: 'legal', orientation: 'portrait' },
 			// pagebreak: { before: '.page-break', mode: 'css' },
@@ -39,18 +40,23 @@ export default function Print() {
 			.toPdf()
 			.output('blob')
 			.then(async (pdfBlob: any) => {
-				let formData;
-				formData = createFormDataForDocument(pdfBlob, 'file', {
-					type: heading,
-					parentId: parentDetails?.parentId,
-					clinicId: '',
-				});
-				htmltopdf().set(opt).from(element).save();
+				// Ensure the Blob type is explicitly set to 'application/pdf'
+				const pdfWithType: any = new Blob([pdfBlob], { type: 'application/pdf' });
+				const formData = new FormData();
+				formData.append('file', pdfWithType, `${heading}.pdf`); // Ensure .pdf extension
+				formData.append('type', heading as string);
+				formData.append('parentId', parentDetails?.parentId as string);
+				formData.append('clinicId', clinicData?.userId as string);
 				try {
-					const response = (await uploadMedicalRecord(
+					const response: any = (await uploadMedicalRecord(
 						formData,
 					)) as ICommonTypes.IApiResponse<IClinicTypes.IMedicalRecord>;
-				} catch (err) {}
+					const payload = { key: response?.data?.medicalRecord?.url as string };
+					const resp = await downloadDocument(payload);
+					back()
+					// Open the PDF in a new tab
+					window.open(resp?.data?.signedUrl, '_blank');
+				} catch (err) { }
 			});
 	};
 
