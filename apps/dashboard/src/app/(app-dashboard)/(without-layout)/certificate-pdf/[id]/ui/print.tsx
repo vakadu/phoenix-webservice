@@ -64,7 +64,7 @@ export default function Print() {
 				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
 				<ImagePlaceholder src="/images/print.svg" containerClasses="w-[42px] h-[42px]" />
 			</div>
-			<div className="mt-6 font-bold text-14 text-primary-1">Click For Print</div>
+			<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
 		</div>
 	);
 }
