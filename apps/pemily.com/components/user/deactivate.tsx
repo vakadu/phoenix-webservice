@@ -29,7 +29,6 @@ const Deactivate = () => {
         };
         const response = await axios.post(`${process.env.NEXT_PUBLIC_PEMILY_BASE_PATH}/user/deactivate`, data);
         console.log(response);
-        
     };
 
     return (
