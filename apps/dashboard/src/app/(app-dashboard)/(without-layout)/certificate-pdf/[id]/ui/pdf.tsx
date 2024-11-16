@@ -201,24 +201,20 @@ export default function CertificatePdf() {
 	}
 
 	return (
-		<div id="pdf" className="mx-auto bg-white max-w-[1240px] p-24">
+		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] p-24 flex flex-col">
 			<div className="bg-purple flex justify-between py-6">
-				{/* <div className="justify-center flex-col mx-6">
-					<ImagePlaceholder
-						src={clinicData?.logoUrl as string}
-						containerClasses="w-[100px] h-[100px] "
-						imageClasses="rounded-full object-center"
-					/>
-				</div> */}
 				<div className="flex flex-col items-center mx-6 relative">
 					<img
-						crossOrigin="anonymous" // Correct casing for React
+						crossOrigin="anonymous"
 						alt="logo"
-						src={clinicData?.logoUrl} // Dynamic logo URL function
+						src={clinicData?.logoUrl}
 						className="w-[100px] h-[100px] rounded-full object-cover"
+						style={{
+							height: '100px', // Limit max width
+							width: '100px', // Limit max height
+						}}
 					/>
 				</div>
-
 				<div className="flex-1 flex justify-center flex-col mx-18">
 					<h1 className="text-white text-22 font-bold">{clinicData?.name}</h1>
 					<div className="flex">
@@ -443,7 +439,7 @@ export default function CertificatePdf() {
 					</div>
 				</div>
 			)}
-			<div className="mb-auto">
+			<div className="mt-auto">
 				<div className=" bg-purple text-white font-bold text-14 py-6 text-center">
 					Please call for an Appointment!
 				</div>

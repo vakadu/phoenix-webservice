@@ -27,7 +27,7 @@ export default function Print() {
 			image: { type: 'jpeg', quality: 1 },
 			pagebreak: { avoid: 'tr', mode: 'css', before: '#page-break', after: '1cm' },
 			html2canvas: { scale: 2, useCORS: true, letterRendering: true, dpi: 300 },
-			jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait', putTotalPages: true },
+			jsPDF: { unit: 'px', format: 'a4', orientation: 'portrait', putTotalPages: true, hotfixes: ["px_scaling"] },
 		};
 		let element = document.querySelector('#pdf');
 		htmltopdf()
