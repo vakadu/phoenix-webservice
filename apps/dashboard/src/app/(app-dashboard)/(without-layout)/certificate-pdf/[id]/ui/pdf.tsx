@@ -307,7 +307,12 @@ export default function CertificatePdf() {
 
 
 			</div>
-			<div id="page-break" className="text-14 px-24 mt-16 font-medium text-justify  leading-relaxed tracking-tight">
+			<div
+				id="page-break"
+				className="text-14 px-24 mt-16 font-medium text-justify"
+				style={{ wordSpacing: '-0.1em' }}
+
+			>
 				{renderDesc}
 			</div>
 			{heading === 'ARV_CERTIFICATE' && (
