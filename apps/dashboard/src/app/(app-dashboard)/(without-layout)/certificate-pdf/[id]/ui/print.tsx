@@ -24,10 +24,6 @@ export default function Print() {
 		const htmltopdf = await require('html2pdf.js');
 		var opt = {
 			filename: 'certificate.pdf',
-			// html2canvas: { scale: 2, letterRendering: true },
-			// jsPDF: { unit: 'pt', format: 'legal', orientation: 'portrait' },
-			// pagebreak: { before: '.page-break', mode: 'css' },
-
 			image: { type: 'jpeg', quality: 1 },
 			pagebreak: { avoid: 'tr', mode: 'css', before: '#page-break', after: '1cm' },
 			html2canvas: { scale: 2, useCORS: true, letterRendering: true, dpi: 300 },
@@ -35,8 +31,8 @@ export default function Print() {
 		};
 		let element = document.querySelector('#pdf');
 		htmltopdf()
-			.set(opt)
 			.from(element)
+			.set(opt)
 			.toPdf()
 			.output('blob')
 			.then(async (pdfBlob: any) => {

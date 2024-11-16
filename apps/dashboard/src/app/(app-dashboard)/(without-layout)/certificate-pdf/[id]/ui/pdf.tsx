@@ -210,18 +210,12 @@ export default function CertificatePdf() {
 						imageClasses="rounded-full object-center"
 					/>
 				</div> */}
-				<div className="justify-center flex-col mx-6 relative">
-					<ImagePlaceholder
-						src={clinicData?.logoUrl as string}
-						containerClasses="w-[100px] h-[100px] relative"
-						imageClasses="rounded-full absolute inset-0 w-full h-full"
-						style={{
-							width: '100px',
-							height: '100px',
-							display: 'block',
-							margin: 'auto',
-							objectFit: 'cover',
-						}}
+				<div className="flex flex-col items-center mx-6 relative">
+					<img
+						crossOrigin="anonymous" // Correct casing for React
+						alt="logo"
+						src={clinicData?.logoUrl} // Dynamic logo URL function
+						className="w-[100px] h-[100px] rounded-full object-cover"
 					/>
 				</div>
 
