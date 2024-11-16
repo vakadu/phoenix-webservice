@@ -538,8 +538,8 @@ export const followupData = [
 
 export const certificateData = [
 	{ value: 'ARV_CERTIFICATE', label: 'Arv Certificate' },
-	{ value: 'HEALTH_CUM_VACCINATION_CERTIFICATE', label: 'Health & Vaccination Certificate' },
-	{ value: 'TRAVEL_CUM_VACCINATION_CERTIFICATE', label: 'Travel & Vaccination Certificate' },
+	{ value: 'HEALTH_CUM_VACCINATION_CERTIFICATE', label: 'Health Cum Vaccination Certificate' },
+	{ value: 'TRAVEL_CUM_VACCINATION_CERTIFICATE', label: 'Travel Cum Vaccination Certificate' },
 	{ value: 'EUTHANASIA_CERTIFICATE', label: 'Euthanasia Certificate' },
 	{ value: 'DEATH_CERTIFICATE', label: 'Death Certificate' },
 	{ value: 'MICROCHIP_IMPLANTATION_CERTIFICATE', label: 'Microchip Implantation Certificate' },

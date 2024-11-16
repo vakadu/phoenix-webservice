@@ -24,18 +24,18 @@ function VaccinationRecords({ activeFilter, petId, selectedDate }: IRecord) {
 
 	if (vaccinationRecords && vaccinationRecords?.length <= 0) {
 		return (
-			<div className="mt-[124px] flex flex-col gap-24 justify-center items-center">
+			<div className="py-[82px] flex flex-col gap-24 justify-center items-center">
 				<ImagePlaceholder
-					containerClasses="w-[120px] h-[120px]"
+					containerClasses="w-[120px] h-[180px]"
 					src="/images/no-records.svg"
 				/>
-				<p className="text-18 font-medium">No Records found.</p>
+				<p className="text-16 font-medium">No Records found.</p>
 			</div>
 		);
 	}
 
 	return (
-		<div className="mt-12 pb-32">
+		<div className="mt-12 min-h-[395px]">
 			{vaccinationRecords?.map((record) => {
 				return (
 					<RecordItem

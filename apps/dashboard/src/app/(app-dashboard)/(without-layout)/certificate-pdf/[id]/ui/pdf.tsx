@@ -1,11 +1,11 @@
 'use client';
 
 import { useMemo } from 'react';
-import { format } from 'date-fns';
+import { format, differenceInCalendarYears, differenceInCalendarMonths, differenceInCalendarDays } from 'date-fns';
 
 import { usePetCertificateVaccination } from '@webservices/api';
 import { useRouterQuery } from '@webservices/hooks';
-import { ImagePlaceholder, Loading } from '@webservices/ui';
+import { Loading } from '@webservices/ui';
 
 export default function CertificatePdf() {
 	const { query, params } = useRouterQuery();
@@ -13,7 +13,7 @@ export default function CertificatePdf() {
 	const heading = params.get('type');
 
 	const { data, isPending } = usePetCertificateVaccination({ type: heading as string, petId });
-	const { clinicData, petAndParentDetail, vaccinations } = data?.data?.certificateData || {};
+	const { clinicData, petAndParentDetail, vaccinations }: any = data?.data?.certificateData || {};
 
 	const parentDetails = petAndParentDetail?.parent;
 	const petDetails = petAndParentDetail;
@@ -30,166 +30,166 @@ export default function CertificatePdf() {
 		}
 	}, []);
 
+	const calculateAge = (birthDate: string) => {
+		const today = new Date(); // Get current date
+
+		// Calculate years, months, and days
+		const years = differenceInCalendarYears(today, new Date(birthDate));
+		const months = differenceInCalendarMonths(today, new Date(birthDate)) % 12;
+		const days = differenceInCalendarDays(today, new Date(birthDate)) % 30;
+
+		if (years === 0) {
+			// If age is less than a year, return only months and days
+			if (months === 0) {
+				// If less than a month, return days
+				return `${days}D`;
+			}
+			return `${months}M, ${days}D`; // Show months and days
+		}
+
+		return `${years}Y, ${months}M, ${days}D`; // Show years, months, and days
+
+	};
+
 	const renderDesc = useMemo(() => {
 		switch (heading) {
 			case 'ARV_CERTIFICATE':
 				return (
-					<div>
-						This is to certify that the above pet, owned by{' '}
-						<span className="font-bold text-12">
-							Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
-						</span>
-						(description given above), has been inspected and deemed fit for boarding
-						under the terms and conditions agreed upon by the owner and the facility.
-					</div>
+					<>
+						<div>
+							This is to certify that the pet described above, owned by{' '}
+							<span className="font-bold text-[12px]">
+								Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
+							</span>{' '}
+							(as detailed above), has been thoroughly examined by the undersigned and is found to be in excellent health as of the date of examination.
+						</div>
+						<div className="mt-12">
+							Additionally, the pet is fully vaccinated against Rabies, as indicated in the vaccination record below.
+						</div>
+					</>
 				);
 			case 'HEALTH_CUM_VACCINATION_CERTIFICATE':
 				return (
-					<div>
-						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-12">
-							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
-						</span>
-						(description given above) has been examined by the undersigned and is found
-						to be in perfect health as on date.The pet is duly immunized against
-						following diseases. (PI refer to the vaccination record attached).
-					</div>
+					<>
+						<div>
+							This is to certify that the pet described above, owned by{' '}
+							<span className="font-bold text-[12px]">
+								Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
+							</span>{' '}
+							(as detailed above), has been thoroughly examined by the undersigned and is found to be in excellent health as of the date of examination.
+						</div>
+						<div className="mt-12">
+							Additionally, the pet is fully immunized against the following diseases (please refer to the attached vaccination record for further details).
+						</div>
+					</>
 				);
 			case 'TRAVEL_CUM_VACCINATION_CERTIFICATE':
 				return (
-					<div>
-						This is to certify that the above pet owned by{' '}
-						<span className="font-bold text-12">
-							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
-						</span>
-						(description given above) has been examined by the undersigned and is found
-						to be in perfect health as on date and is fit to travel by Air/Road/Rail.The
-						pet is duly immunized against all diseases including Rabies. (Please refer
-						to the vaccination record attached for exact status).
-					</div>
+					<>
+						<div>
+							This is to certify that the pet described above, owned by{' '}
+							<span className="font-bold text-[12px]">
+								Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
+							</span>{' '}
+							(as detailed above), has been thoroughly examined by the undersigned and is found to be in excellent health as of the date of examination. The pet is fit for travel by Air, Road, or Rail.
+						</div>
+						<div className="mt-12">
+							Additionally, the pet is fully immunized against all required diseases, including Rabies. (Please refer to the attached vaccination record for detailed information on the immunization status).
+						</div>
+					</>
 				);
 			case 'EUTHANASIA_CERTIFICATE':
 				return (
 					<div>
-						I, the undersigned (mentioned as owner) do hereby certify that I am the
-						rightful owner of the animal mentioned above(mentioned as patient). I do
-						hereby give{' '}
+						I, the undersigned, hereby certify that I am the rightful owner of the animal described above (hereinafter referred to as the 'patient'). I grant{' '}
 						<span className="font-bold text-12">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
-						full and complete authority to euthanize the said animal in whatever manner
-						he deems fit. I do hereby, and by these presents forever release the said
-						Vets, his/her agents, servants, or representatives from any and all
-						liability for so euthanizing the said animal.
-						<div className="mt-6">
-							I do also certify that the said animal has not bitten any person or
-							animal during the last fifteen (15) days, and to the best of my
-							knowledge has not been exposed to rabies.
+						full authority to euthanize the said animal in any manner deemed appropriate by the attending veterinarian. By signing this document, I hereby release the veterinarian, as well as their agents, employees, or representatives, from any and all liability associated with the euthanasia of the animal.
+						<div className="mt-12">
+							Furthermore, I certify that the animal has not bitten any person or other animal within the last fifteen (15) days and, to the best of my knowledge, has not been exposed to rabies.
 						</div>
 					</div>
 				);
 			case 'DEATH_CERTIFICATE':
 				return (
 					<div>
-						This is to certify that the above pet owned by{' '}
+						This is to certify that the pet described above, owned by{' '}
 						<span className="font-bold text-12">
 							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
-						</span>
-						(description given above) has been examined by the undersigned, to be dead.
-						This information is true to the best of my knowledge.
+						</span>{' '}
+						(as detailed above), has been examined by the undersigned and is confirmed to be dead. This statement is made to the best of my knowledge and belief.
 					</div>
 				);
 			case 'MICROCHIP_IMPLANTATION_CERTIFICATE':
 				return (
 					<div>
-						This is to certify that the above pet owned by{' '}
+						This is to certify that the pet described above, owned by{' '}
 						<span className="font-bold text-12">
 							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
-						</span>
-						(description given above) has been implanted with microchip by the
-						undersigned for the purpose of identification.
+						</span>{' '}
+						(as detailed above), has been implanted with a microchip by the undersigned for the purpose of identification.
 					</div>
 				);
 			case 'IDENTIFICATION_CERTIFICATE':
 				return (
 					<div>
-						This is to certify that the above pet owned by{' '}
+						This is to certify that the pet described above, owned by{' '}
 						<span className="font-bold text-12">
 							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
-						</span>
-						(description given above) has been examined for the purpose of
-						identification. The information provided is true to the best of the
-						knowledge of the undersigned.
+						</span>{' '}
+						(as detailed above), has been examined for identification purposes. The information provided is accurate to the best of the undersigned's knowledge.
 					</div>
 				);
 			case 'BOARDING_AND_LODGING':
 				return (
 					<div>
-						I,the undersigned (mentioned as owner) do hereby certify that I am the
-						rightful owner of the animal mentioned above(mentioned as patient). I
-						request the vets to keep my pet in boarding for above mentioned dates. I
-						will not hold{' '}
+						I, the undersigned (referred to as the owner), hereby certify that I am the rightful owner of the pet described above (referred to as the patient). I request that the veterinarians at{' '}
 						<span className="font-bold text-14">{clinicData?.name?.trim()?.trim()?.toUpperCase()}</span>{' '}
-						responsible or caim any compensation for any untoward happening.
+						provide boarding services for my pet during the specified dates. I acknowledge that I will not hold{' '}
+						<span className="font-bold text-14">{clinicData?.name?.trim()?.trim()?.toUpperCase()}</span>{' '}
+						responsible for any unforeseen incidents, nor will I claim any compensation for such events.
+
 						<div className="my-12">
-							<div>Normal pick up and drop time - 9.30 a.m to 9.30 p.m</div>
+							<div>Normal pick-up and drop-off time: 9:00 AM to 9:30 PM.</div>
 							<div>
-								Special pick up and drop time - 9.30 a.m to 11.30 p.m can be
-								considered on case to case basis and would invite extra Rs 200/- for
-								misc. boarding charges in addition to regular charges.{' '}
+								Special pick-up and drop-off time (between 9:30 PM and 11:30 PM) may be considered on a case-by-case basis, subject to an additional charge of Rs 200/- for miscellaneous boarding expenses, in addition to the regular charges.
 							</div>
 						</div>
-						<div>
-							Terms and conditions of boarding:
+						<div className="mt-12">
+							Terms and Conditions of Boarding:
 							<div className="mt-6 ml-8">
-								1. The pet should be completely vaccinated else the vaccination
-								would be done at clinic at owner's expense.
+								1. The pet must be fully vaccinated; if not, the vaccination will be administered at the clinic's discretion and at the owner's expense.
 							</div>
-							<div className="ml-8">
-								2. The pet should be free from skin infections/communicable diseases
-								Otherwise necessary treatment would be done at owner's expense.
+							<div className="ml-6">
+								2. The pet must be free from skin infections and communicable diseases. If any such condition is found, necessary treatment will be administered at the owner's expense.
 							</div>
-							<div className="ml-8">
-								3. If during the course of boarding the pet fells ill, the necessary
-								treatment would be done as deemed fit by the vets.
+							<div className="ml-6">
+								3. In the event that the pet falls ill during boarding, necessary treatment will be provided by the attending veterinarians.
 							</div>
-							<div className="ml-8">
-								4. We undertake maximum precautions for the safety of your pet but
-								even if due to unforeseen circumstances the pet runs away from
-								boarding or any other unfortunate mishappening to the pet you will
-								not hold vet responsible for the same neither we are liable for any
-								compensation whatsoever.
+							<div className="ml-6">
+								4. While maximum precautions will be taken for the safety of your pet, in the case of unforeseen circumstances (e.g., the pet running away or any other unfortunate incident), the veterinarians will not be held responsible, and no compensation will be provided.
 							</div>
-							<div className="ml-8">
-								5. During the boarding if your pet damages the property of the
-								facility or bites/scratches the staff, you have to pay for the
-								damages and medical expenses incurred.
+							<div className="ml-6">
+								5. If your pet causes any damage to the property of the facility or injures the staff (e.g., biting or scratching), you will be liable for the cost of the damages and any medical expenses incurred.
 							</div>
-							<div className="ml-8">
-								6. As we keep limited number of pets in boarding, the dates of
-								boarding should not be arbitrarily changed by the owner as it
-								affects the whole schedule at boarding. Any special circumstances
-								can be considered by the vets as on case to case basis for which
-								extra fees would be chargeable. I Agree to the above terms and
-								conditions.
+							<div className="ml-6">
+								6. As we accommodate a limited number of pets in boarding, changes to the boarding dates by the owner must be avoided, as it disrupts the entire boarding schedule. Any special circumstances will be considered by the veterinarians on a case-by-case basis, and additional charges may apply.
 							</div>
-							<div className="mt-12">I Agree to the above terms and conditions.</div>
+							<div className="mt-12">I acknowledge and agree to the terms and conditions outlined above.</div>
 						</div>
 					</div>
 				);
 			case 'SURGICAL_RISK_NOTE':
 				return (
 					<div>
-						I, the undersigned (mentioned as owner) do hereby certify that I am the
-						rightful owner of the animal mentioned above(mentioned as patient). I am
-						fully aware and take full responsibility for the complication and risk
-						involved in the anesthesia and surgery of this animal. I give my full
-						consent for the necessary surgery to be performed and will not hold{' '}
+						I, the undersigned (referred to as the owner), hereby certify that I am the rightful owner of the animal mentioned above (referred to as the patient). I acknowledge and fully understand the potential risks and complications involved with the administration of anesthesia and the surgery of my pet. I give my explicit consent for the necessary surgical procedures to be performed and accept full responsibility for any outcomes. I further agree that I will not hold{' '}
 						<span className="font-bold text-14">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
-						responsible or claim any compensation for any untoward happening.
+						liable or seek compensation for any unforeseen circumstances or complications that may arise during or after the procedure.
 					</div>
 				);
 			default:
 				return null;
 		}
+
 	}, [parentDetails, heading, clinicData]);
 
 	if (isPending) {
@@ -202,31 +202,27 @@ export default function CertificatePdf() {
 
 	return (
 		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] p-24 flex flex-col">
-			<div className="bg-purple flex justify-between py-6">
-				<div className="flex flex-col items-center mx-6 relative">
+			<div className="bg-purple flex justify-between py-10">
+				<div className="flex flex-col items-center mx-10 relative">
 					<img
 						crossOrigin="anonymous"
 						alt="logo"
 						src={clinicData?.logoUrl}
-						className="w-[100px] h-[100px] rounded-full object-cover"
-						style={{
-							height: '100px', // Limit max width
-							width: '100px', // Limit max height
-						}}
+						className="w-[100px] h-[100px] rounded-full object-fill"
 					/>
 				</div>
-				<div className="flex-1 flex justify-center flex-col mx-18">
+				<div className="flex-1 flex justify-center flex-col mx-14">
 					<h1 className="text-white text-22 font-bold">{clinicData?.name}</h1>
 					<div className="flex">
-						<p className="text-white text-14 text-left">
-							<span className="font-medium">Mob. : </span>
+						<p className="text-white text-14 text-left font-medium">
+							<span>Mob. : </span>
 							{clinicData?.businessContact
 								? clinicData?.businessContact
 								: clinicData?.mobile}
 							<span className="pr-8">,</span>
 						</p>
-						<p className="text-white text-14">
-							<span className="font-medium">Address: </span>
+						<p className="text-white text-14 font-medium">
+							<span>Address: </span>
 							{clinicData?.address?.line1 && `${clinicData?.address?.line1}, `}
 							{clinicData?.address?.line2 && `${clinicData?.address?.line2}, `}
 							{clinicData?.address?.district && `${clinicData?.address?.district}, `}
@@ -245,59 +241,73 @@ export default function CertificatePdf() {
 				<div className="py-2 grid grid-cols-3 gap-32 border-b border-dashed border-purple">
 					<div className="col-span-1">
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Owner Name:</div>
-							<div className="pl-8 text-14">{parentDetails?.name}</div>
+							<div className="text-12 font-medium">Owner Name:</div>
+							<div className="pl-8 text-12 font-medium">{parentDetails?.name}</div>
 						</div>
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Owner Mob.:</div>
-							<div className="pl-8 text-14">{parentDetails?.mobile}</div>
+							<div className="text-12 font-medium">Owner Mob.:</div>
+							<div className="pl-8 text-12 font-medium">{parentDetails?.mobile}</div>
 						</div>
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Address:</div>
-							{/* <div className="pl-8">{petAndParentDetail?.petAndParentDetail?.parentAddress}</div> */}
-						</div>
-					</div>
-					<div className="col-span-1">
-						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Pet Name:</div>
-							<div className="pl-8 text-14">{petDetails?.name}</div>
-						</div>
-						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Pet Sex:</div>
-							<div className="pl-8 text-14">{petDetails?.gender}</div>
-						</div>
-						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Pet Color:</div>
-							<div className="pl-8 text-14"></div>
-						</div>
-						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Breed:</div>
-							<div className="pl-8 text-14">{petDetails?.breed}</div>
+							<div className="text-12 font-medium">Address:</div>
+							<div className="pl-8 text-12 font-medium">
+								{petAndParentDetail?.parentAddress?.address?.line1 && `${petAndParentDetail?.parentAddress?.address?.line1}, `}
+								{petAndParentDetail?.parentAddress?.address?.line2 && `${petAndParentDetail?.parentAddress?.address?.line2}, `}
+								{petAndParentDetail?.parentAddress?.address?.district && `${petAndParentDetail?.parentAddress?.address?.district}, `}
+								{petAndParentDetail?.parentAddress?.address?.state && `${petAndParentDetail?.parentAddress?.address?.state}, `}
+								{petAndParentDetail?.parentAddress?.address?.pincode && petAndParentDetail?.parentAddress?.address?.pincode}
+							</div>
 						</div>
 					</div>
 					<div className="col-span-1">
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Microchip No.:</div>
-							<div className="pl-8 text-14"></div>
+							<div className="text-12 font-medium">Pet Name:</div>
+							<div className="pl-8 text-12 font-medium">{petDetails?.name}</div>
 						</div>
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Pet DOB:</div>
-							<div className="pl-8 text-14">{petDetails?.dob}</div>
+							<div className="text-12 font-medium">Pet Type:</div>
+							<div className="pl-8 text-12 font-medium">{petDetails?.type}</div>
 						</div>
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Pet Age:</div>
-							<div className="pl-8 text-14"></div>
+							<div className="text-12 font-medium">Pet Sex:</div>
+							<div className="pl-8 text-12 font-medium">{petDetails?.gender}</div>
 						</div>
 						<div className="flex items-center py-2">
-							<div className="text-14 font-medium">Patient code:</div>
-							<div className="pl-8 text-14"></div>
+							<div className="text-12 font-medium">Pet Color:</div>
+							<div className="pl-8 text-12 font-medium"></div>
+						</div>
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Pet Breed:</div>
+							<div className="pl-8 text-12 font-medium">{petDetails?.breed}</div>
+						</div>
+					</div>
+					<div className="col-span-1">
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Pet DOB:</div>
+							<div className="pl-8 text-12 font-medium">{format(petDetails?.dob as string, 'do MMM, yyyy')}</div>
+						</div>
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Pet Age:</div>
+							<div className="pl-8 text-12 font-medium">{calculateAge(petDetails?.dob as string)}</div>
+						</div>
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Patient code:</div>
+							<div className="pl-8 text-12 font-medium">{petDetails?.code}</div>
+						</div>
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Microchip No.:</div>
+							<div className="pl-8 text-12 font-medium"></div>
+						</div>
+						<div className="flex items-center py-2">
+							<div className="text-12 font-medium">Reg No.:</div>
+							<div className="pl-8 text-12 font-medium"></div>
 						</div>
 					</div>
 				</div>
 
 
 			</div>
-			<div id="page-break" className="text-14 px-24 mt-16 font-medium">
+			<div id="page-break" className="text-14 px-24 mt-16 font-medium text-justify  leading-relaxed tracking-tight">
 				{renderDesc}
 			</div>
 			{heading === 'ARV_CERTIFICATE' && (
@@ -318,10 +328,10 @@ export default function CertificatePdf() {
 									const { vaccineName, nextDueDate, lastCompleteDate } =
 										vaccination;
 									const dueDate = nextDueDate
-										? format(nextDueDate, 'yyyy-MM-dd')
+										? format(nextDueDate, 'do MMM, yyyy')
 										: '';
 									const completeDate = lastCompleteDate
-										? format(lastCompleteDate, 'yyyy-MM-dd')
+										? format(lastCompleteDate, 'do MMM, yyyy')
 										: '';
 
 									return (
@@ -369,19 +379,19 @@ export default function CertificatePdf() {
 								}
 
 								const dueDate = nextDueDate
-									? format(nextDueDate, 'yyyy-MM-dd')
+									? format(nextDueDate, 'do MMM, yyyy')
 									: '';
 								const completeDate = lastCompleteDate
-									? format(lastCompleteDate, 'yyyy-MM-dd')
+									? format(lastCompleteDate, 'do MMM, yyyy')
 									: '';
 
 								return (
 									<tr className='border-b border-dashed border-purple' key={vaccineName}>
-										<td className="py-4 px-6 font-normal">{vaccineName}</td>
-										<td className="py-4 px-6 font-normal"></td>
-										<td className="py-4 px-6 font-normal"></td>
-										<td className="py-4 px-6 font-normal">{completeDate}</td>
-										<td className="py-4 px-6 font-normal">{dueDate}</td>
+										<td className="py-4 px-6 text-12 font-medium">{vaccineName}</td>
+										<td className="py-4 px-6 text-12 font-medium"></td>
+										<td className="py-4 px-6 text-12 font-medium"></td>
+										<td className="py-4 px-6 text-12 font-medium">{completeDate}</td>
+										<td className="py-4 px-6 text-12 font-medium">{dueDate}</td>
 									</tr>
 								);
 							})}
@@ -390,13 +400,13 @@ export default function CertificatePdf() {
 				</div>
 			)}
 			{heading === 'BOARDING_AND_LODGING' || heading === 'SURGICAL_RISK_NOTE' ? (
-				<div className="p-24">
+				<div className="px-24 pt-50">
 					<div className="grid grid-cols-2">
-						<div className="flex flex-col gap-16">
+						<div className="flex flex-col gap-6">
 							<span className="h-1 w-[292px] bg-black-1 block"></span>
 							<span className="font-medium text-14">Signature of Owner/Agent</span>
 						</div>
-						<div className="flex items-end flex-col gap-16">
+						<div className="flex items-end flex-col gap-6">
 							<span className="h-1 w-[292px] bg-black-1 block"></span>
 							<span className="font-medium text-14">
 								Name and Signature of explaining Doctor
@@ -410,12 +420,12 @@ export default function CertificatePdf() {
 						</div>
 					)}
 					{heading === 'BOARDING_AND_LODGING' && (
-						<div className="flex gap-16">
-							<div className="flex items-end mt-24">
+						<div className="flex gap-6">
+							<div className="flex items-end my-10">
 								<span className="font-medium text-14">Date / Time IN:</span>
 								<span className="h-1 w-[172px] bg-black-1 block"></span>
 							</div>
-							<div className="flex items-end mt-24">
+							<div className="flex items-end my-10">
 								<span className="font-medium text-14">Date / Time OUT:</span>
 								<span className="h-1 w-[172px] bg-black-1 block"></span>
 							</div>
@@ -423,12 +433,12 @@ export default function CertificatePdf() {
 					)}
 				</div>
 			) : (
-				<div className="grid grid-cols-2 p-24">
+				<div className="grid grid-cols-2 px-24 pt-40">
 					<div className="flex items-end">
 						<span className="font-medium text-14">Date:</span>
 						<span className="h-1 w-[172px] bg-black-1 block"></span>
 					</div>
-					<div className="flex items-end flex-col gap-16">
+					<div className="flex items-end flex-col gap-6">
 						<span className="h-1 w-[292px] bg-black-1 block"></span>
 						<span className="font-medium text-14">
 							{heading === 'EUTHANASIA_CERTIFICATE' ||
@@ -441,7 +451,7 @@ export default function CertificatePdf() {
 			)}
 			<div className="mt-auto">
 				<div className=" bg-purple text-white font-bold text-14 py-6 text-center">
-					Please call for an Appointment!
+					Please call for an appointment!
 				</div>
 				<div className="py-2 flex justify-between items-center">
 					<p className="text-14 font-medium">

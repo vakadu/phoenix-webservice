@@ -49,7 +49,7 @@ export function HealthCertificate() {
 					href={`/certificate-pdf/${petId}?type=${selectedRecord?.value}`}
 				>
 					<span className="text-14 font-bold text-white">
-						Upload {selectedRecord?.label}
+						Create {selectedRecord?.label}
 					</span>
 				</Link>
 			</div>

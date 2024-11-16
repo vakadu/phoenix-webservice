@@ -1,7 +1,6 @@
 'use client';
 
 import { useDownloadDocument, usePetCertificateVaccination, useUploadMedicalRecord } from '@webservices/api';
-import { createFormDataForDocument } from '@webservices/helpers';
 import { useRouterQuery } from '@webservices/hooks';
 import { ImagePlaceholder } from '@webservices/ui';
 
@@ -57,7 +56,7 @@ export default function Print() {
 	};
 
 	return (
-		<div className="fixed right-24 bottom-24 cursor-pointer">
+		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
 			<div
 				className="relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center"
 				onClick={handlePdf}
@@ -65,6 +64,7 @@ export default function Print() {
 				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
 				<ImagePlaceholder src="/images/print.svg" containerClasses="w-[42px] h-[42px]" />
 			</div>
+			<div className="mt-6 font-bold text-14 text-primary-1">Click For Print</div>
 		</div>
 	);
 }
