@@ -323,7 +323,7 @@ export default function CertificatePdf() {
 							</tr>
 						</thead>
 						<tbody>
-							{vaccinations?.map((vaccination) => {
+							{vaccinations?.map((vaccination: any) => {
 								if (vaccination.vaccineName === 'Anti-Rabies') {
 									const { vaccineName, nextDueDate, lastCompleteDate } =
 										vaccination;
@@ -365,7 +365,7 @@ export default function CertificatePdf() {
 							</tr>
 						</thead>
 						<tbody>
-							{vaccinations?.map((vaccination) => {
+							{vaccinations?.map((vaccination: any) => {
 								const { vaccineName, nextDueDate, lastCompleteDate } = vaccination;
 								if (petDetails?.type === 'CAT') {
 									if (vaccineName === 'DHPPi+L' || vaccineName === 'Corona') {
