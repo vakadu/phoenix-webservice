@@ -3,8 +3,8 @@ import useCertificate from '../hooks/use-certificate';
 import RecordItem from '../components/item';
 import CategoryLoader from '../../category-loader/category-loader';
 
-export default function Certificate({ activeFilter }: { activeFilter: string }) {
-	const { records, refetch, isPending } = useCertificate({ activeFilter });
+export default function Certificate({ activeFilter, petId }: { activeFilter: string, petId: string }) {
+	const { records, refetch, isPending } = useCertificate({ activeFilter, petId });
 
 	if (isPending) {
 		return <CategoryLoader columns={1} rows={4} />;

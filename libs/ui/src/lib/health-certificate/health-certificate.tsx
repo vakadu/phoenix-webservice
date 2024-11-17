@@ -20,7 +20,7 @@ export function HealthCertificate() {
 	const { query } = useRouterQuery();
 	const petId = query?.id as string;
 
-	const { refetch } = useCertificate({ activeFilter: selectedRecord?.value as string });
+	const { refetch } = useCertificate({ activeFilter: selectedRecord?.value as string, petId });
 
 	useEffect(() => {
 		refetch();
@@ -53,7 +53,7 @@ export function HealthCertificate() {
 					</span>
 				</Link>
 			</div>
-			<Certificate activeFilter={selectedRecord?.value as string} />
+			<Certificate activeFilter={selectedRecord?.value as string} petId={petId} />
 		</div>
 	);
 }

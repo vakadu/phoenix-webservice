@@ -11,6 +11,7 @@ import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import { useUpdateMedicalRecord } from '@webservices/api';
 import { logEvent } from '@webservices/services';
 import useDocumentDownlaod from '../hooks/use-download-document';
+import { certificateData } from '@webservices/constants';
 
 interface IRecordItem {
 	record: IClinicTypes.IMedicalRecord;
@@ -72,13 +73,19 @@ function RecordItem({ record, refetch, activeFilter }: IRecordItem) {
 		setShowModal(true);
 	};
 
+	const getCertificateLabel = (value: string) => {
+		const certificate = certificateData.find((cert) => cert.value === value);
+		return certificate ? certificate.label : '';
+	};
+
+
 	return (
 		<div className="grid grid-cols-2 gap-12 bg-white mb-12 rounded-8 shadow-base px-16 py-12">
-			<div className="col-span-1">
+			<div className="col-span-1 w-[500px]">
 				<div className="flex gap-12 ">
 					<PdfIcon width={85} height={72} />
 					<div className="flex flex-col gap-6">
-						<p className="text-18 font-semibold">{record.pet.name}</p>
+						<p className="text-16 font-semibold">{record.pet.name} ({getCertificateLabel(record?.type)})</p>
 						<p className="text-14">{record?.parent?.name}</p>
 					</div>
 				</div>
