@@ -201,7 +201,7 @@ export default function CertificatePdf() {
 	}
 
 	return (
-		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] px-24 pt-50 pb-30 flex flex-col">
+		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] px-24 pt-50 pb-50 flex flex-col">
 			<div className="bg-purple flex justify-between py-10">
 				<div className="flex flex-col items-center mx-10 relative">
 					<img
