@@ -157,7 +157,7 @@ export default function CertificatePdf() {
 						<div className="mt-12">
 							Terms and Conditions of Boarding:
 							<div className="mt-6 ml-8">
-								1. The pet must be fully vaccinated; if not, the vaccination will be administered at the clinic's discretion and at the owner's expense.
+								1. The pet must be fully vaccinated. if not, the vaccination will be administered at the clinic's discretion and at the owner's expense.
 							</div>
 							<div className="ml-6">
 								2. The pet must be free from skin infections and communicable diseases. If any such condition is found, necessary treatment will be administered at the owner's expense.
