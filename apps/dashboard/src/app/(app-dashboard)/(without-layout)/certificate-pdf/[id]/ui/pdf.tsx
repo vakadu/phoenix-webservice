@@ -201,14 +201,14 @@ export default function CertificatePdf() {
 	}
 
 	return (
-		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] p-24 flex flex-col">
-			<div className="bg-purple mt-30 flex justify-between py-10">
+		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] px-24 pt-50 pb-30 flex flex-col">
+			<div className="bg-purple flex justify-between py-10">
 				<div className="flex flex-col items-center mx-10 relative">
 					<img
 						crossOrigin="anonymous"
 						alt="logo"
 						src={clinicData?.logoUrl}
-						className="w-[80px] h-[80px] rounded-full object-fill"
+						className="w-[100px] h-[100px] rounded-full object-fill"
 					/>
 				</div>
 				<div className="flex-1 flex justify-center flex-col mx-14">
@@ -309,9 +309,8 @@ export default function CertificatePdf() {
 			</div>
 			<div
 				id="page-break"
-				className="text-14 px-24 mt-16 font-medium text-justify"
-				style={{ wordSpacing: '-0.1em' }}
-
+				className="text-13 px-24 mt-16 font-medium text-justify"
+				style={{ wordSpacing: '-0.1em', lineHeight: '1.4' }}
 			>
 				{renderDesc}
 			</div>
@@ -458,7 +457,7 @@ export default function CertificatePdf() {
 				<div className=" bg-purple text-white font-bold text-14 py-6 text-center">
 					Please call for an appointment!
 				</div>
-				<div className="pb-4 flex justify-between items-center">
+				<div className="flex justify-between items-center">
 					<p className="text-14 font-medium">
 						<span>Mob. : </span>
 						{clinicData?.businessContact
