@@ -202,13 +202,13 @@ export default function CertificatePdf() {
 
 	return (
 		<div id="pdf" className="mx-auto bg-white w-[793px] h-[1122px] p-24 flex flex-col">
-			<div className="bg-purple mt-25 flex justify-between py-10">
+			<div className="bg-purple mt-30 flex justify-between py-10">
 				<div className="flex flex-col items-center mx-10 relative">
 					<img
 						crossOrigin="anonymous"
 						alt="logo"
 						src={clinicData?.logoUrl}
-						className="w-[100px] h-[100px] rounded-full object-fill"
+						className="w-[80px] h-[80px] rounded-full object-fill"
 					/>
 				</div>
 				<div className="flex-1 flex justify-center flex-col mx-14">
@@ -458,7 +458,7 @@ export default function CertificatePdf() {
 				<div className=" bg-purple text-white font-bold text-14 py-6 text-center">
 					Please call for an appointment!
 				</div>
-				<div className="py-2 flex justify-between items-center">
+				<div className="pb-4 flex justify-between items-center">
 					<p className="text-14 font-medium">
 						<span>Mob. : </span>
 						{clinicData?.businessContact
