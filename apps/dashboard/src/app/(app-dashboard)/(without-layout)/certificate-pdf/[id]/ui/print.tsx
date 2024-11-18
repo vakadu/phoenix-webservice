@@ -28,6 +28,7 @@ export default function Print() {
 	const disableButton = getMedicalRecordPdfPending || uploadMedicalRecordPending;
 
 	const handlePdf = async () => {
+		if (disableButton) return;
 		try {
 			const htmltopdf = await require('html2pdf.js');
 			var opt = {
@@ -76,16 +77,29 @@ export default function Print() {
 	};
 
 	return (
-		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
+		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center gap-4">
 			<button
-				className={`relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center ${disableButton && 'cursor-not-allowed'}`}
+				className={`relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center shadow-lg border border-gray-300 ${disableButton && 'cursor-not-allowed opacity-50'}`}
 				onClick={handlePdf}
 				disabled={disableButton}
 			>
-				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-				<ImagePlaceholder src="/images/print.svg" containerClasses="w-[42px] h-[42px]" />
+				{
+					disableButton ? (
+						<div className="absolute inset-0 flex items-center justify-center">
+							<Loading />
+						</div>
+					) : (
+						<>
+							<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+							<ImagePlaceholder src="/images/print.svg" containerClasses="w-[32px] h-[32px]" />
+						</>
+					)
+				}
 			</button>
-			<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
+			<span className="text-14 font-bold text-primary-1 text-center">
+				{disableButton ? 'Preparing...' : 'Click to Print'}
+			</span>
 		</div>
 	);
+
 }
