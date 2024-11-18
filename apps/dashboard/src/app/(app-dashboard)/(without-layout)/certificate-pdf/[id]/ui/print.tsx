@@ -85,7 +85,7 @@ export default function Print() {
 	return (
 		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
 			{
-				uploadMedicalRecordPending || getMedicalRecordPdfPending || isGenerating ? (
+				isGenerating || uploadMedicalRecordPending || getMedicalRecordPdfPending ? (
 					<div className="flex flex-col gap-12 items-center justify-center h-full">
 						<Loading />
 						<span className="mt-6 font-bold text-14 text-primary-1">Preparing...</span>
