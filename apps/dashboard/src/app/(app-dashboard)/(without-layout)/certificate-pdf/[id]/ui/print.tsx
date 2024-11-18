@@ -20,7 +20,7 @@ export default function Print() {
 		});
 
 	const handlePdf = async () => {
-		if (!uploadMedicalRecordPending) {
+		if (!uploadMedicalRecordPending && !getMedicalRecordPdfPending) {
 			const htmltopdf = await require('html2pdf.js');
 			var opt = {
 				filename: 'certificate.pdf',
