@@ -84,26 +84,28 @@ export default function Print() {
 
 	return (
 		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
-			{uploadMedicalRecordPending || getMedicalRecordPdfPending || isGenerating ? (
-				<div className="flex flex-col gap-12 items-center justify-center h-full">
-					<Loading />
-					<span className="mt-6 font-bold text-14 text-primary-1">Preparing...</span>
-				</div>
-			) : (
-				<>
-					<div
-						className="relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center"
-						onClick={handlePdf}
-					>
-						<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-						<ImagePlaceholder
-							src="/images/print.svg"
-							containerClasses="w-[42px] h-[42px]"
-						/>
+			{
+				uploadMedicalRecordPending || getMedicalRecordPdfPending || isGenerating ? (
+					<div className="flex flex-col gap-12 items-center justify-center h-full">
+						<Loading />
+						<span className="mt-6 font-bold text-14 text-primary-1">Preparing...</span>
 					</div>
-					<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
-				</>
-			)}
+				) : (
+					<>
+						<div
+							className="relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center"
+							onClick={handlePdf}
+						>
+							<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+							<ImagePlaceholder
+								src="/images/print.svg"
+								containerClasses="w-[42px] h-[42px]"
+							/>
+						</div>
+						<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
+					</>
+				)
+			}
 		</div>
 	);
 }
