@@ -14,6 +14,7 @@ import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import { useUpdateMedicalRecord } from '@webservices/api';
 import Loading from '../../loading/loading';
 import { logEvent } from '@webservices/services';
+import { toZonedTime } from 'date-fns-tz';
 
 const CommentModal = dynamic(() => import('./comment-modal'), {
 	loading: () => <Loading />,
@@ -98,7 +99,7 @@ function Record({ record, refetch, activeFilter }: IRecordItem) {
 					</div>
 				</div>
 				<p className="text-12 mt-8">
-					Uploaded on: {format(new Date(record?.createdAtIST), 'do MMMM yyyy')}
+					Uploaded on: {format(toZonedTime(record?.createdAtUTC, 'Asia/Kolkata'), 'do MMMM yyyy')}
 				</p>
 			</div>
 			<div className="col-span-1">

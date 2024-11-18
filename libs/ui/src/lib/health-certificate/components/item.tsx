@@ -4,7 +4,7 @@ import { memo, useState } from 'react';
 import { format } from 'date-fns';
 import { useDispatch } from 'react-redux';
 
-import { DeleteIcon, DownloadIcon, PdfIcon } from '@webservices/icons';
+import { DeleteIcon, PdfIcon } from '@webservices/icons';
 import ButtonWrapper from '../../button-wrapper/button-wrapper';
 import { closeModal, openModal } from '@webservices/slices';
 import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
@@ -12,6 +12,7 @@ import { useUpdateMedicalRecord } from '@webservices/api';
 import { logEvent } from '@webservices/services';
 import useDocumentDownlaod from '../hooks/use-download-document';
 import { certificateData } from '@webservices/constants';
+import { toZonedTime } from 'date-fns-tz';
 
 interface IRecordItem {
 	record: IClinicTypes.IMedicalRecord;
@@ -90,7 +91,7 @@ function RecordItem({ record, refetch, activeFilter }: IRecordItem) {
 					</div>
 				</div>
 				<p className="text-12 mt-8">
-					Uploaded on: {format(new Date(record?.createdAtIST), 'do MMMM yyyy')}
+					Uploaded on: {format(toZonedTime(record?.createdAtUTC, 'Asia/Kolkata'), 'do MMMM yyyy')}
 				</p>
 			</div>
 			<div className="col-span-1 flex items-center justify-end gap-24">
