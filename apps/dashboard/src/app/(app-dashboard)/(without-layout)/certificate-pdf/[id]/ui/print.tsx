@@ -8,6 +8,7 @@ import {
 import { useRouterQuery } from '@webservices/hooks';
 import { ImagePlaceholder, Loading } from '@webservices/ui';
 import useCertificate from 'libs/ui/src/lib/health-certificate/hooks/use-certificate';
+import { useState } from 'react';
 
 export default function Print() {
 	const { query, params, back } = useRouterQuery();
@@ -26,8 +27,14 @@ export default function Print() {
 			petId: petId as string,
 		});
 
+	// Local loading state to block multiple clicks
+	const [isGenerating, setIsGenerating] = useState(false);
+
 	const handlePdf = async () => {
-		if (!uploadMedicalRecordPending && !getMedicalRecordPdfPending) {
+		if (isGenerating || uploadMedicalRecordPending || getMedicalRecordPdfPending) return;
+
+		setIsGenerating(true); // Block further clicks
+		try {
 			const htmltopdf = await require('html2pdf.js');
 			var opt = {
 				filename: 'certificate.pdf',
@@ -49,10 +56,9 @@ export default function Print() {
 				.toPdf()
 				.output('blob')
 				.then(async (pdfBlob: any) => {
-					// Ensure the Blob type is explicitly set to 'application/pdf'
 					const pdfWithType: any = new Blob([pdfBlob], { type: 'application/pdf' });
 					const formData = new FormData();
-					formData.append('file', pdfWithType, `${heading}.pdf`); // Ensure .pdf extension
+					formData.append('file', pdfWithType, `${heading}.pdf`);
 					formData.append('type', heading as string);
 					formData.append('parentId', parentDetails?.parentId as string);
 					formData.append('clinicId', clinicData?.userId as string);
@@ -62,18 +68,23 @@ export default function Print() {
 						)) as ICommonTypes.IApiResponse<IClinicTypes.IMedicalRecord>;
 						const payload = { key: response?.data?.medicalRecord?.url as string };
 						const resp = await downloadDocument(payload);
-						refetch();
 						back();
-						// Open the PDF in a new tab
+						refetch();
 						window.open(resp?.data?.signedUrl, '_blank');
-					} catch (err) {}
+					} catch (err) {
+						console.error('Error:', err);
+					}
 				});
+		} catch (err) {
+			console.error('Error generating PDF:', err);
+		} finally {
+			setIsGenerating(false); // Allow clicks again
 		}
 	};
 
 	return (
 		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
-			{uploadMedicalRecordPending || getMedicalRecordPdfPending ? (
+			{uploadMedicalRecordPending || getMedicalRecordPdfPending || isGenerating ? (
 				<div className="flex flex-col gap-12 items-center justify-center h-full">
 					<Loading />
 					<span className="mt-6 font-bold text-14 text-primary-1">Preparing...</span>
