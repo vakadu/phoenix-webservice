@@ -21,19 +21,13 @@ export default function Print() {
 	const { data, isPending } = usePetCertificateVaccination({ type: heading as string, petId });
 	const { petAndParentDetail, clinicData } = data?.data?.certificateData || {};
 	const parentDetails = petAndParentDetail?.parent;
-
 	const { mutateAsync: uploadMedicalRecord, isPending: uploadMedicalRecordPending } =
 		useUploadMedicalRecord({
 			petId: petId as string,
 		});
-
-	// Local loading state to block multiple clicks
-	const [isGenerating, setIsGenerating] = useState(false);
+	const disableButton = getMedicalRecordPdfPending || uploadMedicalRecordPending;
 
 	const handlePdf = async () => {
-		if (isGenerating || uploadMedicalRecordPending || getMedicalRecordPdfPending) return;
-
-		setIsGenerating(true); // Block further clicks
 		try {
 			const htmltopdf = await require('html2pdf.js');
 			var opt = {
@@ -78,32 +72,20 @@ export default function Print() {
 		} catch (err) {
 			console.error('Error generating PDF:', err);
 		} finally {
-			setIsGenerating(false); // Allow clicks again
 		}
 	};
 
 	return (
 		<div className="fixed right-50 bottom-50 cursor-pointer flex flex-col items-center">
-			{uploadMedicalRecordPending || getMedicalRecordPdfPending || isGenerating ? (
-				<div className="flex flex-col gap-12 items-center justify-center h-full">
-					<Loading />
-					<span className="mt-6 font-bold text-14 text-primary-1">Preparing...</span>
-				</div>
-			) : (
-				<>
-					<div
-						className="relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center"
-						onClick={handlePdf}
-					>
-						<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-						<ImagePlaceholder
-							src="/images/print.svg"
-							containerClasses="w-[42px] h-[42px]"
-						/>
-					</div>
-					<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
-				</>
-			)}
+			<button
+				className={`relative bg-white rounded-full w-[52px] h-[52px] flex items-center justify-center ${disableButton && 'cursor-not-allowed'}`}
+				onClick={handlePdf}
+				disabled={disableButton}
+			>
+				<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+				<ImagePlaceholder src="/images/print.svg" containerClasses="w-[42px] h-[42px]" />
+			</button>
+			<div className="mt-6 font-bold text-14 text-primary-1">Click to Print</div>
 		</div>
 	);
 }
