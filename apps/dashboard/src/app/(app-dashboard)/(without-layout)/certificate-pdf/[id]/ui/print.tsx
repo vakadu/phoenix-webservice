@@ -97,7 +97,7 @@ export default function Print() {
 				}
 			</button>
 			<span className="text-14 font-bold text-primary-1 text-center">
-				{disableButton ? 'Preparing...' : 'Click to Print'}
+				{disableButton ? 'Saving...' : 'Click to Save/Print'}
 			</span>
 		</div>
 	);
