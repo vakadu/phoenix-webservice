@@ -541,9 +541,9 @@ export const certificateData = [
 	{ value: 'HEALTH_CUM_VACCINATION_CERTIFICATE', label: 'Health Cum Vaccination Certificate' },
 	{ value: 'TRAVEL_CUM_VACCINATION_CERTIFICATE', label: 'Travel Cum Vaccination Certificate' },
 	{ value: 'EUTHANASIA_CERTIFICATE', label: 'Euthanasia Certificate' },
+	{ value: 'SURGICAL_RISK_NOTE', label: 'Surgical Risk Note' },
 	{ value: 'DEATH_CERTIFICATE', label: 'Death Certificate' },
 	{ value: 'MICROCHIP_IMPLANTATION_CERTIFICATE', label: 'Microchip Implantation Certificate' },
 	{ value: 'IDENTIFICATION_CERTIFICATE', label: 'Identification Certificate' },
-	{ value: 'BOARDING_AND_LODGING', label: 'Boarding & Lodging' },
-	{ value: 'SURGICAL_RISK_NOTE', label: 'Surgical Risk Note' },
+	{ value: 'BOARDING_AND_LODGING', label: 'Boarding & Lodging' }
 ];
