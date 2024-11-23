@@ -73,12 +73,13 @@ const BusinessForm = () => {
 	return (
 		<div className="flex gap-32">
 			<div>
-				<div className=" rounded-full w-[168px] h-[168px] bg-white relative border border-primary-1">
+				<div className="rounded-full w-[200px] h-[200px] bg-white relative border border-primary-1">
 					{getLogo?.data?.logoUrl && getLogo?.data?.logoUrl !== '' ? (
-						<ImagePlaceholder
+						<img
+							crossOrigin="anonymous"
+							alt="logo"
 							src={getLogo?.data?.logoUrl as string}
-							containerClasses="w-[160px] h-[160px] "
-							imageClasses="rounded-full object-cover"
+							className="w-[200px] h-[200px] rounded-full object-fill"
 						/>
 					) : (
 						<UserIcon width={160} height={160} />
@@ -87,13 +88,8 @@ const BusinessForm = () => {
 						<input type="file" onChange={onChange} className="w-full hidden" />
 						<CameraIcon className="text-white" width={18} height={18} />
 					</label>
+					<div className="mt-6 font-medium text-10 text-purple text-center" style={{ wordSpacing: '-0.1em', lineHeight: '1.2' }}><span className='font-bold'>NOTE: </span>THE ABOVE IMAGE IS A PREVIEW AND WILL APPEAR AS THE LOGO ON HEALTH CERTIFICATES. PLEASE USE A HIGH-QUALITY IMAGE, PREFERABLY 200x200px.</div>
 				</div>
-				<Link
-					href="/preview"
-					className="mt-16 max-w-[120px] border border-purple text-center py-6 rounded-full mx-auto bg-purple cursor-pointer block"
-				>
-					<span className="text-14 font-semibold text-white">See Preview</span>
-				</Link>
 			</div>
 			<form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
 				<section className="grid grid-cols-2 gap-24 mb-24">
