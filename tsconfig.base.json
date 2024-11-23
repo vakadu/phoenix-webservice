@@ -28,7 +28,10 @@
 			"@webservices/services/server": ["libs/services/src/server.ts"],
 			"@webservices/slices": ["libs/slices/src/index.ts"],
 			"@webservices/ui": ["libs/ui/src/index.ts"],
-			"@webservices/ui/server": ["libs/ui/src/server.ts"]
+			"@webservices/ui/server": ["libs/ui/src/server.ts"],
+			"@dashboard/core/api": ["apps/dashboard/src/core/api"],
+			"@dashboard/core/primitives": ["apps/dashboard/src/core/primitives"],
+			"@dashboard/core/ui": ["apps/dashboard/src/core/ui"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"],
