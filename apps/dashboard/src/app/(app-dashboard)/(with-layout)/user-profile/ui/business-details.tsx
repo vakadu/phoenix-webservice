@@ -17,6 +17,7 @@ import {
 } from '@webservices/helpers';
 import { CameraIcon, UserIcon } from '@webservices/icons';
 import { useGetClinicLogo, useUploadClinicLogo } from '@dashboard/core/api';
+import Link from 'next/link';
 
 // const validationSchema = yup.object().shape({
 // 	ownerName: yup.string(),
@@ -87,9 +88,12 @@ const BusinessForm = () => {
 						<CameraIcon className="text-white" width={18} height={18} />
 					</label>
 				</div>
-				<div className="mt-16 max-w-[120px] border border-purple text-center py-6 rounded-full mx-auto bg-purple cursor-pointer">
+				<Link
+					href="/preview"
+					className="mt-16 max-w-[120px] border border-purple text-center py-6 rounded-full mx-auto bg-purple cursor-pointer block"
+				>
 					<span className="text-14 font-semibold text-white">See Preview</span>
-				</div>
+				</Link>
 			</div>
 			<form className="flex-1" onSubmit={handleSubmit(onSubmit)}>
 				<section className="grid grid-cols-2 gap-24 mb-24">
