@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import { PemilyRootState } from '@webservices/slices';
 import { useIsMobile, useRouterQuery } from '@webservices/hooks';
-import MobileOnly from '../../core/ui/mobile-only';
+import MobileOnly from '../../../core/ui/mobile-only';
 import { DashboardLayoutHeader, DashboardLayoutSidebar } from '@webservices/ui';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {

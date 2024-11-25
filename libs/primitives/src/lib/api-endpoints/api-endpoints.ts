@@ -50,4 +50,5 @@ export const enum ApiEndpoints {
 	VaccinationList = 'app/utils/vaccination-list',
 	FollowupList = 'app/utils/follow-list',
 	DropdownList = 'app/utils/dropdown',
+	VaccinationCertificate = 'clinic/certificateData',
 }

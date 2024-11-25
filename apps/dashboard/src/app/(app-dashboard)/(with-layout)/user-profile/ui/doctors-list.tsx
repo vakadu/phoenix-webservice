@@ -7,7 +7,7 @@ import { EditIcon, PlusIcon, UploadIcon } from '@webservices/icons';
 import { BoxLoader, ButtonWrapper } from '@webservices/ui';
 import AddEditDoctor from './add-edit-doctor';
 import { createFormDataForImage } from '@webservices/helpers';
-import UserProfileImage from '../../../../core/ui/user-profile';
+import UserProfileImage from '../../../../../core/ui/user-profile';
 
 const DoctorsList = () => {
 	const { data, isPending } = useGetDoctors();

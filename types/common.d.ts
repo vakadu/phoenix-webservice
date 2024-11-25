@@ -1,3 +1,8 @@
+declare module 'html2pdf.js' {
+	const html2pdf: any;
+	export default html2pdf;
+}
+
 declare namespace ICommonTypes {
 	interface IApiResponse<T> {
 		status: 'SUCCESS' | 'ERROR';
@@ -236,6 +241,7 @@ declare namespace ICommonTypes {
 		updatedAt: string;
 		dob: string;
 		profileUrl: string;
+		code: string
 	}
 	interface IGetPetsResponse {
 		pets: IPetItem[];

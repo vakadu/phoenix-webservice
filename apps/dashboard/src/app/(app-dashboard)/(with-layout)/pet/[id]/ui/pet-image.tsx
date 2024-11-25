@@ -11,13 +11,14 @@ import { openModal } from '@webservices/slices';
 import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import PetBasicDetails from './shared/pet-basic-details';
 import { logEvent } from '@webservices/services';
+import { format } from 'date-fns';
 
 const PetImage = () => {
 	const { query } = useRouterQuery();
 	const { data: profileData, refetch, isPending } = useGetPetById(query?.id as string);
 	const { data: profileImage } = useGetPetProfileImage(query?.id as string);
 	const { profileUrl } = profileImage?.data || {};
-	const { name, breed, gender, type, dob } = profileData?.data?.pet || {};
+	const { name, breed, gender, type, dob, code } = profileData?.data?.pet || {};
 	const { mutate: updatePetImage } = useUpdatePetImage(query?.id as string);
 	const dispatch = useDispatch();
 
@@ -78,9 +79,10 @@ const PetImage = () => {
 			<PetBasicDetails
 				name={name as string}
 				gender={gender as string}
-				dob={dob as string}
+				dob={format(dob as string, 'do MMM, yyyy')}
 				breed={breed as string}
 				type={type as string}
+				code={code as string}
 			/>
 		</div>
 	);

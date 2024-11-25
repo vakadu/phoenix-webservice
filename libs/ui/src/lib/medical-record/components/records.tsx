@@ -22,7 +22,7 @@ function Record({ activeFilter, petId, selectedDate }: IRecord) {
 		return (
 			<div className="py-[82px] flex flex-col gap-24 justify-center items-center">
 				<ImagePlaceholder
-					containerClasses="w-[120px] h-[120px]"
+					containerClasses="w-[120px] h-[180px]"
 					src="/images/no-records.svg"
 				/>
 				<p className="text-16 font-medium">No Records found.</p>
@@ -31,7 +31,7 @@ function Record({ activeFilter, petId, selectedDate }: IRecord) {
 	}
 
 	return (
-		<div className="mt-12">
+		<div className="mt-12 min-h-[395px]">
 			{medicalRecords?.map((record) => {
 				return (
 					<RecordItem

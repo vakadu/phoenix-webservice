@@ -43,7 +43,7 @@ export default function Filters({
 					activeFilter,
 					refetch: refetchRecords,
 				},
-			})
+			}),
 		);
 	};
 
@@ -93,7 +93,7 @@ export default function Filters({
 			) : (
 				<Button onClick={openParents} className="min-w-[180px] max-w-[240px] !px-12">
 					<span className="text-14 font-bold">{`Upload ${firstCharCapital(
-						activeFilter
+						activeFilter,
 					)}`}</span>
 				</Button>
 			)}

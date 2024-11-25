@@ -14,9 +14,10 @@ const getMedicalRecords = async ({
 	if (date) {
 		url += `&uploadDate=${date}`;
 	}
-	const { data } = await HttpService.get<
-		ICommonTypes.IApiResponse<IClinicTypes.IClinicMedicalRecordsApiResponse>
-	>(url);
+	const { data } =
+		await HttpService.get<
+			ICommonTypes.IApiResponse<IClinicTypes.IClinicMedicalRecordsApiResponse>
+		>(url);
 	return data;
 };
 
@@ -32,7 +33,6 @@ export function useGetMedicalRecords({
 	return useQuery({
 		queryKey: [ApiEndpoints.ClinicMedicalRecords, type, petId, date],
 		queryFn: getMedicalRecords,
-		enabled: !!petId || !!date,
 	});
 }
 

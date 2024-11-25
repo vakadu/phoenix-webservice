@@ -47,7 +47,7 @@ export function MedicalRecord({ showDays = false }: IMedicalRecords) {
 					handleClick={handleUploadClick}
 					btnTxt={`Upload ${firstCharCapital(activeFilter as string)}`}
 					headingTxt={`Upload a photo of your ${firstCharCapital(
-						activeFilter as string
+						activeFilter as string,
 					)}`}
 				/>
 			</Sidebar>

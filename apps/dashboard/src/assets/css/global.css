@@ -111,3 +111,9 @@ body {
 .swiper-container-rtl .swiper-button-prev {
 	@apply right-0 bg-white rounded-tl-8 rounded-bl-8;
 }
+
+@layer base {
+	img {
+		display: initial;
+	}
+}
