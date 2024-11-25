@@ -11,6 +11,7 @@ import { openModal } from '@webservices/slices';
 import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import PetBasicDetails from './shared/pet-basic-details';
 import { logEvent } from '@webservices/services';
+import { format } from 'date-fns';
 
 const PetImage = () => {
 	const { query } = useRouterQuery();
@@ -78,7 +79,7 @@ const PetImage = () => {
 			<PetBasicDetails
 				name={name as string}
 				gender={gender as string}
-				dob={dob as string}
+				dob={format(dob as string, 'do MMM, yyyy')}
 				breed={breed as string}
 				type={type as string}
 				code={code as string}
