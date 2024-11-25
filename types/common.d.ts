@@ -241,6 +241,7 @@ declare namespace ICommonTypes {
 		updatedAt: string;
 		dob: string;
 		profileUrl: string;
+		code: string
 	}
 	interface IGetPetsResponse {
 		pets: IPetItem[];
