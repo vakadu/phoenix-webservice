@@ -82,7 +82,7 @@ const BusinessForm = () => {
 							className="w-[200px] h-[200px] rounded-full object-fill"
 						/>
 					) : (
-						<UserIcon width={160} height={160} />
+						<UserIcon width={200} height={200} />
 					)}
 					<label className="cursor-pointer w-[32px] h-[32px] z-3 rounded-full absolute bg-primary-1 flex items-center justify-center right-0 top-[26px] shadow-base3">
 						<input type="file" onChange={onChange} className="w-full hidden" />
