@@ -212,23 +212,20 @@ export default function CertificatePdf() {
 					/>
 				</div>
 				<div className="flex-1 flex justify-center flex-col mx-14">
-					<h1 className="text-white text-22 font-bold">{clinicData?.name}</h1>
-					<div className="flex">
-						<p className="text-white text-14 text-left font-medium">
-							<span>Mob. : </span>
-							{clinicData?.businessContact
-								? clinicData?.businessContact
-								: clinicData?.mobile}
-							<span className="pr-8">,</span>
-						</p>
-						<p className="text-white text-14 font-medium">
-							<span>Address: </span>
-							{clinicData?.address?.line1 && `${clinicData?.address?.line1}, `}
-							{clinicData?.address?.line2 && `${clinicData?.address?.line2}, `}
-							{clinicData?.address?.district && `${clinicData?.address?.district}, `}
-							{clinicData?.address?.state && `${clinicData?.address?.state}, `}
-							{clinicData?.address?.pincode && clinicData?.address?.pincode}
-						</p>
+					<div className="text-white text-20 font-bold">{clinicData?.name}</div>
+					<div className="text-white text-14 font-medium">
+						<span>Mobile : </span>
+						{clinicData?.businessContact
+							? clinicData?.businessContact
+							: clinicData?.mobile}
+					</div>
+					<div className="text-white text-14 font-medium text-justify">
+						<span>Address: </span>
+						{clinicData?.address?.line1 && `${clinicData?.address?.line1}, `}
+						{clinicData?.address?.line2 && `${clinicData?.address?.line2}, `}
+						{clinicData?.address?.district && `${clinicData?.address?.district}, `}
+						{clinicData?.address?.state && `${clinicData?.address?.state}, `}
+						{clinicData?.address?.pincode && clinicData?.address?.pincode}
 					</div>
 				</div>
 			</div>
@@ -459,7 +456,7 @@ export default function CertificatePdf() {
 				</div>
 				<div className="flex justify-between items-center">
 					<p className="text-14 font-medium">
-						<span>Mob. : </span>
+						<span>Mobile : </span>
 						{clinicData?.businessContact
 							? clinicData?.businessContact
 							: clinicData?.mobile}
