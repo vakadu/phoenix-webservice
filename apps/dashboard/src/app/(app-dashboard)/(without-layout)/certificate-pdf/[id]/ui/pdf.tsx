@@ -91,10 +91,10 @@ export default function CertificatePdf() {
 							<span className="font-bold text-[12px]">
 								Mr./Ms. {parentDetails?.name?.trim()?.toUpperCase()}
 							</span>{' '}
-							(as detailed above), has been thoroughly examined by the undersigned and is found to be in excellent health as of the date of examination. The pet is fit for travel by Air, Road, or Rail.
+							(as detailed above), has been thoroughly examined by the undersigned and is found to be in excellent health as of the date of examination. The pet is fit to travel by Air, Road or Rail.
 						</div>
 						<div className="mt-12">
-							Additionally, the pet is fully immunized against all required diseases, including Rabies. (Please refer to the attached vaccination record for detailed information on the immunization status).
+							Additionally, the pet is fully immunized against all contagious diseases, including Rabies. (Please refer to the attached vaccination record for detailed information on the immunization status).
 						</div>
 					</>
 				);
