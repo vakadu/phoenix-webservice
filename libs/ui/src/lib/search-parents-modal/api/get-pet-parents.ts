@@ -10,8 +10,6 @@ const getPetParentsList = async ({
 	searchTerm: string;
 	limit: number;
 }) => {
-	console.log(pageParam);
-
 	let url = `${process.env.NEXT_PUBLIC_BASE_PATH}/clinic/parents?page=${pageParam}&limit=${limit}`;
 	if (searchTerm && searchTerm.length > 2) {
 		url += `&searchTerm=${searchTerm}`;
