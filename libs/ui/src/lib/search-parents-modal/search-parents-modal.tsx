@@ -2,39 +2,38 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useGetPetParentsMutation } from '@webservices/api';
-import { debounce } from '@webservices/helpers';
 import Loading from '../loading/loading';
 import Search from './components/search';
 import Parent from './components/parent';
+import { useGetPetParentsList } from './api/get-pet-parents';
+import Spinner from '../spinner/spinner';
+import { useInView } from 'react-intersection-observer';
 
 export function SearchParentsModal() {
 	const [value, setValue] = useState('');
-	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
 	const [activeParent, setActiveParent] = useState<string>('');
 	const [activeClinic, setActiveClinic] = useState<string>('');
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const scrollRef = useRef<HTMLDivElement | null>(null);
+	const { data, refetch, isPending, fetchNextPage, isFetchingNextPage } = useGetPetParentsList(
+		value,
+		10,
+	);
+	const parents = data?.pages.flatMap((page) => page?.data?.data?.parents) || [];
+	const { ref, inView } = useInView({
+		threshold: 0,
+	});
 
 	useEffect(() => {
-		getPetParents('');
+		if (inView) {
+			fetchNextPage();
+		}
+	}, [fetchNextPage, inView]);
+
+	const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		const val = e.target.value;
+		setValue(val);
 	}, []);
-
-	const debouncedFilter = useCallback(
-		debounce((input: string) => {
-			getPetParents(input);
-		}, 300),
-		[]
-	);
-
-	const onChange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const val = e.target.value;
-			setValue(val);
-			debouncedFilter(val);
-		},
-		[debouncedFilter]
-	);
 
 	const handleParent = useCallback(
 		(e: React.MouseEvent<HTMLDivElement>) => {
@@ -48,31 +47,26 @@ export function SearchParentsModal() {
 			if (parentId) {
 				setActiveParent(parentId);
 				setActiveClinic(clinicId);
-				const parentsData = data?.data?.parents || [];
-				const index = parentsData.findIndex(
-					(parent) => parent.parent.parentId === parentId
-				);
+				const index = parents.findIndex((parent) => parent.parent.parentId === parentId);
 				setFocusedIndex(index);
 			}
 		},
-		[data?.data?.parents]
+		[parents],
 	);
 
 	const onClear = useCallback(() => {
 		setValue('');
-		getPetParents('');
 	}, []);
 
 	const handleKeyDown = useCallback(
 		(e: KeyboardEvent) => {
-			const parentsData = data?.data?.parents || [];
-			if (parentsData.length <= 0) {
+			if (parents.length <= 0) {
 				return;
 			}
 
 			if (e.code === 'ArrowDown') {
 				setFocusedIndex((prevIndex) =>
-					prevIndex < parentsData.length - 1 ? prevIndex + 1 : 0
+					prevIndex < parents.length - 1 ? prevIndex + 1 : 0,
 				);
 			}
 			if (e.code === 'ArrowUp') {
@@ -80,19 +74,18 @@ export function SearchParentsModal() {
 			}
 
 			if (e.code === 'Enter' && focusedIndex >= 0) {
-				const selectedParent = parentsData[focusedIndex].parent.parentId;
-				const selectedClinic = parentsData[focusedIndex].clinicId;
+				const selectedParent = parents[focusedIndex].parent.parentId;
+				const selectedClinic = parents[focusedIndex].clinicId;
 				setActiveParent(selectedParent);
 				setActiveClinic(selectedClinic);
 			}
 		},
-		[data?.data?.parents, focusedIndex]
+		[parents, focusedIndex],
 	);
 
 	useEffect(() => {
-		const parentsData = data?.data?.parents || [];
-		if (parentsData.length > 0 && focusedIndex >= 0) {
-			const parentElement = document.getElementById(parentsData[focusedIndex]?._id);
+		if (parents && parents.length > 0 && focusedIndex >= 0) {
+			const parentElement = document.getElementById(parents[focusedIndex]?._id);
 			if (parentElement) {
 				parentElement.scrollIntoView({
 					block: 'nearest',
@@ -100,7 +93,7 @@ export function SearchParentsModal() {
 				});
 			}
 		}
-	}, [focusedIndex, data?.data?.parents]);
+	}, [focusedIndex, parents]);
 
 	useEffect(() => {
 		window.addEventListener('keydown', handleKeyDown);
@@ -120,19 +113,27 @@ export function SearchParentsModal() {
 						<span className="text-14 font-medium">Fetching parents...</span>
 					</div>
 				)}
-				{!isPending && data?.data?.parents && data?.data?.parents?.length <= 0 ? (
+				{!isPending && parents && parents?.length <= 0 ? (
 					<div className="flex flex-col gap-12 items-center justify-center h-full">
 						<span className="text-14 font-medium">No Parents found.</span>
 					</div>
 				) : (
 					<Parent
-						data={data?.data?.parents as IClinicTypes.IPetParent[]}
+						data={parents as IClinicTypes.IPetParent[]}
 						handleParent={handleParent}
 						activeParent={activeParent}
 						focusedIndex={focusedIndex}
 						activeClinic={activeClinic}
 					/>
 				)}
+				<div className="text-center flex flex-col gap-6" ref={ref}>
+					{isFetchingNextPage && (
+						<>
+							<Spinner />
+							<span className="text-12 font-medium">Fetching more parents...</span>
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);

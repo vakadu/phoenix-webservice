@@ -8,36 +8,34 @@ import { debounce } from '@webservices/helpers';
 import { openModal } from '@webservices/slices';
 import { ModalTypes, USER_EVENTS } from '@webservices/primitives';
 import { logEvent } from '@webservices/services';
+import { useGetPetParentsList } from '../api/get-pet-parents';
 
 export default function useSearchHook() {
 	const [parentDetails, setParentDetails] = useState<IClinicTypes.IPetParent>();
 	const [value, setValue] = useState('');
-	const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
+	// const { mutate: getPetParents, data, isPending } = useGetPetParentsMutation();
 	const dispatch = useDispatch();
+	const { data, refetch, isPending, fetchNextPage, isFetchingNextPage } = useGetPetParentsList(
+		value,
+		10,
+	);
 
-	useEffect(() => {
-		getPetParents('');
+	// useEffect(() => {
+	// 	getPetParents('');
+	// }, []);
+
+	// const debouncedFilter = useCallback(
+	// 	debounce((input: string) => {
+	// 		getPetParents(input);
+	// 	}, 300),
+	// 	[],
+	// );
+
+	const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		const val = e.target.value;
+		setValue(val);
+		// debouncedFilter(val);
 	}, []);
-
-	const debouncedFilter = useCallback(
-		debounce((input: string) => {
-			getPetParents(input);
-		}, 300),
-		[]
-	);
-
-	const refetchParents = useCallback(() => {
-		getPetParents(value);
-	}, [value]);
-
-	const onChange = useCallback(
-		(e: React.ChangeEvent<HTMLInputElement>) => {
-			const val = e.target.value;
-			setValue(val);
-			debouncedFilter(val);
-		},
-		[debouncedFilter]
-	);
 
 	const handleClear = useCallback(() => {
 		logEvent({
@@ -46,7 +44,7 @@ export default function useSearchHook() {
 				clearedValue: value,
 			},
 		});
-		getPetParents('');
+		// getPetParents('');
 		setValue('');
 	}, []);
 
@@ -79,22 +77,23 @@ export default function useSearchHook() {
 					parentId: parentDetails?.parent?.parentId,
 					memberId: parentDetails?.memberId,
 				},
-				refetch: refetchParents,
-			})
+				refetch: refetch,
+			}),
 		);
 	};
 
 	return {
-		getPetParents,
 		onChange,
 		handleClear,
-		refetchParents,
-		parents: data?.data?.parents,
+		refetchParents: refetch,
+		parents: data?.pages.flatMap((page) => page?.data?.data?.parents),
 		isPending,
 		searchValue: value,
 		handlePetParent,
 		parentDetails,
 		setParentDetails,
 		handleAddParent,
+		fetchNextPage,
+		isFetchingNextPage,
 	};
 }
