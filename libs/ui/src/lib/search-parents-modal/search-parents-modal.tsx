@@ -1,13 +1,15 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useSelector } from 'react-redux';
 
 import Loading from '../loading/loading';
 import Search from './components/search';
 import Parent from './components/parent';
 import { useGetPetParentsList } from './api/get-pet-parents';
 import Spinner from '../spinner/spinner';
-import { useInView } from 'react-intersection-observer';
+import { PemilyRootState } from '@webservices/slices';
 
 export function SearchParentsModal() {
 	const [value, setValue] = useState('');
@@ -15,9 +17,12 @@ export function SearchParentsModal() {
 	const [activeClinic, setActiveClinic] = useState<string>('');
 	const [focusedIndex, setFocusedIndex] = useState<number>(-1);
 	const scrollRef = useRef<HTMLDivElement | null>(null);
+	const modalData = useSelector((state: PemilyRootState) => state.modal);
+	const { data: modalD } = modalData;
 	const { data, refetch, isPending, fetchNextPage, isFetchingNextPage } = useGetPetParentsList(
 		value,
 		10,
+		modalD.type,
 	);
 	const parents = data?.pages.flatMap((page) => page?.data?.data?.parents) || [];
 	const { ref, inView } = useInView({

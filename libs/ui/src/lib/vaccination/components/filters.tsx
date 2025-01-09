@@ -38,7 +38,7 @@ export default function Filters({
 					activeFilter,
 					refetch,
 				},
-			})
+			}),
 		);
 	};
 

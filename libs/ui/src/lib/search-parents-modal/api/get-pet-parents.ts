@@ -23,9 +23,9 @@ const getPetParentsList = async ({
 	};
 };
 
-export function useGetPetParentsList(searchTerm: string, limit: number) {
+export function useGetPetParentsList(searchTerm: string, limit: number, type: string) {
 	return useInfiniteQuery({
-		queryKey: ['clinic/parents', searchTerm, limit],
+		queryKey: [type, searchTerm, limit],
 		queryFn: ({ pageParam }) => getPetParentsList({ pageParam, searchTerm, limit }),
 		initialPageParam: 0,
 		getNextPageParam: (lastPage) => lastPage.nextPage,
