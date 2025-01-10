@@ -132,6 +132,7 @@ declare namespace ICommonTypes {
 		dob: string;
 		breed: string;
 		type: string;
+		microChipNo?: string;
 	}
 	interface ISlotDetail {
 		scheduleId: string;
@@ -241,7 +242,8 @@ declare namespace ICommonTypes {
 		updatedAt: string;
 		dob: string;
 		profileUrl: string;
-		code: string
+		code: string;
+		microChipNo?: string;
 	}
 	interface IGetPetsResponse {
 		pets: IPetItem[];

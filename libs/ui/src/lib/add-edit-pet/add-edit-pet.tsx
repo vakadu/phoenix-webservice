@@ -24,6 +24,7 @@ interface OptionType {
 
 const validationSchema = yup.object().shape({
 	name: yup.string().required('Name is required'),
+	microChipNo: yup.string()
 });
 
 export function AddEditPet() {
@@ -39,7 +40,7 @@ export function AddEditPet() {
 	});
 
 	const { data } = useGetPetById(modalState.data?.petId as string);
-	const { name, breed, type: petType, dob: petDob, gender: petGender } = data?.data?.pet || {};
+	const { name, breed, microChipNo, type: petType, dob: petDob, gender: petGender } = data?.data?.pet || {};
 	const [dob, setDob] = useState<any>(new Date());
 	const [gender, setGender] = useState('M');
 	const [type, setType] = useState<string>('');
@@ -55,6 +56,9 @@ export function AddEditPet() {
 	useEffect(() => {
 		if (modalState.type === 'edit' && name && modalState.data?.petId) {
 			setValue('name', name);
+			if (microChipNo) {
+				setValue('microChipNo', microChipNo);
+			}
 			if (breed) {
 				setSelectedBreed({ value: breed, label: breed });
 			}
@@ -69,6 +73,9 @@ export function AddEditPet() {
 			reset({
 				name: '',
 			});
+			reset({
+				microChipNo: '',
+			});
 			setType('');
 			setSelectedBreed(null);
 			setGender(petGender || 'M');
@@ -78,6 +85,7 @@ export function AddEditPet() {
 		}
 	}, [
 		breed,
+		microChipNo,
 		modalState.data?.petId,
 		modalState.type,
 		name,
@@ -212,6 +220,14 @@ export function AddEditPet() {
 								onChange={() => setGender('F')}
 							/>
 						</div>
+					</div>
+					<div>
+						<TextInput
+							label="Microchip No."
+							placeholder=""
+							error={errors?.microChipNo}
+							{...register('microChipNo')}
+						/>
 					</div>
 				</div>
 				<div className="flex justify-end items-center !mt-32">

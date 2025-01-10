@@ -200,6 +200,7 @@ declare namespace IClinicTypes {
 		breed: string;
 		parent: IParent;
 		parentAddress: Record<string, unknown>;
+		microChipNo?: string;
 	}
 	interface IVaccinationType {
 		lastCompleteDate: string;

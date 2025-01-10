@@ -4,7 +4,8 @@ function PetBasicDetails({
 	gender,
 	type,
 	dob,
-	code
+	code,
+	microChipNo
 }: {
 	name: string;
 	breed: string;
@@ -12,6 +13,7 @@ function PetBasicDetails({
 	type: string;
 	dob: string;
 	code: string;
+	microChipNo?: string
 }) {
 	return (
 		<div className="flex flex-col gap-16 mt-24 w-full">
@@ -38,6 +40,10 @@ function PetBasicDetails({
 			<div className="flex items-center border border-grey-border1 gap-12 py-12 px-12 rounded-8">
 				<span className="text-14 text-grey-text3">Dob: </span>
 				<span className="font-medium text-14">{dob}</span>
+			</div>
+			<div className="flex items-center border border-grey-border1 gap-12 py-12 px-12 rounded-8">
+				<span className="text-14 text-grey-text3">Microchip No.: </span>
+				<span className="font-medium text-14">{microChipNo ? microChipNo : ''}</span>
 			</div>
 		</div>
 	);

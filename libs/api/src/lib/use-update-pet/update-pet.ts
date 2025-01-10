@@ -12,6 +12,7 @@ interface IPayload {
 	gender: string;
 	type: string;
 	dob: string;
+	microChipNo?: string
 }
 
 const updatePet = async (payload: IPayload, petId: string) => {
