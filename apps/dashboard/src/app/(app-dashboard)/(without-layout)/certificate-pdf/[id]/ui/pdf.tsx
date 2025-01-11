@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { format, differenceInCalendarYears, differenceInCalendarMonths, differenceInCalendarDays } from 'date-fns';
+import { format, addMonths, differenceInYears, differenceInMonths, differenceInDays, addYears } from 'date-fns';
 
 import { usePetCertificateVaccination } from '@webservices/api';
 import { useRouterQuery } from '@webservices/hooks';
@@ -30,25 +30,36 @@ export default function CertificatePdf() {
 		}
 	}, []);
 
-	const calculateAge = (birthDate: string) => {
-		const today = new Date(); // Get current date
 
-		// Calculate years, months, and days
-		const years = differenceInCalendarYears(today, new Date(birthDate));
-		const months = differenceInCalendarMonths(today, new Date(birthDate)) % 12;
-		const days = differenceInCalendarDays(today, new Date(birthDate)) % 30;
+	const calculateAge = (birthDateString: string) => {
+		const birthDate = new Date(birthDateString);
+		const today = new Date();
 
-		if (years === 0) {
-			// If age is less than a year, return only months and days
-			if (months === 0) {
-				// If less than a month, return days
-				return `${days}D`;
-			}
-			return `${months}M, ${days}D`; // Show months and days
+		// Validation: Check if the birth date is valid and not in the future
+		if (isNaN(birthDate.getTime()) || birthDate > today) {
+			return `${0}Y, ${0}M, ${0}D`;  // Return years, months, and days
 		}
 
-		return `${years}Y, ${months}M, ${days}D`; // Show years, months, and days
+		// Step 1: Calculate the difference in full years
+		const years = differenceInYears(today, birthDate);
+		const adjustedDateAfterYears = addYears(birthDate, years);
 
+		// Step 2: Calculate the difference in months
+		const months = differenceInMonths(today, adjustedDateAfterYears);
+		const adjustedDateAfterMonths = addMonths(adjustedDateAfterYears, months);
+
+		// Step 3: Calculate the difference in days
+		const days = differenceInDays(today, adjustedDateAfterMonths);
+
+		// Return in the desired format
+		if (years === 0) {
+			if (months === 0) {
+				return `${days}D`;  // Return only days if under a month
+			}
+			return `${months}M, ${days}D`; // Return months and days if under a year
+		}
+
+		return `${years}Y, ${months}M, ${days}D`;  // Return years, months, and days
 	};
 
 	const renderDesc = useMemo(() => {
