@@ -9,6 +9,12 @@ import { USER_EVENTS } from '@webservices/primitives';
 
 const menu = [
 	{
+		link: '/home',
+		icon: '/images/house.png',
+		text: 'Home',
+		type: 'image',
+	},
+	{
 		link: '/medical-records',
 		icon: '/images/medical-records.png',
 		text: 'Medical Records',
@@ -58,7 +64,7 @@ export default function NavMenu() {
 							<Link
 								className={classNames(
 									'flex gap-12',
-									active ? 'bg-white shadow-base py-12 px-12 rounded-8' : ''
+									active ? 'bg-white shadow-base py-12 px-12 rounded-8' : '',
 								)}
 								href={item.link}
 								onClick={() => handleEvents(item.link)}
