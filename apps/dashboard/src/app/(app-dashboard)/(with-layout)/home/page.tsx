@@ -26,6 +26,10 @@ const years = [
 
 const lists = [
 	{
+		l1: "Transparency",
+		l2: "Your data belongs to you, and we are proud to share it with you."
+	},
+	{
 		l1: "Security",
 		l2: "Your data is secure. Avoid frequent downloads."
 	},
@@ -35,10 +39,8 @@ const lists = [
 	}, {
 		l1: "Format",
 		l2: "Data is provided in an easy-to-use Excel format."
-	}, {
-		l1: "Transparency",
-		l2: "Your data belongs to you, and we are proud to share it with you."
-	}, {
+	},
+	{
 		l1: "Growth",
 		l2: "Receive monthly data insights to support your growth and planning."
 	}
