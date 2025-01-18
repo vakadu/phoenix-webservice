@@ -3,6 +3,8 @@
 import { Button, ImagePlaceholder } from '@webservices/ui';
 import { useState } from 'react';
 import { useVaccinationExcel } from './api/analytics';
+import { usePemilyAppSelector } from '@webservices/slices';
+import { Roles } from '@webservices/primitives';
 
 const months = [
 	{ value: 1, label: 'January' },
@@ -26,31 +28,32 @@ const years = [
 
 const lists = [
 	{
-		l1: "Transparency",
-		l2: "Your data belongs to you, and we take pride in making it accessible."
+		l1: 'Transparency',
+		l2: 'Your data belongs to you, and we take pride in making it accessible.',
 	},
 	{
-		l1: "Security",
-		l2: "Your data is secure. Avoid multiple downloads and sharing with untrusted sources."
+		l1: 'Security',
+		l2: 'Your data is secure. Avoid multiple downloads and sharing with untrusted sources.',
 	},
 	{
-		l1: "Notifications",
-		l2: "Admins receive WhatsApp alerts for every download."
+		l1: 'Notifications',
+		l2: 'Admins receive WhatsApp alerts for every download.',
 	},
 	{
-		l1: "User-Friendly",
-		l2: "Data is available in a simple and easy-to-use Excel format."
+		l1: 'User-Friendly',
+		l2: 'Data is available in a simple and easy-to-use Excel format.',
 	},
 	{
-		l1: "Growth-Focused",
-		l2: "Gain monthly insights to support growth and better planning."
-	}
+		l1: 'Growth-Focused',
+		l2: 'Gain monthly insights to support growth and better planning.',
+	},
 ];
 
 export default function Page() {
 	const [month, setMonth] = useState(1);
 	const [year, setYear] = useState(2025);
 	const { mutateAsync: vaccinationExcel, isPending } = useVaccinationExcel();
+	const auth = usePemilyAppSelector((state) => state.auth);
 
 	const handleSubmit = async () => {
 		const payload = {
@@ -71,9 +74,9 @@ export default function Page() {
 			<div className="grid grid-cols-5">
 				<div className="col-span-2 p-16">
 					<h1 className="text-[30px] font-semibold">Data For Your Growth & Trust</h1>
-					<ul className="pl-6 space-y-2 text-gray-800">
+					<ul className="pl-6 space-y-2 text-gray-800 py-16">
 						{lists.map((list, i) => (
-							<li key={i} className="list-none relative pl-12">
+							<li key={i} className="list-none relative pl-12 leading-18 py-6">
 								<span className="absolute left-0 top-8 w-6 h-6 rounded-full bg-black-1" />
 								<span className="text-[16px] font-semibold">{list?.l1}: </span>
 								<span className="text-[14px]">{list?.l2}</span>
@@ -116,12 +119,12 @@ export default function Page() {
 							</div>
 						</div>
 						<Button
-							disabled={isPending}
+							disabled={isPending || auth.role === Roles.Staff}
 							isLoading={isPending}
 							onClick={handleSubmit}
 							className="mt-24 w-full"
 						>
-							<span className="text-[20px] font-semibold" >Download</span>
+							<span className="text-[20px] font-semibold">Download</span>
 						</Button>
 					</div>
 				</div>

@@ -11,7 +11,7 @@ const signin = async (payload: IAuthTypes.ISigninFormData) => {
 	try {
 		const { data } = await axios.post<ICommonTypes.IApiResponse<IAuthTypes.ILoginInterface>>(
 			`${process.env.NEXT_PUBLIC_BASE_PATH}/${ApiEndpoints.SignIn}`,
-			payload
+			payload,
 		);
 		return data;
 	} catch (err: any) {
@@ -31,14 +31,14 @@ export const useSignin = () => {
 				openModal({
 					isOpen: true,
 					view: ModalTypes.LOADING_MODAL,
-				})
+				}),
 			);
 			dispatch(
 				authenticateUser({
 					token: data?.data?.accessToken,
 					refreshToken: data?.data?.refreshToken,
-					navigateFunction: () => router.push('/medical-records'),
-				})
+					navigateFunction: () => router.push('/home'),
+				}),
 			);
 			toast.success('Logged in!');
 		},
