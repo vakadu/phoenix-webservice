@@ -31,7 +31,7 @@ const lists = [
 export default function Page() {
 	const [month, setMonth] = useState(1);
 	const [year, setYear] = useState(2025);
-	const { mutateAsync: vaccinationExcel } = useVaccinationExcel();
+	const { mutateAsync: vaccinationExcel, isPending } = useVaccinationExcel();
 
 	const handleSubmit = async () => {
 		const payload = {
@@ -95,7 +95,12 @@ export default function Page() {
 								</select>
 							</div>
 						</div>
-						<Button onClick={handleSubmit} className="mt-24 w-full">
+						<Button
+							disabled={isPending}
+							isLoading={isPending}
+							onClick={handleSubmit}
+							className="mt-24 w-full"
+						>
 							<span>Submit</span>
 						</Button>
 					</div>
