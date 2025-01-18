@@ -25,7 +25,24 @@ const years = [
 ];
 
 const lists = [
-	'Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti excepturi maxime quam quos doloremque sunt ratione perferendis tempore, beatae quisquam cupiditate nihil totam pariatur voluptates cumque exercitationem fuga quaerat quas!',
+	{
+		l1: "Security",
+		l2: "Your data is secure. Avoid frequent downloads."
+	},
+	{
+		l1: "Notifications",
+		l2: "Admin is notified via WhatsApp for every download."
+	}, {
+		l1: "Format",
+		l2: "Data is provided in an easy-to-use Excel format."
+	}, {
+		l1: "Transparency",
+		l2: "Your data belongs to you, and we are proud to share it with you."
+	}, {
+		l1: "Growth",
+		l2: "Receive monthly data insights to support your growth and planning."
+	}
+
 ];
 
 export default function Page() {
@@ -40,7 +57,7 @@ export default function Page() {
 			month,
 		};
 		const response = await vaccinationExcel(payload);
-		if (response.status === 'SUCCESS') {
+		if (response.status === 'SUCCESS' && response?.data?.signedUrl) {
 			window.location.href = response.data.signedUrl;
 			setYear(2025);
 			setMonth(1);
@@ -51,33 +68,18 @@ export default function Page() {
 		<section className="bg-white rounded-8">
 			<div className="grid grid-cols-5">
 				<div className="col-span-2 p-16">
-					<h1 className="text-[42px] font-semibold">Data Analytics</h1>
+					<h1 className="text-[30px] font-semibold">Data For Your Growth & Trust</h1>
 					<ul className="pl-6 space-y-2 text-gray-800">
 						{lists.map((list, i) => (
 							<li key={i} className="list-none relative pl-12">
 								<span className="absolute left-0 top-8 w-6 h-6 rounded-full bg-black-1" />
-								<span>{list}</span>
+								<span className="text-[16px] font-semibold">{list?.l1}: </span>
+								<span className="text-[14px]">{list?.l2}</span>
 							</li>
 						))}
 					</ul>
 					<div className="mt-24">
 						<div className="grid grid-cols-2 gap-24">
-							<div className="col-span-1 flex flex-col gap-6">
-								<label className="text-12 font-medium">Select Month</label>
-								<select
-									value={month}
-									onChange={(e) => setMonth(Number(e.target.value))}
-									className="border border-grey-light rounded-8 py-8 px-6 outline-none text-14"
-								>
-									{months.map((month) => {
-										return (
-											<option key={month.value} value={month.value}>
-												{month.label}
-											</option>
-										);
-									})}
-								</select>
-							</div>
 							<div className="col-span-1 flex flex-col gap-6">
 								<label className="text-12 font-medium">Select Year</label>
 								<select
@@ -94,6 +96,22 @@ export default function Page() {
 									})}
 								</select>
 							</div>
+							<div className="col-span-1 flex flex-col gap-6">
+								<label className="text-12 font-medium">Select Month</label>
+								<select
+									value={month}
+									onChange={(e) => setMonth(Number(e.target.value))}
+									className="border border-grey-light rounded-8 py-8 px-6 outline-none text-14"
+								>
+									{months.map((month) => {
+										return (
+											<option key={month.value} value={month.value}>
+												{month.label}
+											</option>
+										);
+									})}
+								</select>
+							</div>
 						</div>
 						<Button
 							disabled={isPending}
@@ -101,7 +119,7 @@ export default function Page() {
 							onClick={handleSubmit}
 							className="mt-24 w-full"
 						>
-							<span>Submit</span>
+							<span className="text-[20px] font-semibold" >Download</span>
 						</Button>
 					</div>
 				</div>
