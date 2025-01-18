@@ -27,24 +27,24 @@ const years = [
 const lists = [
 	{
 		l1: "Transparency",
-		l2: "Your data belongs to you, and we are proud to share it with you."
+		l2: "Your data belongs to you, and we take pride in making it accessible."
 	},
 	{
 		l1: "Security",
-		l2: "Your data is secure. Avoid frequent downloads."
+		l2: "Your data is secure. Avoid multiple downloads and sharing with untrusted sources."
 	},
 	{
 		l1: "Notifications",
-		l2: "Admin is notified via WhatsApp for every download."
-	}, {
-		l1: "Format",
-		l2: "Data is provided in an easy-to-use Excel format."
+		l2: "Admins receive WhatsApp alerts for every download."
 	},
 	{
-		l1: "Growth",
-		l2: "Receive monthly data insights to support your growth and planning."
+		l1: "User-Friendly",
+		l2: "Data is available in a simple and easy-to-use Excel format."
+	},
+	{
+		l1: "Growth-Focused",
+		l2: "Gain monthly insights to support growth and better planning."
 	}
-
 ];
 
 export default function Page() {
