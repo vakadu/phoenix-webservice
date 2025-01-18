@@ -16,7 +16,7 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
 	useEffect(() => {
 		if (authState.loggedIn) {
-			router.push(routes.get(RouteList.MEDICAL_RECORDS));
+			router.push(routes.get(RouteList.HOME));
 		}
 	}, [authState.loggedIn, router]);
 
