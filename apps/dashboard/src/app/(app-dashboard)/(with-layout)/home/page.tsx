@@ -77,7 +77,7 @@ export default function Page() {
 					<ul className="pl-6 space-y-2 text-gray-800 py-16">
 						{lists.map((list, i) => (
 							<li key={i} className="list-none relative pl-12 leading-18 py-6">
-								<span className="absolute left-0 top-8 w-6 h-6 rounded-full bg-black-1" />
+								<span className="absolute left-0 top-12 w-6 h-6 rounded-full bg-black-1" />
 								<span className="text-[16px] font-semibold">{list?.l1}: </span>
 								<span className="text-[14px]">{list?.l2}</span>
 							</li>
