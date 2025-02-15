@@ -24,6 +24,8 @@ export default function CertificatePdf() {
 	const renderTitle = useMemo(() => {
 		if (heading === 'BOARDING_AND_LODGING') {
 			return 'BOARDING AND LODGING CONSENT FORM';
+		} else if (heading === 'STERILIZATION_CERTIFICATE') {
+			return 'SPAY/NEUTER CERTIFICATE';
 		} else {
 			const title = heading?.split('_').join(' ');
 			return title;
@@ -195,6 +197,17 @@ export default function CertificatePdf() {
 						I, the undersigned (referred to as the owner), hereby certify that I am the rightful owner of the animal mentioned above (referred to as the patient). I acknowledge and fully understand the potential risks and complications involved with the administration of anesthesia and the surgery of my pet. I give my explicit consent for the necessary surgical procedures to be performed and accept full responsibility for any outcomes. I further agree that I will not hold{' '}
 						<span className="font-bold text-14">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
 						liable or seek compensation for any unforeseen circumstances or complications that may arise during or after the procedure.
+					</div>
+				);
+			case 'STERILIZATION_CERTIFICATE':
+				return (
+					<div>
+						This is to certify that the pet described above, owned by{' '}
+						<span className="font-bold text-12">
+							Mr./Ms. {parentDetails?.name.trim()?.toUpperCase()}
+						</span>{' '}
+						(as detailed above), has been spayed/castrated at <span className="font-bold text-14">{clinicData?.name.trim()?.toUpperCase()}</span>{' '}
+						. The information provided is accurate to the best of the undersigned's knowledge.
 					</div>
 				);
 			default:
