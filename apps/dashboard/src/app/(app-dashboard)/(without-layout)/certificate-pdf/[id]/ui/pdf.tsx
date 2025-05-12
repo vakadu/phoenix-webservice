@@ -313,7 +313,7 @@ export default function CertificatePdf() {
 						</div>
 						<div className="flex items-center py-2">
 							<div className="text-12 font-medium">Patient code:</div>
-							<div className="pl-8 text-12 font-medium">{petDetails?.oldCode ? petDetails?.oldCode : petDetails.code}</div>
+							<div className="pl-8 text-12 font-medium">{petDetails.code}</div>
 						</div>
 						<div className="flex items-center py-2">
 							<div className="text-12 font-medium">Microchip No.:</div>
